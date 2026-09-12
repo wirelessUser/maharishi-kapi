@@ -1,0 +1,149 @@
+<style>
+    :global(body.customizer-inspecting *:hover) {
+        outline: 2px dashed #a855f7 !important;
+        outline-offset: -2px !important;
+        cursor: crosshair !important;
+        transition: outline 0.1s;
+    }
+    :global(.customizer-selected) {
+        outline: 3px solid #facc15 !important;
+        outline-offset: -3px !important;
+        box-shadow: inset 0 0 10px rgba(250, 204, 21, 0.5) !important;
+    }
+</style>
+
+<button id="customizer-toggle" (click)="togglePanel()" 
+    class="fixed top-1/2 right-0 -translate-y-1/2 bg-kapi-purple hover:bg-kapi-purpleHover text-white px-4 py-3 rounded-l-lg font-bold text-sm cursor-pointer z-[999998] shadow-lg flex items-center gap-2 border-none transition-transform">
+    <i class="fa-solid fa-wand-magic-sparkles"></i> Build
+</button>
+
+<div id="wp-customizer" 
+    class="fixed top-0 w-[360px] h-screen bg-[#18181b] text-white z-[999999] overflow-y-auto transition-all duration-300 flex flex-col shadow-2xl"
+    [ngClass]="isOpen ? 'right-0' : '-right-[360px]'">
+    
+    <div class="p-5 border-b border-[#3f3f46] bg-[#09090b] flex justify-between items-center">
+        <h2 class="m-0 text-lg font-semibold flex items-center gap-2 text-kapi-gold">
+            <i class="fa-solid fa-layer-group"></i> Divi-Pro Builder
+        </h2>
+        <button (click)="togglePanel()" class="text-gray-400 hover:text-white"><i class="fa-solid fa-xmark text-xl"></i></button>
+    </div>
+
+    <div class="flex justify-between items-center p-4 bg-[#27272a] border-b border-[#3f3f46]">
+        <div class="flex items-center gap-3">
+            <label class="relative inline-flex items-center cursor-pointer">
+                <input type="checkbox" class="sr-only peer" (change)="toggleInspector($event)">
+                <div class="w-11 h-6 bg-gray-600 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-kapi-purple"></div>
+            </label>
+            <span class="text-sm font-semibold text-gray-200">Select Mode</span>
+        </div>
+        
+        <button (click)="undo()" [disabled]="history.length === 0" 
+            class="text-xs font-bold px-3 py-1.5 rounded bg-gray-700 hover:bg-gray-600 disabled:opacity-50 transition">
+            <i class="fa-solid fa-rotate-left mr-1"></i> Undo
+        </button>
+    </div>
+
+    <div *ngIf="!selectedElement" class="p-10 text-center text-[#a1a1aa] text-sm flex-grow flex flex-col justify-center">
+        <i class="fa-solid fa-hand-pointer text-5xl mb-4 text-[#52525b] animate-bounce block"></i>
+        <p>Turn on <strong>Select Mode</strong> and click on any text, image, or card to edit.</p>
+    </div>
+
+    <div *ngIf="selectedElement" class="p-5 flex-grow overflow-y-auto">
+        <div class="bg-[#27272a] p-3 rounded-lg border-l-4 border-kapi-gold mb-6 flex justify-between items-center">
+            <div>
+                <span class="block text-[10px] text-gray-400 uppercase font-bold mb-1">Editing Element</span>
+                <strong class="text-white text-sm font-mono">{{ targetName }}</strong>
+            </div>
+            <button (click)="hideElement()" class="w-8 h-8 bg-red-500/20 text-red-400 rounded hover:bg-red-500 hover:text-white transition" title="Hide/Delete Element">
+                <i class="fa-solid fa-trash-can"></i>
+            </button>
+        </div>
+
+        <div class="mb-6">
+            <label class="block text-xs font-bold text-gray-400 uppercase tracking-widest mb-3"><i class="fa-solid fa-pen-nib mr-2"></i>Content</label>
+            <textarea [(ngModel)]="styles.text" 
+                (input)="applyTextLive()" 
+                (blur)="commitText()"
+                rows="3" 
+                class="w-full bg-[#27272a] border border-[#3f3f46] rounded p-3 text-sm text-white focus:outline-none focus:border-kapi-purple"
+                [disabled]="styles.text === '[Contains Sub-Elements]'">
+            </textarea>
+            <p *ngIf="styles.text === '[Contains Sub-Elements]'" class="text-[10px] text-yellow-500 mt-1">Select a deeper element (like a paragraph) to edit text directly.</p>
+        </div>
+
+        <div class="mb-6">
+            <label class="block text-xs font-bold text-gray-400 uppercase tracking-widest mb-3"><i class="fa-solid fa-palette mr-2"></i>Colors</label>
+            <div class="space-y-3">
+                <div class="flex items-center gap-3 bg-[#27272a] p-2 rounded border border-[#3f3f46]">
+                    <!-- INPUT EVENT FOR LIVE, CHANGE EVENT FOR SAVING HISTORY -->
+                    <input type="color" [(ngModel)]="styles.textColor" 
+                        (input)="updateLiveStyle('color', styles.textColor)" 
+                        (change)="commitStyle('color', styles.textColor)"
+                        class="w-8 h-8 rounded cursor-pointer bg-transparent border-none p-0">
+                    <span class="text-sm text-gray-300 flex-grow">Text Color</span>
+                </div>
+                <div class="flex items-center gap-3 bg-[#27272a] p-2 rounded border border-[#3f3f46]">
+                    <input type="color" [(ngModel)]="styles.bgColor" 
+                        (input)="updateLiveStyle('background-color', styles.bgColor)" 
+                        (change)="commitStyle('background-color', styles.bgColor)"
+                        class="w-8 h-8 rounded cursor-pointer bg-transparent border-none p-0">
+                    <span class="text-sm text-gray-300 flex-grow">Background</span>
+                </div>
+                <div class="flex items-center gap-3 bg-[#27272a] p-2 rounded border border-[#3f3f46]">
+                    <input type="color" [(ngModel)]="styles.borderColor" 
+                        (input)="updateLiveStyle('border-color', styles.borderColor)" 
+                        (change)="commitStyle('border-color', styles.borderColor)"
+                        class="w-8 h-8 rounded cursor-pointer bg-transparent border-none p-0">
+                    <span class="text-sm text-gray-300 flex-grow">Border</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="mb-6">
+            <label class="block text-xs font-bold text-gray-400 uppercase tracking-widest mb-3"><i class="fa-solid fa-text-height mr-2"></i>Typography</label>
+            <div class="grid grid-cols-2 gap-3">
+                <div>
+                    <label class="text-[10px] text-gray-500 block mb-1">Font Size</label>
+                    <input type="text" [(ngModel)]="styles.fontSize" 
+                        (input)="updateLiveStyle('font-size', styles.fontSize)" 
+                        (blur)="commitStyle('font-size', styles.fontSize)"
+                        class="w-full bg-[#27272a] border border-[#3f3f46] rounded p-2 text-sm text-white focus:outline-none focus:border-kapi-purple" placeholder="e.g. 16px">
+                </div>
+                <div>
+                    <label class="text-[10px] text-gray-500 block mb-1">Font Weight</label>
+                    <select [(ngModel)]="styles.fontWeight" 
+                        (change)="updateLiveStyle('font-weight', styles.fontWeight); commitStyle('font-weight', styles.fontWeight)"
+                        class="w-full bg-[#27272a] border border-[#3f3f46] rounded p-2 text-sm text-white focus:outline-none focus:border-kapi-purple">
+                        <option value="300">Light</option>
+                        <option value="400">Regular</option>
+                        <option value="600">Semi Bold</option>
+                        <option value="700">Bold</option>
+                        <option value="900">Black</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+
+        <div class="mb-6">
+            <label class="block text-xs font-bold text-gray-400 uppercase tracking-widest mb-3"><i class="fa-solid fa-up-right-and-down-left-from-center mr-2"></i>Spacing</label>
+            <div class="grid grid-cols-2 gap-3">
+                <div>
+                    <label class="text-[10px] text-gray-500 block mb-1">Padding (Inner)</label>
+                    <input type="text" [(ngModel)]="styles.padding" 
+                        (input)="updateLiveStyle('padding', styles.padding)" 
+                        (blur)="commitStyle('padding', styles.padding)"
+                        class="w-full bg-[#27272a] border border-[#3f3f46] rounded p-2 text-sm text-white focus:outline-none focus:border-kapi-purple" placeholder="e.g. 10px 20px">
+                </div>
+                <div>
+                    <label class="text-[10px] text-gray-500 block mb-1">Margin (Outer)</label>
+                    <input type="text" [(ngModel)]="styles.margin" 
+                        (input)="updateLiveStyle('margin', styles.margin)" 
+                        (blur)="commitStyle('margin', styles.margin)"
+                        class="w-full bg-[#27272a] border border-[#3f3f46] rounded p-2 text-sm text-white focus:outline-none focus:border-kapi-purple" placeholder="e.g. 10px auto">
+                </div>
+            </div>
+            <p class="text-[10px] text-gray-500 mt-2">Use CSS formats: <code>10px</code>, <code>2rem</code>, or <code>10px 20px</code></p>
+        </div>
+
+    </div>
+</div>

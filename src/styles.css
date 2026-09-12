@@ -1,3 +1,67 @@
-/* You can add global styles to this file, and also import other style files */
+@import "tailwindcss";
 
-@import 'tailwindcss';
+@theme {
+  /* Deep cosmic violet — third-eye / crown chakra: intuition, mysticism, spiritual authority.
+     Deepened from a bright orchid-purple so it reads as sacred/premium rather than tech-SaaS. */
+  --color-kapi-purple: #6d28d9;
+  --color-kapi-purpleHover: #5b21b6;
+  /* Near-black indigo for night-sky / cosmos gradients used in dark hero & card sections */
+  --color-kapi-cosmic: #2e1065;
+
+  /* Sacred saffron — agni (fire), renunciation, courage; the color of temple flags and robes */
+  --color-kapi-saffron: #f2760c;
+  --color-kapi-saffronDark: #c2560a;
+
+  /* Sindoor rose / kumkum maroon — devotion, auspiciousness, heart chakra grounded in tradition
+     (replaces a bright "beauty pink" that read more spa than spiritual) */
+  --color-kapi-rose: #b33a5b;
+  --color-kapi-roseDark: #7a1b36;
+
+  /* Temple gold leaf — divinity, enlightenment, prosperity; warmer than a caution-yellow */
+  --color-kapi-gold: #f5c24c;
+
+  /* Warm ivory & cream — purity and grounding neutrals */
+  --color-kapi-sand: #fffbeb;
+  --color-kapi-peach: #fbeedc;
+
+  --font-sans: 'Outfit', sans-serif;
+  --font-serif: 'Playfair Display', serif;
+
+  --shadow-premium: 0 20px 50px -10px rgba(109, 40, 217, 0.25);
+  --shadow-card: 0 8px 30px rgba(109, 40, 217, 0.08);
+  --shadow-glow-gold: 0 0 30px rgba(245, 194, 76, 0.4);
+  --shadow-glow-purple: 0 0 30px rgba(109, 40, 217, 0.4);
+}
+
+html { 
+  scroll-behavior: smooth; 
+}
+
+body {
+  background-color: #fffbeb;
+  color: #2e1065;
+  overflow-x: hidden;
+  font-family: var(--font-sans);
+}
+
+.hide-scrollbar::-webkit-scrollbar { 
+  display: none; 
+}
+.hide-scrollbar { 
+  -ms-overflow-style: none; 
+  scrollbar-width: none; 
+}
+
+.sunburst-bg {
+  background: repeating-conic-gradient(from 0deg, #fef3c7 0deg 15deg, #fffbeb 15deg 30deg);
+}
+
+.text-gradient-purple {
+  background: linear-gradient(135deg, #6d28d9, #f5c24c);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.phone-mockup {
+  box-shadow: inset 0 0 20px rgba(109,40,217,0.3), 0 30px 60px rgba(109,40,217,0.2);
+}

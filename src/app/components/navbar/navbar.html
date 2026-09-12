@@ -1,0 +1,30 @@
+<nav class="bg-white/95 backdrop-blur-md shadow-sm sticky top-0 z-50 py-3 transition-all duration-300" id="navbar">
+    <div class="container mx-auto px-4 max-w-7xl">
+        <div class="flex justify-between items-center">
+            <a href="#" class="flex items-center space-x-3 group">
+                <div class="w-11 h-11 bg-kapi-purple text-white rounded-full flex items-center justify-center font-serif text-2xl font-bold shadow-md group-hover:bg-kapi-saffron transition-colors">
+                    K
+                </div>
+                <div class="flex flex-col items-start leading-none">
+                    <span class="text-[20px] font-bold text-kapi-saffron tracking-tight font-serif uppercase group-hover:text-kapi-purple transition-colors">Maharishi Kapi</span>
+                    <span class="text-[9px] text-kapi-gold tracking-[0.2em] font-bold uppercase mt-1">Institute</span>
+                </div>
+            </a>
+            <div class="hidden lg:flex space-x-8 items-center text-[13px] font-semibold text-kapi-saffron uppercase tracking-wider">
+                <a routerLink="/" routerLinkActive="text-kapi-purple border-b-2 border-kapi-purple pb-1" [routerLinkActiveOptions]="{exact: true}" class="hover:text-kapi-purple transition">Home</a>
+                <a routerLink="/about" routerLinkActive="text-kapi-purple border-b-2 border-kapi-purple pb-1" class="hover:text-kapi-purple transition">About</a>
+                <a routerLink="/services" routerLinkActive="text-kapi-purple border-b-2 border-kapi-purple pb-1" class="hover:text-kapi-purple transition">Services</a>
+        <a routerLink="/courses" routerLinkActive="text-kapi-purple border-b-2 border-kapi-purple pb-1" class="hover:text-kapi-purple transition">Courses</a>
+              <a href="#" class="hover:text-kapi-purple transition">Retreats</a>
+                <a href="#" class="hover:text-kapi-purple transition">Blogs</a>
+            </div>
+            <div class="hidden lg:flex items-center space-x-4">
+                <a href="#" class="text-[11px] font-bold uppercase tracking-widest text-kapi-saffron/60 hover:text-kapi-purple transition">Login</a>
+                <button class="bg-kapi-purple hover:bg-kapi-purpleHover text-white px-6 py-2.5 rounded-full text-xs font-bold transition shadow-lg tracking-wider uppercase">Book Consultation</button>
+            </div>
+            <button class="lg:hidden text-kapi-saffron text-2xl focus:outline-none">
+                <i class="fa-solid fa-bars-staggered"></i>
+            </button>
+        </div>
+    </div>
+</nav>

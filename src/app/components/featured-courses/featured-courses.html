@@ -1,0 +1,121 @@
+<section class="py-16 sm:py-24 bg-gradient-to-b from-[#faf8f5] via-[#faf7f2] to-[#f5ede2] border-b border-[#e8dac5] relative overflow-hidden font-sans">
+    
+    <!-- Sacred Geometry Watermarks & Solar Ambient Halo -->
+    <div class="absolute inset-0 bg-[radial-gradient(#c2a275_1.2px,transparent_1.2px)] [background-size:28px_28px] opacity-25 pointer-events-none"></div>
+    <div class="absolute -top-32 right-10 w-[550px] h-[550px] bg-gradient-to-bl from-[#fcd34d]/20 via-[#fb923c]/10 to-transparent rounded-full blur-[110px] pointer-events-none"></div>
+
+    <div class="container mx-auto px-4 max-w-7xl relative z-10">
+        
+        <!-- ========================================================================= -->
+        <!-- 1. SECTION HEADER WITH SHODASH-VIDYA RIBBON                               -->
+        <!-- ========================================================================= -->
+        <div class="flex flex-col md:flex-row justify-between items-start md:items-end mb-12 sm:mb-16 gap-6 border-b border-[#e8dac5] pb-6">
+            <div>
+                <div class="inline-flex items-center gap-2 text-[#8c5324] font-mono text-[10px] uppercase tracking-[0.28em] font-bold mb-2">
+                    <span class="text-[#d97706]">❖</span>
+                    <span>विद्या पीठ • PATHSHALA SELECTIONS</span>
+                    <span class="text-[#d97706]">❖</span>
+                </div>
+                
+                <h2 class="text-3xl sm:text-4xl md:text-5xl font-serif font-black text-[#3a2717] tracking-tight leading-[1.12]">
+                    Featured Curricula
+                </h2>
+                <p class="text-[#685546] text-xs sm:text-sm mt-2 max-w-lg leading-relaxed">
+                    Foundational mastercourses taught live by Acharya Alok Awasthi with lifetime portal access.
+                </p>
+            </div>
+
+            <!-- View All Link with Directional Arrow -->
+            <a routerLink="/courses" 
+               class="group inline-flex items-center gap-2 text-[11px] font-mono font-bold uppercase tracking-widest text-[#8c5324] hover:text-[#b45309] transition-colors pb-1 border-b-2 border-[#d8c3a5] hover:border-[#b45309]">
+                <span>Explore All 24 Courses</span>
+                <i class="fa-solid fa-arrow-right text-[10px] group-hover:translate-x-1 transition-transform"></i>
+            </a>
+        </div>
+
+        <!-- ========================================================================= -->
+        <!-- 2. ARCHIVAL FEATURED COURSE CARDS                                         -->
+        <!-- ========================================================================= -->
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8 sm:gap-10">
+            @for (course of courses; track course.title; let i = $index) {
+                
+                <article class="featured-course-card group bg-[#fffdfa] rounded-[32px] border-2 border-[#e8dac5] hover:border-[#d97706] p-5 sm:p-6 flex flex-col justify-between relative overflow-hidden transition-all duration-500 hover:-translate-y-2 shadow-xs hover:shadow-xl">
+                    
+                    <!-- Antique Gilded Corner Filigrees -->
+                    <div class="absolute top-3 left-3 w-4 h-4 border-t border-l border-[#cbb391] pointer-events-none z-20"></div>
+                    <div class="absolute top-3 right-3 w-4 h-4 border-t border-r border-[#cbb391] pointer-events-none z-20"></div>
+
+                    <div>
+                        <!-- Header Lineage Stamp -->
+                        <div class="flex items-center justify-between mb-4 pb-2.5 border-b border-[#f0e4d4]">
+                            <span class="text-[9px] font-mono font-bold uppercase tracking-widest text-[#d97706] bg-[#fbf3e8] px-2.5 py-0.5 rounded-full border border-[#e8dac5]">
+                                {{ course.sanskritTag }}
+                            </span>
+                            <span class="text-[9px] font-mono text-[#8c5324] font-semibold flex items-center gap-1">
+                                <i class="fa-solid fa-star text-amber-500 text-[8px]"></i>
+                                {{ course.rating }}
+                            </span>
+                        </div>
+
+                        <!-- Photographic Vignette with Curved Arch Top & Sheen Sweep -->
+                        <div class="relative h-52 rounded-t-[28px] rounded-b-xl overflow-hidden border border-[#e8dac5] bg-[#f5ede2] mb-5">
+                            <img [src]="course.image" [alt]="course.title" class="w-full h-full object-cover group-hover:scale-106 transition-transform duration-1000 ease-out">
+                            <div class="absolute inset-0 bg-gradient-to-t from-[#2c1d11]/75 via-transparent to-transparent"></div>
+                            
+                            <!-- Magazine Gloss Sheen Reflection -->
+                            <div class="sheen-sweep z-10"></div>
+
+                            <!-- Category Badge -->
+                            <span class="absolute top-3 left-3 bg-white/95 backdrop-blur-md text-[#8c5324] text-[8.5px] font-mono font-bold uppercase tracking-wider px-3 py-1 rounded-full border border-[#e8dac5] shadow-2xs z-20">
+                                {{ course.category }}
+                            </span>
+
+                            <!-- Duration Tag -->
+                            <div class="absolute bottom-2.5 left-3 text-white/95 font-mono text-[9px] uppercase tracking-wider z-20">
+                                <i class="fa-regular fa-clock mr-1 text-amber-300"></i>
+                                <span>{{ course.duration }}</span>
+                            </div>
+                        </div>
+
+                        <!-- Course Title -->
+                        <h3 class="font-serif font-bold text-lg sm:text-[19px] text-[#3a2717] leading-snug mb-3 group-hover:text-[#8c5324] transition-colors">
+                            {{ course.title }}
+                        </h3>
+
+                        <!-- Micro Benefit Points -->
+                        <div class="space-y-1.5 mb-6 text-[11px] text-[#685546]">
+                            <div class="flex items-center gap-2">
+                                <span class="text-[#d97706] text-[9px]">❖</span>
+                                <span>Complete Classical Syllabus &amp; Audio Transcripts</span>
+                            </div>
+                            <div class="flex items-center gap-2">
+                                <span class="text-[#d97706] text-[9px]">❖</span>
+                                <span>Official Maharishi Kapi Certified Shastra Diploma</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Bottom Pricing & Enrollment Action Bar -->
+                    <div class="pt-4 border-t border-[#f0e4d4] flex items-center justify-between mt-auto">
+                        <div>
+                            <span class="text-[9px] font-mono text-[#9c7d67] uppercase tracking-widest font-bold line-through block leading-none mb-1">
+                                {{ formatPrice(course.originalPrice) }}
+                            </span>
+                            <span class="font-serif font-black text-xl text-[#8c5324] leading-none">
+                                {{ formatPrice(course.price) }}
+                            </span>
+                        </div>
+
+                        <a routerLink="/courses" 
+                           class="bg-gradient-to-r from-[#d97706] via-[#ea580c] to-[#b45309] hover:brightness-105 text-white font-mono text-[10px] font-bold uppercase tracking-widest px-5 py-2.5 rounded-full transition-all shadow-2xs hover:shadow-md hover:scale-105 active:scale-95 flex items-center gap-1.5">
+                            <span>View Course</span>
+                            <i class="fa-solid fa-arrow-right text-[8px]"></i>
+                        </a>
+                    </div>
+
+                </article>
+            }
+        </div>
+
+    </div>
+</section>

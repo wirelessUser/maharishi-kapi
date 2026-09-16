@@ -1,0 +1,543 @@
+<main class="bg-[#faf8f5] text-[#3a2717] antialiased min-h-screen selection:bg-amber-200 selection:text-amber-950 font-sans">
+
+    <!-- ========================================================================= -->
+    <!-- 1. SACRED SANKALPA HERO SECTION WITH CELESTIAL MANDALAS                   -->
+    <!-- ========================================================================= -->
+    <section class="relative pt-16 sm:pt-20 pb-20 sm:pb-28 overflow-hidden bg-gradient-to-b from-[#f5eee4] via-[#faf7f2] to-[#faf8f5] border-b border-[#e8dac5]">
+        
+        <!-- Sacred Geometry Background Grid -->
+        <div class="absolute inset-0 bg-[radial-gradient(#c2a275_1.2px,transparent_1.2px)] [background-size:28px_28px] opacity-25 pointer-events-none"></div>
+        <div class="absolute -top-32 left-1/2 -translate-x-1/2 w-[700px] h-[550px] bg-gradient-to-b from-[#fcd34d]/30 via-[#fb923c]/20 to-transparent rounded-full blur-[130px] pointer-events-none animate-float-slow"></div>
+
+        <!-- Rotating Astrolabe Watermark -->
+        <div class="absolute inset-0 flex items-center justify-center pointer-events-none opacity-30 overflow-hidden">
+            <div class="w-[820px] h-[820px] border border-[#d8c3a5]/50 rounded-full animate-rotate-mandala flex items-center justify-center">
+                <div class="w-[680px] h-[680px] border border-dashed border-[#cbb391]/70 rounded-full"></div>
+                <div class="absolute w-[500px] h-[500px] border border-[#d8c3a5]/40 rotate-45"></div>
+            </div>
+        </div>
+
+        <div class="container mx-auto px-4 max-w-5xl relative z-10 text-center">
+            
+            <!-- Sacred Seal Banner -->
+            <div class="inline-flex items-center gap-2.5 px-4 sm:px-5 py-2 rounded-full bg-white/90 backdrop-blur-md border border-[#d8c3a5] text-[#8c5324] text-[10px] sm:text-[11px] font-mono font-bold tracking-[0.25em] uppercase shadow-xs mb-6">
+                <span class="text-[#d97706] animate-pulse">❖</span>
+                <span>MAHA SANKALPA • 80G TAX EXEMPTION</span>
+                <span class="text-[#d97706] animate-pulse">❖</span>
+            </div>
+
+            <!-- Grand Editorial Headline -->
+            <h1 class="text-3xl sm:text-5xl md:text-6xl font-serif font-black text-[#3a2717] leading-[1.12] tracking-tight mb-5 text-balance">
+                Preserve 5,000 Years of Sacred Shastras.<br>
+                <span class="italic text-transparent bg-clip-text bg-gradient-to-r from-[#994d22] via-[#b5651d] to-[#d97706]">
+                    Nurture the Next Generation of Sages.
+                </span>
+            </h1>
+
+            <p class="text-[#685546] text-xs sm:text-sm md:text-base leading-relaxed max-w-2xl mx-auto mb-10 font-normal">
+                Join Acharya Alok Awasthi in restoring ancient crumbling palm-leaf astrology manuscripts, providing full free Gurukul scholarship to 60 young scholars, and serving daily Ganga Annadanam in Rishikesh.
+            </p>
+
+            <!-- ================= CAMPAIGN PROGRESS METRIC LEDGER ================= -->
+            <div class="bg-[#fffdfa] rounded-[32px] p-6 sm:p-8 border-2 border-[#e8dac5] shadow-[0_20px_50px_rgba(180,130,70,0.12)] max-w-3xl mx-auto relative overflow-hidden">
+                
+                <!-- Corner Filigrees -->
+                <div class="absolute top-3 left-3 w-5 h-5 border-t-2 border-l-2 border-[#cbb391] pointer-events-none"></div>
+                <div class="absolute top-3 right-3 w-5 h-5 border-t-2 border-r-2 border-[#cbb391] pointer-events-none"></div>
+                <div class="absolute bottom-3 left-3 w-5 h-5 border-b-2 border-l-2 border-[#cbb391] pointer-events-none"></div>
+                <div class="absolute bottom-3 right-3 w-5 h-5 border-b-2 border-r-2 border-[#cbb391] pointer-events-none"></div>
+
+                <div class="flex flex-col sm:flex-row justify-between items-baseline gap-4 mb-4">
+                    <div>
+                        <span class="text-[10px] font-mono uppercase tracking-[0.2em] text-[#8c5324] font-bold block mb-1">Total Consecrated Dakshina</span>
+                        <div class="flex items-baseline gap-2">
+                            <span class="text-3xl sm:text-4xl font-serif font-black text-[#3a2717]">{{ formatCurrency(raisedAmount()) }}</span>
+                            <span class="text-xs sm:text-sm font-mono text-[#7d6756]">of {{ formatCurrency(targetGoal) }} Goal</span>
+                        </div>
+                    </div>
+                    <div class="text-left sm:text-right">
+                        <span class="inline-flex items-center gap-1.5 bg-[#fbf3e8] text-[#8c5324] px-3.5 py-1 rounded-full text-xs font-mono font-bold border border-[#e8dac5]">
+                            <span>{{ progressPercent() }}% Manifested</span>
+                        </span>
+                    </div>
+                </div>
+
+                <!-- Luminous Golden Progress Bar -->
+                <div class="w-full h-3.5 sm:h-4 bg-[#f0e4d4] rounded-full overflow-hidden p-0.5 border border-[#e8dac5] relative">
+                    <div class="h-full bg-gradient-to-r from-[#d97706] via-[#ea580c] to-[#b45309] rounded-full transition-all duration-1000 relative"
+                         [style.width.%]="progressPercent()">
+                        <div class="absolute inset-0 bg-gradient-to-r from-transparent via-white/40 to-transparent -translate-x-full animate-sheen-slide"></div>
+                    </div>
+                </div>
+
+                <div class="flex flex-wrap justify-between items-center text-[10px] sm:text-[11px] font-mono text-[#7d6756] mt-4 pt-4 border-t border-[#f0e4d4]">
+                    <span><strong class="text-[#3a2717]">{{ donorCount() }}</strong> Daanveers Blessed</span>
+                    <span><strong class="text-[#3a2717]">{{ daysLeft() }} Days</strong> Remaining in Sharad Sankalpa</span>
+                    <span class="text-[#d97706] font-bold">100% Tax Deductible (80G)</span>
+                </div>
+
+            </div>
+
+        </div>
+    </section>
+
+    <!-- ========================================================================= -->
+    <!-- 2. THE DAKSHINA OFFERING TERMINAL (INTERACTIVE CONTRIBUTION PORTAL)        -->
+    <!-- ========================================================================= -->
+    <section class="py-14 sm:py-20 -mt-10 sm:-mt-14 relative z-20">
+        <div class="container mx-auto px-4 max-w-5xl">
+            
+            <div class="bg-[#fffdfa] rounded-[36px] border-2 border-[#e8dac5] shadow-[0_25px_65px_rgba(140,83,36,0.15)] p-6 sm:p-10 lg:p-12 relative overflow-hidden">
+                
+                <!-- Background Palm-Leaf Watermark -->
+                <div class="absolute top-0 right-0 w-80 h-80 bg-gradient-to-bl from-amber-100/30 to-transparent rounded-bl-full pointer-events-none"></div>
+
+                <!-- Frequency Selector (One-Time vs Nitya Monthly Seva) -->
+                <div class="flex justify-center mb-10">
+                    <div class="bg-[#f5ede2] p-1.5 rounded-full border border-[#e8dac5] inline-flex items-center gap-1 shadow-inner">
+                        <button
+                            type="button"
+                            (click)="toggleDonationType('one-time')"
+                            class="px-6 py-2.5 rounded-full text-xs font-mono font-bold uppercase tracking-wider transition-all cursor-pointer"
+                            [class.bg-[#8c5324]]="donationType() === 'one-time'"
+                            [class.text-white]="donationType() === 'one-time'"
+                            [class.shadow-xs]="donationType() === 'one-time'"
+                            [class.text-[#685546]]="donationType() !== 'one-time'"
+                        >
+                            One-Time Sankalpa
+                        </button>
+                        <button
+                            type="button"
+                            (click)="toggleDonationType('monthly')"
+                            class="px-6 py-2.5 rounded-full text-xs font-mono font-bold uppercase tracking-wider transition-all cursor-pointer flex items-center gap-1.5"
+                            [class.bg-[#8c5324]]="donationType() === 'monthly'"
+                            [class.text-white]="donationType() === 'monthly'"
+                            [class.shadow-xs]="donationType() === 'monthly'"
+                            [class.text-[#685546]]="donationType() !== 'monthly'"
+                        >
+                            <i class="fa-solid fa-repeat text-[10px]"></i>
+                            <span>Nitya Seva (Monthly)</span>
+                        </button>
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 items-start">
+                    
+                    <!-- Left 7 Columns: Preset Amount Tiers & Impact -->
+                    <div class="lg:col-span-7 space-y-6">
+                        
+                        <div>
+                            <span class="text-[10px] font-mono uppercase tracking-[0.25em] text-[#8c5324] font-bold block mb-1">Step 1: Choose Your Sacred Offering</span>
+                            <h3 class="text-xl sm:text-2xl font-serif font-black text-[#3a2717]">Select Seva Amount</h3>
+                        </div>
+
+                        <!-- Tier Cards Grid -->
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3.5">
+                            @for (tier of tiers; track tier.amount; let i = $index) {
+                                <div
+                                    (click)="selectTier(i)"
+                                    class="p-4 rounded-2xl border-2 transition-all duration-300 cursor-pointer flex flex-col justify-between relative group"
+                                    [class.border-[#d97706]]="!isCustom() && selectedTierIndex() === i"
+                                    [class.bg-[#fcf8f0]]="!isCustom() && selectedTierIndex() === i"
+                                    [class.shadow-xs]="!isCustom() && selectedTierIndex() === i"
+                                    [class.border-[#e8dac5]]="isCustom() || selectedTierIndex() !== i"
+                                    [class.bg-white]="isCustom() || selectedTierIndex() !== i"
+                                    [class.hover:border-[#d8c3a5]]="isCustom() || selectedTierIndex() !== i"
+                                >
+                                    @if (tier.popular) {
+                                        <span class="absolute -top-2.5 right-3 bg-gradient-to-r from-[#d97706] to-[#b45309] text-white text-[8px] font-mono uppercase tracking-widest px-2.5 py-0.5 rounded-full shadow-2xs font-bold">
+                                            Most Chosen
+                                        </span>
+                                    }
+
+                                    <div>
+                                        <div class="flex items-center justify-between mb-1">
+                                            <span class="text-xl font-serif font-black text-[#3a2717]">{{ formatCurrency(tier.amount) }}</span>
+                                            <span class="w-4 h-4 rounded-full border flex items-center justify-center text-[9px]"
+                                                  [class.border-[#d97706]]="!isCustom() && selectedTierIndex() === i"
+                                                  [class.bg-[#d97706]]="!isCustom() && selectedTierIndex() === i"
+                                                  [class.text-white]="!isCustom() && selectedTierIndex() === i">
+                                                @if (!isCustom() && selectedTierIndex() === i) { ✓ }
+                                            </span>
+                                        </div>
+                                        <span class="text-[10px] font-mono text-[#8c5324] font-bold block mb-2">{{ tier.sanskritTitle }}</span>
+                                        <p class="text-[#685546] text-[11px] leading-relaxed">{{ tier.impact }}</p>
+                                    </div>
+                                </div>
+                            }
+
+                            <!-- Custom Amount Box -->
+                            <div
+                                (click)="enableCustomAmount()"
+                                class="p-4 rounded-2xl border-2 transition-all duration-300 cursor-pointer flex flex-col justify-between"
+                                [class.border-[#d97706]]="isCustom()"
+                                [class.bg-[#fcf8f0]]="isCustom()"
+                                [class.border-[#e8dac5]]="!isCustom()"
+                                [class.bg-white]="!isCustom()"
+                            >
+                                <span class="text-[10px] font-mono text-[#8c5324] font-bold uppercase tracking-wider block mb-2">Custom Voluntary Daan</span>
+                                <div class="relative mt-auto">
+                                    <span class="absolute left-3 top-1/2 -translate-y-1/2 font-serif font-black text-gray-500 text-base">₹</span>
+                                    <input
+                                        type="number"
+                                        placeholder="Enter other amount"
+                                        [value]="customAmountInput()"
+                                        (focus)="enableCustomAmount()"
+                                        (input)="customAmountInput.set($any($event.target).value)"
+                                        class="w-full bg-white border border-[#d8c3a5] focus:border-[#d97706] rounded-xl pl-8 pr-3 py-2 text-sm text-[#3a2717] font-serif font-bold outline-none"
+                                    >
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Impact Allocation Preview Banner -->
+                        <div class="bg-[#faf6ee] p-4.5 rounded-2xl border border-[#ede1d1] flex items-start gap-3.5">
+                            <div class="w-9 h-9 rounded-xl bg-[#f5ede2] text-[#8c5324] border border-[#e8dac5] flex items-center justify-center shrink-0 text-sm shadow-2xs">
+                                <i class="fa-solid fa-om"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-serif font-bold text-xs sm:text-sm text-[#3a2717] mb-0.5">Where Your Offering Travels</h4>
+                                <p class="text-[#685546] text-[11px] leading-relaxed">
+                                    40% Manuscript Digitization Lab • 35% Gurukul Scholar Housing & Food • 25% Ganga Sadhu Annadanam.
+                                </p>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <!-- Right 5 Columns: Consecrated Sankalpa Form & Payment CTA -->
+                    <div class="lg:col-span-5 bg-gradient-to-b from-[#fdfaf5] to-[#f7f0e4] rounded-[28px] p-6 sm:p-7 border-2 border-[#e8dac5] relative shadow-sm">
+                        
+                        <div class="mb-5 pb-3 border-b border-[#e8dac5]">
+                            <span class="text-[9px] font-mono uppercase tracking-[0.25em] text-[#8c5324] font-bold block mb-1">Step 2: Sankalpa Puja Details</span>
+                            <h3 class="text-lg font-serif font-bold text-[#3a2717]">Donor Gotra &amp; Blessing Slip</h3>
+                        </div>
+
+                        <form (submit)="processSankalpaPayment($event)" class="space-y-3.5">
+                            
+                            <div>
+                                <label class="block text-[10px] font-mono uppercase tracking-wider text-[#685546] font-bold mb-1">Karta Full Name *</label>
+                                <input
+                                    type="text"
+                                    required
+                                    [(ngModel)]="donorName"
+                                    name="donorName"
+                                    placeholder="Full legal or ceremonial name"
+                                    class="w-full bg-white border border-[#d8c3a5] focus:border-[#d97706] rounded-xl px-3.5 py-2.5 text-xs text-[#3a2717] outline-none shadow-2xs"
+                                >
+                            </div>
+
+                            <div class="grid grid-cols-2 gap-3">
+                                <div>
+                                    <label class="block text-[10px] font-mono uppercase tracking-wider text-[#685546] font-bold mb-1">Email (for 80G) *</label>
+                                    <input
+                                        type="email"
+                                        required
+                                        [(ngModel)]="donorEmail"
+                                        name="donorEmail"
+                                        placeholder="email@example.com"
+                                        class="w-full bg-white border border-[#d8c3a5] focus:border-[#d97706] rounded-xl px-3.5 py-2.5 text-xs text-[#3a2717] outline-none shadow-2xs"
+                                    >
+                                </div>
+                                <div>
+                                    <label class="block text-[10px] font-mono uppercase tracking-wider text-[#685546] font-bold mb-1">Mobile (WhatsApp)</label>
+                                    <input
+                                        type="tel"
+                                        [(ngModel)]="donorPhone"
+                                        name="donorPhone"
+                                        placeholder="+91 98765 43210"
+                                        class="w-full bg-white border border-[#d8c3a5] focus:border-[#d97706] rounded-xl px-3.5 py-2.5 text-xs text-[#3a2717] outline-none shadow-2xs"
+                                    >
+                                </div>
+                            </div>
+
+                            <div class="grid grid-cols-2 gap-3">
+                                <div>
+                                    <label class="block text-[10px] font-mono uppercase tracking-wider text-[#685546] font-bold mb-1">Family Gotra</label>
+                                    <input
+                                        type="text"
+                                        [(ngModel)]="donorGotra"
+                                        name="donorGotra"
+                                        placeholder="e.g. Bharadwaja, Kashyapa"
+                                        class="w-full bg-white border border-[#d8c3a5] focus:border-[#d97706] rounded-xl px-3.5 py-2.5 text-xs text-[#3a2717] outline-none shadow-2xs"
+                                    >
+                                </div>
+                                <div>
+                                    <label class="block text-[10px] font-mono uppercase tracking-wider text-[#685546] font-bold mb-1">Birth Nakshatra</label>
+                                    <input
+                                        type="text"
+                                        [(ngModel)]="donorNakshatra"
+                                        name="donorNakshatra"
+                                        placeholder="e.g. Rohini, Ashwini"
+                                        class="w-full bg-white border border-[#d8c3a5] focus:border-[#d97706] rounded-xl px-3.5 py-2.5 text-xs text-[#3a2717] outline-none shadow-2xs"
+                                    >
+                                </div>
+                            </div>
+
+                            <div>
+                                <label class="block text-[10px] font-mono uppercase tracking-wider text-[#685546] font-bold mb-1">PAN Card (For 80G Certificate)</label>
+                                <input
+                                    type="text"
+                                    [(ngModel)]="donorPan"
+                                    name="donorPan"
+                                    placeholder="ABCDE1234F"
+                                    class="w-full bg-white border border-[#d8c3a5] focus:border-[#d97706] rounded-xl px-3.5 py-2.5 text-xs text-[#3a2717] uppercase font-mono outline-none shadow-2xs"
+                                >
+                            </div>
+
+                            <!-- Checkbox Options -->
+                            <div class="pt-1 space-y-1.5 text-[11px] text-[#685546]">
+                                <label class="flex items-center gap-2 cursor-pointer">
+                                    <input type="checkbox" [(ngModel)]="taxExemptionRequired" name="taxExempt" class="accent-[#d97706] rounded">
+                                    <span>Send instant 80G Tax Exemption Certificate</span>
+                                </label>
+                                <label class="flex items-center gap-2 cursor-pointer">
+                                    <input type="checkbox" [(ngModel)]="anonymousDonation" name="anon" class="accent-[#d97706] rounded">
+                                    <span>Keep my contribution anonymous on the digital ledger</span>
+                                </label>
+                            </div>
+
+                            <!-- Primary Offering Button -->
+                            <button
+                                type="submit"
+                                class="w-full mt-3 bg-gradient-to-r from-[#d97706] via-[#ea580c] to-[#b45309] hover:brightness-105 text-white font-mono font-bold text-xs uppercase tracking-[0.2em] py-4 rounded-full transition-all shadow-md hover:shadow-lg hover:scale-[1.01] active:scale-[0.99] flex items-center justify-center gap-2 cursor-pointer"
+                            >
+                                <span>Offer {{ formatCurrency(currentSelectedAmount()) }} Dakshina</span>
+                                <i class="fa-solid fa-arrow-right text-[11px]"></i>
+                            </button>
+
+                            @if (isSubmitted()) {
+                                <div class="p-3 bg-white border border-[#d97706] rounded-xl text-center text-xs font-mono text-[#8c5324] animate-fade-in">
+                                    ✦ Sankalpa Recorded. Redirecting to sacred secure gateway...
+                                </div>
+                            }
+
+                            <!-- Trust Badges -->
+                            <div class="flex items-center justify-center gap-4 text-[10px] font-mono text-[#8c5324] pt-2">
+                                <span class="flex items-center gap-1"><i class="fa-solid fa-shield-halved"></i> 256-Bit SSL</span>
+                                <span>•</span>
+                                <span class="flex items-center gap-1"><i class="fa-solid fa-receipt"></i> Instant 80G</span>
+                                <span>•</span>
+                                <span class="flex items-center gap-1"><i class="fa-solid fa-building-columns"></i> Verified Trust</span>
+                            </div>
+
+                        </form>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+    </section>
+
+    <!-- ========================================================================= -->
+    <!-- 3. THREE CORE SEVA PILLARS (DEVANAGARI PARCHMENT DOSSIERS)                 -->
+    <!-- ========================================================================= -->
+    <section class="py-20 bg-[#f5ede2]/60 border-y border-[#e8dac5]">
+        <div class="container mx-auto px-4 max-w-7xl">
+            
+            <div class="text-center max-w-2xl mx-auto mb-16">
+                <span class="text-[#8c5324] font-mono text-[10px] tracking-[0.3em] uppercase font-bold block mb-2">PANCHA-MAHAYAJNA RESPONSIBILITY</span>
+                <h2 class="text-3xl sm:text-4xl font-serif font-black text-[#3a2717]">The Three Consecrated Pillars</h2>
+                <div class="w-14 h-1 bg-[#d97706] mx-auto mt-4 rounded-full"></div>
+                <p class="text-[#685546] text-xs sm:text-sm mt-3">
+                    Every rupee contributed directly fuels verified shastric conservation under Acharya Alok Awasthi's supervision.
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+                @for (pillar of sevaPillars; track pillar.id; let i = $index) {
+                    <div class="bg-[#fffdfa] rounded-[32px] border-2 border-[#e8dac5] hover:border-[#d97706] p-6 sm:p-8 flex flex-col justify-between shadow-xs hover:shadow-xl transition-all duration-500 hover:-translate-y-2 relative overflow-hidden group">
+                        
+                        <!-- Archival Corner Filigrees -->
+                        <div class="absolute top-3 left-3 w-4 h-4 border-t border-l border-[#cbb391] pointer-events-none"></div>
+                        <div class="absolute top-3 right-3 w-4 h-4 border-t border-r border-[#cbb391] pointer-events-none"></div>
+
+                        <div>
+                            <!-- Header Bar -->
+                            <div class="flex items-center justify-between mb-4 pb-3 border-b border-[#f0e4d4]">
+                                <span class="font-serif font-black text-xl text-[#d97706]/40 group-hover:text-[#d97706] transition-colors leading-none">
+                                    ०{{ i + 1 }}
+                                </span>
+                                <span class="text-[9px] font-mono font-bold text-[#8c5324] uppercase tracking-wider bg-[#fbf3e8] px-3 py-1 rounded-full border border-[#e8dac5]">
+                                    {{ pillar.sanskritName }}
+                                </span>
+                            </div>
+
+                            <!-- Photographic Vignette -->
+                            <div class="relative h-48 rounded-2xl overflow-hidden border border-[#e8dac5] bg-[#f5ede2] mb-5">
+                                <img [src]="pillar.image" [alt]="pillar.title" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700">
+                                <div class="absolute inset-0 bg-gradient-to-t from-[#2c1d11]/70 via-transparent to-transparent"></div>
+                                <div class="absolute bottom-3 left-4 text-white">
+                                    <span class="text-[9px] font-mono uppercase tracking-widest text-amber-200 block">Allocation</span>
+                                    <span class="font-serif font-bold text-sm">{{ pillar.allocatedPercent }}% of Maha Fund</span>
+                                </div>
+                            </div>
+
+                            <h3 class="font-serif font-bold text-lg sm:text-xl text-[#3a2717] leading-snug mb-2 group-hover:text-[#8c5324] transition-colors">
+                                {{ pillar.title }}
+                            </h3>
+
+                            <p class="text-[#685546] text-xs leading-relaxed mb-6 font-normal">
+                                {{ pillar.description }}
+                            </p>
+                        </div>
+
+                        <!-- Pillar Mini Progress Bar -->
+                        <div class="pt-4 border-t border-[#f0e4d4]">
+                            <div class="flex justify-between text-[10px] font-mono text-[#7d6756] mb-1.5">
+                                <span>Raised: {{ formatCurrency(pillar.raisedAmount) }}</span>
+                                <span class="font-bold text-[#8c5324]">{{ formatCurrency(pillar.targetAmount) }}</span>
+                            </div>
+                            <div class="w-full h-2 bg-[#f0e4d4] rounded-full overflow-hidden p-0.5 border border-[#e8dac5]">
+                                <div class="h-full bg-[#d97706] rounded-full" [style.width.%]="(pillar.raisedAmount / pillar.targetAmount) * 100"></div>
+                            </div>
+                        </div>
+
+                    </div>
+                }
+            </div>
+
+        </div>
+    </section>
+
+    <!-- ========================================================================= -->
+    <!-- 4. LIVE SANKALPA ROLL: DIGITAL TAMRA-PATRA DONOR REGISTER                 -->
+    <!-- ========================================================================= -->
+    <section class="py-20 bg-[#faf8f5]">
+        <div class="container mx-auto px-4 max-w-5xl">
+            
+            <div class="flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-10 pb-4 border-b border-[#e8dac5]">
+                <div>
+                    <span class="text-[10px] font-mono uppercase tracking-[0.25em] text-[#8c5324] font-bold block mb-1">DIGITAL TAMRA-PATRA</span>
+                    <h2 class="text-2xl sm:text-3xl font-serif font-black text-[#3a2717]">Recent Consecrated Daanveers</h2>
+                </div>
+                <div class="flex items-center gap-2 text-xs font-mono text-[#8c5324]">
+                    <span class="w-2.5 h-2.5 rounded-full bg-[#d97706] animate-pulse"></span>
+                    <span>Live Sanctum Stream</span>
+                </div>
+            </div>
+
+            <!-- Donor Ledger Entries -->
+            <div class="space-y-3.5">
+                @for (donor of recentDonors; track donor.name) {
+                    <div class="bg-[#fffdfa] rounded-2xl p-4.5 sm:p-5 border border-[#e8dac5] hover:border-[#d97706] shadow-2xs hover:shadow-sm transition-all flex flex-col sm:flex-row sm:items-center justify-between gap-3 group">
+                        
+                        <div class="flex items-start sm:items-center gap-3.5">
+                            <div class="w-10 h-10 rounded-xl bg-[#fbf3e8] border border-[#e8dac5] text-[#8c5324] group-hover:bg-[#8c5324] group-hover:text-white flex items-center justify-center text-sm shrink-0 transition-colors shadow-2xs font-serif font-bold">
+                                ॐ
+                            </div>
+                            <div>
+                                <div class="flex flex-wrap items-center gap-2">
+                                    <h4 class="font-serif font-bold text-sm text-[#3a2717]">{{ donor.name }}</h4>
+                                    @if (donor.gotra) {
+                                        <span class="text-[9px] font-mono text-[#8c5324] bg-[#fbf3e8] px-2 py-0.5 rounded border border-[#e8dac5]">
+                                            {{ donor.gotra }}
+                                        </span>
+                                    }
+                                </div>
+                                <p class="text-[11px] text-[#7d6756] font-mono mt-0.5">
+                                    {{ donor.location }} • Dedicated for {{ donor.sevaCause }}
+                                </p>
+                            </div>
+                        </div>
+
+                        <div class="flex sm:flex-col items-center sm:items-end justify-between sm:justify-center border-t sm:border-t-0 pt-2 sm:pt-0 border-[#f0e4d4]">
+                            <span class="font-serif font-black text-base sm:text-lg text-[#8c5324]">{{ formatCurrency(donor.amount) }}</span>
+                            <span class="text-[9px] font-mono text-[#9c7d67]">{{ donor.timeAgo }}</span>
+                        </div>
+
+                    </div>
+                }
+            </div>
+
+            <div class="text-center mt-8">
+                <span class="text-[#7d6756] text-xs font-mono">
+                    May the divine blessings of Surya and Guru Brihaspati bestow abundance upon all generous contributors.
+                </span>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- ========================================================================= -->
+    <!-- 5. TRANSPARENCY & 80G TAX ACCREDITATION CERTIFICATION                     -->
+    <!-- ========================================================================= -->
+    <section class="py-16 bg-[#f5ede2]/60 border-y border-[#e8dac5]">
+        <div class="container mx-auto px-4 max-w-5xl">
+            
+            <div class="bg-[#fffdfa] rounded-[32px] p-8 sm:p-10 border-2 border-[#e8dac5] shadow-sm flex flex-col md:flex-row items-center justify-between gap-8">
+                
+                <div class="flex items-center gap-5">
+                    <div class="w-16 h-16 rounded-2xl bg-[#fbf3e8] border border-amber-300 text-[#8c5324] flex items-center justify-center text-3xl shrink-0 shadow-inner">
+                        <i class="fa-solid fa-stamp"></i>
+                    </div>
+                    <div>
+                        <span class="text-[9px] font-mono uppercase tracking-[0.25em] text-[#8c5324] font-bold block mb-1">GOVERNMENT OF INDIA RECOGNIZED</span>
+                        <h3 class="text-xl sm:text-2xl font-serif font-bold text-[#3a2717] mb-1">Section 80G Certified Non-Profit Trust</h3>
+                        <p class="text-[#685546] text-xs leading-relaxed max-w-xl">
+                            All offerings qualify for 50% tax exemption under Section 80G. Form 10BE compliant receipts are generated instantly and submitted directly to the Income Tax portal under your PAN.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="text-center md:text-right shrink-0">
+                    <span class="inline-block bg-[#fbf3e8] border border-[#d8c3a5] text-[#8c5324] px-4 py-2 rounded-xl text-xs font-mono font-bold">
+                        Trust Reg: MKT/80G/2026/DEL
+                    </span>
+                </div>
+
+            </div>
+
+        </div>
+    </section>
+
+    <!-- ========================================================================= -->
+    <!-- 6. PRASHNA UTTARA (FREQUENTLY ASKED QUESTIONS)                            -->
+    <!-- ========================================================================= -->
+    <section class="py-20 bg-[#faf8f5]">
+        <div class="container mx-auto px-4 max-w-3xl">
+            
+            <div class="text-center mb-12">
+                <span class="text-[#8c5324] font-mono text-[10px] tracking-[0.3em] uppercase font-bold block mb-2">PRASHNA UTTARA</span>
+                <h2 class="text-3xl font-serif font-black text-[#3a2717]">Frequently Asked Questions</h2>
+                <div class="w-14 h-1 bg-[#d97706] mx-auto mt-4 rounded-full"></div>
+            </div>
+
+            <div class="space-y-3.5">
+                @for (faq of faqs; track faq.question; let i = $index) {
+                    <div class="border border-[#e8dac5] rounded-2xl overflow-hidden bg-white shadow-2xs transition-all duration-300"
+                         [class.border-[#d97706]/60]="openFaq() === i"
+                         [class.shadow-md]="openFaq() === i">
+                        
+                        <button
+                            type="button"
+                            (click)="toggleFaq(i)"
+                            class="w-full flex justify-between items-center text-left px-6 py-4.5 gap-4 cursor-pointer group"
+                        >
+                            <span class="font-serif font-bold text-sm sm:text-base text-[#3a2717] group-hover:text-[#8c5324] transition-colors">
+                                {{ faq.question }}
+                            </span>
+                            <div class="w-7 h-7 rounded-full bg-[#fbf3e8] border border-[#e8dac5] flex items-center justify-center text-[#8c5324] text-xs flex-shrink-0 transition-transform duration-300 group-hover:border-[#d97706]"
+                                 [class.rotate-180]="openFaq() === i"
+                                 [class.bg-[#8c5324]]="openFaq() === i"
+                                 [class.text-white]="openFaq() === i">
+                                <i class="fa-solid fa-chevron-down text-[9px]"></i>
+                            </div>
+                        </button>
+
+                        @if (openFaq() === i) {
+                            <div class="px-6 pb-5 pt-1 text-[#685546] text-xs sm:text-sm leading-relaxed border-t border-[#f0e4d4] animate-fade-in">
+                                {{ faq.answer }}
+                            </div>
+                        }
+                    </div>
+                }
+            </div>
+
+        </div>
+    </section>
+
+</main>

@@ -1,0 +1,78 @@
+/* Astrolabe Rotations & Orbital Physics */
+@keyframes spin-astrolabe {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes spin-reverse-slow {
+  from {
+    transform: rotate(360deg);
+  }
+  to {
+    transform: rotate(0deg);
+  }
+}
+
+@keyframes orbit-outer {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes orbit-inner {
+  from {
+    transform: rotate(360deg);
+  }
+  to {
+    transform: rotate(0deg);
+  }
+}
+
+@keyframes subtle-float {
+  0%, 100% {
+    transform: translateY(0px) scale(1);
+  }
+  50% {
+    transform: translateY(-8px) scale(1.015);
+  }
+}
+
+.animate-spin-astrolabe {
+  animation: spin-astrolabe 60s linear infinite;
+}
+
+.animate-spin-reverse-slow {
+  animation: spin-reverse-slow 40s linear infinite;
+}
+
+.animate-orbit-outer {
+  animation: orbit-outer 18s linear infinite;
+}
+
+.animate-orbit-inner {
+  animation: orbit-inner 28s linear infinite;
+}
+
+.animate-subtle-float {
+  animation: subtle-float 7s ease-in-out infinite;
+}
+
+/* Gateway Tablet Edge Shadows */
+.gateway-tablet {
+  box-shadow: 
+    0 10px 25px -5px rgba(140, 83, 36, 0.08),
+    0 0 0 1px rgba(232, 218, 197, 0.6);
+}
+
+.gateway-tablet:hover {
+  box-shadow: 
+    0 24px 45px -10px rgba(140, 83, 36, 0.16),
+    0 0 0 1px rgba(217, 119, 6, 0.35);
+}

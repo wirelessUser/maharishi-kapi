@@ -1,0 +1,22 @@
+/* GPU-Accelerated Continuous 60fps Marquee */
+@keyframes lineageMarquee {
+  0% {
+    transform: translate3d(0, 0, 0);
+  }
+  100% {
+    transform: translate3d(-50%, 0, 0);
+  }
+}
+
+.animate-lineage-marquee {
+  display: flex;
+  width: max-content;
+  will-change: transform;
+  animation: lineageMarquee 42s linear infinite;
+}
+
+@media (max-width: 640px) {
+  .animate-lineage-marquee {
+    animation-duration: 32s;
+  }
+}

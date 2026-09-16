@@ -1,0 +1,42 @@
+/* Cross-browser hide-scrollbar utility */
+.hide-scrollbar {
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
+}
+
+.hide-scrollbar::-webkit-scrollbar {
+  display: none; /* Chrome, Safari and Opera */
+}
+
+/* Glossy Sheen Sweep Reflection on Hover */
+.sheen-sweep {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    115deg,
+    transparent 0%,
+    rgba(255, 255, 255, 0.42) 45%,
+    rgba(255, 255, 255, 0.15) 55%,
+    transparent 100%
+  );
+  transform: translateX(-160%);
+  pointer-events: none;
+  transition: transform 0.85s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.consultant-card:hover .sheen-sweep {
+  transform: translateX(160%);
+}
+
+/* Tactile Card Elevation */
+.consultant-card {
+  box-shadow: 
+    0 8px 20px -5px rgba(140, 83, 36, 0.08),
+    0 0 0 1px rgba(232, 218, 197, 0.6);
+}
+
+.consultant-card:hover {
+  box-shadow: 
+    0 24px 45px -10px rgba(140, 83, 36, 0.16),
+    0 0 0 1px rgba(217, 119, 6, 0.4);
+}

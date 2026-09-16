@@ -1,0 +1,427 @@
+<main class="bg-[#faf7f2] text-[#3a2717] antialiased overflow-hidden selection:bg-amber-200 selection:text-amber-950 font-sans min-h-screen">
+
+    <!-- ========================================================================= -->
+    <!-- 1. SACRED EDITORIAL MASTHEAD                                              -->
+    <!-- ========================================================================= -->
+    <header class="bg-gradient-to-b from-[#f5eee4] via-[#faf7f2] to-[#faf7f2] pt-14 pb-8 border-b-2 border-[#e8dac5] relative">
+        <div class="absolute inset-0 bg-[radial-gradient(#c2a275_1.2px,transparent_1.2px)] [background-size:32px_32px] opacity-25 pointer-events-none"></div>
+
+        <div class="container mx-auto px-4 max-w-7xl text-center relative z-10">
+            <!-- Masthead Gazette Header -->
+            <div class="flex items-center justify-center gap-3 sm:gap-4 mb-3 text-[10px] font-mono font-bold uppercase tracking-[0.35em] text-[#8c5324]">
+                <span>THE MAHARISHI KAPI JOURNAL</span>
+                <span>❖</span>
+                <span>VOL. IX · EDITORIAL EDITION</span>
+                <span class="hidden sm:inline">❖</span>
+                <span class="hidden sm:inline">RISHIKESH · DELHI · GLOBAL</span>
+            </div>
+
+            <h1 class="text-5xl sm:text-6xl md:text-8xl font-serif font-black text-[#3a2717] tracking-tight leading-none mb-3">
+                The Kapi Journal
+            </h1>
+            
+            <p class="text-[#7d6756] text-xs sm:text-sm font-serif italic max-w-xl mx-auto mb-8">
+                Vedic wisdom read like an authentic literary magazine — not a listicle. Consecrated by Acharya Alok Awasthi.
+            </p>
+
+            <!-- Department Selector Tabs -->
+            <nav aria-label="Magazine Departments" class="flex flex-wrap justify-center gap-2 border-t border-[#e8dac5] pt-5">
+                @for (category of categories; track category) {
+                    <button
+                        type="button"
+                        (click)="selectCategory(category)"
+                        class="px-4 py-1.5 rounded-full text-[11px] font-mono font-bold uppercase tracking-wider transition-all duration-300 cursor-pointer shadow-2xs"
+                        [class.bg-[#8c5324]]="selectedCategory() === category"
+                        [class.text-white]="selectedCategory() === category"
+                        [class.shadow-xs]="selectedCategory() === category"
+                        [class.bg-white/80]="selectedCategory() !== category"
+                        [class.text-[#6d5543]]="selectedCategory() !== category"
+                        [class.border]="selectedCategory() !== category"
+                        [class.border-[#e8dac5]]="selectedCategory() !== category"
+                        [class.hover:border-[#8c5324]]="selectedCategory() !== category"
+                        [class.hover:text-[#8c5324]]="selectedCategory() !== category"
+                    >
+                        {{ category }}
+                    </button>
+                }
+            </nav>
+        </div>
+    </header>
+
+    <!-- ========================================================================= -->
+    <!-- 2. THE TOP INTERACTIVE OPEN-MAGAZINE READING DESK (RESTORED & ENHANCED)    -->
+    <!-- ========================================================================= -->
+    <section id="magazine-desk-view" class="py-12 sm:py-16 px-3 sm:px-6 lg:px-8 max-w-7xl mx-auto">
+        
+        <!-- Reader Deck Header Controls -->
+        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-6 px-2">
+            <div class="flex items-center gap-3">
+                <span class="w-3 h-3 rounded-full bg-[#d97706] animate-pulse"></span>
+                <span class="text-xs font-mono font-bold uppercase tracking-widest text-[#8c5324]">
+                    Interactive Magazine Spread • Reading Issue 0{{ activeSpreadIndex() + 1 }} of 0{{ allSelectableArticles().length }}
+                </span>
+            </div>
+
+            <!-- Page Turner Controls -->
+            <div class="flex items-center gap-2 self-end sm:self-auto">
+                <button
+                    type="button"
+                    (click)="prevSpread()"
+                    class="px-4 py-2 rounded-xl bg-white hover:bg-[#f5ede2] text-[#8c5324] border border-[#e8dac5] font-mono text-xs font-bold uppercase tracking-wider transition-all shadow-2xs hover:shadow-xs flex items-center gap-2 cursor-pointer active:scale-95"
+                    title="Previous Magazine Leaf"
+                >
+                    <i class="fa-solid fa-arrow-left"></i>
+                    <span class="hidden sm:inline">Prev Leaf</span>
+                </button>
+
+                <button
+                    type="button"
+                    (click)="nextSpread()"
+                    class="px-5 py-2 rounded-xl bg-gradient-to-r from-[#d97706] to-[#b45309] hover:brightness-105 text-white font-mono text-xs font-bold uppercase tracking-wider transition-all shadow-xs flex items-center gap-2 cursor-pointer active:scale-95"
+                    title="Next Magazine Leaf"
+                >
+                    <span>Turn Leaf</span>
+                    <i class="fa-solid fa-arrow-right"></i>
+                </button>
+            </div>
+        </div>
+
+        <!-- ================= THE PHYSICAL OPEN MAGAZINE READER DESK ================= -->
+        @if (currentSpreadArticle(); as a) {
+            <article class="magazine-desk relative bg-[#f2e9dc] rounded-[38px] p-3 sm:p-6 lg:p-8 shadow-[0_25px_70px_rgba(140,83,36,0.18)] border-2 border-[#e8dac5] overflow-hidden">
+                
+                <!-- Under-Desk Ambient Texture -->
+                <div class="absolute inset-0 bg-[radial-gradient(#c2a275_1px,transparent_1px)] [background-size:24px_24px] opacity-20 pointer-events-none"></div>
+
+                <!-- Central Magazine Spine Crease (Saddle-Stitched Centerline) -->
+                <div class="magazine-center-spine hidden lg:block"></div>
+
+                <!-- Double-Page Magazine Spread -->
+                <div class="relative z-10 grid grid-cols-1 lg:grid-cols-2 gap-0 items-stretch bg-[#fffdfa] rounded-[28px] border border-[#e2d5c3] shadow-lg overflow-hidden transition-all duration-300"
+                     [class.opacity-40]="isFlipping()"
+                     [class.scale-[0.99]]="isFlipping()">
+                    
+                    <!-- ================= LEFT FOLIO: GLOSSY PHOTO PLATE & PULL QUOTE ================= -->
+                    <div class="left-folio p-6 sm:p-10 md:p-12 flex flex-col justify-between border-b lg:border-b-0 lg:border-r border-[#ece1cf] relative bg-[#fffdfa]">
+                        
+                        <!-- Archival Corner Tabs -->
+                        <div class="absolute top-4 left-4 text-[#cbb391] text-xs pointer-events-none font-serif">❖</div>
+                        <div class="absolute top-4 right-4 text-[#cbb391] text-xs pointer-events-none font-serif">❖</div>
+                        
+                        <div>
+                            <!-- Header Folio Stamp -->
+                            <div class="flex items-center justify-between text-[10px] font-mono tracking-widest text-[#8c5324] uppercase pb-3 border-b border-[#f0e4d4] mb-6">
+                                <span>{{ a.issueVol ?? 'VOL. IX · EDITORIAL' }}</span>
+                                <span class="text-[#d97706] font-bold bg-[#fbf3e8] px-2.5 py-0.5 rounded-full border border-[#e8dac5]">
+                                    {{ a.category }}
+                                </span>
+                            </div>
+
+                            <!-- Full Bleed Image Frame with Glossy Overlay -->
+                            <div class="relative h-64 sm:h-80 rounded-[22px] overflow-hidden border-2 border-[#e8dac5] bg-[#f5ede2] mb-6 shadow-sm group">
+                                <img [src]="a.image" [alt]="a.title" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-1000 ease-out">
+                                <div class="absolute inset-0 bg-gradient-to-t from-[#2c1d11]/70 via-transparent to-transparent"></div>
+                                <div class="magazine-sheen-sweep"></div>
+                                
+                                <div class="absolute bottom-3 left-4 right-4 text-white">
+                                    <span class="text-[9px] font-mono uppercase tracking-widest text-amber-200 block mb-0.5">Editorial Photo Plate</span>
+                                    <p class="font-serif italic text-xs drop-shadow-xs">{{ a.author }} · Shastra Research</p>
+                                </div>
+                            </div>
+
+                            <!-- Editorial Callout Pull-Quote with Saffron Border -->
+                            <div class="relative bg-gradient-to-r from-[#faf6ee] to-[#f5ede0] p-5 sm:p-6 rounded-2xl border-l-4 border-[#d97706] shadow-2xs">
+                                <i class="fa-solid fa-quote-left text-[#d97706]/30 text-2xl mb-2 block"></i>
+                                <blockquote class="font-serif italic text-sm sm:text-base text-[#3a2717] leading-relaxed">
+                                    "{{ a.pullQuote ?? a.deck }}"
+                                </blockquote>
+                            </div>
+                        </div>
+
+                        <!-- Left Folio Page Number Footer -->
+                        <div class="pt-6 mt-6 border-t border-[#f0e4d4] flex items-center justify-between text-[10px] font-mono text-[#8c5324]">
+                            <span>THE KAPI JOURNAL • RISHIKESH GAZETTE</span>
+                            <span class="font-bold">PAGE 0{{ (activeSpreadIndex() * 2) + 1 }}</span>
+                        </div>
+
+                    </div>
+
+                    <!-- ================= RIGHT FOLIO: TWO-COLUMN EDITORIAL ESSAY ================= -->
+                    <div class="right-folio p-6 sm:p-10 md:p-12 flex flex-col justify-between bg-[#fffdfa] relative">
+                        
+                        <!-- Archival Corner Tabs -->
+                        <div class="absolute top-4 left-4 text-[#cbb391] text-xs pointer-events-none font-serif">❖</div>
+                        <div class="absolute top-4 right-4 text-[#cbb391] text-xs pointer-events-none font-serif">❖</div>
+
+                        <div>
+                            <!-- Right Header Masthead -->
+                            <div class="flex items-center justify-between text-[10px] font-mono tracking-widest text-[#8c5324] uppercase pb-3 border-b border-[#f0e4d4] mb-5">
+                                <span>ESSAYS ON VEDIC DHARMA</span>
+                                <span class="text-[#7d6756] font-semibold">{{ a.readTime }}</span>
+                            </div>
+
+                            <!-- Article Headline -->
+                            <h2 class="text-2xl sm:text-3xl lg:text-4xl font-serif font-black text-[#3a2717] leading-[1.15] mb-3 tracking-tight">
+                                {{ a.title }}
+                            </h2>
+
+                            <!-- Deck / Subhead -->
+                            <p class="text-[#8c5324] text-xs sm:text-sm font-serif italic mb-6 leading-relaxed">
+                                {{ a.deck }}
+                            </p>
+
+                            <!-- Author Card Strip -->
+                            <div class="flex items-center gap-3.5 pb-5 mb-6 border-b border-[#f0e4d4]">
+                                <img [src]="a.authorPhoto" [alt]="a.author" class="w-11 h-11 rounded-full object-cover border-2 border-amber-400/60 shadow-xs">
+                                <div>
+                                    <p class="font-serif font-bold text-xs sm:text-sm text-[#3a2717]">{{ a.author }}</p>
+                                    <p class="text-[10px] font-mono text-[#8c5324] uppercase tracking-wider">{{ a.date }} · Contributing Scholar</p>
+                                </div>
+                            </div>
+
+                            <!-- Two-Column Editorial Text Flow with First-Letter Drop Cap -->
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-5 sm:gap-6 text-[#59493e] text-xs sm:text-[13px] leading-relaxed text-justify">
+                                <div>
+                                    <p class="magazine-column-first">
+                                        {{ a.deck }} In traditional Parampara study, sacred knowledge is never delivered as raw mechanical data. It requires the disciple to approach each cycle—whether an planetary transit, an elemental Vastu direction, or an Ayurvedic herbal brew—as a living reflection of Ishwara.
+                                    </p>
+                                </div>
+                                <div>
+                                    <p>
+                                        When we understand the underlying geometry behind our personal karma, fear dissolves. What remains is calm, disciplined action (Karma Yoga) guided by the ancient sages. Reflect upon its deeper guidance within your own birth chart and daily sadhana.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Right Folio Page Footer & Turn Edge -->
+                        <div class="pt-6 mt-6 border-t border-[#f0e4d4] flex items-center justify-between text-[10px] font-mono text-[#8c5324]">
+                            <span class="font-bold">PAGE 0{{ (activeSpreadIndex() * 2) + 2 }}</span>
+                            
+                            <button
+                                type="button"
+                                (click)="nextSpread()"
+                                class="hover:text-[#b45309] font-bold flex items-center gap-1.5 transition-colors cursor-pointer text-xs font-mono"
+                            >
+                                <span>Turn Leaf</span>
+                                <i class="fa-solid fa-arrow-right text-[10px]"></i>
+                            </button>
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </article>
+        }
+
+        <!-- Magazine Leaf Quick-Selector Dots -->
+        <div class="flex items-center justify-center gap-2 mt-6">
+            @for (art of allSelectableArticles(); track art.slug; let i = $index) {
+                <button
+                    type="button"
+                    (click)="activeSpreadIndex.set(i)"
+                    class="h-2 rounded-full transition-all duration-300 cursor-pointer"
+                    [class.w-8]="activeSpreadIndex() === i"
+                    [class.bg-[#8c5324]]="activeSpreadIndex() === i"
+                    [class.w-2]="activeSpreadIndex() !== i"
+                    [class.bg-[#d8c3a5]]="activeSpreadIndex() !== i"
+                    [class.hover:bg-[#b45309]]="activeSpreadIndex() !== i"
+                    [attr.aria-label]="'Go to spread ' + (i + 1)"
+                ></button>
+            }
+        </div>
+
+    </section>
+
+    <!-- ========================================================================= -->
+    <!-- 3. ANIMATED MAGAZINE ARTICLES GRID (CLICKING LOADS SPREAD IN READER)      -->
+    <!-- ========================================================================= -->
+    <section class="py-20 bg-[#f5ede2]/60 border-t border-[#e8dac5]">
+        <div class="container mx-auto px-4 max-w-7xl grid grid-cols-1 lg:grid-cols-3 gap-12 items-start">
+
+            <!-- Articles Column -->
+            <div class="lg:col-span-2">
+                <div class="flex items-center justify-between mb-8 pb-3 border-b border-[#e8dac5]">
+                    <h3 class="text-xs font-mono font-bold text-[#8c5324] uppercase tracking-[0.25em]">
+                        {{ selectedCategory() === 'All' ? 'Complete Magazine Archive' : selectedCategory() + ' Editorial Folios' }}
+                    </h3>
+                    <span class="text-xs font-mono text-[#7d6756]">{{ filteredArticles().length }} Stories Bound</span>
+                </div>
+
+                <!-- Grid of Animated Magazine Cards -->
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-8">
+                    @for (article of filteredArticles(); track article.slug; let i = $index) {
+                        
+                        <!-- ================= ANIMATED MAGAZINE ARTICLE CARD ================= -->
+                        <div 
+                            (click)="openArticleInMagazine(article)"
+                            class="magazine-card group bg-[#fffdfa] rounded-[24px] border-2 border-[#e8dac5] hover:border-[#d97706] shadow-2xs hover:shadow-2xl transition-all duration-500 hover:-translate-y-2 p-5 flex flex-col justify-between relative overflow-hidden cursor-pointer"
+                            [class.sm:col-span-2]="i === 0"
+                        >
+                            <!-- Saddle-Stitch Crease with Metallic Staples -->
+                            <div class="magazine-saddle-crease">
+                                <span class="magazine-staple top-12"></span>
+                                <span class="magazine-staple bottom-12"></span>
+                            </div>
+
+                            <!-- Magazine Masthead Header -->
+                            <div class="pl-3.5 flex items-center justify-between border-b border-[#e8dac5] pb-2 mb-3.5 text-[9px] font-mono tracking-widest text-[#8c5324] uppercase">
+                                <span class="font-bold text-[#3a2717]">KAPI JOURNAL · VOL. IX</span>
+                                <span class="text-[#d97706] font-bold bg-[#fbf3e8] px-2 py-0.5 rounded border border-[#e8dac5]">
+                                    {{ article.category }}
+                                </span>
+                                <span>{{ article.date }}</span>
+                            </div>
+
+                            <!-- Magazine Cover Image Plate with Gloss Sheen Sweep -->
+                            <div class="pl-3.5 mb-4">
+                                <div class="relative overflow-hidden rounded-[16px] border border-[#e8dac5] bg-[#f5ede2]"
+                                     [class.h-64]="i === 0" 
+                                     [class.h-52]="i !== 0">
+                                    
+                                    <img [src]="article.image" [alt]="article.title" class="w-full h-full object-cover group-hover:scale-106 transition-transform duration-1000 ease-out">
+                                    <div class="absolute inset-0 bg-gradient-to-t from-[#2c1d11]/75 via-transparent to-transparent"></div>
+                                    
+                                    <!-- Animated Gloss Sheen Sweep -->
+                                    <div class="magazine-sheen-sweep"></div>
+
+                                    <!-- Read Time Tag -->
+                                    <span class="absolute top-3 right-3 bg-white/95 backdrop-blur-md px-2.5 py-1 rounded-full text-[9px] font-mono font-bold text-[#8c5324] uppercase border border-[#e8dac5] shadow-xs">
+                                        {{ article.readTime }}
+                                    </span>
+
+                                    <!-- Issue Tag on Image -->
+                                    <div class="absolute bottom-2.5 left-3 text-white/95 font-mono text-[9px] uppercase tracking-wider">
+                                        <span>ISSUE NO. {{ i + 1 < 10 ? '0' + (i + 1) : i + 1 }}</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Editorial Headlines & Subhead Deck -->
+                            <div class="pl-3.5 flex-grow flex flex-col justify-start">
+                                <h4 class="font-serif font-bold text-[#3a2717] group-hover:text-[#8c5324] transition-colors leading-snug mb-2"
+                                    [class.text-2xl]="i === 0" 
+                                    [class.text-base]="i !== 0">
+                                    {{ article.title }}
+                                </h4>
+
+                                <p class="text-[#685546] text-xs leading-relaxed mb-4 line-clamp-3 font-serif italic">
+                                    "{{ article.deck }}"
+                                </p>
+                            </div>
+
+                            <!-- Magazine Footer: Author byline, Barcode & 3D Dog-Ear Corner Page Curl -->
+                            <div class="pl-3.5 pt-3 border-t border-[#f0e4d4] flex items-center justify-between mt-auto relative">
+                                
+                                <!-- Author Byline -->
+                                <div class="flex items-center gap-2.5">
+                                    <img [src]="article.authorPhoto" [alt]="article.author" class="w-7 h-7 rounded-full object-cover border border-[#d8c3a5]">
+                                    <div>
+                                        <p class="font-serif font-bold text-xs text-[#3a2717] leading-none">{{ article.author }}</p>
+                                        <p class="text-[9px] font-mono text-[#8c5324] uppercase mt-0.5">Contributing Scholar</p>
+                                    </div>
+                                </div>
+
+                                <!-- Editorial Barcode & Action Button -->
+                                <div class="flex items-center gap-3 mr-4">
+                                    <div class="magazine-barcode h-3 w-12 opacity-40 group-hover:opacity-90 transition-opacity hidden sm:block"></div>
+                                    <span class="text-[9px] font-mono font-bold uppercase tracking-wider text-[#8c5324] group-hover:text-[#b45309] flex items-center gap-1">
+                                        <span>Read in Reader</span>
+                                        <i class="fa-solid fa-arrow-up text-[8px] group-hover:-translate-y-1 transition-transform"></i>
+                                    </span>
+                                </div>
+
+                                <!-- Animated 3D Magazine Page Curl (Bottom-Right Corner) -->
+                                <div class="magazine-page-curl"></div>
+
+                            </div>
+
+                        </div>
+                    }
+                </div>
+            </div>
+
+            <!-- Right Column: Trending Dispatches & The Sunday Scriptorium -->
+            <aside class="lg:col-span-1 space-y-8">
+                
+                <!-- Trending This Week (Ranked Editorial Index) -->
+                <div class="bg-[#fffdfa] rounded-[28px] p-7 border-2 border-[#e8dac5] shadow-xs">
+                    <div class="flex items-center justify-between mb-6 pb-2.5 border-b border-[#f0e4d4]">
+                        <h3 class="text-xs font-mono font-bold text-[#8c5324] uppercase tracking-[0.25em]">
+                            Trending In The Journal
+                        </h3>
+                        <span class="text-[#d97706] text-xs">❖</span>
+                    </div>
+
+                    <ol class="space-y-5">
+                        @for (article of trending; track article.slug; let i = $index) {
+                            <li>
+                                <div 
+                                    (click)="openArticleInMagazine(article)"
+                                    class="flex items-start gap-4 group cursor-pointer"
+                                >
+                                    <span class="font-serif font-black text-2xl text-[#d97706]/35 group-hover:text-[#d97706] transition-colors leading-none w-7 shrink-0">
+                                        0{{ i + 1 }}
+                                    </span>
+                                    <div>
+                                        <span class="text-[#8c5324] font-mono font-bold text-[9px] uppercase tracking-widest">
+                                            {{ article.category }}
+                                        </span>
+                                        <h5 class="font-bold text-[#3a2717] text-xs sm:text-[13px] font-serif leading-snug mt-0.5 group-hover:text-[#8c5324] transition-colors">
+                                            {{ article.title }}
+                                        </h5>
+                                        <span class="text-[10px] font-mono text-[#9c7d67] mt-1 block">
+                                            {{ article.author }} · {{ article.readTime }}
+                                        </span>
+                                    </div>
+                                </div>
+                            </li>
+                        }
+                    </ol>
+
+                    <!-- Weekly Scriptorium Dispatch Box -->
+                    <div class="mt-8 pt-6 border-t border-[#f0e4d4] bg-[#faf6ee] -mx-7 -mb-7 p-7 rounded-b-[26px]">
+                        <div class="w-10 h-10 rounded-xl bg-white border border-[#e8dac5] text-[#8c5324] flex items-center justify-center text-base mb-3 shadow-2xs">
+                            <i class="fa-solid fa-feather-pointed"></i>
+                        </div>
+
+                        <h4 class="font-bold text-[#3a2717] font-serif text-base mb-1.5">
+                            The Sunday Scriptorium
+                        </h4>
+                        <p class="text-[#685546] text-xs leading-relaxed mb-4">
+                            One consecrated essay every Sunday directly from Acharya Alok Awasthi. No noise, purely timeless Shastra.
+                        </p>
+                        
+                        <form (submit)="subscribe($event)" class="flex flex-col gap-2.5">
+                            <input 
+                                type="email" 
+                                required
+                                [(ngModel)]="emailInput"
+                                name="subscriberEmail"
+                                placeholder="Enter your sacred email..." 
+                                class="bg-white border border-[#d8c3a5] focus:border-[#8c5324] rounded-xl px-4 py-2.5 text-xs text-[#3a2717] placeholder-[#a69280] outline-none shadow-inner"
+                            >
+                            <button 
+                                type="submit" 
+                                class="bg-gradient-to-r from-[#d97706] to-[#b45309] hover:brightness-105 text-white font-mono font-bold text-[11px] uppercase tracking-wider py-3 rounded-xl transition-all shadow-xs cursor-pointer active:scale-98"
+                            >
+                                Subscribe to Journal
+                            </button>
+                        </form>
+
+                        @if (subscribed()) {
+                            <div class="mt-3 p-2.5 bg-white border border-[#d97706] text-[#8c5324] rounded-xl text-[11px] font-mono text-center">
+                                ✦ Welcome to the Sangha. See you this Sunday.
+                            </div>
+                        }
+                    </div>
+
+                </div>
+
+            </aside>
+
+        </div>
+    </section>
+
+</main>

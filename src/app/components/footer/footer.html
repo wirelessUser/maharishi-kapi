@@ -1,123 +1,329 @@
-<section class="pb-36 bg-white relative"></section>
+<!-- Spacer Section providing breathing room for the overlapping floating newsletter card -->
+<section class="pb-16 md:pb-40 bg-[#faf8f5] relative"></section>
 
-<footer class="bg-kapi-roseDark text-white/90 relative mt-0 border-b-[8px] border-kapi-purple">
-    <div class="absolute top-0 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[90%] max-w-5xl z-20">
-        <div class="bg-gradient-to-r from-kapi-peach to-kapi-sand rounded-[32px] overflow-hidden shadow-[0_30px_60px_rgba(122,27,54,0.2)] flex flex-col md:flex-row border border-white">
-            <div class="md:w-1/3 h-64 md:h-auto bg-kapi-rose relative">
-                <img src="https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?auto=format&fit=crop&w=400&q=80" class="w-full h-full object-cover opacity-90 object-top">
-                <div class="absolute inset-0 bg-gradient-to-t from-kapi-roseDark via-transparent to-transparent"></div>
-                <div class="absolute bottom-6 left-6 right-6 text-center">
-                    <h3 class="text-3xl font-black text-white tracking-widest font-sans drop-shadow-md">ALOK</h3>
-                    <p class="text-[9px] font-bold uppercase tracking-[0.2em] text-kapi-gold mt-1">Founder</p>
+<!-- Added pb-12 md:pb-0 so the card has breathing room at the bottom of the screen on mobile -->
+<footer class="bg-gradient-to-b from-[#f5ede2] via-[#faf7f2] to-[#ede3d4] text-[#3a2717] relative border-t-2 border-[#e8dac5] pb-28 md:pb-0">    
+    <!-- Sacred Ambient Watermarks -->
+    <div class="absolute inset-0 bg-[radial-gradient(#c2a275_1.2px,transparent_1.2px)] [background-size:32px_32px] opacity-25 pointer-events-none"></div>
+    <div class="absolute -top-32 left-1/2 -translate-x-1/2 w-[700px] h-[350px] bg-gradient-to-b from-[#fcd34d]/25 via-[#fb923c]/15 to-transparent rounded-full blur-[100px] pointer-events-none"></div>
+
+    <!-- ========================================================================= -->
+    <!-- 1. FLOATING OVERLAPPING SANCTUM DISPATCH CARD                             -->
+    <!-- ========================================================================= -->
+    <div class="relative md:absolute md:top-0 left-1/2 -translate-x-1/2 md:-translate-y-1/2 w-[92%] max-w-5xl z-20 -mt-12 md:mt-0">
+        <div class="bg-[#fffdfa] rounded-[36px] overflow-hidden shadow-[0_25px_60px_rgba(180,130,70,0.16)] flex flex-col md:flex-row md:h-[320px] border-2 border-[#e8dac5] relative group">
+            
+            <!-- Decorative Antique Corner Filigrees -->
+            <div class="absolute top-3 left-3 w-5 h-5 border-t-2 border-l-2 border-[#cbb391] pointer-events-none z-30"></div>
+            <div class="absolute top-3 right-3 w-5 h-5 border-t-2 border-r-2 border-[#cbb391] pointer-events-none z-30"></div>
+            <div class="absolute bottom-3 left-3 w-5 h-5 border-b-2 border-l-2 border-[#cbb391] pointer-events-none z-30"></div>
+            <div class="absolute bottom-3 right-3 w-5 h-5 border-b-2 border-r-2 border-[#cbb391] pointer-events-none z-30"></div>
+
+            <!-- Left: Founder Portrait Plate -->
+            <div class="w-full h-56 md:w-5/12 md:h-full relative shrink-0 overflow-hidden bg-[#f5ede2]">
+                <img src="/images/founder-alok.jpg" 
+                     onerror="this.src='https://images.unsplash.com/photo-1506126613408-eca07ce68773?auto=format&fit=crop&w=800&q=80'" 
+                     alt="Acharya Alok Awasthi" 
+                     class="w-full h-full object-cover object-top filter contrast-105 group-hover:scale-105 transition-transform duration-1000 ease-out">
+                
+                <!-- Warm Saffron/Sandalwood Vignette Overlay -->
+                <div class="absolute inset-0 bg-gradient-to-t from-[#2c1d11]/80 via-[#2c1d11]/20 to-transparent"></div>
+                
+                <div class="absolute bottom-5 inset-x-4 text-center text-white">
+                    <span class="text-[9px] font-mono font-bold uppercase tracking-[0.25em] text-amber-200 block mb-0.5">Saraswat Preceptor</span>
+                    <h3 class="text-xl sm:text-2xl font-serif font-black tracking-wide leading-tight drop-shadow-xs">
+                        Acharya Alok Awasthi
+                    </h3>
+                    <p class="text-amber-100/80 text-[10px] font-mono mt-0.5 tracking-wider">Founder, Maharishi Kapi Institute</p>
                 </div>
             </div>
 
-            <div class="md:w-2/3 p-8 md:p-12 flex flex-col justify-center">
-                <h2 class="text-3xl md:text-4xl font-bold text-kapi-rose mb-2 font-serif leading-tight">Become 1% Better<br>Every Day</h2>
-                <p class="text-[13px] text-gray-600 font-medium leading-relaxed mb-8 max-w-md">
-                    Welcome to the Kapi Daily. We'll send you the latest breakthroughs in personal growth, astrology, and transformation—straight to your inbox.
+            <!-- Right: Newsletter Inscription Desk -->
+            <div class="w-full md:w-7/12 p-7 sm:p-9 md:p-10 flex flex-col justify-center bg-gradient-to-br from-[#fffdfa] to-[#faf6ee] relative">
+                
+                <div class="inline-flex items-center gap-2 text-[#8c5324] font-mono text-[10px] uppercase tracking-[0.25em] font-bold mb-2">
+                    <span class="text-[#d97706] animate-pulse">❖</span>
+                    <span>THE KAPI DAILY DISPATCH</span>
+                </div>
+
+                <h2 class="text-2xl sm:text-3xl font-serif font-black text-[#3a2717] leading-snug mb-2 text-balance">
+                    Awaken 1% Closer to Truth Every Day
+                </h2>
+                
+                <p class="text-[#685546] text-xs sm:text-[13px] leading-relaxed mb-6 max-w-md font-normal">
+                    Receive weekly Shastric breakdowns on planetary transits, biological AyurJyotish, and non-demolition space harmonization directly from the Institute.
                 </p>
-                <div class="flex flex-col sm:flex-row gap-4 w-full max-w-md">
-                    <input type="email" placeholder="Your email address" class="flex-grow bg-white border border-gray-200 rounded-xl px-5 py-3.5 text-sm focus:outline-none focus:border-kapi-purple text-gray-800 placeholder-gray-400 transition-colors font-medium">
-                    <button class="bg-kapi-purple text-white hover:bg-kapi-purpleHover px-8 py-3.5 rounded-xl font-bold transition-all shadow-md whitespace-nowrap text-sm">Subscribe</button>
+
+                <form (submit)="subscribeNewsletter($event)" class="flex flex-col sm:flex-row gap-3 w-full max-w-md">
+                    <input 
+                        type="email" 
+                        required
+                        [(ngModel)]="newsletterEmail" 
+                        name="newsletterEmail"
+                        placeholder="Enter your sacred email address..." 
+                        class="flex-grow bg-white border border-[#d8c3a5] focus:border-[#8c5324] rounded-2xl px-5 py-3.5 text-xs text-[#3a2717] placeholder-[#a69280] outline-none shadow-inner transition-colors font-medium"
+                    >
+                    <button 
+                        type="submit" 
+                        class="bg-gradient-to-r from-[#d97706] to-[#b45309] hover:brightness-105 text-white font-mono font-bold text-xs uppercase tracking-widest px-7 py-3.5 rounded-2xl transition-all shadow-sm hover:shadow-md hover:scale-105 whitespace-nowrap cursor-pointer active:scale-95"
+                    >
+                        Subscribe
+                    </button>
+                </form>
+
+                @if (subscribed()) {
+                    <p class="text-[11px] text-[#8c5324] font-mono font-bold mt-2.5 animate-fade-in flex items-center gap-1.5">
+                        <span>✦</span>
+                        <span>Welcome to the Sangha. Check your inbox this Sunday.</span>
+                    </p>
+                } @else {
+                    <p class="text-[10px] text-[#9c7d67] font-mono mt-2.5">
+                        Guaranteed zero marketing spam. Sacred knowledge only. Unsubscribe anytime.
+                    </p>
+                }
+
+            </div>
+
+        </div>
+    </div>
+
+    <!-- ========================================================================= -->
+    <!-- 2. MAIN 4-COLUMN VEDIC DIRECTORY (HIDDEN ON MOBILE: hidden md:block)      -->
+    <!-- ========================================================================= -->
+    <div class="hidden md:block container mx-auto px-4 max-w-7xl relative z-10 pt-16 md:pt-48 pb-14">
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-x-8 gap-y-12 mb-16">
+            
+            <!-- Column 1: Sacred Geographic Sanctums -->
+            <div>
+                <div class="flex items-center gap-2 mb-5 pb-2 border-b border-[#e8dac5]">
+                    <span class="text-[#d97706] text-xs">❖</span>
+                    <h4 class="text-[#8c5324] font-mono font-bold text-[11px] tracking-[0.25em] uppercase">
+                        Sanctum Locations
+                    </h4>
                 </div>
-                <p class="text-[10px] text-gray-400 font-medium mt-3">Your data is safe with us. Unsubscribe anytime.</p>
+                <ul class="space-y-3.5 text-xs text-[#59493e] font-medium">
+                    <li class="flex items-center gap-3 group cursor-default">
+                        <div class="w-8 h-8 rounded-xl bg-[#fbf3e8] group-hover:bg-[#8c5324] text-[#8c5324] group-hover:text-white border border-[#e8dac5] flex items-center justify-center text-xs transition-colors shadow-2xs">
+                            <i class="fa-solid fa-mountain-sun"></i>
+                        </div>
+                        <span class="group-hover:text-[#8c5324] transition-colors">Rishikesh (Ganga Kinare), India</span>
+                    </li>
+                    <li class="flex items-center gap-3 group cursor-default">
+                        <div class="w-8 h-8 rounded-xl bg-[#fbf3e8] group-hover:bg-[#8c5324] text-[#8c5324] group-hover:text-white border border-[#e8dac5] flex items-center justify-center text-xs transition-colors shadow-2xs">
+                            <i class="fa-solid fa-building-columns"></i>
+                        </div>
+                        <span class="group-hover:text-[#8c5324] transition-colors">Delhi NCR, India</span>
+                    </li>
+                    <li class="flex items-center gap-3 group cursor-default">
+                        <div class="w-8 h-8 rounded-xl bg-[#fbf3e8] group-hover:bg-[#8c5324] text-[#8c5324] group-hover:text-white border border-[#e8dac5] flex items-center justify-center text-xs transition-colors shadow-2xs">
+                            <i class="fa-solid fa-water"></i>
+                        </div>
+                        <span class="group-hover:text-[#8c5324] transition-colors">Mumbai, India</span>
+                    </li>
+                    <li class="flex items-center gap-3 group cursor-default">
+                        <div class="w-8 h-8 rounded-xl bg-[#fbf3e8] group-hover:bg-[#8c5324] text-[#8c5324] group-hover:text-white border border-[#e8dac5] flex items-center justify-center text-xs transition-colors shadow-2xs">
+                            <i class="fa-solid fa-globe"></i>
+                        </div>
+                        <span class="group-hover:text-[#8c5324] transition-colors">Riga, Latvia (European Chapter)</span>
+                    </li>
+                </ul>
+            </div>
+
+            <!-- Column 2: Sanctum Navigation Links -->
+            <div>
+                <div class="flex items-center gap-2 mb-5 pb-2 border-b border-[#e8dac5]">
+                    <span class="text-[#d97706] text-xs">❖</span>
+                    <h4 class="text-[#8c5324] font-mono font-bold text-[11px] tracking-[0.25em] uppercase">
+                        Pathshala Links
+                    </h4>
+                </div>
+                <ul class="space-y-2.5 text-xs text-[#59493e] font-medium">
+                    <li>
+                        <a routerLink="/" class="hover:text-[#8c5324] hover:translate-x-1.5 transition-all inline-flex items-center gap-2">
+                            <span class="text-[#cbb391] text-[10px]">›</span>
+                            <span>Sanctum Home</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a routerLink="/about" class="hover:text-[#8c5324] hover:translate-x-1.5 transition-all inline-flex items-center gap-2">
+                            <span class="text-[#cbb391] text-[10px]">›</span>
+                            <span>About Acharya Alok &amp; Lineage</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a routerLink="/services" class="hover:text-[#8c5324] hover:translate-x-1.5 transition-all inline-flex items-center gap-2">
+                            <span class="text-[#cbb391] text-[10px]">›</span>
+                            <span>1-on-1 Consultations</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a routerLink="/courses" class="hover:text-[#8c5324] hover:translate-x-1.5 transition-all inline-flex items-center gap-2">
+                            <span class="text-[#cbb391] text-[10px]">›</span>
+                            <span>Sacred Courses &amp; Curriculum</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a routerLink="/retreats" class="hover:text-[#8c5324] hover:translate-x-1.5 transition-all inline-flex items-center gap-2">
+                            <span class="text-[#cbb391] text-[10px]">›</span>
+                            <span>Himalayan Ganga Retreats</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a routerLink="/blog" class="hover:text-[#8c5324] hover:translate-x-1.5 transition-all inline-flex items-center gap-2">
+                            <span class="text-[#cbb391] text-[10px]">›</span>
+                            <span>The Kapi Journal &amp; Gazette</span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+
+            <!-- Column 3: The 5 Master Disciplines of Acharya Alok -->
+            <div>
+                <div class="flex items-center gap-2 mb-5 pb-2 border-b border-[#e8dac5]">
+                    <span class="text-[#d97706] text-xs">❖</span>
+                    <h4 class="text-[#8c5324] font-mono font-bold text-[11px] tracking-[0.25em] uppercase">
+                        Disciplines &amp; Vidya
+                    </h4>
+                </div>
+                <ul class="space-y-2.5 text-xs text-[#59493e] font-medium">
+                    <li>
+                        <a routerLink="/services" class="hover:text-[#8c5324] hover:translate-x-1.5 transition-all inline-flex items-center gap-2">
+                            <span class="text-[#cbb391] text-[10px]">›</span>
+                            <span>Parashari Vedic Jyotish</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a routerLink="/services" class="hover:text-[#8c5324] hover:translate-x-1.5 transition-all inline-flex items-center gap-2">
+                            <span class="text-[#cbb391] text-[10px]">›</span>
+                            <span>Medical AyurJyotish Diagnostics</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a routerLink="/services" class="hover:text-[#8c5324] hover:translate-x-1.5 transition-all inline-flex items-center gap-2">
+                            <span class="text-[#cbb391] text-[10px]">›</span>
+                            <span>Sthapatya Non-Demolition Vastu</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a routerLink="/services" class="hover:text-[#8c5324] hover:translate-x-1.5 transition-all inline-flex items-center gap-2">
+                            <span class="text-[#cbb391] text-[10px]">›</span>
+                            <span>Vedic Psychology &amp; Chitta Shuddhi</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a routerLink="/services" class="hover:text-[#8c5324] hover:translate-x-1.5 transition-all inline-flex items-center gap-2">
+                            <span class="text-[#cbb391] text-[10px]">›</span>
+                            <span>Ank Vidya Harmonic Numerology</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a routerLink="/services" class="hover:text-[#8c5324] hover:translate-x-1.5 transition-all inline-flex items-center gap-2">
+                            <span class="text-[#cbb391] text-[10px]">›</span>
+                            <span>Corporate Gita Mentorship</span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+
+            <!-- Column 4: Contact & Social Sangha -->
+            <div>
+                <div class="flex items-center gap-2 mb-5 pb-2 border-b border-[#e8dac5]">
+                    <span class="text-[#d97706] text-xs">❖</span>
+                    <h4 class="text-[#8c5324] font-mono font-bold text-[11px] tracking-[0.25em] uppercase">
+                        Direct Contact
+                    </h4>
+                </div>
+                
+                <ul class="space-y-4 text-xs text-[#59493e] mb-6">
+                    <li class="flex items-center group">
+                        <div class="w-9 h-9 rounded-xl bg-[#fbf3e8] border border-[#e8dac5] flex items-center justify-center mr-3 text-[#8c5324] group-hover:bg-[#8c5324] group-hover:text-white transition-colors shadow-2xs">
+                            <i class="fa-solid fa-phone text-xs"></i>
+                        </div>
+                        <a href="tel:+918791691675" class="hover:text-[#8c5324] font-mono tracking-wider font-semibold transition-colors">
+                            +91-8791691675
+                        </a>
+                    </li>
+                    <li class="flex items-center group">
+                        <div class="w-9 h-9 rounded-xl bg-[#fbf3e8] border border-[#e8dac5] flex items-center justify-center mr-3 text-[#8c5324] group-hover:bg-[#8c5324] group-hover:text-white transition-colors shadow-2xs">
+                            <i class="fa-solid fa-envelope text-xs"></i>
+                        </div>
+                        <a href="mailto:maharishikapi@gmail.com" class="hover:text-[#8c5324] font-mono text-[11px] tracking-wide break-all font-semibold transition-colors">
+                            maharishikapi&#64;gmail.com
+                        </a>
+                    </li>
+                </ul>
+
+                <!-- Social Media Channels in Ivory & Sand Gold -->
+                <div class="flex items-center gap-2.5">
+                    <a href="https://instagram.com/arka.connection" target="_blank" rel="noopener" aria-label="Instagram" 
+                       class="w-10 h-10 rounded-2xl bg-white hover:bg-[#8c5324] text-[#8c5324] hover:text-white border border-[#d8c3a5] flex items-center justify-center transition-all shadow-2xs hover:scale-105">
+                        <i class="fa-brands fa-instagram text-sm"></i>
+                    </a>
+                    <a href="https://youtube.com/@arkaconnection" target="_blank" rel="noopener" aria-label="YouTube" 
+                       class="w-10 h-10 rounded-2xl bg-white hover:bg-[#8c5324] text-[#8c5324] hover:text-white border border-[#d8c3a5] flex items-center justify-center transition-all shadow-2xs hover:scale-105">
+                        <i class="fa-brands fa-youtube text-sm"></i>
+                    </a>
+                    <a href="https://threads.net/@arka.connection" target="_blank" rel="noopener" aria-label="Threads" 
+                       class="w-10 h-10 rounded-2xl bg-white hover:bg-[#8c5324] text-[#8c5324] hover:text-white border border-[#d8c3a5] flex items-center justify-center transition-all shadow-2xs hover:scale-105">
+                        <i class="fa-brands fa-threads text-sm"></i>
+                    </a>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- Copyright & Legal Seal Row -->
+        <div class="border-t border-[#d8c3a5] pt-8 flex flex-col md:flex-row justify-between items-center gap-4 text-center md:text-left">
+            <div class="flex items-center gap-3">
+                <span class="w-7 h-7 rounded-lg bg-[#8c5324] text-white flex items-center justify-center font-serif text-sm font-bold shadow-xs">
+                    ॐ
+                </span>
+                <h2 class="text-xl sm:text-2xl font-serif font-black text-[#3a2717] tracking-wider uppercase">
+                    Maharishi Kapi
+                </h2>
+            </div>
+
+            <div class="flex flex-col sm:flex-row items-center gap-3 sm:gap-6 text-[11px] font-mono text-[#7d6756]">
+                <p>© {{ currentYear }} Maharishi Kapi Vedic Trust. All sacred rights reserved.</p>
+                <div class="flex gap-4 font-bold text-[#8c5324]">
+                    <a href="#" class="hover:underline">Privacy Policy</a>
+                    <span>•</span>
+                    <a href="#" class="hover:underline">Terms of Sadhana</a>
+                </div>
             </div>
         </div>
     </div>
 
-    <div class="container mx-auto px-4 max-w-7xl relative z-10 pt-48 pb-12">
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-x-8 gap-y-12 mb-16">
-            <div class="lg:col-span-1">
-                 <h4 class="text-kapi-gold font-bold mb-6 text-[11px] tracking-[0.2em] uppercase drop-shadow-sm">Address</h4>
-                 <ul class="space-y-4 text-[13px] font-light text-white/90">
-                    <li class="flex items-start group cursor-pointer">
-                        <i class="fa-solid fa-location-dot mt-1 w-6 text-kapi-purple group-hover:text-kapi-gold transition-colors"></i>
-                        <span class="group-hover:text-white transition-colors">Rishikesh (Uttarakhand), India</span>
-                    </li>
-                    <li class="flex items-start group cursor-pointer">
-                        <i class="fa-solid fa-location-dot mt-1 w-6 text-kapi-purple group-hover:text-kapi-gold transition-colors"></i>
-                        <span class="group-hover:text-white transition-colors">Delhi, India</span>
-                    </li>
-                    <li class="flex items-start group cursor-pointer">
-                        <i class="fa-solid fa-location-dot mt-1 w-6 text-kapi-purple group-hover:text-kapi-gold transition-colors"></i>
-                        <span class="group-hover:text-white transition-colors">Mumbai, India</span>
-                    </li>
-                </ul>
-            </div>
-
-            <div>
-                <h4 class="text-kapi-gold font-bold mb-6 text-[11px] tracking-[0.2em] uppercase drop-shadow-sm">Links</h4>
-                <ul class="space-y-3.5 text-[13px] font-light text-white/90">
-                    <li><a href="#" class="hover:text-kapi-gold transition-colors block">Home</a></li>
-                    <li><a href="#" class="hover:text-kapi-gold transition-colors block">About Us</a></li>
-                    <li><a href="#" class="hover:text-kapi-gold transition-colors block">Services</a></li>
-                    <li><a href="#" class="hover:text-kapi-gold transition-colors block">Courses</a></li>
-                    <li><a href="#" class="hover:text-kapi-gold transition-colors block">Retreats</a></li>
-                    <li><a href="#" class="hover:text-kapi-gold transition-colors block">Blogs</a></li>
-                </ul>
-            </div>
-
-            <div>
-                <h4 class="text-kapi-gold font-bold mb-6 text-[11px] tracking-[0.2em] uppercase drop-shadow-sm">Expertise</h4>
-                <ul class="space-y-3.5 text-[13px] font-light text-white/90">
-                    <li><a href="#" class="hover:text-kapi-gold transition-colors block">Vedic Astrologer</a></li>
-                    <li><a href="#" class="hover:text-kapi-gold transition-colors block">Panchakosha Energy Healer</a></li>
-                    <li><a href="#" class="hover:text-kapi-gold transition-colors block">Vastu Expert</a></li>
-                    <li><a href="#" class="hover:text-kapi-gold transition-colors block">Gita Teacher</a></li>
-                    <li><a href="#" class="hover:text-kapi-gold transition-colors block">Ayurveda & Marma</a></li>
-                </ul>
-            </div>
-
-            <div>
-                <h4 class="text-kapi-gold font-bold mb-6 text-[11px] tracking-[0.2em] uppercase drop-shadow-sm">Contact</h4>
-                <ul class="space-y-5 text-[13px] text-white/90 font-light mb-10">
-                    <li class="flex items-center group">
-                        <div class="w-10 h-10 rounded-full border border-white/40 flex items-center justify-center mr-4 group-hover:border-kapi-gold transition-colors">
-                            <i class="fa-solid fa-phone text-kapi-purple group-hover:text-kapi-gold transition-colors"></i>
-                        </div>
-                        <a href="tel:+918791691675" class="hover:text-white transition-colors tracking-wider text-sm">+91-8791691675</a>
-                    </li>
-                    <li class="flex items-center group">
-                        <div class="w-10 h-10 rounded-full border border-white/40 flex items-center justify-center mr-4 group-hover:border-kapi-gold transition-colors">
-                            <i class="fa-solid fa-envelope text-kapi-purple group-hover:text-kapi-gold transition-colors"></i>
-                        </div>
-                        <a href="mailto:maharishikapi@gmail.com" class="hover:text-white transition-colors tracking-wide break-all text-sm">maharishikapi@gmail.com</a>
-                    </li>
-                </ul>
-                <div class="flex space-x-3">
-                    <a href="#" class="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center text-white/80 hover:text-white hover:bg-kapi-gold transition-all"><i class="fa-brands fa-facebook-f text-sm"></i></a>
-                    <a href="#" class="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center text-white/80 hover:text-white hover:bg-kapi-gold transition-all"><i class="fa-brands fa-instagram text-sm"></i></a>
-                    <a href="#" class="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center text-white/80 hover:text-white hover:bg-kapi-gold transition-all"><i class="fa-brands fa-youtube text-sm"></i></a>
-                </div>
-            </div>
-        </div>
-
-        <div class="border-t border-white/20 pt-10 pb-6 flex flex-col md:flex-row justify-between items-center gap-6">
-            <h2 class="text-3xl font-black text-white/30 leading-none tracking-tight font-serif uppercase drop-shadow-sm">
-                Maharishi Kapi
-            </h2>
-            <div class="flex flex-col md:flex-row items-center gap-4 text-[10px] text-white/60 font-medium tracking-widest uppercase">
-                <p>All copyrights reserved 2026 Maharishi Kapi Institute.</p>
-                <div class="flex gap-4">
-                    <a href="#" class="hover:text-kapi-gold transition-colors">Privacy</a>
-                    <a href="#" class="hover:text-kapi-gold transition-colors">Terms</a>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <div class="bg-gradient-to-r from-kapi-purple via-kapi-purpleHover to-kapi-purple text-white py-3 relative z-20 shadow-[0_-5px_20px_rgba(0,0,0,0.3)] hidden md:block">
-        <div class="container mx-auto px-4 max-w-7xl flex justify-center items-center gap-6">
-            <div class="flex flex-wrap justify-center gap-x-8 text-[10px] font-bold tracking-widest uppercase opacity-90 drop-shadow-sm">
-                <span>Vedic Astrology</span>
-                <span class="opacity-30">|</span>
+    <!-- ========================================================================= -->
+    <!-- 3. CONSECRATED BOTTOM SHASTRA STRIP (HIDDEN ON MOBILE: hidden md:block)   -->
+    <!-- ========================================================================= -->
+    <div class="hidden md:block bg-gradient-to-r from-[#d97706] via-[#ea580c] to-[#b45309] text-white py-3 relative z-20 shadow-[0_-4px_20px_rgba(217,119,6,0.2)]">
+        <div class="container mx-auto px-4 max-w-7xl flex flex-wrap justify-center items-center gap-x-8 gap-y-2 text-[10px] font-mono font-bold tracking-[0.25em] uppercase">
+            <span class="flex items-center gap-2">
+                <span class="text-amber-200">❖</span>
+                <span>Vedic Jyotish</span>
+            </span>
+            <span class="opacity-40">|</span>
+            <span class="flex items-center gap-2">
+                <span class="text-amber-200">❖</span>
+                <span>Medical AyurJyotish</span>
+            </span>
+            <span class="opacity-40">|</span>
+            <span class="flex items-center gap-2">
+                <span class="text-amber-200">❖</span>
+                <span>Sthapatya Vastu</span>
+            </span>
+            <span class="opacity-40">|</span>
+            <span class="flex items-center gap-2">
+                <span class="text-amber-200">❖</span>
+                <span>Panchakosha Healing</span>
+            </span>
+            <span class="opacity-40">|</span>
+            <span class="flex items-center gap-2">
+                <span class="text-amber-200">❖</span>
                 <span>Vedic Numerology</span>
-                <span class="opacity-30">|</span>
-                <span>Palmistry</span>
-                <span class="opacity-30">|</span>
-                <span>Ayurveda & Marma</span>
-            </div>
+            </span>
         </div>
     </div>
+
 </footer>

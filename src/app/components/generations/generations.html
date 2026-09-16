@@ -1,0 +1,129 @@
+<section class="py-20 sm:py-28 bg-gradient-to-b from-[#f5ede2] via-[#faf7f2] to-[#faf8f5] border-y border-[#e8dac5] relative overflow-hidden font-sans group">
+    
+    <!-- Sacred Ambient Yantra Matrix -->
+    <div class="absolute inset-0 bg-[radial-gradient(#c2a275_1.2px,transparent_1.2px)] [background-size:28px_28px] opacity-25 pointer-events-none"></div>
+    <div class="absolute -top-24 left-1/2 -translate-x-1/2 w-[700px] h-[450px] bg-gradient-to-b from-[#fcd34d]/25 via-[#fb923c]/15 to-transparent rounded-full blur-[120px] pointer-events-none"></div>
+
+    <!-- Soft Parchment Fade Masks (Smooth Edge Transition) -->
+    <div class="absolute left-0 top-0 bottom-0 w-16 sm:w-40 bg-gradient-to-r from-[#f5ede2] via-[#f5ede2]/80 to-transparent z-20 pointer-events-none"></div>
+    <div class="absolute right-0 top-0 bottom-0 w-16 sm:w-40 bg-gradient-to-l from-[#f5ede2] via-[#f5ede2]/80 to-transparent z-20 pointer-events-none"></div>
+
+    <div class="container mx-auto px-4 max-w-7xl text-center mb-16 relative z-10">
+        
+        <!-- Sanskrit Lineage Badge -->
+        <div class="inline-flex items-center gap-2 text-[#8c5324] font-mono text-[10px] uppercase tracking-[0.28em] font-bold mb-3 px-4 py-1.5 rounded-full bg-white/80 border border-[#d8c3a5] shadow-2xs">
+            <span class="text-[#d97706] animate-pulse">❖</span>
+            <span>ऋषि परम्परा • 9 GENERATIONS OF VEDIC WISDOM</span>
+            <span class="text-[#d97706] animate-pulse">❖</span>
+        </div>
+
+        <h2 class="text-3xl sm:text-4xl md:text-5xl font-serif font-black text-[#3a2717] tracking-tight leading-[1.12] mb-3">
+            A Living Tradition, Passed Down
+        </h2>
+
+        <div class="w-14 h-1 bg-[#d97706] mx-auto mb-4 rounded-full"></div>
+
+        <p class="text-[#685546] text-xs sm:text-sm max-w-xl mx-auto leading-relaxed font-normal">
+            Documented torchbearers of an unbroken Saraswat Brahmin lineage—each master consecrating a distinct science, culminating in Acharya Alok Awasthi’s teachings today.
+        </p>
+    </div>
+
+    <!-- Infinite Scrolling Lineage Track (Pauses on User Hover) -->
+    <div class="relative overflow-hidden w-full">
+        <div class="flex items-center gap-8 sm:gap-10 w-max animate-lineage-marquee group-hover:[animation-play-state:paused] py-6">
+            <ng-container [ngTemplateOutlet]="lineageRow"></ng-container>
+            <ng-container [ngTemplateOutlet]="lineageRow"></ng-container>
+        </div>
+    </div>
+
+</section>
+
+<!-- ========================================================================= -->
+<!-- REUSABLE LINEAGE SEQUENCE TEMPLATE                                        -->
+<!-- ========================================================================= -->
+<ng-template #lineageRow>
+    @for (person of lineage; track person.key; let last = $last) {
+        
+        <div class="flex items-center shrink-0 gap-8 sm:gap-10">
+            
+            <!-- Sage Memorial Plaque -->
+            <div class="relative flex flex-col items-center shrink-0 w-64 sm:w-72">
+                
+                <!-- Consecrated Medallion (Photo or Embossed Initials) -->
+                <div class="relative z-10 w-22 h-22 rounded-full p-1 border-2 shadow-[0_12px_28px_rgba(140,83,36,0.18)] flex items-center justify-center transition-transform duration-500 hover:scale-105"
+                     [class.border-[#d97706]]="person.photo"
+                     [class.bg-gradient-to-b]="person.photo"
+                     [class.from-[#d97706]]="person.photo"
+                     [class.to-[#b45309]]="person.photo"
+                     [class.border-[#d8c3a5]]="!person.photo"
+                     [class.bg-[#f5ede2]]="!person.photo">
+                    
+                    @if (person.photo) {
+                        <div class="w-full h-full rounded-full overflow-hidden border-2 border-white bg-[#f5ede2]">
+                            <img [src]="person.photo" [alt]="person.name" class="w-full h-full object-cover object-[50%_25%]">
+                        </div>
+                    } @else {
+                        <div class="w-full h-full rounded-full border-2 border-[#e8dac5] bg-gradient-to-br from-[#fffdfa] to-[#f4ebe0] flex flex-col items-center justify-center">
+                            <span class="text-[#8c5324] font-serif font-black text-xl leading-none tracking-wider">
+                                {{ person.initials }}
+                            </span>
+                            <span class="text-[8px] font-mono text-[#d97706] mt-0.5 font-bold">ॐ</span>
+                        </div>
+                    }
+                </div>
+
+                <!-- Archival Inscription Tablet -->
+                <div class="relative -mt-7 w-full rounded-[28px] pt-10 pb-6 px-5 sm:px-6 text-center border-2 transition-all duration-500 hover:-translate-y-1.5 shadow-2xs hover:shadow-xl"
+                     [class.bg-gradient-to-b]="person.photo"
+                     [class.from-[#fffdfa]]="person.photo"
+                     [class.to-[#fcf6eb]]="person.photo"
+                     [class.border-[#d97706]]="person.photo"
+                     [class.shadow-[0_15px_35px_rgba(217,119,6,0.15)]]="person.photo"
+                     [class.bg-[#fffdfa]]="!person.photo"
+                     [class.border-[#e8dac5]]="!person.photo"
+                     [class.hover:border-[#d97706]/70]="!person.photo">
+                    
+                    <!-- Devanagari Sequence Stamp -->
+                    <div class="flex items-center justify-between border-b border-[#f0e4d4] pb-2 mb-3 text-[9px] font-mono font-bold uppercase tracking-widest text-[#8c5324]">
+                        <span class="font-serif font-black text-[#d97706] text-sm leading-none">
+                            {{ person.devanagariNumber }}
+                        </span>
+                        <span class="text-[#7d6756]">{{ person.ordinal }}</span>
+                    </div>
+
+                    @if (person.photo) {
+                        <span class="inline-block bg-gradient-to-r from-[#d97706] to-[#b45309] text-white text-[8px] font-mono font-bold uppercase tracking-[0.2em] px-3 py-1 rounded-full mb-2 shadow-2xs">
+                            Current Torchbearer
+                        </span>
+                    }
+
+                    <p class="text-[9px] font-mono font-bold uppercase tracking-wider text-[#d97706] mb-1">
+                        {{ person.shastricTitle }}
+                    </p>
+
+                    <h3 class="font-serif font-bold text-base sm:text-[17px] text-[#3a2717] leading-tight mb-2">
+                        {{ person.name }}
+                    </h3>
+
+                    <div class="w-8 h-[1px] bg-[#d8c3a5] mx-auto mb-2.5"></div>
+
+                    <p class="text-[#685546] text-xs font-serif italic leading-relaxed">
+                        "{{ person.specialty }}"
+                    </p>
+                </div>
+
+            </div>
+
+            <!-- Sacred Consecrated Connector (Not shown after last entry) -->
+            @if (!last) {
+                <div class="flex items-center gap-1.5 text-[#d97706] select-none pointer-events-none opacity-60">
+                    <span class="w-4 sm:w-6 h-[1.5px] bg-[#d8c3a5]"></span>
+                    <span class="text-xs font-serif text-[#d97706]">❖</span>
+                    <i class="fa-solid fa-arrow-right text-xs"></i>
+                </div>
+            }
+
+        </div>
+
+    }
+</ng-template>

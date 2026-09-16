@@ -33,14 +33,17 @@
   --shadow-glow-purple: 0 0 30px rgba(109, 40, 217, 0.4);
 }
 
-html { 
-  scroll-behavior: smooth; 
+html {
+  scroll-behavior: smooth;
+  overflow-x: hidden;
+  width: 100%;
 }
 
 body {
   background-color: #fffbeb;
   color: #2e1065;
   overflow-x: hidden;
+  width: 100%;
   font-family: var(--font-sans);
 }
 
@@ -64,4 +67,64 @@ body {
 
 .phone-mockup {
   box-shadow: inset 0 0 20px rgba(109,40,217,0.3), 0 30px 60px rgba(109,40,217,0.2);
+}
+
+@keyframes spin-slow {
+  to { transform: rotate(360deg); }
+}
+.animate-spin-slow {
+  animation: spin-slow 12s linear infinite;
+}
+
+.animate-spin-slower {
+  animation: spin-slow 48s linear infinite;
+}
+
+@keyframes earth-spin {
+  from { transform: rotateY(0deg); }
+  to { transform: rotateY(360deg); }
+}
+.animate-earth-spin {
+  animation: earth-spin 9s linear infinite;
+}
+
+.animate-spin-reverse {
+  animation: spin-slow 34s linear infinite reverse;
+}
+
+@keyframes float-slow {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+}
+.animate-float-slow {
+  animation: float-slow 6s ease-in-out infinite;
+}
+
+@keyframes pulse-slow {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.7; }
+}
+.animate-pulse-slow {
+  animation: pulse-slow 2.5s ease-in-out infinite;
+}
+
+@keyframes marquee-left {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+.animate-marquee {
+  animation: marquee-left 26s linear infinite;
+}
+.animate-marquee-slow {
+  animation: marquee-left 40s linear infinite;
+}
+.animate-marquee-slow:hover {
+  animation-play-state: paused;
+}
+.animate-marquee:hover {
+  animation-play-state: paused;
+}
+.marquee-fade {
+  -webkit-mask-image: linear-gradient(to right, transparent, black 6%, black 94%, transparent);
+  mask-image: linear-gradient(to right, transparent, black 6%, black 94%, transparent);
 }

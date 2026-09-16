@@ -1,0 +1,46 @@
+/* Astrolabe Background Rotation */
+@keyframes spinAstrolabe {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.animate-spin-astrolabe {
+  animation: spinAstrolabe 90s linear infinite;
+}
+
+/* Glossy Sheen Sweep on Card Hover */
+.sheen-sweep {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    115deg,
+    transparent 0%,
+    rgba(255, 255, 255, 0.42) 45%,
+    rgba(255, 255, 255, 0.15) 55%,
+    transparent 100%
+  );
+  transform: translateX(-160%);
+  pointer-events: none;
+  transition: transform 0.85s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.consult-card:hover .sheen-sweep {
+  transform: translateX(160%);
+}
+
+/* Tactile Parchment Card Shadows */
+.consult-card {
+  box-shadow: 
+    0 6px 18px -4px rgba(140, 83, 36, 0.08),
+    0 0 0 1px rgba(232, 218, 197, 0.6);
+}
+
+.consult-card:hover {
+  box-shadow: 
+    0 22px 45px -10px rgba(140, 83, 36, 0.16),
+    0 0 0 1px rgba(217, 119, 6, 0.4);
+}

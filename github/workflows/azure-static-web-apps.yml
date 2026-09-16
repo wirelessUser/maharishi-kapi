@@ -37,4 +37,8 @@ jobs:
           action: "upload"
           app_location: "dist/maharishi-kapi/browser"
           api_location: ""
+<<<<<<< HEAD
           skip_app_build: true
+=======
+          skip_app_build: true
+>>>>>>> 9146571 (Gitflow-andDownload-Removed)

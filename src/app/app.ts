@@ -5,10 +5,11 @@ import { Footer } from './components/footer/footer';
 import { NavbarComponent } from './components/navbar/navbar';
 import { WhatsappBtn } from './components/whatsapp-btn/whatsapp-btn';
 import { ThemeCustomizerComponent } from './components/theme-customizer/theme-customizer';
+import { BottomTabBar } from './components/bottom-tab-bar/bottom-tab-bar';
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet,TopBar,Footer,NavbarComponent,WhatsappBtn,ThemeCustomizerComponent],
+  imports: [RouterOutlet,TopBar,Footer,NavbarComponent,WhatsappBtn,ThemeCustomizerComponent,BottomTabBar],
   templateUrl: './app.html',
   styleUrl: './app.css'
 })

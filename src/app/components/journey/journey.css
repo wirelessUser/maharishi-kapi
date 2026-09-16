@@ -1,0 +1,42 @@
+/* Cross-browser hide-scrollbar utility */
+.hide-scrollbar {
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
+}
+
+.hide-scrollbar::-webkit-scrollbar {
+  display: none; /* Chrome, Safari and Opera */
+}
+
+/* Glossy Sheen Sweep Reflection Animation */
+.sheen-sweep {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    115deg,
+    transparent 0%,
+    rgba(255, 255, 255, 0.4) 45%,
+    rgba(255, 255, 255, 0.15) 55%,
+    transparent 100%
+  );
+  transform: translateX(-160%);
+  pointer-events: none;
+  transition: transform 0.9s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.journey-card:hover .sheen-sweep {
+  transform: translateX(160%);
+}
+
+/* Card Elevation & Shadows */
+.journey-card {
+  box-shadow: 
+    0 10px 25px -5px rgba(44, 29, 17, 0.2),
+    0 0 0 1px rgba(232, 218, 197, 0.6);
+}
+
+.journey-card:hover {
+  box-shadow: 
+    0 24px 50px -10px rgba(44, 29, 17, 0.35),
+    0 0 0 1px rgba(217, 119, 6, 0.5);
+}

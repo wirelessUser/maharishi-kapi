@@ -1,0 +1,757 @@
+@if (retreat(); as r) {
+
+<!-- ========================================================================= -->
+<!-- 1. SACRED BEIGE & KESARIYA HERO SECTION                                   -->
+<!-- ========================================================================= -->
+<section class="relative pt-16 pb-16 bg-gradient-to-b from-[#f5eee4] via-[#faf7f2] to-[#f4ebe1] overflow-hidden border-b border-[#e8dac5]">
+    
+    <!-- Ambient Rotating Mandalas & Sacred Light Watermarks -->
+    <div class="absolute inset-0 bg-[radial-gradient(#d4af37_1px,transparent_1px)] [background-size:32px_32px] opacity-25 pointer-events-none"></div>
+    <div class="absolute -top-36 left-1/2 -translate-x-1/2 w-[850px] h-[850px] bg-gradient-to-b from-[#fcd34d]/30 via-[#fb923c]/20 to-transparent rounded-full blur-[130px] pointer-events-none animate-float-slow"></div>
+    
+    <!-- Dual Celestial Mandalas in Warm Sandstone Gold -->
+    <div class="absolute -top-16 left-1/2 -translate-x-1/2 w-[850px] h-[850px] border border-[#d8c3a5]/40 rounded-full animate-spin-mandala pointer-events-none opacity-40">
+        <div class="absolute inset-12 border border-dashed border-[#cbb391]/60 rounded-full"></div>
+        <div class="absolute inset-32 border border-[#d8c3a5]/40 rotate-45"></div>
+        <div class="absolute inset-32 border border-[#d8c3a5]/40 rotate-12"></div>
+    </div>
+
+    <!-- Top Headline Chamber -->
+    <div class="container mx-auto px-4 max-w-4xl text-center relative z-10 mb-10">
+        <div class="inline-flex items-center gap-2.5 px-5 py-2 rounded-full bg-white/90 backdrop-blur-md border border-[#d8c3a5] text-[#8c5324] text-[10px] sm:text-[11px] font-mono font-bold tracking-[0.3em] uppercase shadow-xs mb-5">
+            <span class="text-[#d97706] animate-pulse">❖</span>
+            <span>{{ r.tagline }}</span>
+            <span class="text-[#d97706] animate-pulse">❖</span>
+        </div>
+
+        <h1 class="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-serif font-black text-[#3a2717] leading-[1.08] tracking-tight drop-shadow-xs mb-4 text-balance">
+            {{ r.title }}
+        </h1>
+        <p class="text-[#7d6756] text-sm md:text-lg font-serif italic max-w-2xl mx-auto mb-6 leading-relaxed">
+            {{ r.subtitle }}
+        </p>
+
+        <!-- Social Proof Trust Line -->
+        <div class="inline-flex flex-wrap items-center justify-center gap-3 sm:gap-6 bg-white/80 backdrop-blur-md px-6 py-2.5 rounded-full border border-[#e8dac5] text-[#685546] text-xs font-semibold shadow-xs">
+            <span class="flex items-center gap-1.5">
+                <i class="fa-solid fa-star text-[#d97706]"></i> 
+                <strong class="text-[#3a2717]">{{ r.rating }}</strong> from past seekers
+            </span>
+            <span class="w-1.5 h-1.5 rounded-full bg-[#d97706]"></span>
+            <span class="flex items-center gap-1.5">
+                <i class="fa-solid fa-user-group text-[#d97706]"></i> 
+                Max <strong>{{ r.seatsTotal }}</strong> seekers per batch
+            </span>
+        </div>
+    </div>
+
+    <!-- Hero Masterpiece Frame: Consecrated Himalayan Gateway -->
+    <div class="relative z-10 mx-auto max-w-6xl px-4">
+        <div class="relative h-[440px] md:h-[560px] rounded-[38px] overflow-hidden shadow-[0_25px_60px_rgba(180,130,70,0.18)] border-4 border-white group">
+            
+            <img [src]="r.heroImage" [alt]="r.title" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-1000 ease-out">
+            <div class="absolute inset-0 bg-gradient-to-t from-[#2c1d11]/85 via-[#2c1d11]/25 to-transparent"></div>
+
+            <!-- Seat Status Badge in Antique Gold / Saffron -->
+            @if (r.status === 'upcoming') {
+                <span class="absolute top-6 left-6 md:left-8 bg-gradient-to-r from-[#d97706] to-[#b45309] text-white text-[10px] font-mono font-bold uppercase tracking-[0.2em] px-4 py-2 rounded-full shadow-md flex items-center gap-2">
+                    <i class="fa-solid fa-fire text-amber-200"></i>
+                    @if (r.seatsLeft > 0) { Only {{ r.seatsLeft }} Seats Left } @else { Waitlist Open }
+                </span>
+            } @else {
+                <span class="absolute top-6 left-6 md:left-8 bg-white/95 backdrop-blur-md text-[#8c5324] text-[10px] font-mono font-bold uppercase tracking-[0.2em] px-4 py-2 rounded-full shadow-md border border-[#e8dac5]">
+                    Past Consecration
+                </span>
+            }
+
+            <!-- Bottom Left Actions & Summary -->
+            <div class="absolute bottom-8 left-6 sm:left-10 right-6 md:right-auto max-w-lg">
+                <p class="text-white/95 text-xs sm:text-sm leading-relaxed mb-6 font-normal drop-shadow-sm line-clamp-3">
+                    {{ r.summary }}
+                </p>
+                
+                <div class="flex flex-wrap gap-3.5">
+                    <a routerLink="/services" class="bg-gradient-to-r from-[#d97706] via-[#ea580c] to-[#b45309] hover:brightness-105 text-white font-mono font-bold py-3.5 px-8 rounded-full text-xs uppercase tracking-widest transition-all shadow-md hover:shadow-lg hover:scale-105 flex items-center gap-2 cursor-pointer">
+                        <span>{{ r.status === 'upcoming' ? 'Reserve Your Seat' : 'Notify Me — Next Batch' }}</span>
+                        <i class="fa-solid fa-arrow-right text-[11px]"></i>
+                    </a>
+                    
+                    <a href="#journey" class="bg-white/90 hover:bg-white text-[#8c5324] font-mono font-bold py-3.5 px-6 rounded-full text-xs uppercase tracking-widest transition-all shadow-sm flex items-center gap-2 border border-[#d8c3a5]">
+                        <i class="fa-solid fa-compass text-[#d97706]"></i> 
+                        <span>Explore Journey</span>
+                    </a>
+                </div>
+            </div>
+
+            <!-- Top Right Floating Parchment Dossier Card -->
+            <div class="hidden md:flex absolute top-8 right-8 bg-[#fffdfa]/95 backdrop-blur-md rounded-[24px] p-5 flex-col gap-3.5 shadow-xl border-2 border-[#e8dac5] max-w-xs">
+                
+                <div class="flex items-center gap-3">
+                    <div class="w-9 h-9 rounded-xl bg-[#fbf3e8] text-[#8c5324] flex items-center justify-center text-sm shadow-inner">
+                        <i class="fa-solid fa-calendar-days"></i>
+                    </div>
+                    <div>
+                        <p class="text-xs font-bold text-[#3a2717] font-serif leading-tight">{{ r.dateRange }}</p>
+                        <p class="text-[10px] text-[#8c5324] font-mono font-semibold mt-0.5">{{ r.duration }}</p>
+                    </div>
+                </div>
+
+                <div class="flex items-center gap-3">
+                    <div class="w-9 h-9 rounded-xl bg-[#fbf3e8] text-[#b45309] flex items-center justify-center text-sm shadow-inner">
+                        <i class="fa-solid fa-location-dot"></i>
+                    </div>
+                    <div>
+                        <p class="text-xs font-bold text-[#3a2717] font-serif leading-tight">{{ r.location }}</p>
+                        @if (r.elevation) {
+                            <p class="text-[10px] text-[#7d6756] font-mono mt-0.5">{{ r.elevation }}</p>
+                        }
+                    </div>
+                </div>
+
+                @if (r.status === 'upcoming') {
+                    <div class="pt-2 border-t border-[#f0e4d4]">
+                        <div class="flex justify-between text-[9px] font-mono font-bold text-[#8c5324] uppercase tracking-wider mb-1.5">
+                            <span>SEATS FILLED</span>
+                            <span>{{ r.seatsTotal - r.seatsLeft }}/{{ r.seatsTotal }}</span>
+                        </div>
+                        <div class="w-44 h-2 bg-[#f0e4d4] rounded-full overflow-hidden p-0.5 border border-[#e8dac5]">
+                            <div class="h-full bg-gradient-to-r from-[#d97706] to-[#b45309] rounded-full transition-all duration-1000" [style.width.%]="100 - seatsPercent()"></div>
+                        </div>
+                    </div>
+                }
+            </div>
+
+        </div>
+    </div>
+
+</section>
+
+<!-- ========================================================================= -->
+<!-- 2. SACRED TRUST SEAL BAR (ANTIQUE IVORY & EMBOSSED GOLD)                   -->
+<!-- ========================================================================= -->
+<section class="bg-[#fffdfa] border-b border-[#e8dac5] py-6 shadow-2xs">
+    <div class="container mx-auto px-4 max-w-6xl flex flex-wrap justify-center md:justify-between items-center gap-x-10 gap-y-4 text-center">
+        <span class="flex items-center gap-2.5 text-[11px] font-mono font-bold text-[#4a3625] uppercase tracking-[0.2em]">
+            <i class="fa-solid fa-users text-[#d97706] text-sm"></i> Small, Held Sanctum
+        </span>
+        <span class="flex items-center gap-2.5 text-[11px] font-mono font-bold text-[#4a3625] uppercase tracking-[0.2em]">
+            <i class="fa-solid fa-hands-praying text-[#d97706] text-sm"></i> Personally Led by Acharya Alok
+        </span>
+        <span class="flex items-center gap-2.5 text-[11px] font-mono font-bold text-[#4a3625] uppercase tracking-[0.2em]">
+            <i class="fa-solid fa-om text-[#d97706] text-sm"></i> Saraswat Lineage
+        </span>
+        <span class="flex items-center gap-2.5 text-[11px] font-mono font-bold text-[#4a3625] uppercase tracking-[0.2em]">
+            <i class="fa-solid fa-certificate text-[#d97706] text-sm"></i> Certified Institute
+        </span>
+    </div>
+</section>
+
+<!-- ========================================================================= -->
+<!-- 3. THE JOURNEY (OPEN PARCHMENT FOLIO ARCHITECTURE)                        -->
+<!-- ========================================================================= -->
+<section id="journey" class="py-24 bg-[#faf8f5]">
+    <div class="container mx-auto px-4 max-w-6xl grid grid-cols-1 lg:grid-cols-2 gap-14 items-center">
+        
+        <div>
+            <div class="inline-flex items-center gap-2 text-[#8c5324] font-mono text-[10px] uppercase tracking-[0.25em] font-bold mb-3">
+                <span class="animate-pulse">❖</span>
+                <span>SACRED INITIATION</span>
+            </div>
+            <h2 class="text-3xl sm:text-4xl md:text-[42px] font-serif font-black text-[#3a2717] leading-[1.12] mb-6 text-balance">
+                Not a Vacation.<br/>
+                <span class="italic text-transparent bg-clip-text bg-gradient-to-r from-[#994d22] via-[#b5651d] to-[#d97706]">
+                    A Return to What Is Essential.
+                </span>
+            </h2>
+            <div class="w-16 h-[2.5px] bg-[#d97706] mb-6"></div>
+            <p class="text-[#59493e] text-sm sm:text-base leading-relaxed font-normal">
+                {{ r.journeyIntro }}
+            </p>
+        </div>
+
+        <!-- Framed Himalayan Retreat Photography with Wax Seal Quote -->
+        <div class="relative">
+            <div class="relative h-80 sm:h-96 rounded-[34px] overflow-hidden shadow-xl border-4 border-white bg-[#fbf3e8] group">
+                <img [src]="r.journeyImage" [alt]="r.title" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-1000">
+                <div class="absolute inset-0 bg-gradient-to-t from-[#2c1d11]/40 via-transparent to-transparent"></div>
+            </div>
+
+            <!-- Floating Ancient Wax Quote Tile -->
+            <div class="absolute -bottom-6 -right-2 sm:right-6 bg-[#fffdfa] rounded-2xl shadow-xl p-5 max-w-[260px] border-2 border-[#e8dac5]">
+                <i class="fa-solid fa-quote-left text-[#d97706]/40 text-2xl mb-2 block"></i>
+                <p class="text-[#3a2717] text-xs font-serif italic leading-relaxed">
+                    "{{ r.journeyQuote }}"
+                </p>
+            </div>
+        </div>
+
+    </div>
+</section>
+
+<!-- ========================================================================= -->
+<!-- 4. IS THIS FOR YOU (OPEN TWO-PANEL BROCHURE SPREAD)                       -->
+<!-- ========================================================================= -->
+<section class="py-24 bg-[#f5ede2]/70 border-y border-[#e8dac5]">
+    <div class="container mx-auto px-4 max-w-6xl">
+        
+        <div class="text-center max-w-2xl mx-auto mb-14">
+            <span class="text-[#8c5324] font-mono text-[10px] tracking-[0.3em] uppercase font-bold block mb-2">DISCIPLE READINESS CHECK</span>
+            <h2 class="text-3xl sm:text-4xl font-serif font-black text-[#3a2717]">Is This Retreat For You?</h2>
+            <div class="w-14 h-1 bg-[#d97706] mx-auto mt-4 rounded-full"></div>
+        </div>
+
+        <!-- 2-Leaf Open Book Spread -->
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+            
+            <!-- Left Folio: This Is For You (Saffron & Gold Accents) -->
+            <div class="bg-[#fffdfa] rounded-[32px] p-8 sm:p-10 shadow-md border-2 border-[#e8dac5] relative overflow-hidden group hover:border-[#d97706] transition-colors">
+                <div class="absolute top-0 right-0 w-28 h-28 bg-[#fceddc]/50 rounded-bl-full pointer-events-none"></div>
+                
+                <h3 class="font-serif font-bold text-[#3a2717] text-xl mb-6 flex items-center gap-3">
+                    <span class="w-8 h-8 rounded-xl bg-[#fbf3e8] text-[#d97706] flex items-center justify-center text-sm shadow-inner">
+                        <i class="fa-solid fa-check"></i>
+                    </span>
+                    <span>This Is For You If</span>
+                </h3>
+
+                <ul class="space-y-4">
+                    @for (point of r.forYou; track point) {
+                        <li class="flex items-start gap-3.5 text-[#59493e] text-xs sm:text-sm leading-relaxed">
+                            <i class="fa-solid fa-circle-check text-[#d97706] mt-1 shrink-0 text-sm"></i>
+                            <span>{{ point }}</span>
+                        </li>
+                    }
+                </ul>
+            </div>
+
+            <!-- Right Folio: This Isn't For You (Gentle Neutral Sand) -->
+            <div class="bg-[#fffdfa] rounded-[32px] p-8 sm:p-10 shadow-md border-2 border-[#e8dac5] relative overflow-hidden group">
+                <div class="absolute top-0 right-0 w-28 h-28 bg-[#f5ede2]/40 rounded-bl-full pointer-events-none"></div>
+                
+                <h3 class="font-serif font-bold text-[#7d6756] text-xl mb-6 flex items-center gap-3">
+                    <span class="w-8 h-8 rounded-xl bg-[#f5ede2] text-[#9c7d67] flex items-center justify-center text-sm shadow-inner">
+                        <i class="fa-solid fa-xmark"></i>
+                    </span>
+                    <span>This Isn't For You If</span>
+                </h3>
+
+                <ul class="space-y-4">
+                    @for (point of r.notForYou; track point) {
+                        <li class="flex items-start gap-3.5 text-[#7d6756] text-xs sm:text-sm leading-relaxed">
+                            <i class="fa-solid fa-circle-xmark text-[#cbb391] mt-1 shrink-0 text-sm"></i>
+                            <span>{{ point }}</span>
+                        </li>
+                    }
+                </ul>
+            </div>
+
+        </div>
+
+    </div>
+</section>
+
+<!-- ========================================================================= -->
+<!-- 5. OUTCOMES / WHAT YOU'LL WALK AWAY WITH (NUMBERED LOTUS MEDALLIONS)      -->
+<!-- ========================================================================= -->
+<section class="py-24 bg-[#faf8f5]">
+    <div class="container mx-auto px-4 max-w-6xl grid grid-cols-1 lg:grid-cols-5 gap-12 items-center">
+        
+        <div class="lg:col-span-2">
+            <span class="text-[#8c5324] font-mono text-[10px] tracking-[0.3em] uppercase font-bold block mb-3">THE INNER TRANSFORMATION</span>
+            <h2 class="text-3xl sm:text-4xl font-serif font-black text-[#3a2717] leading-tight mb-4 text-balance">
+                What You'll Walk Away With
+            </h2>
+            <div class="w-14 h-[2px] bg-[#d97706] mb-5"></div>
+            <p class="text-[#685546] text-xs sm:text-sm leading-relaxed">
+                Not superficial souvenirs—a daily Sadhana practice, a completely recalibrated nervous system, and a lifelong spiritual sangha.
+            </p>
+        </div>
+
+        <div class="lg:col-span-3 space-y-4">
+            @for (outcome of r.outcomes; track outcome; let i = $index) {
+                <div class="flex items-start gap-4 bg-white hover:bg-[#fcf8f2] rounded-2xl p-5 border border-[#e8dac5] shadow-xs hover:border-[#d97706]/40 transition-all duration-300 hover:translate-x-1.5 group">
+                    <div class="w-10 h-10 rounded-xl bg-[#fbf3e8] group-hover:bg-[#8c5324] text-[#8c5324] group-hover:text-white flex items-center justify-center font-mono font-bold text-sm shrink-0 transition-colors shadow-2xs">
+                        {{ i + 1 < 10 ? '0' + (i + 1) : i + 1 }}
+                    </div>
+                    <p class="text-[#4a3625] text-xs sm:text-sm leading-relaxed pt-1.5 font-medium">
+                        {{ outcome }}
+                    </p>
+                </div>
+            }
+        </div>
+
+    </div>
+</section>
+
+<!-- ========================================================================= -->
+<!-- 6. THE SACRED ROUTE (STEPPED LOTUS PILGRIMAGE TRACK)                      -->
+<!-- ========================================================================= -->
+<section class="py-24 bg-[#f5ede2]/60 border-y border-[#e8dac5]">
+    <div class="container mx-auto px-4 max-w-7xl">
+        
+        <div class="mb-12">
+            <span class="text-[#8c5324] font-mono text-[10px] tracking-[0.3em] uppercase font-bold block mb-2">GEOGRAPHIC SANCTUMS</span>
+            <h2 class="text-3xl sm:text-4xl font-serif font-black text-[#3a2717] mb-2">{{ r.routeTitle }}</h2>
+            <p class="text-[#7d6756] text-xs sm:text-sm max-w-xl">Follow the sacred footsteps of seekers, from Himalayan foothills to Ganga Aarti.</p>
+        </div>
+
+        <div class="flex overflow-x-auto pb-6 gap-5 scrollbar-thin scrollbar-thumb-[#d8c3a5]">
+            @for (stop of r.route; track stop.name; let i = $index; let last = $last) {
+                <div class="flex items-center shrink-0">
+                    <div class="w-48 sm:w-56 bg-white rounded-[26px] shadow-sm border border-[#e8dac5] p-6 text-center hover:border-[#d97706] transition-all duration-300 hover:-translate-y-1 group">
+                        <div class="w-10 h-10 rounded-xl bg-[#fbf3e8] group-hover:bg-[#8c5324] text-[#8c5324] group-hover:text-white flex items-center justify-center font-mono font-bold text-xs mx-auto mb-4 transition-colors shadow-2xs">
+                            {{ i + 1 }}
+                        </div>
+                        <h4 class="font-bold text-[#3a2717] text-sm sm:text-base font-serif mb-1 group-hover:text-[#8c5324] transition-colors">
+                            {{ stop.name }}
+                        </h4>
+                        <p class="text-[#7d6756] text-[11px] leading-snug">{{ stop.description }}</p>
+                    </div>
+
+                    @if (!last) {
+                        <div class="flex items-center px-3 text-[#d8c3a5]">
+                            <i class="fa-solid fa-arrow-right-long text-sm animate-pulse"></i>
+                        </div>
+                    }
+                </div>
+            }
+        </div>
+
+    </div>
+</section>
+
+<!-- ========================================================================= -->
+<!-- 7. FIVE SACRED PRACTICES (PANCHA-KRIYA CARDS)                             -->
+<!-- ========================================================================= -->
+<section class="py-24 bg-[#faf8f5]">
+    <div class="container mx-auto px-4 max-w-7xl">
+        
+        <div class="text-center max-w-2xl mx-auto mb-14">
+            <span class="text-[#8c5324] font-mono text-[10px] tracking-[0.3em] uppercase font-bold block mb-2">PANCHA-KRIYA SADHANA</span>
+            <h2 class="text-3xl sm:text-4xl font-serif font-black text-[#3a2717]">Sacred Daily Practices</h2>
+            <div class="w-14 h-1 bg-[#d97706] mx-auto mt-4 rounded-full"></div>
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-6">
+            @for (practice of r.practices; track practice.name) {
+                <div class="bg-white rounded-[28px] p-7 text-center border border-[#e8dac5] shadow-xs hover:border-[#d97706] hover:shadow-md transition-all duration-300 hover:-translate-y-1.5 group">
+                    <div class="w-16 h-16 rounded-2xl bg-[#fbf3e8] group-hover:bg-[#8c5324] text-[#8c5324] group-hover:text-white flex items-center justify-center mx-auto mb-5 text-2xl transition-colors duration-300 shadow-2xs">
+                        <i class="fa-solid {{ practice.icon }}"></i>
+                    </div>
+                    <h4 class="font-bold text-[#3a2717] text-base font-serif mb-2 group-hover:text-[#8c5324] transition-colors">
+                        {{ practice.name }}
+                    </h4>
+                    <p class="text-[#7d6756] text-xs leading-relaxed">{{ practice.description }}</p>
+                </div>
+            }
+        </div>
+
+    </div>
+</section>
+
+<!-- ========================================================================= -->
+<!-- 8. GALLERY (MOMENTS FROM THE PATH IN BEIGE FRAMES)                        -->
+<!-- ========================================================================= -->
+<section class="py-24 bg-[#f5ede2]/70 border-y border-[#e8dac5]">
+    <div class="container mx-auto px-4 max-w-7xl">
+        
+        <div class="text-center max-w-2xl mx-auto mb-14">
+            <span class="text-[#8c5324] font-mono text-[10px] tracking-[0.3em] uppercase font-bold block mb-2">DARSHANA GALLERY</span>
+            <h2 class="text-3xl sm:text-4xl font-serif font-black text-[#3a2717]">Moments from the Path</h2>
+            <div class="w-14 h-1 bg-[#d97706] mx-auto mt-4 rounded-full"></div>
+        </div>
+
+        <div class="grid grid-cols-2 md:grid-cols-3 gap-5">
+            @for (image of r.gallery; track image; let i = $index) {
+                <div class="rounded-[24px] overflow-hidden shadow-sm border-2 border-white group relative bg-[#f5ede2]" 
+                     [class.row-span-2]="i === 0" 
+                     [class.h-48]="i !== 0" 
+                     [class.md:h-full]="i === 0" 
+                     [class.h-80]="i === 0">
+                    <img [src]="image" alt="" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700">
+                    <div class="absolute inset-0 bg-gradient-to-t from-[#2c1d11]/40 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity"></div>
+                </div>
+            }
+        </div>
+
+    </div>
+</section>
+
+<!-- ========================================================================= -->
+<!-- 9. ITINERARY OVERVIEW (STEPPED SCROLLWAY)                                  -->
+<!-- ========================================================================= -->
+<section class="py-24 bg-[#faf8f5]">
+    <div class="container mx-auto px-4 max-w-7xl grid grid-cols-1 lg:grid-cols-3 gap-12 items-start">
+        
+        <div class="lg:col-span-2">
+            <span class="text-[#8c5324] font-mono text-[10px] tracking-[0.3em] uppercase font-bold block mb-2">DAILY ADHYAYANA TIMELINE</span>
+            <h2 class="text-3xl sm:text-4xl font-serif font-black text-[#3a2717] mb-8">{{ r.duration }}, Held with Sacred Intention</h2>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-x-10">
+                <ol class="space-y-6 relative border-l-2 border-[#d8c3a5] pl-6 before:absolute before:top-0 before:-left-[5px] before:w-2 before:h-2 before:rounded-full before:bg-[#8c5324]">
+                    @for (day of r.itinerary; track day.title) {
+                        <li class="relative">
+                            <span class="absolute -left-[31px] top-1.5 w-3.5 h-3.5 rounded-full bg-[#d97706] border-2 border-white shadow-xs"></span>
+                            <p class="text-[#8c5324] font-mono font-bold text-xs uppercase tracking-wider mb-0.5">
+                                {{ day.days }} <span class="text-[#9c7d67] font-normal font-sans">· {{ day.date }}</span>
+                            </p>
+                            <p class="text-[#3a2717] font-serif font-bold text-sm sm:text-base leading-snug">{{ day.title }}</p>
+                        </li>
+                    }
+                </ol>
+            </div>
+        </div>
+
+        <div class="relative">
+            <div class="relative h-72 lg:h-[480px] rounded-[32px] overflow-hidden shadow-md border-4 border-white">
+                <img [src]="r.itineraryImage" [alt]="r.title" class="w-full h-full object-cover">
+            </div>
+            <p class="text-[#8c5324] font-serif italic text-xs mt-3 text-center">{{ r.itineraryCaption }}</p>
+        </div>
+
+    </div>
+</section>
+
+<!-- ========================================================================= -->
+<!-- 10. PREPARE + WHAT'S INCLUDED                                             -->
+<!-- ========================================================================= -->
+<section class="py-24 bg-[#f5ede2]/60 border-y border-[#e8dac5]">
+    <div class="container mx-auto px-4 max-w-7xl grid grid-cols-1 lg:grid-cols-2 gap-16">
+        
+        <div>
+            <span class="text-[#8c5324] font-mono text-[10px] tracking-[0.3em] uppercase font-bold block mb-2">DISCIPLE DISCIPLINE</span>
+            <h2 class="text-2xl sm:text-3xl font-serif font-black text-[#3a2717] mb-6">Be Prepared. Travel with Confidence.</h2>
+            
+            <ul class="space-y-4">
+                @for (req of r.requirements; track req) {
+                    <li class="flex items-start gap-3.5 bg-white p-4 rounded-2xl border border-[#e8dac5]">
+                        <i class="fa-solid fa-circle-check text-[#d97706] mt-1 shrink-0 text-sm"></i>
+                        <span class="text-[#59493e] text-xs sm:text-sm leading-relaxed">{{ req }}</span>
+                    </li>
+                }
+            </ul>
+        </div>
+
+        <div>
+            <span class="text-[#8c5324] font-mono text-[10px] tracking-[0.3em] uppercase font-bold block mb-2">COMPLETE PROVISIONS</span>
+            <h2 class="text-2xl sm:text-3xl font-serif font-black text-[#3a2717] mb-6">What Is Included in the Experience</h2>
+            
+            <div class="grid grid-cols-2 gap-4">
+                @for (item of r.included; track item.label) {
+                    <div class="flex items-center gap-3 bg-white rounded-2xl p-4 border border-[#e8dac5]">
+                        <div class="w-9 h-9 rounded-xl bg-[#fbf3e8] text-[#8c5324] flex items-center justify-center shrink-0">
+                            <i class="fa-solid {{ item.icon }} text-xs"></i>
+                        </div>
+                        <span class="text-[#3a2717] text-xs sm:text-sm font-semibold leading-snug">{{ item.label }}</span>
+                    </div>
+                }
+            </div>
+        </div>
+
+    </div>
+</section>
+
+<!-- ========================================================================= -->
+<!-- 11. GUIDE + TESTIMONIALS                                                  -->
+<!-- ========================================================================= -->
+<section class="py-24 bg-[#faf8f5]">
+    <div class="container mx-auto px-4 max-w-7xl grid grid-cols-1 lg:grid-cols-3 gap-10 items-start">
+        
+        <!-- Guide Credential -->
+        <div class="flex items-center gap-4 bg-white p-5 rounded-[24px] border border-[#e8dac5]">
+            <img src="/images/founder-alok.jpg" 
+                 onerror="this.src='https://images.unsplash.com/photo-1506126613408-eca07ce68773?auto=format&fit=crop&w=600&q=80'" 
+                 alt="Acharya Alok Awasthi" 
+                 class="w-20 h-20 rounded-full object-cover object-top border-2 border-amber-400/60 shadow-sm">
+            <div>
+                <p class="text-[10px] text-[#8c5324] font-mono font-bold uppercase tracking-widest mb-0.5">Your Preceptor</p>
+                <h4 class="font-bold text-[#3a2717] font-serif text-lg leading-tight">Acharya Alok Awasthi</h4>
+                <p class="text-[#7d6756] text-xs mt-1">Founder, Maharishi Kapi Institute</p>
+            </div>
+        </div>
+
+        <!-- Institute Mandate -->
+        <div class="flex items-center gap-4 bg-white p-5 rounded-[24px] border border-[#e8dac5]">
+            <div class="w-14 h-14 rounded-2xl bg-[#fbf3e8] text-[#8c5324] flex items-center justify-center text-2xl shrink-0 font-serif font-bold">
+                ॐ
+            </div>
+            <p class="text-[#685546] text-xs leading-relaxed">
+                Rooted in Saraswat Brahmin tradition, the Institute guides seekers globally toward clarity, non-demolition healing, and conscious life alignment.
+            </p>
+        </div>
+
+        <!-- Rating Box -->
+        <div class="bg-white rounded-[24px] p-5 border border-[#e8dac5]">
+            <p class="text-[10px] font-mono font-bold text-[#8c5324] uppercase tracking-widest mb-1.5">Rated by Past Seekers</p>
+            <div class="flex items-center gap-2 mb-1">
+                <span class="text-3xl font-black text-[#8c5324] font-serif">{{ r.rating }}</span>
+                <div class="flex gap-0.5 text-amber-500 text-sm">
+                    @for (star of [1, 2, 3, 4, 5]; track star) {
+                        <i class="fa-solid fa-star" [class.text-gray-300]="star > r.rating"></i>
+                    }
+                </div>
+            </div>
+            <p class="text-[#9c7d67] text-[11px] font-mono">Based on {{ r.testimonials.length }}+ reviews from this journey</p>
+        </div>
+
+    </div>
+
+    <!-- Testimonial Quotes -->
+    <div class="container mx-auto px-4 max-w-7xl grid grid-cols-1 md:grid-cols-3 gap-6 mt-10">
+        @for (testimonial of r.testimonials; track testimonial.name) {
+            <div class="bg-white rounded-[28px] p-7 border border-[#e8dac5] shadow-xs relative">
+                <i class="fa-solid fa-quote-left text-[#d97706]/20 text-3xl absolute top-5 right-6"></i>
+                <p class="text-[#59493e] text-xs sm:text-sm font-serif italic leading-relaxed mb-4">"{{ testimonial.quote }}"</p>
+                <p class="text-[#8c5324] text-xs font-mono font-bold">— {{ testimonial.name }}, {{ testimonial.location }}</p>
+            </div>
+        }
+    </div>
+</section>
+
+<!-- ========================================================================= -->
+<!-- 12. PRICING + FAQ                                                         -->
+<!-- ========================================================================= -->
+<section class="py-24 bg-[#f5ede2]/60 border-y border-[#e8dac5]">
+    <div class="container mx-auto px-4 max-w-7xl grid grid-cols-1 lg:grid-cols-2 gap-16">
+        
+        <div>
+            <span class="text-[#8c5324] font-mono text-[10px] tracking-[0.3em] uppercase font-bold block mb-2">CHOOSE YOUR IMMERSION</span>
+            <h2 class="text-2xl sm:text-3xl font-serif font-black text-[#3a2717] mb-2">Simple, Transparent Dakshina</h2>
+            
+            @if (r.status === 'upcoming' && r.seatsLeft > 0) {
+                <p class="text-[#b45309] text-xs font-mono font-bold mb-6 flex items-center gap-1.5">
+                    <i class="fa-solid fa-triangle-exclamation"></i>
+                    <span>Only {{ r.seatsLeft }} of {{ r.seatsTotal }} seats remaining for this batch</span>
+                </p>
+            } @else {
+                <p class="text-[#7d6756] text-xs mb-6">&nbsp;</p>
+            }
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                @for (tier of r.pricing; track tier.name) {
+                    <div class="rounded-[28px] p-6 border-2 relative bg-white transition-all duration-300" 
+                         [class.border-[#8c5324]]="tier.popular" 
+                         [class.border-[#e8dac5]]="!tier.popular" 
+                         [class.shadow-md]="tier.popular">
+                        
+                        @if (tier.popular) {
+                            <span class="absolute -top-3 left-1/2 -translate-x-1/2 bg-[#8c5324] text-white text-[9px] font-mono font-bold uppercase tracking-widest px-4 py-1 rounded-full shadow-xs">
+                                Most Popular
+                            </span>
+                        }
+
+                        <h4 class="font-bold text-[#3a2717] font-serif text-lg mb-1 text-center mt-2">{{ tier.name }}</h4>
+                        <p class="text-center mb-5">
+                            <span class="text-3xl font-black text-[#8c5324] font-serif">{{ formatPrice(tier.price) }}</span>
+                            <span class="text-[#9c7d67] text-[11px] font-mono"> / person</span>
+                        </p>
+
+                        <ul class="space-y-2.5 mb-6">
+                            @for (feature of tier.features; track feature) {
+                                <li class="flex items-start gap-2 text-xs text-[#59493e]">
+                                    <i class="fa-solid fa-check text-[#d97706] mt-0.5"></i>
+                                    <span>{{ feature }}</span>
+                                </li>
+                            }
+                        </ul>
+
+                        <a routerLink="/services" class="block text-center bg-[#8c5324] hover:bg-[#70421c] text-white font-mono font-bold py-3.5 rounded-full text-xs uppercase tracking-widest transition-all shadow-xs">
+                            Reserve with 50% Deposit
+                        </a>
+                    </div>
+                }
+            </div>
+
+            <p class="text-[#8c5324] text-[11px] font-mono mt-5 flex items-center gap-2">
+                <i class="fa-solid fa-shield-heart"></i>
+                <span>For refund Policies, See FAQ for details.</span>
+            </p>
+        </div>
+
+        <div>
+            <span class="text-[#8c5324] font-mono text-[10px] tracking-[0.3em] uppercase font-bold block mb-2">PRASHNA UTTARA</span>
+            <h2 class="text-2xl sm:text-3xl font-serif font-black text-[#3a2717] mb-8">Frequently Asked Questions</h2>
+            
+            <div class="space-y-3">
+                @for (faq of r.faqs; track faq.question; let i = $index) {
+                    <div class="border border-[#e8dac5] rounded-2xl overflow-hidden bg-white">
+                        <button type="button" (click)="toggleFaq(i)" class="w-full flex justify-between items-center text-left px-5 py-4 gap-4 cursor-pointer">
+                            <span class="font-serif font-bold text-sm text-[#3a2717]">{{ faq.question }}</span>
+                            <i class="fa-solid text-[#8c5324] text-xs transition-transform" [class.fa-plus]="openFaq() !== i" [class.fa-minus]="openFaq() === i"></i>
+                        </button>
+                        @if (openFaq() === i) {
+                            <div class="px-5 pb-4 text-[#685546] text-xs leading-relaxed border-t border-[#f0e4d4]">
+                                {{ faq.answer }}
+                            </div>
+                        }
+                    </div>
+                }
+            </div>
+        </div>
+
+    </div>
+</section>
+
+<!-- ========================================================================= -->
+<!-- 13. RELATED RETREATS — 3D INTERACTIVE BOOK-BROCHURE DESIGN               -->
+<!-- ========================================================================= -->
+@if (related().length > 0) {
+    <section class="py-24 bg-[#faf8f5]">
+        <div class="container mx-auto px-4 max-w-7xl">
+            
+            <div class="text-center max-w-2xl mx-auto mb-16">
+                <span class="text-[#8c5324] font-mono text-[10px] tracking-[0.3em] uppercase font-bold block mb-2">CONTINUE THE JOURNEY</span>
+                <h2 class="text-3xl sm:text-4xl font-serif font-black text-[#3a2717]">Other Sacred Retreats</h2>
+                <div class="w-14 h-1 bg-[#d97706] mx-auto mt-4 rounded-full"></div>
+            </div>
+
+            <!-- 3D Brochure Grid: Replicating the physical Granth Brochure aesthetic -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-10 max-w-5xl mx-auto">
+                @for (retreat of related(); track retreat.slug) {
+                    
+                    <!-- 3D Brochure Container -->
+                    <div class="retreat-brochure-container group [perspective:1400px]">
+                        
+                        <a [routerLink]="['/retreats', retreat.slug]" 
+                           class="retreat-brochure-card block relative bg-[#fffdfa] rounded-[30px] border-2 border-[#e8dac5] hover:border-[#d97706] shadow-md hover:shadow-2xl transition-all duration-700 hover:-translate-y-2.5 overflow-hidden">
+                            
+                            <!-- Left Embossed Book Spine Motif -->
+                            <div class="absolute left-0 inset-y-0 w-4 bg-gradient-to-r from-[#d97706] via-[#ea580c] to-[#b45309] z-20 border-r border-[#8c5324]/30 shadow-inner"></div>
+
+                            <!-- Layered Gilded Page Stack Effect on Right Edge -->
+                            <div class="absolute right-0 inset-y-2 w-2.5 bg-[repeating-linear-gradient(to_bottom,#fcf7ee,#fcf7ee_2px,#e8dac5_3px)] z-20 border-l border-[#e8dac5] rounded-r-md"></div>
+
+                            <!-- Satin Bookmark Ribbon Hanging Over Cover -->
+                            <div class="absolute top-0 left-10 w-4 h-14 bg-gradient-to-b from-[#8c5324] to-[#b45309] shadow-md z-30 [clip-path:polygon(0_0,100%_0,100%_100%,50%_75%,0_100%)]"></div>
+
+                            <!-- Brochure Cover & Content Frame -->
+                            <div class="pl-6 pr-4 py-4">
+                                
+                                <!-- Cover Image with Gopuram Stepped Archway -->
+                                <div class="relative h-56 rounded-[22px] overflow-hidden bg-[#f5ede2] border border-[#e8dac5] mb-5">
+                                    <img [src]="retreat.cardImage" [alt]="retreat.title" class="w-full h-full object-cover group-hover:scale-108 transition-transform duration-1000 ease-out">
+                                    <div class="absolute inset-0 bg-gradient-to-t from-[#2c1d11]/70 via-transparent to-transparent"></div>
+
+                                    <!-- Duration Gold Badge -->
+                                    <span class="absolute top-3 right-3 bg-white/95 backdrop-blur-md text-[#8c5324] font-mono text-[9px] font-bold uppercase tracking-widest px-3 py-1.5 rounded-full border border-[#e8dac5] shadow-xs">
+                                        {{ retreat.duration }}
+                                    </span>
+
+                                    <!-- Bottom Sanskrit Watermark -->
+                                    <span class="absolute bottom-3 left-4 font-serif text-[11px] text-amber-200/90 font-semibold tracking-wider">
+                                        ॐ शान्तिः शान्तिः शान्तिः
+                                    </span>
+                                </div>
+
+                                <!-- Brochure Folio Content Area -->
+                                <div class="px-2 pb-3">
+                                    <div class="flex items-center gap-2 mb-1.5">
+                                        <span class="text-[9px] font-mono text-[#d97706] font-bold uppercase tracking-widest">SACRED FOLIO</span>
+                                        <span class="text-[#cbb391]">❖</span>
+                                        <span class="text-[9px] font-mono text-[#8c5324] font-semibold uppercase tracking-wider">HIMALAYAN SANGHA</span>
+                                    </div>
+
+                                    <h3 class="font-bold text-[#3a2717] text-xl font-serif leading-snug mb-2 group-hover:text-[#8c5324] transition-colors">
+                                        {{ retreat.title }}
+                                    </h3>
+                                    
+                                    <p class="text-[#685546] text-xs leading-relaxed mb-6 line-clamp-2">
+                                        {{ retreat.summary }}
+                                    </p>
+
+                                    <!-- Bottom Action Bar (Unfold / Open Brochure CTA) -->
+                                    <div class="flex items-center justify-between pt-4 border-t border-[#f0e4d4]">
+                                        <span class="text-[#8c5324] font-mono font-bold text-xs uppercase tracking-widest flex items-center gap-2 group-hover:text-[#b45309]">
+                                            <span>Explore Brochure</span>
+                                            <i class="fa-solid fa-arrow-right text-[10px] group-hover:translate-x-1.5 transition-transform duration-300"></i>
+                                        </span>
+                                        <span class="text-xs text-[#d97706]">📖</span>
+                                    </div>
+                                </div>
+
+                            </div>
+
+                        </a>
+
+                    </div>
+                }
+            </div>
+
+        </div>
+    </section>
+}
+
+<!-- ========================================================================= -->
+<!-- 14. FINAL INVITATION CALL TO ACTION (WARM KESARIYA & GOLD)                -->
+<!-- ========================================================================= -->
+<section class="relative py-28 overflow-hidden bg-gradient-to-b from-[#f5ede2] via-[#faf7f2] to-[#ede3d4] border-t border-[#e8dac5] text-center">
+    
+    <!-- Background Halo Glow -->
+    <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[650px] h-[650px] bg-gradient-to-r from-amber-400/20 via-orange-300/15 to-transparent rounded-full blur-[110px] pointer-events-none"></div>
+
+    <div class="container mx-auto px-4 max-w-2xl relative z-10">
+        <span class="text-[#8c5324] font-mono text-[10px] tracking-[0.35em] uppercase font-bold block mb-3">CONSECRATE YOUR SOUL</span>
+        <h2 class="text-[#3a2717] font-serif text-3xl sm:text-4xl lg:text-5xl font-black mb-4 text-balance leading-tight">
+            If You Feel the Call, Begin Here.
+        </h2>
+        <p class="text-[#685546] text-xs sm:text-sm mb-2 font-mono">
+            {{ r.duration }} · {{ r.location }} · From {{ formatPrice(r.priceFrom) }}
+        </p>
+        
+        @if (r.status === 'upcoming' && r.seatsLeft > 0) {
+            <p class="text-[#b45309] text-xs font-mono font-bold mb-8 flex items-center justify-center gap-1.5">
+                <i class="fa-solid fa-fire text-amber-500"></i>
+                <span>Only {{ r.seatsLeft }} seats left — reserve before {{ r.dateRange.split('–')[0] }}</span>
+            </p>
+        } @else {
+            <div class="mb-8"></div>
+        }
+
+        <a routerLink="/services" class="inline-flex items-center gap-2.5 bg-gradient-to-r from-[#d97706] to-[#b45309] hover:brightness-105 text-white font-mono font-bold text-xs uppercase tracking-widest px-9 py-4 rounded-full transition-all shadow-md hover:shadow-lg hover:scale-105 cursor-pointer">
+            <span>{{ r.status === 'upcoming' ? 'Reserve Your Seat' : 'Notify Me — Next Batch' }}</span>
+            <i class="fa-solid fa-arrow-right text-[11px]"></i>
+        </a>
+    </div>
+
+</section>
+
+<!-- ========================================================================= -->
+<!-- 15. STICKY BOTTOM RESERVATION BAR                                         -->
+<!-- ========================================================================= -->
+<div class="fixed inset-x-0 bottom-0 z-40 bg-[#fffdfa]/95 backdrop-blur-md border-t border-[#e8dac5] shadow-[0_-4px_25px_rgba(140,83,36,0.12)]">
+    <div class="container mx-auto px-4 max-w-7xl py-3 flex items-center justify-between gap-4">
+        
+        <div class="flex items-center gap-3.5 min-w-0">
+            <img [src]="r.cardImage" [alt]="r.title" class="w-10 h-10 rounded-xl object-cover hidden sm:block shrink-0 border border-[#e8dac5]">
+            <div class="min-w-0">
+                <p class="font-bold text-[#3a2717] text-xs sm:text-[13px] font-serif truncate">{{ r.title }}</p>
+                <p class="text-[#8c5324] text-[10px] font-mono truncate">From {{ formatPrice(r.priceFrom) }} · {{ r.dateRange }}</p>
+            </div>
+        </div>
+
+        <a routerLink="/services" class="bg-gradient-to-r from-[#d97706] to-[#b45309] hover:brightness-105 text-white font-mono font-bold py-2.5 px-6 rounded-full text-[11px] uppercase tracking-widest transition-all shrink-0 whitespace-nowrap shadow-xs">
+            {{ r.status === 'upcoming' ? 'Reserve Seat' : 'Notify Me' }}
+        </a>
+
+    </div>
+</div>
+
+} @else {
+
+<!-- ========================================================================= -->
+<!-- 16. RETREAT NOT FOUND (WARM BEIGE FALLBACK)                               -->
+<!-- ========================================================================= -->
+<section class="py-32 text-center bg-[#faf8f5]">
+    <div class="container mx-auto px-4 max-w-md">
+        <div class="w-20 h-20 mx-auto rounded-full bg-[#fbf3e8] border border-[#e8dac5] flex items-center justify-center text-3xl text-[#8c5324] mb-6 shadow-xs">
+            <i class="fa-solid fa-om"></i>
+        </div>
+        <h1 class="text-3xl font-serif font-black text-[#3a2717] mb-3">Retreat Not Found</h1>
+        <p class="text-[#7d6756] text-xs sm:text-sm mb-8">This retreat may have concluded or the link is currently unavailable.</p>
+        <a routerLink="/retreats" class="inline-block bg-[#8c5324] hover:bg-[#70421c] text-white font-mono font-bold text-xs uppercase tracking-widest px-8 py-3.5 rounded-full transition-all shadow-xs">
+            View All Retreats
+        </a>
+    </div>
+</section>
+
+}

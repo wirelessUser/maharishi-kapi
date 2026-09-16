@@ -1,30 +1,244 @@
-<nav class="bg-white/95 backdrop-blur-md shadow-sm sticky top-0 z-50 py-3 transition-all duration-300" id="navbar">
-    <div class="container mx-auto px-4 max-w-7xl">
-        <div class="flex justify-between items-center">
-            <a href="#" class="flex items-center space-x-3 group">
-                <div class="w-11 h-11 bg-kapi-purple text-white rounded-full flex items-center justify-center font-serif text-2xl font-bold shadow-md group-hover:bg-kapi-saffron transition-colors">
-                    K
-                </div>
-                <div class="flex flex-col items-start leading-none">
-                    <span class="text-[20px] font-bold text-kapi-saffron tracking-tight font-serif uppercase group-hover:text-kapi-purple transition-colors">Maharishi Kapi</span>
-                    <span class="text-[9px] text-kapi-gold tracking-[0.2em] font-bold uppercase mt-1">Institute</span>
-                </div>
-            </a>
-            <div class="hidden lg:flex space-x-8 items-center text-[13px] font-semibold text-kapi-saffron uppercase tracking-wider">
-                <a routerLink="/" routerLinkActive="text-kapi-purple border-b-2 border-kapi-purple pb-1" [routerLinkActiveOptions]="{exact: true}" class="hover:text-kapi-purple transition">Home</a>
-                <a routerLink="/about" routerLinkActive="text-kapi-purple border-b-2 border-kapi-purple pb-1" class="hover:text-kapi-purple transition">About</a>
-                <a routerLink="/services" routerLinkActive="text-kapi-purple border-b-2 border-kapi-purple pb-1" class="hover:text-kapi-purple transition">Services</a>
-        <a routerLink="/courses" routerLinkActive="text-kapi-purple border-b-2 border-kapi-purple pb-1" class="hover:text-kapi-purple transition">Courses</a>
-              <a href="#" class="hover:text-kapi-purple transition">Retreats</a>
-                <a href="#" class="hover:text-kapi-purple transition">Blogs</a>
-            </div>
-            <div class="hidden lg:flex items-center space-x-4">
-                <a href="#" class="text-[11px] font-bold uppercase tracking-widest text-kapi-saffron/60 hover:text-kapi-purple transition">Login</a>
-                <button class="bg-kapi-purple hover:bg-kapi-purpleHover text-white px-6 py-2.5 rounded-full text-xs font-bold transition shadow-lg tracking-wider uppercase">Book Consultation</button>
-            </div>
-            <button class="lg:hidden text-kapi-saffron text-2xl focus:outline-none">
-                <i class="fa-solid fa-bars-staggered"></i>
-            </button>
+<header class="sticky top-0 z-50 transition-all duration-500 font-sans" id="navbar">
+    
+    <!-- ========================================================================= -->
+    <!-- 1. SACRED TOP GAZETTE MICRO-STRIP                                         -->
+    <!-- ========================================================================= -->
+    <div class="bg-gradient-to-r from-[#f5eee4] via-[#f7f1e5] to-[#f5eee4] border-b border-[#e8dac5]/70 py-1 px-4 text-[10px] font-mono tracking-[0.25em] text-[#8c5324] uppercase transition-all duration-300"
+         [class.h-0]="isScrolled()"
+         [class.py-0]="isScrolled()"
+         [class.opacity-0]="isScrolled()"
+         [class.overflow-hidden]="isScrolled()">
+        <div class="container mx-auto max-w-7xl flex justify-between items-center">
+            <span class="flex items-center gap-2">
+                <span class="text-[#d97706]">ॐ तत्सत्</span>
+                <span class="hidden sm:inline opacity-40">|</span>
+                <span class="hidden sm:inline">Maharishi Kapi Institute of Vedic Sciences</span>
+            </span>
+            <span class="flex items-center gap-3">
+                <span class="hidden md:inline">Rishikesh • Delhi • Riga</span>
+                <span class="text-[#d97706]">❖</span>
+                <span class="text-[#b45309] font-bold">Sharad Admissions Open</span>
+            </span>
         </div>
     </div>
-</nav>
+
+    <!-- ========================================================================= -->
+    <!-- 2. MAIN FROSTED PARCHMENT NAVIGATION BAR                                  -->
+    <!-- ========================================================================= -->
+    <nav class="bg-[#fffdfa]/92 backdrop-blur-md border-b transition-all duration-300"
+         [class.border-[#e8dac5]]="!isScrolled()"
+         [class.border-[#d8c3a5]]="isScrolled()"
+         [class.shadow-[0_12px_35px_rgba(140,83,36,0.08)]]="isScrolled()"
+         [class.py-2.5]="isScrolled()"
+         [class.py-3.5]="!isScrolled()">
+        
+        <div class="container mx-auto px-4 sm:px-6 max-w-7xl">
+            <div class="flex justify-between items-center">
+                
+                <!-- Brand Logo & Sacred Insignia -->
+                <a routerLink="/" (click)="closeMobileMenu()" class="flex items-center gap-3 group">
+                    <div class="relative">
+                        <div class="absolute -inset-1 rounded-full bg-amber-400/20 blur-sm opacity-0 group-hover:opacity-100 transition-opacity"></div>
+                        <img src="/images/mk-logo.png" 
+                             onerror="this.src='https://images.unsplash.com/photo-1506126613408-eca07ce68773?auto=format&fit=crop&w=120&q=80'" 
+                             alt="Maharishi Kapi Institute" 
+                             class="h-11 sm:h-12 w-auto object-contain relative z-10 filter drop-shadow-2xs group-hover:scale-105 transition-transform duration-300">
+                    </div>
+                    
+                </a>
+
+                <!-- Desktop Navigation Links (Editorial Monastic Style) -->
+                <div class="hidden xl:flex items-center space-x-7 text-[11px] font-mono font-bold uppercase tracking-[0.16em] text-[#6d5543]">
+                    
+                    <a routerLink="/" 
+                       routerLinkActive="nav-link-active" 
+                       [routerLinkActiveOptions]="{exact: true}" 
+                       class="nav-link hover:text-[#8c5324] transition-colors relative py-1">
+                        Home
+                    </a>
+
+                    <a routerLink="/about" 
+                       routerLinkActive="nav-link-active" 
+                       class="nav-link hover:text-[#8c5324] transition-colors relative py-1">
+                        About
+                    </a>
+
+                    <a routerLink="/services" 
+                       routerLinkActive="nav-link-active" 
+                       class="nav-link hover:text-[#8c5324] transition-colors relative py-1">
+                        Consultations
+                    </a>
+
+                    <a routerLink="/courses" 
+                       routerLinkActive="nav-link-active" 
+                       class="nav-link hover:text-[#8c5324] transition-colors relative py-1">
+                        Courses
+                    </a>
+
+                    <a routerLink="/retreats" 
+                       routerLinkActive="nav-link-active" 
+                       class="nav-link hover:text-[#8c5324] transition-colors relative py-1">
+                        Retreats
+                    </a>
+
+                    <a routerLink="/residential" 
+                       routerLinkActive="nav-link-active" 
+                       class="nav-link hover:text-[#8c5324] transition-colors relative py-1">
+                        Residential
+                    </a>
+
+                    <a routerLink="/library" 
+                       routerLinkActive="nav-link-active" 
+                       class="nav-link hover:text-[#8c5324] transition-colors relative py-1">
+                        Library
+                    </a>
+
+                    <a routerLink="/blog" 
+                       routerLinkActive="nav-link-active" 
+                       class="nav-link hover:text-[#8c5324] transition-colors relative py-1">
+                        Journal
+                    </a>
+
+                    <a routerLink="/Fundraise" 
+                       routerLinkActive="nav-link-active" 
+                       class="nav-link hover:text-[#8c5324] transition-colors relative py-1 text-[#b45309]">
+                        Fundraise
+                    </a>
+                </div>
+
+                <!-- Right Action Cluster: Login & Sacred CTA -->
+                <div class="hidden xl:flex items-center space-x-5">
+                    <a href="#" class="text-[10px] font-mono font-bold uppercase tracking-[0.2em] text-[#8c5324] hover:text-[#b45309] transition-colors">
+                         Login
+                    </a>
+
+                    <a routerLink="/services" 
+                       class="bg-gradient-to-r from-[#d97706] via-[#ea580c] to-[#b45309] hover:brightness-105 text-white text-[10px] font-mono font-bold uppercase tracking-[0.2em] px-6 py-2.5 rounded-full transition-all shadow-sm hover:shadow-md hover:scale-105 active:scale-95 border border-amber-300/30 flex items-center gap-2">
+                        <span>Book Session</span>
+                        <i class="fa-solid fa-arrow-right text-[9px]"></i>
+                    </a>
+                </div>
+
+                <!-- Mobile & Tablet Action Hub -->
+                <div class="flex xl:hidden items-center gap-2.5">
+                    
+                    <!-- Quick Consult Action Button -->
+                    <a routerLink="/services" 
+                       (click)="closeMobileMenu()"
+                       class="bg-gradient-to-r from-[#d97706] to-[#b45309] text-white text-[10px] font-mono font-bold uppercase tracking-wider px-3.5 py-2 rounded-full shadow-2xs flex items-center gap-1.5">
+                        <i class="fa-solid fa-calendar-check text-[11px]"></i>
+                        <span class="hidden sm:inline">Consult</span>
+                    </a>
+
+                    <!-- Hamburger / Close Toggle Button -->
+                    <button type="button" 
+                            (click)="toggleMobileMenu()" 
+                            [attr.aria-expanded]="mobileMenuOpen()"
+                            aria-label="Toggle Navigation Menu"
+                            class="w-10 h-10 rounded-2xl bg-[#fbf3e8] border border-[#e8dac5] text-[#8c5324] hover:bg-[#8c5324] hover:text-white flex items-center justify-center transition-colors shadow-2xs cursor-pointer">
+                        @if (!mobileMenuOpen()) {
+                            <i class="fa-solid fa-bars-staggered text-sm"></i>
+                        } @else {
+                            <i class="fa-solid fa-xmark text-base"></i>
+                        }
+                    </button>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- ========================================================================= -->
+        <!-- 3. MOBILE MANUSCRIPT NAVIGATION DRAWER                                    -->
+        <!-- ========================================================================= -->
+        @if (mobileMenuOpen()) {
+            <div class="xl:hidden bg-[#fffdfa] border-t border-[#e8dac5] px-5 py-6 shadow-xl animate-drawer-down">
+                
+                <div class="flex items-center justify-between pb-3 mb-4 border-b border-[#f0e4d4] text-[9px] font-mono tracking-[0.25em] text-[#8c5324] uppercase font-bold">
+                    <span>Sanctum Index</span>
+                    <span>ऋषि परम्परा</span>
+                </div>
+
+                <nav class="grid grid-cols-1 sm:grid-cols-2 gap-2 text-xs font-serif font-bold text-[#3a2717]">
+                    
+                    <a routerLink="/" 
+                       (click)="closeMobileMenu()" 
+                       class="p-2.5 rounded-xl hover:bg-[#fbf3e8] hover:text-[#8c5324] transition-colors flex items-center justify-between group">
+                        <span>• Home</span>
+                        <i class="fa-solid fa-arrow-right text-[10px] opacity-0 group-hover:opacity-100 transition-opacity text-[#d97706]"></i>
+                    </a>
+
+                    <a routerLink="/about" 
+                       (click)="closeMobileMenu()" 
+                       class="p-2.5 rounded-xl hover:bg-[#fbf3e8] hover:text-[#8c5324] transition-colors flex items-center justify-between group">
+                        <span>• About</span>
+                        <i class="fa-solid fa-arrow-right text-[10px] opacity-0 group-hover:opacity-100 transition-opacity text-[#d97706]"></i>
+                    </a>
+
+                    <a routerLink="/services" 
+                       (click)="closeMobileMenu()" 
+                       class="p-2.5 rounded-xl hover:bg-[#fbf3e8] hover:text-[#8c5324] transition-colors flex items-center justify-between group">
+                        <span>• 1-on-1 Consultations</span>
+                        <i class="fa-solid fa-arrow-right text-[10px] opacity-0 group-hover:opacity-100 transition-opacity text-[#d97706]"></i>
+                    </a>
+
+                    <a routerLink="/courses" 
+                       (click)="closeMobileMenu()" 
+                       class="p-2.5 rounded-xl hover:bg-[#fbf3e8] hover:text-[#8c5324] transition-colors flex items-center justify-between group">
+                        <span>• Sacred Courses</span>
+                        <i class="fa-solid fa-arrow-right text-[10px] opacity-0 group-hover:opacity-100 transition-opacity text-[#d97706]"></i>
+                    </a>
+
+                    <a routerLink="/retreats" 
+                       (click)="closeMobileMenu()" 
+                       class="p-2.5 rounded-xl hover:bg-[#fbf3e8] hover:text-[#8c5324] transition-colors flex items-center justify-between group">
+                        <span>• Himalayan Retreats</span>
+                        <i class="fa-solid fa-arrow-right text-[10px] opacity-0 group-hover:opacity-100 transition-opacity text-[#d97706]"></i>
+                    </a>
+
+                    <a routerLink="/residential" 
+                       (click)="closeMobileMenu()" 
+                       class="p-2.5 rounded-xl hover:bg-[#fbf3e8] hover:text-[#8c5324] transition-colors flex items-center justify-between group">
+                        <span>• Residential Gurukul</span>
+                        <i class="fa-solid fa-arrow-right text-[10px] opacity-0 group-hover:opacity-100 transition-opacity text-[#d97706]"></i>
+                    </a>
+
+                    <a routerLink="/library" 
+                       (click)="closeMobileMenu()" 
+                       class="p-2.5 rounded-xl hover:bg-[#fbf3e8] hover:text-[#8c5324] transition-colors flex items-center justify-between group">
+                        <span>• Library</span>
+                        <i class="fa-solid fa-arrow-right text-[10px] opacity-0 group-hover:opacity-100 transition-opacity text-[#d97706]"></i>
+                    </a>
+
+                    <a routerLink="/blog" 
+                       (click)="closeMobileMenu()" 
+                       class="p-2.5 rounded-xl hover:bg-[#fbf3e8] hover:text-[#8c5324] transition-colors flex items-center justify-between group">
+                        <span>• Journal &amp; Gazette</span>
+                        <i class="fa-solid fa-arrow-right text-[10px] opacity-0 group-hover:opacity-100 transition-opacity text-[#d97706]"></i>
+                    </a>
+
+                    <a routerLink="/Fundraise" 
+                       (click)="closeMobileMenu()" 
+                       class="p-2.5 rounded-xl bg-[#fbf3e8] text-[#8c5324] transition-colors flex items-center justify-between group sm:col-span-2">
+                        <span>• Fundraise (80G)</span>
+                        <i class="fa-solid fa-arrow-right text-[10px] text-[#d97706]"></i>
+                    </a>
+
+                </nav>
+
+                <div class="pt-5 mt-4 border-t border-[#f0e4d4] flex flex-col gap-3">
+                    <a routerLink="/services" 
+                       (click)="closeMobileMenu()" 
+                       class="w-full text-center bg-gradient-to-r from-[#d97706] to-[#b45309] text-white font-mono font-bold text-xs uppercase tracking-widest py-3 rounded-xl shadow-xs">
+                        Book Consultation
+                    </a>
+                    
+                    <a href="#" class="text-center text-[10px] font-mono font-bold uppercase tracking-widest text-[#8c5324] py-1">
+                        Login
+                    </a>
+                </div>
+
+            </div>
+        }
+
+    </nav>
+</header>

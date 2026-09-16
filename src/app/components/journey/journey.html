@@ -1,64 +1,182 @@
-<section class="py-24 bg-kapi-sand border-b border-purple-100">
-    <div class="container mx-auto px-4 max-w-7xl">
-        <div class="text-center mb-12">
-            <span class="text-kapi-purple font-bold text-[11px] uppercase tracking-[0.2em] mb-2 inline-block">Begin Your Journey</span>
-            <h2 class="text-[42px] font-bold text-kapi-rose font-serif leading-tight">A better you</h2>
-            <p class="text-kapi-roseDark/80 text-sm font-medium max-w-2xl mx-auto mt-4">
-                Grow your awareness, establish deep connections, uplift your health and more. Tell us your goals, and transform your life like never before.
+<section class="py-20 sm:py-28 bg-gradient-to-b from-[#f5eee4] via-[#faf7f2] to-[#faf8f5] border-b border-[#e8dac5] relative overflow-hidden font-sans">
+    
+    <!-- Sacred Ambient Yantra Matrix & Solar Glow -->
+    <div class="absolute inset-0 bg-[radial-gradient(#c2a275_1.2px,transparent_1.2px)] [background-size:28px_28px] opacity-25 pointer-events-none"></div>
+    <div class="absolute -top-32 left-1/2 -translate-x-1/2 w-[700px] h-[500px] bg-gradient-to-b from-[#fcd34d]/25 via-[#fb923c]/15 to-transparent rounded-full blur-[120px] pointer-events-none"></div>
+
+    <div class="container mx-auto px-4 max-w-7xl relative z-10">
+        
+        <!-- ========================================================================= -->
+        <!-- 1. SECTION MASTHEAD                                                       -->
+        <!-- ========================================================================= -->
+        <div class="text-center max-w-2xl mx-auto mb-14 sm:mb-16">
+            <div class="inline-flex items-center gap-2 text-[#8c5324] font-mono text-[10px] uppercase tracking-[0.28em] font-bold mb-3 px-4 py-1.5 rounded-full bg-white/85 border border-[#d8c3a5] shadow-2xs">
+                <span class="text-[#d97706] animate-pulse">❖</span>
+                <span>पञ्च मार्ग • FIVE SACRED PATHWAYS</span>
+                <span class="text-[#d97706] animate-pulse">❖</span>
+            </div>
+
+            <h2 class="text-3xl sm:text-4xl md:text-5xl font-serif font-black text-[#3a2717] tracking-tight leading-[1.12] mb-3">
+                Awaken to Your True Dharma
+            </h2>
+
+            <div class="w-14 h-1 bg-[#d97706] mx-auto mb-4 rounded-full"></div>
+
+            <p class="text-[#685546] text-xs sm:text-sm leading-relaxed font-normal">
+                Every seeker arrives at a unique crossroads. Select the pathway that calls to your soul, and let timeless Shastras illuminate your next step.
             </p>
         </div>
 
-        <div class="flex overflow-x-auto pb-8 pt-4 gap-6 snap-x hide-scrollbar px-4 md:px-0">
-            <div class="flex-shrink-0 w-[280px] h-[380px] relative rounded-[32px] overflow-hidden snap-center cursor-pointer group shadow-card">
-                <img src="https://images.unsplash.com/photo-1521737604893-d14cc237f11d?auto=format&fit=crop&w=500&q=80" class="absolute inset-0 w-full h-full object-cover opacity-80 group-hover:scale-105 transition-transform duration-700">
-                <div class="absolute inset-0 bg-gradient-to-t from-kapi-roseDark/90 via-kapi-roseDark/40 to-transparent"></div>
-                <div class="absolute bottom-8 left-8 right-8 text-center">
-                    <p class="text-white/90 text-[11px] font-medium mb-1 drop-shadow">I'm seeking</p>
-                    <h3 class="text-white font-bold text-3xl leading-tight font-serif drop-shadow-md">Spiritual<br>Awakening</h3>
-                </div>
+        <!-- ========================================================================= -->
+        <!-- 2. SCROLLABLE HORIZONTAL PATHWAY TABLETS                                   -->
+        <!-- ========================================================================= -->
+        <div class="relative">
+            
+            <!-- Soft Side Edge Gradient Masks (Desktop Only) -->
+            <div class="hidden lg:block absolute left-0 top-0 bottom-8 w-12 bg-gradient-to-r from-[#faf7f2] to-transparent z-20 pointer-events-none"></div>
+            <div class="hidden lg:block absolute right-0 top-0 bottom-8 w-12 bg-gradient-to-l from-[#faf7f2] to-transparent z-20 pointer-events-none"></div>
+
+            <!-- Scrollable Track -->
+            <div #scrollTrack class="flex overflow-x-auto pb-8 pt-2 gap-6 snap-x snap-mandatory hide-scrollbar px-2 sm:px-4">
+                @for (path of paths; track path.id) {
+                    
+                    <article 
+                        (click)="selectPath(path.id)"
+                        class="journey-card shrink-0 w-[270px] sm:w-[290px] md:w-[310px] h-[400px] sm:h-[430px] relative rounded-[32px] overflow-hidden snap-center cursor-pointer group border-2 transition-all duration-500 hover:-translate-y-2 flex flex-col justify-between p-6 sm:p-7 shadow-xs"
+                        [class.border-[#d97706]]="selectedPathId() === path.id"
+                        [class.shadow-[0_20px_45px_rgba(217,119,6,0.22)]]="selectedPathId() === path.id"
+                        [class.border-[#e8dac5]]="selectedPathId() !== path.id"
+                        [class.hover:border-[#d97706]/70]="selectedPathId() !== path.id">
+                        
+                        <!-- Gilded Corner Filigrees -->
+                        <div class="absolute top-3 left-3 w-4 h-4 border-t-2 border-l-2 border-white/60 pointer-events-none z-30"></div>
+                        <div class="absolute top-3 right-3 w-4 h-4 border-t-2 border-r-2 border-white/60 pointer-events-none z-30"></div>
+                        <div class="absolute bottom-3 left-3 w-4 h-4 border-b-2 border-l-2 border-white/60 pointer-events-none z-30"></div>
+                        <div class="absolute bottom-3 right-3 w-4 h-4 border-b-2 border-r-2 border-white/60 pointer-events-none z-30"></div>
+
+                        <!-- Photographic Vignette Background -->
+                        <img [src]="path.image" 
+                             [alt]="path.title" 
+                             class="absolute inset-0 w-full h-full object-cover object-center filter contrast-105 group-hover:scale-108 transition-transform duration-1000 ease-out">
+                        
+                        <!-- Deep Saffron & Sandalwood Vignette Layer -->
+                        <div class="absolute inset-0 bg-gradient-to-t from-[#2c1d11] via-[#2c1d11]/45 to-[#2c1d11]/70 transition-colors duration-500 group-hover:via-[#2c1d11]/35"></div>
+
+                        <!-- Glossy Light Sheen Sweep -->
+                        <div class="sheen-sweep z-10"></div>
+
+                        <!-- Card Header: Devanagari Sequence & Sanskrit Pill -->
+                        <div class="relative z-20 flex justify-between items-center">
+                            <span class="bg-black/35 backdrop-blur-md text-amber-200 border border-white/20 font-serif font-black text-xs px-2.5 py-1 rounded-full">
+                                {{ path.devanagariNum }}
+                            </span>
+
+                            <span class="bg-white/90 backdrop-blur-md text-[#8c5324] font-mono text-[9px] font-bold uppercase tracking-wider px-3 py-1 rounded-full border border-[#e8dac5] shadow-2xs">
+                                {{ path.sanskritTag }}
+                            </span>
+                        </div>
+
+                        <!-- Card Body: Prompt & Headline -->
+                        <div class="relative z-20 text-center my-auto px-2">
+                            <p class="text-amber-200/90 font-mono text-[10px] sm:text-[11px] font-bold uppercase tracking-[0.25em] mb-2 drop-shadow-xs">
+                                {{ path.prompt }}
+                            </p>
+
+                            <h3 class="text-white font-serif font-black text-2xl sm:text-3xl leading-[1.12] drop-shadow-[0_2px_10px_rgba(0,0,0,0.8)]">
+                                {{ path.title }}<br>
+                                <span class="italic font-normal text-amber-100 text-xl sm:text-2xl">{{ path.subtitle }}</span>
+                            </h3>
+
+                            <div class="w-10 h-[1.5px] bg-[#d97706] mx-auto mt-3 rounded-full"></div>
+                        </div>
+
+                        <!-- Card Footer: Selection Indicator & Action Cue -->
+                        <div class="relative z-20 pt-3 border-t border-white/20 flex items-center justify-between text-white text-[10px] font-mono">
+                            <span class="tracking-wider uppercase text-white/80">
+                                @if (selectedPathId() === path.id) {
+                                    <span class="text-amber-300 font-bold">✦ Active Path</span>
+                                } @else {
+                                    <span>Select Path</span>
+                                }
+                            </span>
+
+                            <span class="w-6 h-6 rounded-full bg-white/20 backdrop-blur-xs flex items-center justify-center group-hover:bg-[#d97706] transition-colors">
+                                <i class="fa-solid fa-arrow-right text-[9px]"></i>
+                            </span>
+                        </div>
+
+                    </article>
+
+                }
             </div>
 
-            <div class="flex-shrink-0 w-[280px] h-[380px] relative rounded-[32px] overflow-hidden snap-center cursor-pointer group shadow-card border-4 border-kapi-gold">
-                <img src="https://images.unsplash.com/photo-1506126613408-eca07ce68773?auto=format&fit=crop&w=500&q=80" class="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-700">
-                <div class="absolute inset-0 bg-gradient-to-t from-kapi-purple/90 via-kapi-purple/40 to-transparent"></div>
-                <div class="absolute bottom-8 left-8 right-8 text-center">
-                    <p class="text-white/90 text-[11px] font-medium mb-1 drop-shadow">I'm looking to</p>
-                    <h3 class="text-white font-bold text-3xl leading-tight font-serif drop-shadow-md">Master<br>Astrology</h3>
-                </div>
-            </div>
-
-            <div class="flex-shrink-0 w-[280px] h-[380px] relative rounded-[32px] overflow-hidden snap-center cursor-pointer group shadow-card">
-                <img src="https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?auto=format&fit=crop&w=500&q=80" class="absolute inset-0 w-full h-full object-cover opacity-80 group-hover:scale-105 transition-transform duration-700">
-                <div class="absolute inset-0 bg-gradient-to-t from-kapi-purpleHover/90 via-kapi-purpleHover/40 to-transparent"></div>
-                <div class="absolute bottom-8 left-8 right-8 text-center">
-                    <p class="text-white/90 text-[11px] font-medium mb-1 drop-shadow">I'm going through a</p>
-                    <h3 class="text-white font-bold text-3xl leading-tight font-serif drop-shadow-md">Transition<br>in Life</h3>
-                </div>
-            </div>
-
-            <div class="flex-shrink-0 w-[280px] h-[380px] relative rounded-[32px] overflow-hidden snap-center cursor-pointer group shadow-card">
-                <img src="https://images.unsplash.com/photo-1518288774671-b94e8088c2f5?auto=format&fit=crop&w=500&q=80" class="absolute inset-0 w-full h-full object-cover opacity-80 group-hover:scale-105 transition-transform duration-700">
-                <div class="absolute inset-0 bg-gradient-to-t from-kapi-saffronDark/90 via-kapi-saffronDark/40 to-transparent"></div>
-                <div class="absolute bottom-8 left-8 right-8 text-center">
-                    <p class="text-white/90 text-[11px] font-medium mb-1 drop-shadow">I'm looking to</p>
-                    <h3 class="text-white font-bold text-3xl leading-tight font-serif drop-shadow-md">Heal<br>My Body</h3>
-                </div>
-            </div>
-
-            <div class="flex-shrink-0 w-[280px] h-[380px] relative rounded-[32px] overflow-hidden snap-center cursor-pointer group shadow-card">
-                <img src="https://images.unsplash.com/photo-1529333166437-7750a6dd5a70?auto=format&fit=crop&w=500&q=80" class="absolute inset-0 w-full h-full object-cover opacity-80 group-hover:scale-105 transition-transform duration-700">
-                <div class="absolute inset-0 bg-gradient-to-t from-kapi-rose/90 via-kapi-rose/40 to-transparent"></div>
-                <div class="absolute bottom-8 left-8 right-8 text-center">
-                    <p class="text-white/90 text-[11px] font-medium mb-1 drop-shadow">I'm looking for</p>
-                    <h3 class="text-white font-bold text-3xl leading-tight font-serif drop-shadow-md">Love<br>Connection</h3>
-                </div>
-            </div>
         </div>
 
-        <div class="flex justify-center items-center gap-4 mt-6">
-            <button class="w-10 h-10 rounded-full border border-kapi-purple text-kapi-purple flex items-center justify-center hover:bg-kapi-purple hover:text-white transition"><i class="fa-solid fa-chevron-left text-sm"></i></button>
-            <button class="bg-kapi-purple text-white px-6 py-2.5 rounded-full text-xs font-bold shadow-md hover:bg-kapi-purpleHover transition">Select Path</button>
-            <button class="w-10 h-10 rounded-full border border-kapi-purple text-kapi-purple flex items-center justify-center hover:bg-kapi-purple hover:text-white transition"><i class="fa-solid fa-chevron-right text-sm"></i></button>
+        <!-- ========================================================================= -->
+        <!-- 3. ACTIVE PATHWAY BRIEFING & DYNAMIC DIRECT CTA                           -->
+        <!-- ========================================================================= -->
+        <div class="mt-8 max-w-3xl mx-auto bg-[#fffdfa] rounded-[28px] p-6 sm:p-8 border-2 border-[#e8dac5] shadow-xs relative overflow-hidden">
+            
+            <div class="flex flex-col sm:flex-row items-center justify-between gap-6 text-center sm:text-left">
+                
+                <div>
+                    <div class="flex items-center justify-center sm:justify-start gap-2 mb-1.5">
+                        <span class="text-[9px] font-mono text-[#d97706] uppercase tracking-[0.2em] font-bold">
+                            {{ selectedPath.devanagariNum }} • {{ selectedPath.sanskritTag }}
+                        </span>
+                        <span class="w-1.5 h-1.5 rounded-full bg-[#d97706]"></span>
+                        <span class="text-[9px] font-mono text-[#8c5324] uppercase tracking-wider">
+                            Recommended Next Step
+                        </span>
+                    </div>
+
+                    <h4 class="font-serif font-bold text-lg sm:text-xl text-[#3a2717] mb-2 leading-snug">
+                        {{ selectedPath.title }} {{ selectedPath.subtitle }}
+                    </h4>
+
+                    <p class="text-[#685546] text-xs sm:text-[13px] leading-relaxed max-w-xl font-normal">
+                        {{ selectedPath.deck }}
+                    </p>
+                </div>
+
+                <!-- Direct CTA to Relevant Section -->
+                <a [routerLink]="selectedPath.targetRoute" 
+                   class="shrink-0 inline-flex items-center gap-2.5 bg-gradient-to-r from-[#d97706] via-[#ea580c] to-[#b45309] hover:brightness-105 text-white font-mono font-bold text-xs uppercase tracking-widest px-7 py-3.5 rounded-full transition-all shadow-md hover:shadow-lg hover:scale-105 active:scale-95 cursor-pointer whitespace-nowrap">
+                    <span>{{ selectedPath.routeLabel }}</span>
+                    <i class="fa-solid fa-arrow-right text-[10px]"></i>
+                </a>
+
+            </div>
+
         </div>
+
+        <!-- ========================================================================= -->
+        <!-- 4. TRACK NAVIGATION CONTROLS                                              -->
+        <!-- ========================================================================= -->
+        <div class="flex justify-center items-center gap-4 mt-8">
+            
+            <!-- Left Chevron Button -->
+            <button type="button" 
+                    (click)="scrollLeft()" 
+                    aria-label="Scroll left to previous pathway"
+                    class="w-10 h-10 rounded-full bg-white hover:bg-[#8c5324] text-[#8c5324] hover:text-white border-2 border-[#d8c3a5] hover:border-[#8c5324] flex items-center justify-center transition-all shadow-2xs hover:shadow-xs active:scale-95 cursor-pointer">
+                <i class="fa-solid fa-chevron-left text-xs"></i>
+            </button>
+
+            <!-- Center Sacred Badge Indicator -->
+            <div class="px-4 py-1.5 rounded-full bg-white border border-[#d8c3a5] text-[10px] font-mono font-bold uppercase tracking-widest text-[#8c5324] shadow-2xs">
+                <span>Swipe / Choose Your Calling</span>
+            </div>
+
+            <!-- Right Chevron Button -->
+            <button type="button" 
+                    (click)="scrollRight()" 
+                    aria-label="Scroll right to next pathway"
+                    class="w-10 h-10 rounded-full bg-white hover:bg-[#8c5324] text-[#8c5324] hover:text-white border-2 border-[#d8c3a5] hover:border-[#8c5324] flex items-center justify-center transition-all shadow-2xs hover:shadow-xs active:scale-95 cursor-pointer">
+                <i class="fa-solid fa-chevron-right text-xs"></i>
+            </button>
+
+        </div>
+
     </div>
 </section>

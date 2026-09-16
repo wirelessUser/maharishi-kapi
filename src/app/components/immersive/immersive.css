@@ -1,0 +1,73 @@
+/* Astrolabe Sound Disc Rotation */
+@keyframes spinDisc {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.animate-spin-disc {
+  animation: spinDisc 32s linear infinite;
+}
+
+/* Background Celestial Yantra Rotation */
+@keyframes rotateCelestial {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.animate-rotate-celestial {
+  animation: rotateCelestial 80s linear infinite;
+}
+
+/* Equalizer Bars Physics */
+@keyframes eqBounce {
+  0%, 100% {
+    transform: scaleY(0.3);
+  }
+  50% {
+    transform: scaleY(1);
+  }
+}
+
+.eq-bar {
+  width: 3px;
+  background: linear-gradient(to top, #d97706, #fcd34d);
+  border-radius: 9999px;
+  transform-origin: bottom;
+  animation: eqBounce 1.2s ease-in-out infinite;
+}
+
+.eq-bar:nth-child(1) { animation-delay: 0.1s; }
+.eq-bar:nth-child(2) { animation-delay: 0.3s; }
+.eq-bar:nth-child(3) { animation-delay: 0.5s; }
+.eq-bar:nth-child(4) { animation-delay: 0.2s; }
+.eq-bar:nth-child(5) { animation-delay: 0.4s; }
+.eq-bar:nth-child(6) { animation-delay: 0.15s; }
+
+.eq-bar.paused {
+  animation-play-state: paused;
+  transform: scaleY(0.2);
+}
+
+/* Ambient Pulse Glow */
+@keyframes pulseSlow {
+  0%, 100% {
+    opacity: 0.7;
+    transform: translate(-50%, 0) scale(1);
+  }
+  50% {
+    opacity: 1;
+    transform: translate(-50%, -10px) scale(1.05);
+  }
+}
+
+.animate-pulse-slow {
+  animation: pulseSlow 8s ease-in-out infinite;
+}

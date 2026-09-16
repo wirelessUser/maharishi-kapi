@@ -1,11 +1,12 @@
-<app-top-bar></app-top-bar>
+<app-top-bar class="hidden lg:block"></app-top-bar>
 <app-navbar></app-navbar>
 
-<main class="min-h-screen">
+<main class="min-h-screen pb-16 lg:pb-0">
   <!-- यहाँ Angular आपके पेजेस (Home, Courses, Services) को URL के हिसाब से लोड करेगा -->
   <router-outlet></router-outlet>
 </main>
 
 <app-footer></app-footer>
+<app-bottom-tab-bar></app-bottom-tab-bar>
 <app-whatsapp-btn></app-whatsapp-btn>
 <app-theme-customizer></app-theme-customizer>

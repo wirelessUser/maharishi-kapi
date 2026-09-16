@@ -1,85 +1,137 @@
-<section class="py-24 bg-white">
-    <div class="container mx-auto px-4 max-w-7xl">
-        <div class="text-center mb-16">
-            <span class="text-kapi-purple font-bold text-[10px] uppercase tracking-[0.3em] bg-purple-50 px-4 py-1.5 rounded-full mb-4 inline-block border border-purple-100">Downloads</span>
-            <h2 class="text-[36px] font-bold text-kapi-rose mb-3 font-serif">Sacred Remedies</h2>
-            <p class="text-gray-500 text-[14px] font-medium">Ancient texts and mantras to elevate your daily life</p>
+<section class="py-20 sm:py-28 bg-gradient-to-b from-[#faf8f5] via-[#faf7f2] to-[#f5ede2] border-b border-[#e8dac5] relative overflow-hidden font-sans">
+    
+    <!-- Sacred Ambient Yantra Matrix & Solar Aura -->
+    <div class="absolute inset-0 bg-[radial-gradient(#c2a275_1.2px,transparent_1.2px)] [background-size:28px_28px] opacity-25 pointer-events-none"></div>
+    <div class="absolute -top-32 left-1/2 -translate-x-1/2 w-[750px] h-[500px] bg-gradient-to-b from-[#fcd34d]/25 via-[#fb923c]/15 to-transparent rounded-full blur-[130px] pointer-events-none"></div>
+
+    <div class="container mx-auto px-4 max-w-7xl relative z-10">
+        
+        <!-- ========================================================================= -->
+        <!-- 1. SECTION MASTHEAD WITH SANSKRIT CODE-STAMP                              -->
+        <!-- ========================================================================= -->
+        <div class="text-center max-w-2xl mx-auto mb-14 sm:mb-16">
+            <div class="inline-flex items-center gap-2 text-[#8c5324] font-mono text-[10px] uppercase tracking-[0.28em] font-bold mb-3 px-4 py-1.5 rounded-full bg-white/85 border border-[#d8c3a5] shadow-2xs">
+                <span class="text-[#d97706] animate-pulse">❖</span>
+                <span>मन्त्र एवं स्तोत्र सङ्ग्रह • SCRIPTURAL REMEDIES</span>
+                <span class="text-[#d97706] animate-pulse">❖</span>
+            </div>
+
+            <h2 class="text-3xl sm:text-4xl md:text-5xl font-serif font-black text-[#3a2717] tracking-tight leading-[1.12] mb-3">
+                Sacred Remedies &amp; Chants
+            </h2>
+
+            <div class="w-14 h-1 bg-[#d97706] mx-auto mb-4 rounded-full"></div>
+
+            <p class="text-[#685546] text-xs sm:text-sm leading-relaxed font-normal">
+                Authentic classical stotras, phonetic diacritics, and English commentaries compiled from the Kapi Institute scriptorium for daily contemplation.
+            </p>
         </div>
 
-        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
-            <div class="bg-white rounded-[2rem] shadow-card overflow-hidden flex flex-col hover:-translate-y-2 transition-transform duration-300 border border-gray-100 group">
-                <div class="h-48 flex flex-col justify-center items-center relative border-b-4 border-kapi-gold overflow-hidden sunburst-bg">
-                    <div class="absolute top-4 right-4 bg-white/80 backdrop-blur w-10 h-10 rounded-full shadow flex items-center justify-center text-kapi-gold"><i class="fa-solid fa-file-pdf"></i></div>
-                    <div class="relative z-20 text-center drop-shadow-md">
-                         <div class="text-kapi-rose font-bold text-3xl mb-0 font-serif leading-none">वैदिक</div>
-                         <div class="text-kapi-rose font-bold text-3xl font-serif leading-none">ज्ञान</div>
-                    </div>
-                    <div class="absolute bottom-0 w-full bg-gradient-to-r from-kapi-gold to-yellow-500 py-3 text-center z-20 shadow-inner">
-                         <h4 class="font-bold text-kapi-rose text-[14px] tracking-widest font-serif">आनन्द लहरि</h4>
-                    </div>
-                </div>
-                <div class="p-8 text-center flex-grow flex flex-col justify-between bg-white relative z-10">
-                    <p class="text-[9px] font-bold text-gray-400 mb-4 tracking-[0.2em] uppercase">Better Yourself</p>
-                    <p class="text-[13px] font-semibold text-kapi-rose leading-relaxed">Aanand Lahari Shlok | आनंद लहरी श्लोक संग्रह Free PDF Download</p>
-                </div>
-            </div>
+        <!-- ========================================================================= -->
+        <!-- 2. SCRIPTURAL CODICES GRID (4-COLUMN PARCHMENT RACK)                      -->
+        <!-- ========================================================================= -->
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-7 mb-14">
+            @for (codex of codices; track codex.id; let i = $index) {
+                
+                <article class="codex-card group bg-[#fffdfa] rounded-[30px] border-2 border-[#e8dac5] hover:border-[#d97706] flex flex-col justify-between overflow-hidden relative shadow-xs hover:shadow-xl transition-all duration-500 hover:-translate-y-2">
+                    
+                    <!-- Gilded Corner Filigrees -->
+                    <div class="absolute top-2.5 left-2.5 w-3.5 h-3.5 border-t border-l border-[#cbb391] pointer-events-none z-30"></div>
+                    <div class="absolute top-2.5 right-2.5 w-3.5 h-3.5 border-t border-r border-[#cbb391] pointer-events-none z-30"></div>
 
-            <div class="bg-white rounded-[2rem] shadow-card overflow-hidden flex flex-col hover:-translate-y-2 transition-transform duration-300 border border-gray-100 group">
-                <div class="h-48 flex flex-col justify-center items-center relative border-b-4 border-kapi-gold overflow-hidden sunburst-bg">
-                    <div class="absolute top-4 right-4 bg-white/80 backdrop-blur w-10 h-10 rounded-full shadow flex items-center justify-center text-kapi-gold"><i class="fa-solid fa-file-pdf"></i></div>
-                    <div class="relative z-20 text-center drop-shadow-md">
-                         <div class="text-kapi-rose font-bold text-3xl mb-0 font-serif leading-none">वैदिक</div>
-                         <div class="text-kapi-rose font-bold text-3xl font-serif leading-none">ज्ञान</div>
-                    </div>
-                    <div class="absolute bottom-0 w-full bg-gradient-to-r from-kapi-gold to-yellow-500 py-3 text-center z-20 shadow-inner">
-                         <h4 class="font-bold text-kapi-rose text-[14px] tracking-widest font-serif">अच्युताष्टकम्</h4>
-                    </div>
-                </div>
-                <div class="p-8 text-center flex-grow flex flex-col justify-between bg-white relative z-10">
-                    <p class="text-[9px] font-bold text-gray-400 mb-4 tracking-[0.2em] uppercase">Better Yourself</p>
-                    <p class="text-[13px] font-semibold text-kapi-rose leading-relaxed">Achyutashtakam Shlok | अच्युताष्टकम् श्लोक संग्रह Free PDF Download</p>
-                </div>
-            </div>
+                    <!-- Glossy Sheen Sweep -->
+                    <div class="sheen-sweep z-10"></div>
 
-            <div class="bg-white rounded-[2rem] shadow-card overflow-hidden flex flex-col hover:-translate-y-2 transition-transform duration-300 border border-gray-100 group">
-                <div class="h-48 flex flex-col justify-center items-center relative border-b-4 border-kapi-gold overflow-hidden sunburst-bg">
-                    <div class="absolute top-4 right-4 bg-white/80 backdrop-blur w-10 h-10 rounded-full shadow flex items-center justify-center text-kapi-gold"><i class="fa-solid fa-file-pdf"></i></div>
-                    <div class="relative z-20 text-center drop-shadow-md">
-                         <div class="text-kapi-rose font-bold text-3xl mb-0 font-serif leading-none">वैदिक</div>
-                         <div class="text-kapi-rose font-bold text-3xl font-serif leading-none">ज्ञान</div>
-                    </div>
-                    <div class="absolute bottom-0 w-full bg-gradient-to-r from-kapi-gold to-yellow-500 py-3 text-center z-20 shadow-inner">
-                         <h4 class="font-bold text-kapi-rose text-[14px] tracking-widest font-serif">अर्ध नारीश्वर अष्टकम्</h4>
-                    </div>
-                </div>
-                <div class="p-8 text-center flex-grow flex flex-col justify-between bg-white relative z-10">
-                    <p class="text-[9px] font-bold text-gray-400 mb-4 tracking-[0.2em] uppercase">Better Yourself</p>
-                    <p class="text-[13px] font-semibold text-kapi-rose leading-relaxed">Ardhnarishwar Ashtakam | अर्धनारीश्वर अष्टकम् श्लोक संग्रह Free PDF Download</p>
-                </div>
-            </div>
+                    <div>
+                        <!-- Top Archival Header Plate -->
+                        <div class="h-44 bg-gradient-to-br from-[#fbf3e8] via-[#f7efe0] to-[#f4ebe0] border-b-2 border-[#d8c3a5] p-5 flex flex-col justify-between relative overflow-hidden">
+                            
+                            <!-- Subtle Sunburst Radial Watermark -->
+                            <div class="absolute inset-0 bg-[radial-gradient(circle_at_center,#d97706_1px,transparent_1px)] [background-size:16px_16px] opacity-15 pointer-events-none"></div>
 
-            <div class="bg-white rounded-[2rem] shadow-card overflow-hidden flex flex-col hover:-translate-y-2 transition-transform duration-300 border border-gray-100 group">
-                <div class="h-48 flex flex-col justify-center items-center relative border-b-4 border-kapi-gold overflow-hidden sunburst-bg">
-                    <div class="absolute top-4 right-4 bg-white/80 backdrop-blur w-10 h-10 rounded-full shadow flex items-center justify-center text-kapi-gold"><i class="fa-solid fa-file-pdf"></i></div>
-                    <div class="relative z-20 text-center drop-shadow-md">
-                         <div class="text-kapi-rose font-bold text-3xl mb-0 font-serif leading-none">वैदिक</div>
-                         <div class="text-kapi-rose font-bold text-3xl font-serif leading-none">ज्ञान</div>
+                            <!-- Header Bar: Devanagari Sequence & PDF Format Badge -->
+                            <div class="flex items-center justify-between relative z-20">
+                                <span class="font-serif font-black text-xs text-[#d97706] bg-white px-2.5 py-0.5 rounded-full border border-[#e8dac5] shadow-2xs">
+                                    {{ codex.devanagariNum }}
+                                </span>
+
+                                <div class="w-8 h-8 rounded-xl bg-white/95 border border-[#d8c3a5] flex items-center justify-center text-[#b45309] text-xs shadow-2xs group-hover:scale-110 group-hover:bg-[#8c5324] group-hover:text-white transition-all duration-300">
+                                    <i class="fa-solid fa-file-pdf"></i>
+                                </div>
+                            </div>
+
+                            <!-- Center Sanskrit Typography Callout -->
+                            <div class="text-center my-auto relative z-20">
+                                <span class="text-[9px] font-mono uppercase tracking-[0.2em] text-[#8c5324] font-bold block mb-0.5">
+                                    वैदिक ज्ञान
+                                </span>
+                                <h3 class="font-serif font-black text-2xl text-[#3a2717] leading-none group-hover:text-[#8c5324] transition-colors">
+                                    {{ codex.sanskritTitle }}
+                                </h3>
+                            </div>
+
+                            <!-- Bottom Category Ribbon -->
+                            <div class="relative z-20 flex justify-center">
+                                <span class="text-[8.5px] font-mono font-bold uppercase tracking-widest text-[#8c5324] bg-white/90 border border-[#e8dac5] px-3 py-0.5 rounded-full shadow-2xs">
+                                    {{ codex.category }}
+                                </span>
+                            </div>
+                        </div>
+
+                        <!-- Card Inscription Body -->
+                        <div class="p-5 sm:p-6 text-center">
+                            <h4 class="font-serif font-bold text-base text-[#3a2717] leading-snug mb-1">
+                                {{ codex.title }}
+                            </h4>
+                            
+                            <p class="text-[#8c5324] text-[11px] font-mono mb-4">
+                                {{ codex.subtitle }}
+                            </p>
+
+                            <!-- Classical Shloka Verse Snippet -->
+                            <div class="p-3 rounded-xl bg-[#faf6ee] border border-[#ede1d1] text-center mb-4">
+                                <p class="font-serif text-xs text-[#59493e] italic leading-relaxed truncate">
+                                    {{ codex.shlokaSnippet }}
+                                </p>
+                            </div>
+
+                            <!-- File Metadata Pills -->
+                            <div class="flex items-center justify-center gap-3 text-[10px] font-mono text-[#7d6756]">
+                                <span><i class="fa-regular fa-file-lines mr-1 text-[#d97706]"></i>{{ codex.pages }}</span>
+                                <span>•</span>
+                                <span><i class="fa-solid fa-floppy-disk mr-1 text-[#d97706]"></i>{{ codex.fileSize }}</span>
+                            </div>
+                        </div>
                     </div>
-                    <div class="absolute bottom-0 w-full bg-gradient-to-r from-kapi-gold to-yellow-500 py-3 text-center z-20 shadow-inner">
-                         <h4 class="font-bold text-kapi-rose text-[12px] whitespace-nowrap font-serif">भज गोविन्दम् (मोह मुङ्गरम)</h4>
+
+                    <!-- Bottom Tactile Download Action Button -->
+                    <div class="p-5 sm:p-6 pt-0 mt-auto">
+                        <a [href]="codex.downloadUrl" 
+                           class="w-full py-3 rounded-full bg-[#fbf3e8] hover:bg-[#8c5324] text-[#8c5324] hover:text-white border border-[#e8dac5] hover:border-[#8c5324] text-[10.5px] font-mono font-bold uppercase tracking-widest transition-all duration-300 shadow-2xs flex items-center justify-center gap-2 cursor-pointer group-hover:shadow-xs">
+                            <i class="fa-solid fa-download text-[10px]"></i>
+                            <span>Download Codex</span>
+                        </a>
                     </div>
-                </div>
-                <div class="p-8 text-center flex-grow flex flex-col justify-between bg-white relative z-10">
-                    <p class="text-[9px] font-bold text-gray-400 mb-4 tracking-[0.2em] uppercase">Better Yourself</p>
-                    <p class="text-[13px] font-semibold text-kapi-rose leading-relaxed">Bhaja Govindam Shlok | भज गोविन्दम् श्लोक संग्रह Free PDF Download</p>
-                </div>
-            </div>
+
+                </article>
+
+            }
         </div>
 
-        <div class="text-center mt-12">
-            <button class="bg-kapi-saffron text-white px-10 py-4 rounded-full text-sm font-bold inline-flex items-center hover:bg-kapi-saffronDark transition shadow-lg">
-                <i class="fa-solid fa-download mr-3"></i> Download All
-            </button>
+        <!-- ========================================================================= -->
+        <!-- 3. MASTER SANGRAHA DOWNLOAD CALLOUT                                       -->
+        <!-- ========================================================================= -->
+        <div class="text-center">
+            <a href="#" 
+               class="inline-flex items-center gap-3 bg-gradient-to-r from-[#d97706] via-[#ea580c] to-[#b45309] hover:brightness-105 text-white font-mono font-bold text-xs uppercase tracking-[0.2em] px-9 py-4 rounded-full transition-all shadow-md hover:shadow-lg hover:scale-105 active:scale-95 cursor-pointer">
+                <i class="fa-solid fa-box-archive text-sm"></i>
+                <span>Download Complete Shastra Codex (All 4 Shlokas • PDF)</span>
+            </a>
+            
+            <p class="text-[#7d6756] text-[11px] font-mono mt-3">
+                Free Shastric access provided under the patronage of the Maharishi Kapi Institute.
+            </p>
         </div>
+
     </div>
 </section>

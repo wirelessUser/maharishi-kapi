@@ -1,0 +1,47 @@
+<nav class="lg:hidden fixed bottom-0 inset-x-0 z-40 bg-white/95 backdrop-blur-md border-t border-kapi-purple/10 shadow-[0_-4px_20px_rgba(0,0,0,0.06)]" style="padding-bottom: env(safe-area-inset-bottom)">
+    <div class="grid grid-cols-5 h-16">
+        <a routerLink="/" routerLinkActive="text-kapi-purple" [routerLinkActiveOptions]="{exact: true}" class="flex flex-col items-center justify-center gap-1 text-gray-400 text-[10px] font-bold active:bg-kapi-sand transition-colors">
+            <i class="fa-solid fa-house text-lg"></i>
+            Home
+        </a>
+        <a routerLink="/courses" routerLinkActive="text-kapi-purple" class="flex flex-col items-center justify-center gap-1 text-gray-400 text-[10px] font-bold active:bg-kapi-sand transition-colors">
+            <i class="fa-solid fa-graduation-cap text-lg"></i>
+            Courses
+        </a>
+        <a routerLink="/retreats" routerLinkActive="text-kapi-purple" class="flex flex-col items-center justify-center gap-1 text-gray-400 text-[10px] font-bold active:bg-kapi-sand transition-colors">
+            <i class="fa-solid fa-mountain-sun text-lg"></i>
+            Retreats
+        </a>
+        <a routerLink="/services" routerLinkActive="text-kapi-purple" class="flex flex-col items-center justify-center gap-1 text-gray-400 text-[10px] font-bold active:bg-kapi-sand transition-colors">
+            <i class="fa-solid fa-hands-praying text-lg"></i>
+            Consult
+        </a>
+        <button type="button" (click)="toggleMore()" class="flex flex-col items-center justify-center gap-1 text-[10px] font-bold active:bg-kapi-sand transition-colors" [class.text-kapi-purple]="moreOpen()" [class.text-gray-400]="!moreOpen()">
+            <i class="fa-solid fa-bars text-lg"></i>
+            More
+        </button>
+    </div>
+</nav>
+
+@if (moreOpen()) {
+    <div class="lg:hidden fixed inset-0 z-50 bg-kapi-cosmic/40 backdrop-blur-sm" (click)="closeMore()">
+        <div class="absolute bottom-0 inset-x-0 bg-white rounded-t-[28px] p-6 shadow-2xl" style="padding-bottom: calc(env(safe-area-inset-bottom) + 24px)" (click)="$event.stopPropagation()">
+            <div class="w-10 h-1.5 bg-gray-300 rounded-full mx-auto mb-6"></div>
+            <div class="grid grid-cols-3 gap-3 text-center mb-5">
+                <a routerLink="/about" (click)="closeMore()" class="flex flex-col items-center gap-2 p-3 rounded-2xl hover:bg-kapi-sand transition">
+                    <div class="w-12 h-12 rounded-full bg-kapi-purple/10 text-kapi-purple flex items-center justify-center text-xl"><i class="fa-solid fa-om"></i></div>
+                    <span class="text-[11px] font-bold text-kapi-purple">About</span>
+                </a>
+                <a routerLink="/blog" (click)="closeMore()" class="flex flex-col items-center gap-2 p-3 rounded-2xl hover:bg-kapi-sand transition">
+                    <div class="w-12 h-12 rounded-full bg-kapi-rose/10 text-kapi-rose flex items-center justify-center text-xl"><i class="fa-solid fa-newspaper"></i></div>
+                    <span class="text-[11px] font-bold text-kapi-purple">Blog</span>
+                </a>
+                <a href="https://wa.me/918791691675" target="_blank" rel="noopener" (click)="closeMore()" class="flex flex-col items-center gap-2 p-3 rounded-2xl hover:bg-kapi-sand transition">
+                    <div class="w-12 h-12 rounded-full bg-green-500/10 text-green-600 flex items-center justify-center text-xl"><i class="fa-brands fa-whatsapp"></i></div>
+                    <span class="text-[11px] font-bold text-kapi-purple">WhatsApp</span>
+                </a>
+            </div>
+            <button type="button" (click)="closeMore()" class="w-full bg-kapi-purple text-white py-3.5 rounded-full text-sm font-bold uppercase tracking-widest">Close</button>
+        </div>
+    </div>
+}

@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <url><loc>https://maharishikapi.com/</loc><priority>1.0</priority><changefreq>weekly</changefreq></url>
+  <url><loc>https://maharishikapi.com/about</loc><priority>0.8</priority><changefreq>monthly</changefreq></url>
+  <url><loc>https://maharishikapi.com/courses</loc><priority>0.9</priority><changefreq>weekly</changefreq></url>
+  <url><loc>https://maharishikapi.com/services</loc><priority>0.8</priority><changefreq>monthly</changefreq></url>
+  <url><loc>https://maharishikapi.com/retreats</loc><priority>0.8</priority><changefreq>weekly</changefreq></url>
+  <url><loc>https://maharishikapi.com/blog</loc><priority>0.7</priority><changefreq>weekly</changefreq></url>
+
+  <url><loc>https://maharishikapi.com/courses/astro-1</loc><priority>0.7</priority><changefreq>monthly</changefreq></url>
+  <url><loc>https://maharishikapi.com/courses/astro-2</loc><priority>0.7</priority><changefreq>monthly</changefreq></url>
+  <url><loc>https://maharishikapi.com/courses/astro-3</loc><priority>0.7</priority><changefreq>monthly</changefreq></url>
+  <url><loc>https://maharishikapi.com/courses/nakshatra-vidya</loc><priority>0.7</priority><changefreq>monthly</changefreq></url>
+  <url><loc>https://maharishikapi.com/courses/panchapakshi</loc><priority>0.7</priority><changefreq>monthly</changefreq></url>
+  <url><loc>https://maharishikapi.com/courses/astro-fellowship</loc><priority>0.7</priority><changefreq>monthly</changefreq></url>
+  <url><loc>https://maharishikapi.com/courses/medical-astrology</loc><priority>0.7</priority><changefreq>monthly</changefreq></url>
+  <url><loc>https://maharishikapi.com/courses/prashna</loc><priority>0.7</priority><changefreq>monthly</changefreq></url>
+  <url><loc>https://maharishikapi.com/courses/numerology-1</loc><priority>0.7</priority><changefreq>monthly</changefreq></url>
+  <url><loc>https://maharishikapi.com/courses/numerology-2</loc><priority>0.7</priority><changefreq>monthly</changefreq></url>
+  <url><loc>https://maharishikapi.com/courses/numerology-3</loc><priority>0.7</priority><changefreq>monthly</changefreq></url>
+  <url><loc>https://maharishikapi.com/courses/kapi-tarot</loc><priority>0.7</priority><changefreq>monthly</changefreq></url>
+  <url><loc>https://maharishikapi.com/courses/vastu-consultant</loc><priority>0.7</priority><changefreq>monthly</changefreq></url>
+  <url><loc>https://maharishikapi.com/courses/vastu-devta</loc><priority>0.7</priority><changefreq>monthly</changefreq></url>
+  <url><loc>https://maharishikapi.com/courses/vastu-master</loc><priority>0.7</priority><changefreq>monthly</changefreq></url>
+  <url><loc>https://maharishikapi.com/courses/kapi-palmistry</loc><priority>0.7</priority><changefreq>monthly</changefreq></url>
+  <url><loc>https://maharishikapi.com/courses/kapi-face-reading</loc><priority>0.7</priority><changefreq>monthly</changefreq></url>
+  <url><loc>https://maharishikapi.com/courses/palmistry-yoga</loc><priority>0.7</priority><changefreq>monthly</changefreq></url>
+  <url><loc>https://maharishikapi.com/courses/kapi-shakti</loc><priority>0.7</priority><changefreq>monthly</changefreq></url>
+  <url><loc>https://maharishikapi.com/courses/kapi-sound-therapy</loc><priority>0.7</priority><changefreq>monthly</changefreq></url>
+  <url><loc>https://maharishikapi.com/courses/kapi-ayurveda</loc><priority>0.7</priority><changefreq>monthly</changefreq></url>
+  <url><loc>https://maharishikapi.com/courses/kapi-nlp</loc><priority>0.7</priority><changefreq>monthly</changefreq></url>
+  <url><loc>https://maharishikapi.com/courses/kapi-emotional-wellness</loc><priority>0.7</priority><changefreq>monthly</changefreq></url>
+  <url><loc>https://maharishikapi.com/courses/kapi-dhyana</loc><priority>0.7</priority><changefreq>monthly</changefreq></url>
+
+  <url><loc>https://maharishikapi.com/retreats/himalayan-sadhana-retreat</loc><priority>0.7</priority><changefreq>monthly</changefreq></url>
+  <url><loc>https://maharishikapi.com/retreats/kerala-ayurveda-retreat</loc><priority>0.6</priority><changefreq>monthly</changefreq></url>
+  <url><loc>https://maharishikapi.com/retreats/divine-india-retreat</loc><priority>0.7</priority><changefreq>monthly</changefreq></url>
+</urlset>

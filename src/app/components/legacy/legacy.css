@@ -1,0 +1,34 @@
+/* Astrolabe Background Yantra Rotation */
+@keyframes rotateSurya {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.animate-rotate-surya {
+  animation: rotateSurya 85s linear infinite;
+}
+
+/* Sun Icon Micro-Spin */
+@keyframes spinSlow {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.animate-spin-slow {
+  animation: spinSlow 30s linear infinite;
+}
+
+/* Gilded Gradient for Sun Icon */
+.text-gradient-gold {
+  background: linear-gradient(135deg, #fcd34d, #f59e0b, #d97706);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}

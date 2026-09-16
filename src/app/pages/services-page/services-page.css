@@ -1,0 +1,75 @@
+/* Sacred Celestial Mandala Rotations in Hero Background */
+@keyframes rotate-mandala {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes float-slow {
+  0%, 100% {
+    transform: translate(-50%, 0) scale(1);
+  }
+  50% {
+    transform: translate(-50%, -15px) scale(1.03);
+  }
+}
+
+.animate-rotate-mandala {
+  animation: rotate-mandala 65s linear infinite;
+}
+
+.animate-float-slow {
+  animation: float-slow 10s ease-in-out infinite;
+}
+
+/* Ashtakon (8-Pointed Star) Rotations inside the Gopuram Cards */
+@keyframes spin-slow {
+  from { transform: translate(-50%, -50%) rotate(0deg); }
+  to { transform: translate(-50%, -50%) rotate(360deg); }
+}
+
+@keyframes spin-slow-reverse {
+  from { transform: translate(-50%, -50%) rotate(45deg); }
+  to { transform: translate(-50%, -50%) rotate(-315deg); }
+}
+
+.animate-spin-slow {
+  animation: spin-slow 25s linear infinite;
+}
+
+.animate-spin-slow-reverse {
+  animation: spin-slow-reverse 25s linear infinite;
+}
+
+/* Fade-In Helper for internal elements */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(4px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fade-in {
+  animation: fadeIn 0.3s ease-out forwards;
+}
+
+/* 3D Hinge & Preserve 3D Utility Classes */
+[perspective\:1800px] {
+  perspective: 1800px;
+}
+
+[transform-style\:preserve-3d] {
+  transform-style: preserve-3d;
+}
+
+[backface-visibility\:hidden] {
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+}

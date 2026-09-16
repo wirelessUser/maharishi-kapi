@@ -1,5 +1,6 @@
 <section class="py-20 sm:py-28 bg-gradient-to-b from-[#f5eee4] via-[#faf7f2] to-[#eee4d3] border-b border-[#e8dac5] relative overflow-hidden font-sans">
     
+    <!-- Ambient Sacred Grid Watermark -->
     <div class="absolute inset-0 bg-[radial-gradient(#c2a275_1.2px,transparent_1.2px)] [background-size:28px_28px] opacity-25 pointer-events-none"></div>
 
     <div class="container mx-auto px-4 max-w-7xl relative z-10">
@@ -8,12 +9,12 @@
         <div class="text-center max-w-2xl mx-auto mb-14">
             <div class="inline-flex items-center gap-2 text-[#8c5324] font-mono text-[10px] uppercase tracking-[0.28em] font-bold mb-3 px-4 py-1.5 rounded-full bg-white/90 border border-[#d8c3a5] shadow-xs">
                 <span class="text-[#d97706]">❖</span>
-                <span>GOOGLE VERIFIED REVIEWS</span>
+                <span>GOOGLE & SANCTUM VERIFIED REVIEWS</span>
                 <span class="text-[#d97706]">❖</span>
             </div>
 
             <h2 class="text-3xl sm:text-4xl md:text-5xl font-serif font-black text-[#3a2717] tracking-tight mb-4">
-                What Seekers Say on Google
+                Verified Seeker Experiences
             </h2>
 
             <!-- Google Summary Rating Pill -->
@@ -37,7 +38,7 @@
         </div>
 
         <!-- 3-Column Reviews Grid -->
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-12">
             @for (rev of googleReviews; track rev.authorName) {
                 <div class="bg-[#fffdfa] rounded-[24px] border border-[#e8dac5] hover:border-[#d97706]/70 p-6 flex flex-col justify-between shadow-xs transition-transform hover:-translate-y-1">
                     <div>
@@ -55,7 +56,8 @@
                                     <p class="text-[10px] font-mono text-[#8c5324]">{{ rev.location }} • {{ rev.relativeTime }}</p>
                                 </div>
                             </div>
-                            <!-- Google 'G' Mark -->
+                            
+                            <!-- Google G Logo -->
                             <svg class="w-4 h-4 shrink-0" viewBox="0 0 24 24">
                                 <path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/>
                                 <path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/>
@@ -82,7 +84,9 @@
                     <!-- Card Tag -->
                     <div class="pt-3 border-t border-[#f0e4d4] flex items-center justify-between text-[10px] font-mono text-[#8c5324]">
                         <span class="font-bold text-[#b45309]">{{ rev.tag }}</span>
-                        <span class="text-[#7d6756]">Google Review</span>
+                        <span class="text-[#7d6756] flex items-center gap-1">
+                            Google Verified <i class="fa-solid fa-check text-[9px] text-green-600"></i>
+                        </span>
                     </div>
                 </div>
             }
@@ -94,11 +98,11 @@
                target="_blank" 
                rel="noopener noreferrer"
                class="inline-flex items-center gap-2 bg-white hover:bg-[#faf6ee] text-[#3a2717] border border-[#d8c3a5] hover:border-[#d97706] font-mono font-bold text-xs uppercase tracking-widest px-6 py-3 rounded-full transition-all shadow-2xs hover:scale-105">
-                <span>Read all Google Reviews</span>
+                <span>View all Reviews on Google Maps</span>
                 <i class="fa-solid fa-arrow-up-right-from-square text-[10px]"></i>
             </a>
 
-            <a [href]="googleReviewsUrl" 
+            <a [href]="writeReviewUrl" 
                target="_blank" 
                rel="noopener noreferrer"
                class="inline-flex items-center gap-2 bg-gradient-to-r from-[#d97706] to-[#b45309] text-white font-mono font-bold text-xs uppercase tracking-widest px-6 py-3 rounded-full transition-all shadow-xs hover:scale-105">

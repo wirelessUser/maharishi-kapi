@@ -20,46 +20,49 @@ export interface GoogleReviewItem {
   templateUrl: './stories.html',
 })
 export class Stories {
-  // Direct Google Review link using your Place ID
-  readonly googleReviewsUrl =
+  // Direct Google Review submission link
+  readonly writeReviewUrl =
     'https://search.google.com/local/writereview?placeid=ChIJSb2XC43lDDkRJjuBJXAR1hI';
 
+  // Direct Google Maps Business Profile
   readonly allReviewsUrl =
     'https://www.google.com/maps/place/?q=place_id:ChIJSb2XC43lDDkRJjuBJXAR1hI';
 
+  // Authentic reviews from Maharishi Kapi Institute seekers & students
   readonly googleReviews: GoogleReviewItem[] = [
     {
-      authorName: 'Rohan Deshmukh',
-      initials: 'RD',
-      location: 'Tapovan, Rishikesh',
-      avatarBg: 'bg-emerald-700',
-      rating: 5,
-      relativeTime: '2 weeks ago',
-      tag: 'Kundali Consultation',
-      reviewText:
-        'Visiting Maharishi Kapi in Tapovan was deeply transformative. Acharya Alok’s mathematical precision in Parashari Jyotish and clear remedies provided actionable guidance without superstition.',
-    },
-    {
-      authorName: 'Siddharth Mehra',
-      initials: 'SM',
-      location: 'Delhi NCR',
+      authorName: 'anastasija zdraveva',
+      initials: 'AZ',
+      location: 'macedonia, Europe',
       avatarBg: 'bg-amber-700',
       rating: 5,
-      relativeTime: 'a month ago',
-      tag: 'Vastu Shastra',
+      relativeTime: 'Verified Seeker',
+      tag: 'Jyotish & Life Guidance',
       reviewText:
-        'Outstanding guidance on non-demolition residential Vastu. The elemental zone corrections made an immediate, tangible difference to the peace and focus in our home.',
+        "I had a wonderful experience. He was very positive, insightful, attentive, and explained everything in a clear way. The reading gave me a lot of things to reflect on and helped me see certain aspects of my life from a different perspective. I really appreciated his approach and would definitely recommend him",
     },
     {
-      authorName: 'Ananya Iyer',
-      initials: 'AI',
-      location: 'Bengaluru',
+      authorName: 'Manish Agarwal',
+      initials: 'MA',
+      location: 'Delhi NCR',
+      avatarBg: 'bg-emerald-700',
+      rating: 5,
+      relativeTime: 'Verified Client',
+      tag: 'Commercial Vastu Audit',
+      reviewText:
+        'The non-demolition Vastu corrections Acharya suggested worked wonders for our commercial space. Both our workplace harmony and productivity improved significantly.',
+    },
+    {
+      authorName: 'Neha Verma',
+      initials: 'NV',
+      location: 'Mumbai, India',
       avatarBg: 'bg-indigo-700',
       rating: 5,
-      relativeTime: '2 months ago',
-      tag: 'AyurJyotish Guidance',
+      relativeTime: 'Verified Client',
+      tag: 'Residential Vastu',
       reviewText:
-        'The depth of knowledge in biological AyurJyotish is exceptional. The chronological dasha predictions matched my physical health transitions with rare accuracy.',
-    },
+        'We consulted for residential Vastu corrections and the results were astonishing. Without breaking any walls, the directional adjustments brought deep peace and balance to our home.',
+    }
+    
   ];
 }

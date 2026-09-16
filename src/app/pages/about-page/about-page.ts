@@ -31,6 +31,17 @@ interface AppearanceItem {
   description: string;
   icon: string;
 }
+export interface PressArticle {
+  id: string;
+  publisher: 'Zee News' | 'Agniban' | 'Janta Se Rishta' | 'InKhabar';
+  logoType: 'zeenews' | 'agniban' | 'jantaserishta' | 'inkhabar';
+  editionTag: string;
+  category: string;
+  headline: string;
+  author: string;
+  topicTag: string;
+  readTime: string;
+}
 
 @Component({
   standalone: true,
@@ -164,75 +175,97 @@ export class AboutPage {
   ];
 
   // Press & Public Appearances (Institutes + Media Houses)
-  readonly appearances: AppearanceItem[] = [
-    {
-      id: 'ims',
-      category: 'PREMIER INSTITUTE',
-      name: 'IMS Ghaziabad',
-      badgeBg: 'bg-[#fceddc]',
-      badgeTextColor: 'text-[#874312]',
-      subtitle: 'Premier Management & Technology Institute',
-      headline: 'Guest Lecture on Mental Wellness & Vedic Psychology in Executive Life',
-      description: 'Invited by academic leadership to deliver masterclasses for MBA scholars, faculty, and corporate executives on overcoming cognitive burnout, Chitta Shuddhi, and conscious leadership.',
-      icon: 'fa-graduation-cap'
-    },
-    {
-      id: 'gl-bajaj',
-      category: 'PREMIER INSTITUTE',
-      name: 'GL Bajaj Institute',
-      badgeBg: 'bg-[#fceddc]',
-      badgeTextColor: 'text-[#874312]',
-      subtitle: 'GL Bajaj Institute of Technology & Management',
-      headline: 'Keynote Address on Mind Mastery & Overcoming Academic Pressure',
-      description: 'Addressed engineering researchers, students, and department heads on applying ancient Yogic psychology, breathwork, and emotional equilibrium in high-stress tech environments.',
-      icon: 'fa-university'
-    },
-    {
-      id: 'zee-news',
-      category: 'NATIONAL MEDIA',
-      name: 'Zee News',
-      badgeBg: 'bg-[#f5ede2]',
-      badgeTextColor: 'text-[#8c5324]',
-      subtitle: 'National Television & Digital Media Network',
-      headline: 'Authored Expert Columns on Astrological Cycles & Planetary Eclipses',
-      description: 'Regularly featured for authoritative Shastric analysis, decoding celestial transitions, planetary alignments, and their psycho-social impact on viewers nationwide.',
-      icon: 'fa-newspaper'
-    },
-    {
-      id: 'inkhabar',
-      category: 'NATIONAL MEDIA',
-      name: 'InKhabar',
-      badgeBg: 'bg-[#f5ede2]',
-      badgeTextColor: 'text-[#8c5324]',
-      subtitle: 'Leading National Digital News Portal',
-      headline: 'Featured Interviews on Non-Demolition Vastu for Commercial Growth',
-      description: 'In-depth broadcasts and exposés explaining how subtle elemental shifts (Panch-Tattva) harmonize troubled commercial properties without breaking a single brick.',
-      icon: 'fa-tv'
-    },
-    {
-      id: 'agnibaan',
-      category: 'DAILY PRESS',
-      name: 'Agnibaan',
-      badgeBg: 'bg-[#faf3e8]',
-      badgeTextColor: 'text-[#a66224]',
-      subtitle: 'Renowned Hindi National Daily Newspaper',
-      headline: 'Comprehensive Editorials on Planetary Transits & Vedic Remedies',
-      description: 'Published insightful columns guiding the public on authentic Parashari remedies, breaking common astrological superstitions, and accurate Muhurat timing.',
-      icon: 'fa-file-lines'
-    },
-    {
-      id: 'janta-se-rishta',
-      category: 'DAILY PRESS',
-      name: 'Janta Se Rishta',
-      badgeBg: 'bg-[#faf3e8]',
-      badgeTextColor: 'text-[#a66224]',
-      subtitle: 'Prominent National Hindi News Daily',
-      headline: 'Special Features on Spiritual Mentorship & Conscious Living',
-      description: 'Profiled Acharya Alok’s journey and his mission to make Vedic sciences practical, compassionate, and empowering for families and students across the nation.',
-      icon: 'fa-bullhorn'
-    }
-  ];
 
+  readonly appearances: PressArticle[] = [
+  {
+    id: 'p1',
+    publisher: 'Zee News',
+    logoType: 'zeenews',
+    editionTag: 'विशेष चुनावी विश्लेषण',
+    category: 'Electoral Astropolitics',
+    headline: 'ज्‍योतिष के मुताबिक जानें किसके सिर सजेगा ताज? मतगणना से पहले जानें यूपी के नतीजे!',
+    author: 'Acharya Alok Awasthi',
+    topicTag: 'UP Elections 2022',
+    readTime: '4 Min Read'
+  },
+  {
+    id: 'p2',
+    publisher: 'Zee News',
+    logoType: 'zeenews',
+    editionTag: 'ग्रहीय गोचर विश्लेषण',
+    category: 'Shani Transit Shastra',
+    headline: "13 दिन बाद 'अस्‍त' शनि बदलेंगे इन लोगों की किस्‍मत, देंगे तगड़ा लाभ और तरक्‍की",
+    author: 'Acharya Alok Awasthi',
+    topicTag: 'Saturn Combust Transit',
+    readTime: '3 Min Read'
+  },
+  {
+    id: 'p3',
+    publisher: 'Zee News',
+    logoType: 'zeenews',
+    editionTag: 'दाम्पत्य एवं सम्बंध',
+    category: 'Vedic Relationship Dynamics',
+    headline: '2022 में रिश्‍तों के मामले में बहुत सावधान रहें इस राशि के लोग, बिखर सकती है जिंदगी',
+    author: 'Acharya Alok Awasthi',
+    topicTag: 'Kundali Matching & Venus',
+    readTime: '5 Min Read'
+  },
+  {
+    id: 'p4',
+    publisher: 'Agniban',
+    logoType: 'agniban',
+    editionTag: 'अंक प्रज्ञा स्तम्भ',
+    category: 'Ank Vidya & Health Audit',
+    headline: 'होगा बड़ा धन लाभ या घेरेगी बीमारी? जन्‍म तारीख से जानें आपके लिए कैसा रहेगा फरवरी',
+    author: 'Acharya Alok Awasthi',
+    topicTag: 'Numerological Forecaster',
+    readTime: '4 Min Read'
+  },
+  {
+    id: 'p5',
+    publisher: 'Janta Se Rishta',
+    logoType: 'jantaserishta',
+    editionTag: 'वार्षिक राशि गोचर',
+    category: 'Rashi Transit Chronicle',
+    headline: '2022: कन्‍या राशि वालों के लिए करियर में अच्‍छा रहेगा',
+    author: 'Acharya Alok Awasthi',
+    topicTag: 'Virgo Professional Horizon',
+    readTime: '3 Min Read'
+  },
+  {
+    id: 'p6',
+    publisher: 'InKhabar',
+    logoType: 'inkhabar',
+    editionTag: 'वर्ण एवं मुहूर्त रहस्य',
+    category: 'Color Shastra & Culture',
+    headline: 'आलिया समेत इन एक्ट्रेसों ने नहीं पहना अपनी शादी में लाल लहंगा, जाने क्या है कारण',
+    author: 'Acharya Alok Awasthi',
+    topicTag: 'Sacred Hue Psychology',
+    readTime: '4 Min Read'
+  },
+  {
+    id: 'p7',
+    publisher: 'Zee News',
+    logoType: 'zeenews',
+    editionTag: 'मौलिक पराशरीय सिद्धांत',
+    category: 'Classical Parampara Doctrines',
+    headline: 'हर व्‍यक्ति की होती हैं एक नहीं तीन राशियां, जानें कब आती है कौनसी काम',
+    author: 'Acharya Alok Awasthi',
+    topicTag: 'Sun, Moon & Lagna',
+    readTime: '6 Min Read'
+  },
+  {
+    id: 'p8',
+    publisher: 'Zee News',
+    logoType: 'zeenews',
+    editionTag: 'मेदिनी वित्तीय समीक्षा',
+    category: 'Mundane Economic Astrology',
+    headline: 'मिडिल क्‍लास, निवेशकों, किचन को लग सकता बड़ा झटका, ज्‍योतिष की नजर से जानें बजट 2022',
+    author: 'Acharya Alok Awasthi',
+    topicTag: 'National Budget Forensics',
+    readTime: '5 Min Read'
+  }
+];
   readonly activeRole = computed(() => {
     return this.masterRoles.find(r => r.id === this.activeRoleId()) ?? this.masterRoles[0];
   });

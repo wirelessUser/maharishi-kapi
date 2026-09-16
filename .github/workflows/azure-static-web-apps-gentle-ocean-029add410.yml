@@ -26,11 +26,11 @@ jobs:
         env:
           NODE_VERSION: '22.22.3'
         with:
-          azure_static_web_apps_api_token: ${{ secrets.AZURE_STATIC_WEB_APPS_API_TOKEN_GENTLE_OCEAN_029ADD410 }}
+          azure_static_web_apps_api_token: ${{ secrets.AZURE_STATIC_WEB_APPS_API_TOKEN }}
           action: "upload"
           app_location: "/"
           api_location: ""
-          output_location: "dist/maharishi-kapi/browser" # यदि Angular 16 या उससे पुराना है तो "dist/maharishi-kapi" का उपयोग करें
+          output_location: "dist/maharishi-kapi/browser"
 
   close_pull_request_job:
     if: github.event_name == 'pull_request' && github.event.action == 'closed'

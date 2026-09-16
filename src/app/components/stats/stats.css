@@ -1,0 +1,23 @@
+/* Continuous 60fps Marquee Animation with GPU Acceleration */
+@keyframes sacredMarquee {
+  0% {
+    transform: translate3d(0, 0, 0);
+  }
+  100% {
+    transform: translate3d(-50%, 0, 0);
+  }
+}
+
+.animate-sacred-marquee {
+  display: flex;
+  width: max-content;
+  will-change: transform;
+  animation: sacredMarquee 38s linear infinite;
+}
+
+/* On mobile screens, slightly faster scroll rate for better visual cadence */
+@media (max-width: 640px) {
+  .animate-sacred-marquee {
+    animation-duration: 28s;
+  }
+}

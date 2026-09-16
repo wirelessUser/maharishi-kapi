@@ -1,0 +1,130 @@
+<section class="py-20 sm:py-28 bg-gradient-to-b from-[#faf8f5] via-[#faf7f2] to-[#f5ede2] border-b border-[#e8dac5] relative overflow-hidden font-sans">
+    
+    <!-- Sacred Ambient Yantra Matrix & Solar Glow -->
+    <div class="absolute inset-0 bg-[radial-gradient(#c2a275_1.2px,transparent_1.2px)] [background-size:28px_28px] opacity-25 pointer-events-none"></div>
+    <div class="absolute -top-32 right-1/4 w-[600px] h-[500px] bg-gradient-to-b from-[#fcd34d]/20 via-[#fb923c]/15 to-transparent rounded-full blur-[130px] pointer-events-none"></div>
+
+    <div class="container mx-auto px-4 max-w-7xl relative z-10">
+        
+        <!-- ========================================================================= -->
+        <!-- 1. SECTION HEADER & BRASS NAVIGATION CONTROLS                             -->
+        <!-- ========================================================================= -->
+        <div class="flex flex-col md:flex-row md:items-end md:justify-between gap-6 mb-12 sm:mb-16 border-b border-[#e8dac5] pb-6">
+            <div class="max-w-2xl">
+                <div class="inline-flex items-center gap-2 text-[#8c5324] font-mono text-[10px] uppercase tracking-[0.28em] font-bold mb-3 px-4 py-1.5 rounded-full bg-white/85 border border-[#d8c3a5] shadow-2xs">
+                    <span class="text-[#d97706] animate-pulse">❖</span>
+                    <span>शिष्य परम्परा • CERTIFIED GURUKUL PRACTITIONERS</span>
+                    <span class="text-[#d97706] animate-pulse">❖</span>
+                </div>
+
+                <h2 class="text-3xl sm:text-4xl md:text-5xl font-serif font-black text-[#3a2717] tracking-tight leading-[1.12]">
+                    Trained by Acharya Alok Awasthi
+                </h2>
+
+                <p class="text-[#685546] text-xs sm:text-sm mt-3 leading-relaxed font-normal max-w-xl">
+                    Senior practitioners rigorously mentored under his direct Guru-Shishya parampara, applying authentic Shastric mathematics to counsel seekers worldwide.
+                </p>
+            </div>
+
+            <!-- Brass Navigation Chevron Controls -->
+            <div class="flex items-center gap-3 shrink-0">
+                <button 
+                    type="button" 
+                    (click)="scroll(-1)" 
+                    aria-label="Previous consultant" 
+                    class="w-11 h-11 rounded-full bg-white hover:bg-[#8c5324] text-[#8c5324] hover:text-white border-2 border-[#d8c3a5] hover:border-[#8c5324] flex items-center justify-center transition-all shadow-2xs hover:shadow-xs active:scale-95 cursor-pointer">
+                    <i class="fa-solid fa-arrow-left text-xs"></i>
+                </button>
+                
+                <button 
+                    type="button" 
+                    (click)="scroll(1)" 
+                    aria-label="Next consultant" 
+                    class="w-11 h-11 rounded-full bg-white hover:bg-[#8c5324] text-[#8c5324] hover:text-white border-2 border-[#d8c3a5] hover:border-[#8c5324] flex items-center justify-center transition-all shadow-2xs hover:shadow-xs active:scale-95 cursor-pointer">
+                    <i class="fa-solid fa-arrow-right text-xs"></i>
+                </button>
+            </div>
+        </div>
+
+        <!-- ========================================================================= -->
+        <!-- 2. HORIZONTAL PRACHARYA CARDS TRACK                                       -->
+        <!-- ========================================================================= -->
+        <div #track class="flex gap-6 sm:gap-7 overflow-x-auto snap-x snap-mandatory hide-scrollbar scroll-smooth pb-6 pt-2">
+            @for (consultant of consultants; track consultant.key) {
+                
+                <article class="consultant-card snap-start shrink-0 w-[270px] sm:w-[290px] md:w-[315px] bg-[#fffdfa] rounded-[32px] border-2 border-[#e8dac5] hover:border-[#d97706] shadow-xs hover:shadow-xl transition-all duration-500 hover:-translate-y-2 flex flex-col justify-between overflow-hidden relative group">
+                    
+                    <!-- Antique Gilded Corner Filigrees -->
+                    <div class="absolute top-3 left-3 w-4 h-4 border-t border-l border-[#cbb391] pointer-events-none z-30"></div>
+                    <div class="absolute top-3 right-3 w-4 h-4 border-t border-r border-[#cbb391] pointer-events-none z-30"></div>
+
+                    <div>
+                        <!-- Top Photographic Vignette with Sheen Sweep -->
+                        <div class="relative aspect-[4/5] overflow-hidden bg-[#f5ede2] border-b border-[#e8dac5]">
+                            <img [src]="consultant.photo" 
+                                 [alt]="consultant.name" 
+                                 class="w-full h-full object-cover object-top filter contrast-105 group-hover:scale-106 transition-transform duration-1000 ease-out">
+                            
+                            <!-- Deep Saffron & Warm Espresso Vignette Overlay -->
+                            <div class="absolute inset-0 bg-gradient-to-t from-[#2c1d11] via-[#2c1d11]/30 to-transparent"></div>
+
+                            <!-- Glossy Light Sheen Sweep -->
+                            <div class="sheen-sweep z-10"></div>
+
+                            <!-- Devanagari Sequence Stamp -->
+                            <span class="absolute top-3.5 left-3.5 font-serif font-black text-xs text-amber-200 bg-black/40 backdrop-blur-xs px-2.5 py-0.5 rounded-full border border-white/20 z-20">
+                                {{ consultant.devanagariNum }}
+                            </span>
+
+                            <!-- Experience Pill Badge -->
+                            <span class="absolute top-3.5 right-3.5 bg-white/95 backdrop-blur-md text-[#8c5324] text-[8.5px] font-mono font-bold uppercase tracking-wider px-2.5 py-1 rounded-full border border-[#e8dac5] shadow-2xs z-20">
+                                {{ consultant.experience }}
+                            </span>
+
+                            <!-- Bottom Photo Location Banner -->
+                            <div class="absolute bottom-3 inset-x-4 flex items-center justify-between text-white text-[9.5px] font-mono z-20">
+                                <span class="text-amber-200 flex items-center gap-1">
+                                    <i class="fa-solid fa-location-dot text-[9px]"></i>
+                                    {{ consultant.location }}
+                                </span>
+                            </div>
+                        </div>
+
+                        <!-- Card Content Body -->
+                        <div class="p-5 sm:p-6 text-center">
+                            
+                            <!-- Sanskrit Discipline Tag -->
+                            <span class="text-[9.5px] font-mono text-[#d97706] uppercase tracking-widest font-bold block mb-1">
+                                {{ consultant.sanskritTag }}
+                            </span>
+
+                            <!-- Consultant Name -->
+                            <h3 class="font-serif font-bold text-lg sm:text-[19px] text-[#3a2717] leading-tight mb-2 group-hover:text-[#8c5324] transition-colors">
+                                {{ consultant.name }}
+                            </h3>
+
+                            <div class="w-8 h-[1px] bg-[#d8c3a5] mx-auto mb-2"></div>
+
+                            <!-- Specialization Role -->
+                            <p class="text-[#685546] text-xs font-serif italic leading-relaxed min-h-[36px]">
+                                "{{ consultant.specialization }}"
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- Bottom Booking Action Footer -->
+                    <div class="px-5 sm:px-6 pb-6 pt-2">
+                        <a routerLink="/services" 
+                           class="w-full py-3 rounded-full bg-[#fbf3e8] hover:bg-[#8c5324] text-[#8c5324] hover:text-white border border-[#e8dac5] hover:border-[#8c5324] text-[10.5px] font-mono font-bold uppercase tracking-widest transition-all duration-300 shadow-2xs flex items-center justify-center gap-2 cursor-pointer">
+                            <span>Book Consultation</span>
+                            <i class="fa-solid fa-arrow-right text-[9px]"></i>
+                        </a>
+                    </div>
+
+                </article>
+
+            }
+        </div>
+
+    </div>
+</section>

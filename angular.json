@@ -18,6 +18,7 @@
           "builder": "@angular/build:application",
           "options": {
             "browser": "src/main.ts",
+            
             "tsConfig": "tsconfig.app.json",
             "assets": [
               {
@@ -42,7 +43,7 @@
               "budgets": [
                 {
                   "type": "initial",
-                  "maximumWarning": "500kB",
+                  "maximumWarning": "750kB",
                   "maximumError": "1MB"
                 },
                 {
@@ -61,18 +62,21 @@
           },
           "defaultConfiguration": "production"
         },
-        "serve": {
-          "builder": "@angular/build:dev-server",
-          "configurations": {
-            "production": {
-              "buildTarget": "maharishi-kapi:build:production"
-            },
-            "development": {
-              "buildTarget": "maharishi-kapi:build:development"
-            }
-          },
-          "defaultConfiguration": "development"
-        },
+       "serve": {
+  "builder": "@angular/build:dev-server",
+  "options": {
+    "allowedHosts": ["escalator-bronze-fasting.ngrok-free.dev"]
+  },
+  "configurations": {
+    "production": {
+      "buildTarget": "maharishi-kapi:build:production"
+    },
+    "development": {
+      "buildTarget": "maharishi-kapi:build:development"
+    }
+  },
+  "defaultConfiguration": "development"
+},
         "test": {
           "builder": "@angular/build:unit-test"
         }

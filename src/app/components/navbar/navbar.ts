@@ -1,17 +1,28 @@
-import { Component, HostListener } from '@angular/core';
+import { Component, HostListener, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { RouterModule } from '@angular/router'; // <-- यह लाइन जोड़ें
+import { RouterModule } from '@angular/router';
+
 @Component({
   selector: 'app-navbar',
   standalone: true,
-  imports: [CommonModule,RouterModule],
-  templateUrl: './navbar.html'
+  imports: [CommonModule, RouterModule],
+  styleUrl: './navbar.css',
+  templateUrl: './navbar.html',
 })
 export class NavbarComponent {
-  isScrolled = false;
+  readonly isScrolled = signal<boolean>(false);
+  readonly mobileMenuOpen = signal<boolean>(false);
 
   @HostListener('window:scroll', [])
-  onWindowScroll() {
-    this.isScrolled = window.scrollY > 20;
+  onWindowScroll(): void {
+    this.isScrolled.set(window.scrollY > 20);
+  }
+
+  toggleMobileMenu(): void {
+    this.mobileMenuOpen.update((open) => !open);
+  }
+
+  closeMobileMenu(): void {
+    this.mobileMenuOpen.set(false);
   }
 }

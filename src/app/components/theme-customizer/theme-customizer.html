@@ -12,13 +12,13 @@
     }
 </style>
 
-<button id="customizer-toggle" (click)="togglePanel()" 
-    class="fixed top-1/2 right-0 -translate-y-1/2 bg-kapi-purple hover:bg-kapi-purpleHover text-white px-4 py-3 rounded-l-lg font-bold text-sm cursor-pointer z-[999998] shadow-lg flex items-center gap-2 border-none transition-transform">
+<button id="customizer-toggle" (click)="togglePanel()"
+    class="hidden lg:flex fixed top-1/2 right-0 -translate-y-1/2 bg-kapi-purple hover:bg-kapi-purpleHover text-white px-4 py-3 rounded-l-lg font-bold text-sm cursor-pointer z-[999998] shadow-lg items-center gap-2 border-none transition-transform">
     <i class="fa-solid fa-wand-magic-sparkles"></i> Build
 </button>
 
-<div id="wp-customizer" 
-    class="fixed top-0 w-[360px] h-screen bg-[#18181b] text-white z-[999999] overflow-y-auto transition-all duration-300 flex flex-col shadow-2xl"
+<div id="wp-customizer"
+    class="hidden lg:flex fixed top-0 w-[360px] h-screen bg-[#18181b] text-white z-[999999] overflow-y-auto transition-all duration-300 flex-col shadow-2xl"
     [ngClass]="isOpen ? 'right-0' : '-right-[360px]'">
     
     <div class="p-5 border-b border-[#3f3f46] bg-[#09090b] flex justify-between items-center">
@@ -57,6 +57,57 @@
             <button (click)="hideElement()" class="w-8 h-8 bg-red-500/20 text-red-400 rounded hover:bg-red-500 hover:text-white transition" title="Hide/Delete Element">
                 <i class="fa-solid fa-trash-can"></i>
             </button>
+        </div>
+
+        <div *ngIf="isImageLike" class="mb-6">
+            <div class="flex justify-between items-center mb-3">
+                <label class="block text-xs font-bold text-gray-400 uppercase tracking-widest"><i class="fa-solid fa-image mr-2"></i>Image Frame</label>
+                <button type="button" (click)="resetImageAdjustments()" class="text-[10px] font-bold text-kapi-gold hover:text-white transition"><i class="fa-solid fa-arrow-rotate-left mr-1"></i>Reset</button>
+            </div>
+            <div class="space-y-4 bg-[#27272a] p-3 rounded border border-[#3f3f46]">
+                <div>
+                    <label class="block text-[10px] text-gray-400 mb-2"><i class="fa-solid fa-arrows-up-down-left-right mr-1"></i>Focal Point — which part of the image shows</label>
+                    <div class="flex justify-between text-[9px] text-gray-500 mb-1">
+                        <span>Horizontal</span><span>{{ imageFocal.x }}%</span>
+                    </div>
+                    <input type="range" title="Focal point horizontal" min="0" max="100" step="1" [(ngModel)]="imageFocal.x"
+                        (input)="updateFocalPoint()" (change)="commitFocalPoint()"
+                        class="w-full accent-kapi-purple cursor-pointer mb-2">
+                    <div class="flex justify-between text-[9px] text-gray-500 mb-1">
+                        <span>Vertical</span><span>{{ imageFocal.y }}%</span>
+                    </div>
+                    <input type="range" title="Focal point vertical" min="0" max="100" step="1" [(ngModel)]="imageFocal.y"
+                        (input)="updateFocalPoint()" (change)="commitFocalPoint()"
+                        class="w-full accent-kapi-purple cursor-pointer">
+                </div>
+
+                <div class="pt-3 border-t border-[#3f3f46]">
+                    <div class="flex justify-between text-[10px] text-gray-400 mb-1">
+                        <span><i class="fa-solid fa-magnifying-glass-plus mr-1"></i>Zoom</span>
+                        <span>{{ imageZoom }}x</span>
+                    </div>
+                    <input type="range" title="Image zoom" min="1" max="3" step="0.05" [(ngModel)]="imageZoom"
+                        (input)="updateImageZoom()" (change)="commitImageZoom()"
+                        class="w-full accent-kapi-purple cursor-pointer">
+                </div>
+                <div>
+                    <div class="flex justify-between text-[10px] text-gray-400 mb-1">
+                        <span><i class="fa-solid fa-rotate mr-1"></i>Rotate</span>
+                        <span>{{ imageRotate }}°</span>
+                    </div>
+                    <input type="range" title="Image rotation" min="-180" max="180" step="1" [(ngModel)]="imageRotate"
+                        (input)="updateImageZoom()" (change)="commitImageZoom()"
+                        class="w-full accent-kapi-purple cursor-pointer">
+                </div>
+
+                <div class="pt-3 border-t border-[#3f3f46]">
+                    <label class="block w-full text-center bg-kapi-purple hover:bg-kapi-purpleHover text-white text-xs font-bold py-2.5 rounded cursor-pointer transition">
+                        <i class="fa-solid fa-upload mr-2"></i>Upload Replacement Image
+                        <input type="file" accept="image/*" class="hidden" (change)="uploadImage($event)">
+                    </label>
+                </div>
+            </div>
+            <p class="text-[10px] text-gray-500 mt-2">First drag <strong>Focal Point</strong> to pick which part of the source image is used, then <strong>Zoom</strong> to fill the frame exactly how you want.</p>
         </div>
 
         <div class="mb-6">

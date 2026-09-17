@@ -50,7 +50,7 @@ export class TrainedConsultants {
       name: 'Supriya Upadhyay',
       sanskritTag: 'कर्म एवं अर्थ प्रज्ञा',
       specialization: 'Career, Wealth & Dasha Strategist',
-      photo: 'https://mkvnstorage.blob.core.windows.net/trainedconsultaint/image-4.png',
+      photo: 'https://mkvnstorage.blob.core.windows.net/trainedconsultaint/Priya%20Upadhyay.png',
       experience: '11+ Years in Practice',
       location: 'Rishikesh, India',
     },

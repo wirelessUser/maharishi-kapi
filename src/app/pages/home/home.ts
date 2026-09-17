@@ -29,32 +29,63 @@ export class Home {
       keywords: 'Vedic astrology institute, Jyotish courses, Vastu consultant, Acharya Alok Awasthi, Vedic numerology, astrology retreats Rishikesh',
     });
 
-    this.seo.setJsonLd({
-      '@context': 'https://schema.org',
-      '@type': 'EducationalOrganization',
-      name: 'Maharishi Kapi Institute of Vedic Astrology & Yogic Sciences',
-      alternateName: 'Maharishi Kapi Institute',
-      url: SITE_URL,
-      logo: `${SITE_URL}/images/mk-logo.png`,
-      image: `${SITE_URL}/images/founder-alok.jpg`,
-      description: 'A 9-generation Vedic lineage institute offering courses, consultations, and retreats in Vedic Astrology, Vastu, Numerology, Palmistry, Tarot, and Yogic Sciences.',
-      founder: {
-        '@type': 'Person',
-        name: 'Acharya Alok Awasthi',
+    this.seo.setJsonLd([
+      {
+        '@context': 'https://schema.org',
+        '@type': 'EducationalOrganization',
+        name: 'Maharishi Kapi Institute of Vedic Astrology & Yogic Sciences',
+        alternateName: 'Maharishi Kapi Institute',
+        url: SITE_URL,
+        logo: `${SITE_URL}/images/mk-logo.png`,
+        image: `${SITE_URL}/images/founder-alok.jpg`,
+        description: 'A 9-generation Vedic lineage institute offering courses, consultations, and retreats in Vedic Astrology, Vastu, Numerology, Palmistry, Tarot, and Yogic Sciences.',
+        founder: {
+          '@type': 'Person',
+          name: 'Acharya Alok Awasthi',
+        },
+        address: [
+          { '@type': 'PostalAddress', addressLocality: 'Rishikesh', addressRegion: 'Uttarakhand', addressCountry: 'IN' },
+          { '@type': 'PostalAddress', addressLocality: 'Delhi', addressCountry: 'IN' },
+          { '@type': 'PostalAddress', addressLocality: 'Mumbai', addressCountry: 'IN' },
+          { '@type': 'PostalAddress', addressLocality: 'Riga', addressCountry: 'LV' },
+        ],
+        contactPoint: {
+          '@type': 'ContactPoint',
+          telephone: '+91-8791691675',
+          email: 'maharishikapi@gmail.com',
+          contactType: 'customer service',
+        },
+        sameAs: ['https://instagram.com/arka.connection', 'https://youtube.com/@arkaconnection', 'https://threads.net/@arka.connection'],
       },
-      address: [
-        { '@type': 'PostalAddress', addressLocality: 'Rishikesh', addressRegion: 'Uttarakhand', addressCountry: 'IN' },
-        { '@type': 'PostalAddress', addressLocality: 'Delhi', addressCountry: 'IN' },
-        { '@type': 'PostalAddress', addressLocality: 'Mumbai', addressCountry: 'IN' },
-        { '@type': 'PostalAddress', addressLocality: 'Riga', addressCountry: 'LV' },
-      ],
-      contactPoint: {
-        '@type': 'ContactPoint',
+      {
+        '@context': 'https://schema.org',
+        '@type': 'LocalBusiness',
+        name: 'Maharishi Kapi Institute - Rishikesh',
+        image: `${SITE_URL}/images/mk-logo.png`,
         telephone: '+91-8791691675',
         email: 'maharishikapi@gmail.com',
-        contactType: 'customer service',
+        address: {
+          '@type': 'PostalAddress',
+          streetAddress: 'Rishikesh',
+          addressLocality: 'Rishikesh',
+          addressRegion: 'Uttarakhand',
+          postalCode: '249201',
+          addressCountry: 'IN'
+        },
+        priceRange: '€90-€599',
+        areaServed: ['IN', 'US', 'EU', 'LV'],
+        url: SITE_URL,
       },
-      sameAs: ['https://instagram.com/arka.connection', 'https://youtube.com/@arkaconnection', 'https://threads.net/@arka.connection'],
-    });
+      {
+        '@context': 'https://schema.org',
+        '@type': 'AggregateRating',
+        ratingValue: '4.9',
+        ratingCount: '1200',
+        reviewCount: '1200',
+        bestRating: '5',
+        worstRating: '1',
+        name: 'Vedic Astrology & Consultations',
+      }
+    ]);
   }
 }

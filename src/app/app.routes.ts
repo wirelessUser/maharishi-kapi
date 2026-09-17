@@ -12,16 +12,16 @@ import { ResidentialPage } from './residential-page/residential-page';
 import { LibraryPage } from './kapi-library-page/kapi-library-page';
 
 export const routes: Routes = [
-  { path: '', component: Home },
+  { path: '', component: Home, pathMatch: 'full' }, // <-- ADD pathMatch: 'full' HERE
   { path: 'courses', component: CoursesPage },
   { path: 'courses/:slug', component: CourseDetailPage },
   { path: 'services', component: ServicesPage },
   { path: 'about', component: AboutPage },
   { path: 'blog', component: BlogPage },
   { path: 'retreats', component: RetreatsPage },
-  {path:'Fundraise',component:FundraiserPage},
+  { path: 'Fundraise', component: FundraiserPage },
   { path: 'retreats/:slug', component: RetreatDetailPage },
-  {path:'library',component:LibraryPage},
-  {path:'residential',component:ResidentialPage},
-  { path: '**', redirectTo: '' } // अगर कोई गलत URL डाले तो होम पेज पर ले जाओ
+  { path: 'library', component: LibraryPage },
+  { path: 'residential', component: ResidentialPage },
+  { path: '**', redirectTo: '' }
 ];

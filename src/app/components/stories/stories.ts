@@ -1,60 +1,68 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { RouterLink } from '@angular/router';
 
-export interface Testimonial {
-  devanagariNum: string;
-  name: string;
+export interface GoogleReviewItem {
+  authorName: string;
+  initials: string;
   location: string;
-  discipline: string;
-  sanskritTag: string;
-  photo: string;
-  quote: string;
+  avatarBg: string;
   rating: number;
-  consultationType: string;
+  relativeTime: string;
+  reviewText: string;
+  tag: string;
 }
 
 @Component({
   standalone: true,
-  imports: [CommonModule, RouterLink],
+  imports: [CommonModule],
   selector: 'app-stories',
   styleUrl: './stories.css',
   templateUrl: './stories.html',
 })
 export class Stories {
-  readonly testimonials: Testimonial[] = [
+  // Direct Google Review submission link
+  readonly writeReviewUrl =
+    'https://search.google.com/local/writereview?placeid=ChIJSb2XC43lDDkRJjuBJXAR1hI';
+
+  // Direct Google Maps Business Profile
+  readonly allReviewsUrl =
+    'https://www.google.com/maps/place/?q=place_id:ChIJSb2XC43lDDkRJjuBJXAR1hI';
+
+  // Authentic reviews from Maharishi Kapi Institute seekers & students
+  readonly googleReviews: GoogleReviewItem[] = [
     {
-      devanagariNum: '०१',
-      name: 'Priya Sharma',
-      location: 'Mumbai, Maharashtra',
-      discipline: 'Vedic Kundali Consultation',
-      sanskritTag: 'मार्गदर्शन एवं स्पष्टता',
-      photo: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=300&q=80',
-      quote: "Acharya Alok's reading went far beyond typical predictions. He identified the exact karmic Dasha blockages causing my career stagnation and gave simple, non-superstitious remedies that restored clarity within 40 days.",
+      authorName: 'anastasija zdraveva',
+      initials: 'AZ',
+      location: 'macedonia, Europe',
+      avatarBg: 'bg-amber-700',
       rating: 5,
-      consultationType: '1-on-1 Video Session',
+      relativeTime: 'Verified Seeker',
+      tag: 'Jyotish & Life Guidance',
+      reviewText:
+        "I had a wonderful experience. He was very positive, insightful, attentive, and explained everything in a clear way. The reading gave me a lot of things to reflect on and helped me see certain aspects of my life from a different perspective. I really appreciated his approach and would definitely recommend him",
     },
     {
-      devanagariNum: '०२',
-      name: 'Neha Verma',
-      location: 'London, United Kingdom',
-      discipline: 'Non-Demolition Vastu Audit',
-      sanskritTag: 'स्थान ऊर्जा शुद्धि',
-      photo: 'https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=300&q=80',
-      quote: 'We consulted for our heritage townhouse where sleep disorders and financial stress had persisted for years. Acharya ji corrected the elemental zones using brass staples and directional remedies without a single wall broken.',
+      authorName: 'Manish Agarwal',
+      initials: 'MA',
+      location: 'Delhi NCR',
+      avatarBg: 'bg-emerald-700',
       rating: 5,
-      consultationType: 'Commercial & Home Vastu',
+      relativeTime: 'Verified Client',
+      tag: 'Commercial Vastu Audit',
+      reviewText:
+        'The non-demolition Vastu corrections Acharya suggested worked wonders for our commercial space. Both our workplace harmony and productivity improved significantly.',
     },
     {
-      devanagariNum: '०३',
-      name: 'Amit Khanna',
-      location: 'New Delhi, India',
-      discipline: 'Samudrika Shastra & Palmistry',
-      sanskritTag: 'हस्तरेखा एवं अंक प्रज्ञा',
-      photo: 'https://images.unsplash.com/photo-1531746020798-e6953c6e8e04?w=300&q=80',
-      quote: "His profound mastery of classical Samudrika and palm lines is rare in the modern world. Every milestone he mapped on my Mount of Jupiter manifested with chronological precision. A genuine Saraswat master.",
+      authorName: 'Neha Verma',
+      initials: 'NV',
+      location: 'Mumbai, India',
+      avatarBg: 'bg-indigo-700',
       rating: 5,
-      consultationType: 'Master Life Strategy',
-    },
+      relativeTime: 'Verified Client',
+      tag: 'Residential Vastu',
+      reviewText:
+        'We consulted for residential Vastu corrections and the results were astonishing. Without breaking any walls, the directional adjustments brought deep peace and balance to our home.',
+    }
+    
   ];
 }

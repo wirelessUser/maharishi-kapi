@@ -1,6 +1,7 @@
 import { Component, signal, computed } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterLink } from '@angular/router';
+import { SeoService, SITE_URL } from '../../services/seo.service';
 
 interface MasterRole {
   id: string;
@@ -276,5 +277,50 @@ export class AboutPage {
 
   selectLineageTab(tab: 'parampara' | 'tapasya' | 'ethics'): void {
     this.activeLineageTab.set(tab);
+  }
+
+  constructor(private readonly seo: SeoService) {
+    this.seo.setPageSeo({
+      title: 'About Maharishi Kapi Institute | Acharya Alok Awasthi, 9-Generation Vedic Lineage',
+      description: 'Meet Acharya Alok Awasthi — 25+ years of Vedic astrology, Vastu, and numerology expertise. 9-generation lineage, 12,000+ kundali audits, 1,200+ Vastu sanctifications, consulting 34+ countries.',
+      path: '/about',
+      keywords: 'Acharya Alok Awasthi, Vedic astrology expert, Vastu consultant, Jyotish lineage, medical astrology, spiritual mentor',
+      image: `${SITE_URL}/images/founder-alok.jpg`
+    });
+
+    this.seo.setJsonLd([
+      {
+        '@context': 'https://schema.org',
+        '@type': 'ProfilePage',
+        name: 'About Maharishi Kapi Institute',
+        mainEntity: {
+          '@type': 'Person',
+          name: 'Acharya Alok Awasthi',
+          image: `${SITE_URL}/images/founder-alok.jpg`,
+          jobTitle: 'Founder & Lead Instructor, Maharishi Kapi Institute',
+          description: '25+ years expertise in Vedic Astrology, Vastu, Numerology, Palmistry, and Yogic Sciences',
+          affiliation: {
+            '@type': 'EducationalOrganization',
+            name: 'Maharishi Kapi Institute of Vedic Astrology & Yogic Sciences',
+            url: SITE_URL,
+          },
+          sameAs: ['https://instagram.com/arka.connection', 'https://youtube.com/@arkaconnection', 'https://threads.net/@arka.connection'],
+          knowsAbout: ['Vedic Astrology', 'Vastu Shastra', 'Numerology', 'Palmistry', 'Ayurveda', 'Spiritual Sciences'],
+        }
+      },
+      {
+        '@context': 'https://schema.org',
+        '@type': 'Organization',
+        name: 'Maharishi Kapi Institute of Vedic Astrology & Yogic Sciences',
+        founder: {
+          '@type': 'Person',
+          name: 'Acharya Alok Awasthi',
+        },
+        foundingDate: '1990s',
+        description: '9-generation Vedic lineage institute offering courses, consultations, and retreats',
+        numberOfEmployees: '12000+',
+        url: SITE_URL,
+      }
+    ]);
   }
 }

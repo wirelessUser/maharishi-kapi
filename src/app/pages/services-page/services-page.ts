@@ -233,5 +233,44 @@ formatPrice(value: number): string {
       path: '/services',
       keywords: 'Vedic astrology consultation, online Vastu consultation, birth chart reading, numerology consultation',
     });
+
+    this.seo.setJsonLd({
+      '@context': 'https://schema.org',
+      '@type': 'FAQPage',
+      mainEntity: [
+        {
+          '@type': 'Question',
+          name: 'What is included in a Vedic astrology consultation?',
+          acceptedAnswer: {
+            '@type': 'Answer',
+            text: 'A personalized one-on-one reading of your birth chart covering karmic patterns, planetary influences, timing for major decisions, and practical guidance for life strategy.'
+          }
+        },
+        {
+          '@type': 'Question',
+          name: 'How long does a consultation session take?',
+          acceptedAnswer: {
+            '@type': 'Answer',
+            text: 'Most consultation sessions range from 60–90 minutes depending on the depth of analysis. All sessions are recorded in full HD for your lifetime access.'
+          }
+        },
+        {
+          '@type': 'Question',
+          name: 'Are consultations available online?',
+          acceptedAnswer: {
+            '@type': 'Answer',
+            text: 'Yes, all consultations are conducted via secure video call. You receive a full HD recording, personalized remedies report, and lifetime access to your session.'
+          }
+        },
+        {
+          '@type': 'Question',
+          name: 'What information do I need to provide?',
+          acceptedAnswer: {
+            '@type': 'Answer',
+            text: 'Please provide your birth date, exact birth time (if known), and birth location. More accurate information yields more precise readings.'
+          }
+        }
+      ]
+    });
   }
 }

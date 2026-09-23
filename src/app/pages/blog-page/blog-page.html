@@ -26,7 +26,7 @@
 
             <!-- Department Selector Tabs -->
             <nav aria-label="Magazine Departments" class="flex flex-wrap justify-center gap-2 border-t border-[#e8dac5] pt-5">
-                @for (category of categories; track category) {
+                @for (category of categories(); track category) {
                     <button
                         type="button"
                         (click)="selectCategory(category)"
@@ -53,6 +53,30 @@
     <!-- ========================================================================= -->
     <section id="magazine-desk-view" class="py-12 sm:py-16 px-3 sm:px-6 lg:px-8 max-w-7xl mx-auto">
         
+        @if (loadError(); as error) {
+            <div role="alert" class="rounded-[28px] border-2 border-[#e0b4a8] bg-[#fdf3ef] p-8 sm:p-12 text-center">
+                <p class="font-serif font-bold text-lg sm:text-xl text-[#7a2a1a] mb-2">The Journal could not be reached right now.</p>
+                <p class="text-xs sm:text-sm text-[#7d6756] mb-5">Please try again in a moment.</p>
+                @if (showTechnicalDetails) {
+                    <code class="block mb-5 text-[11px] font-mono text-[#7a2a1a] break-words">{{ error }}</code>
+                }
+                <button
+                    type="button"
+                    (click)="loadPage()"
+                    class="px-5 py-2 rounded-xl bg-gradient-to-r from-[#d97706] to-[#b45309] hover:brightness-105 text-white font-mono text-xs font-bold uppercase tracking-wider transition-all shadow-xs cursor-pointer active:scale-95"
+                >
+                    Try again
+                </button>
+            </div>
+        } @else if (loading()) {
+            <div role="status" aria-busy="true" class="rounded-[38px] border-2 border-[#e8dac5] bg-[#f2e9dc] py-24 px-6 text-center animate-pulse">
+                <p class="text-xs font-mono font-bold uppercase tracking-widest text-[#8c5324]">Opening the Journal…</p>
+            </div>
+        } @else if (allSelectableArticles().length === 0) {
+            <div class="rounded-[28px] border-2 border-[#e8dac5] bg-[#fffdfa] py-16 px-6 text-center">
+                <p class="font-serif italic text-[#7d6756]">No stories have been published in this department yet.</p>
+            </div>
+        } @else {
         <!-- Reader Deck Header Controls -->
         <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-6 px-2">
             <div class="flex items-center gap-3">
@@ -172,7 +196,7 @@
 
                             <!-- Author Card Strip -->
                             <div class="flex items-center gap-3.5 pb-5 mb-6 border-b border-[#f0e4d4]">
-                                <img [src]="a.authorPhoto" [alt]="a.author" class="w-11 h-11 rounded-full object-cover border-2 border-amber-400/60 shadow-xs">
+                                <app-author-avatar [name]="a.author" [photo]="a.authorPhoto" class="w-11 h-11 border-2 border-amber-400/60 shadow-xs" />
                                 <div>
                                     <p class="font-serif font-bold text-xs sm:text-sm text-[#3a2717]">{{ a.author }}</p>
                                     <p class="text-[10px] font-mono text-[#8c5324] uppercase tracking-wider">{{ a.date }} · Contributing Scholar</p>
@@ -180,32 +204,55 @@
                             </div>
 
                             <!-- Two-Column Editorial Text Flow with First-Letter Drop Cap -->
-                            <div class="grid grid-cols-1 md:grid-cols-2 gap-5 sm:gap-6 text-[#59493e] text-xs sm:text-[13px] leading-relaxed text-justify">
-                                <div>
-                                    <p class="magazine-column-first">
-                                        {{ a.deck }} In traditional Parampara study, sacred knowledge is never delivered as raw mechanical data. It requires the disciple to approach each cycle—whether an planetary transit, an elemental Vastu direction, or an Ayurvedic herbal brew—as a living reflection of Ishwara.
-                                    </p>
+                            @if (spreadContentError()) {
+                                <div role="alert" class="text-xs sm:text-[13px] text-[#7a2a1a] leading-relaxed">
+                                    <p>The full article could not be loaded just now.</p>
+                                    @if (showTechnicalDetails) {
+                                        <code class="block mt-1 text-[11px] font-mono break-words">{{ spreadContentError() }}</code>
+                                    }
                                 </div>
-                                <div>
-                                    <p>
-                                        When we understand the underlying geometry behind our personal karma, fear dissolves. What remains is calm, disciplined action (Karma Yoga) guided by the ancient sages. Reflect upon its deeper guidance within your own birth chart and daily sadhana.
-                                    </p>
+                            } @else if (spreadHtml() === null) {
+                                <p class="text-xs text-[#8c5324]/70 animate-pulse">Loading the full article…</p>
+                            } @else {
+                                <!-- Fixed-height page: text that doesn't fit flows into further columns to the right, one page at a time. -->
+                                <div class="article-viewport">
+                                    <!-- The body is Markdown rendered to HTML; .article-body (global styles) styles it and adds the drop cap. -->
+                                    <div
+                                        #articleColumns
+                                        class="article-columns article-body article-body--dropcap text-[#59493e] text-xs sm:text-[13px] leading-relaxed text-justify"
+                                        [style.--page]="textPage()"
+                                        [innerHTML]="spreadHtml()"
+                                    ></div>
                                 </div>
-                            </div>
+                            }
                         </div>
 
                         <!-- Right Folio Page Footer & Turn Edge -->
                         <div class="pt-6 mt-6 border-t border-[#f0e4d4] flex items-center justify-between text-[10px] font-mono text-[#8c5324]">
                             <span class="font-bold">PAGE 0{{ (activeSpreadIndex() * 2) + 2 }}</span>
-                            
-                            <button
-                                type="button"
-                                (click)="nextSpread()"
-                                class="hover:text-[#b45309] font-bold flex items-center gap-1.5 transition-colors cursor-pointer text-xs font-mono"
-                            >
-                                <span>Turn Leaf</span>
-                                <i class="fa-solid fa-arrow-right text-[10px]"></i>
-                            </button>
+
+                            <div class="flex items-center gap-4">
+                                @if (textPageCount() > 1) {
+                                    <button
+                                        type="button"
+                                        (click)="prevSpread()"
+                                        class="hover:text-[#b45309] transition-colors cursor-pointer"
+                                        aria-label="Previous page of this article"
+                                    >
+                                        <i class="fa-solid fa-arrow-left text-[10px]"></i>
+                                    </button>
+                                    <span class="font-bold" aria-live="polite">{{ textPage() + 1 }} / {{ textPageCount() }}</span>
+                                }
+
+                                <button
+                                    type="button"
+                                    (click)="nextSpread()"
+                                    class="hover:text-[#b45309] font-bold flex items-center gap-1.5 transition-colors cursor-pointer text-xs font-mono"
+                                >
+                                    <span>Turn Leaf</span>
+                                    <i class="fa-solid fa-arrow-right text-[10px]"></i>
+                                </button>
+                            </div>
                         </div>
 
                     </div>
@@ -213,6 +260,8 @@
                 </div>
 
             </article>
+        }
+
         }
 
         <!-- Magazine Leaf Quick-Selector Dots -->
@@ -246,8 +295,14 @@
                     <h3 class="text-xs font-mono font-bold text-[#8c5324] uppercase tracking-[0.25em]">
                         {{ selectedCategory() === 'All' ? 'Complete Magazine Archive' : selectedCategory() + ' Editorial Folios' }}
                     </h3>
-                    <span class="text-xs font-mono text-[#7d6756]">{{ filteredArticles().length }} Stories Bound</span>
+                    @if (!loading()) {
+                        <span class="text-xs font-mono text-[#7d6756]">{{ filteredArticles().length }} Stories Bound</span>
+                    }
                 </div>
+
+                @if (!loading() && !loadError() && filteredArticles().length === 0) {
+                    <p class="font-serif italic text-[#7d6756] text-center py-10">No further stories in this department yet.</p>
+                }
 
                 <!-- Grid of Animated Magazine Cards -->
                 <div class="grid grid-cols-1 sm:grid-cols-2 gap-8">
@@ -316,7 +371,7 @@
                                 
                                 <!-- Author Byline -->
                                 <div class="flex items-center gap-2.5">
-                                    <img [src]="article.authorPhoto" [alt]="article.author" class="w-7 h-7 rounded-full object-cover border border-[#d8c3a5]">
+                                    <app-author-avatar [name]="article.author" [photo]="article.authorPhoto" class="w-7 h-7 border border-[#d8c3a5]" />
                                     <div>
                                         <p class="font-serif font-bold text-xs text-[#3a2717] leading-none">{{ article.author }}</p>
                                         <p class="text-[9px] font-mono text-[#8c5324] uppercase mt-0.5">Contributing Scholar</p>
@@ -355,7 +410,7 @@
                     </div>
 
                     <ol class="space-y-5">
-                        @for (article of trending; track article.slug; let i = $index) {
+                        @for (article of trending(); track article.slug; let i = $index) {
                             <li>
                                 <div 
                                     (click)="openArticleInMagazine(article)"
@@ -404,11 +459,18 @@
                             >
                             <button 
                                 type="submit" 
-                                class="bg-gradient-to-r from-[#d97706] to-[#b45309] hover:brightness-105 text-white font-mono font-bold text-[11px] uppercase tracking-wider py-3 rounded-xl transition-all shadow-xs cursor-pointer active:scale-98"
+                                [disabled]="subscribing()"
+                                class="bg-gradient-to-r from-[#d97706] to-[#b45309] hover:brightness-105 text-white font-mono font-bold text-[11px] uppercase tracking-wider py-3 rounded-xl transition-all shadow-xs cursor-pointer active:scale-98 disabled:opacity-60 disabled:cursor-not-allowed"
                             >
-                                Subscribe to Journal
+                                {{ subscribing() ? 'Subscribing…' : 'Subscribe to Journal' }}
                             </button>
                         </form>
+
+                        @if (subscribeError(); as message) {
+                            <div role="alert" class="mt-3 p-2.5 bg-white border border-[#e0b4a8] text-[#7a2a1a] rounded-xl text-[11px] font-mono text-center">
+                                {{ message }}
+                            </div>
+                        }
 
                         @if (subscribed()) {
                             <div class="mt-3 p-2.5 bg-white border border-[#d97706] text-[#8c5324] rounded-xl text-[11px] font-mono text-center">
@@ -421,6 +483,143 @@
 
             </aside>
 
+        </div>
+    </section>
+
+    <!-- Internal Linking: Deepen Your Knowledge -->
+   <!-- ========================================================================= -->
+    <!-- 4. INTERNAL LINKING: TAKE YOUR PRACTICE FURTHER (CONSECRATED CHAMBERS)    -->
+    <!-- ========================================================================= -->
+    <section class="py-20 px-4 sm:px-6 lg:px-8 bg-gradient-to-b from-[#faf7f2] via-[#f5ede2]/50 to-[#faf7f2] border-t-2 border-[#e8dac5] relative overflow-hidden font-sans">
+        
+        <!-- Sacred Ambient Dot Grid Overlay -->
+        <div class="absolute inset-0 bg-[radial-gradient(#c2a275_1px,transparent_1px)] [background-size:24px_24px] opacity-20 pointer-events-none"></div>
+
+        <div class="container mx-auto max-w-6xl relative z-10">
+            
+            <!-- Section Header -->
+            <div class="text-center max-w-2xl mx-auto mb-14">
+                <div class="inline-flex items-center gap-2 bg-[#fffdfa] border border-[#e8dac5] px-3.5 py-1 rounded-full text-[9.5px] font-mono font-bold uppercase tracking-[0.25em] text-[#8c5324] mb-3 shadow-2xs">
+                    <span class="text-[#d97706]">❖</span>
+                    <span>Direct Preceptor Dispatches</span>
+                    <span class="text-[#d97706]">❖</span>
+                </div>
+                
+                <h2 class="text-3xl sm:text-4xl lg:text-5xl font-serif font-black text-[#3a2717] tracking-tight leading-tight">
+                    Take Your Practice Further
+                </h2>
+                
+                <p class="text-xs sm:text-sm text-[#7d6756] font-serif italic mt-2 leading-relaxed">
+                    Transition from casual reading into authentic Shastric lineage — certified masterclasses, confidential natal chart analysis, and silence retreats.
+                </p>
+            </div>
+
+            <!-- 3-Column Consecrated Chambers Grid -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 sm:gap-8">
+                
+                <!-- Card 1: Certified Courses -->
+                <div class="group relative bg-[#fffdfa] rounded-[28px] p-7 sm:p-8 border-2 border-[#e8dac5] hover:border-[#d97706] shadow-2xs hover:shadow-xl transition-all duration-500 hover:-translate-y-1.5 flex flex-col justify-between overflow-hidden">
+                    <!-- Corner Filigrees -->
+                    <div class="absolute top-3 left-3 w-3 h-3 border-t-2 border-l-2 border-[#caa578] pointer-events-none"></div>
+                    <div class="absolute top-3 right-3 w-3 h-3 border-t-2 border-r-2 border-[#caa578] pointer-events-none"></div>
+
+                    <div>
+                        <!-- Icon Crest -->
+                        <div class="w-12 h-12 rounded-2xl bg-[#faf6ee] border border-[#e8dac5] text-[#d97706] flex items-center justify-center text-lg mb-6 shadow-2xs group-hover:scale-105 group-hover:bg-[#d97706] group-hover:text-white transition-all duration-300">
+                            <i class="fa-solid fa-graduation-cap"></i>
+                        </div>
+
+                        <span class="text-[9px] font-mono font-bold uppercase tracking-[0.22em] text-[#8c5324] block mb-1">
+                            Gurukul Lineage
+                        </span>
+                        
+                        <h3 class="font-serif font-black text-xl text-[#3a2717] mb-3 group-hover:text-[#8c5324] transition-colors">
+                            Learn Live
+                        </h3>
+                        
+                        <p class="text-xs sm:text-[13px] text-[#685546] font-normal leading-relaxed mb-6">
+                            Enroll in comprehensive, certified Shastric curricula taught directly by Acharya Alok Awasthi with lifetime archive access.
+                        </p>
+                    </div>
+
+                    <a routerLink="/courses" class="inline-flex items-center justify-between w-full pt-4 border-t border-[#f0e4d4] text-[10.5px] font-mono font-bold uppercase tracking-wider text-[#8c5324] group-hover:text-[#d97706] transition-colors">
+                        <span>View Curricula</span>
+                        <i class="fa-solid fa-arrow-right text-[10px] transform group-hover:translate-x-1.5 transition-transform"></i>
+                    </a>
+
+                    <!-- Bottom Accent Rim -->
+                    <div class="absolute inset-x-0 bottom-0 h-[2px] bg-gradient-to-r from-transparent via-[#d97706] to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                </div>
+
+                <!-- Card 2: 1-on-1 Consultation -->
+                <div class="group relative bg-[#fffdfa] rounded-[28px] p-7 sm:p-8 border-2 border-[#e8dac5] hover:border-[#d97706] shadow-2xs hover:shadow-xl transition-all duration-500 hover:-translate-y-1.5 flex flex-col justify-between overflow-hidden">
+                    <!-- Corner Filigrees -->
+                    <div class="absolute top-3 left-3 w-3 h-3 border-t-2 border-l-2 border-[#caa578] pointer-events-none"></div>
+                    <div class="absolute top-3 right-3 w-3 h-3 border-t-2 border-r-2 border-[#caa578] pointer-events-none"></div>
+
+                    <div>
+                        <!-- Icon Crest -->
+                        <div class="w-12 h-12 rounded-2xl bg-[#faf6ee] border border-[#e8dac5] text-[#d97706] flex items-center justify-center text-lg mb-6 shadow-2xs group-hover:scale-105 group-hover:bg-[#d97706] group-hover:text-white transition-all duration-300">
+                            <i class="fa-solid fa-compass-drafting"></i>
+                        </div>
+
+                        <span class="text-[9px] font-mono font-bold uppercase tracking-[0.22em] text-[#8c5324] block mb-1">
+                            Confidential Counsel
+                        </span>
+                        
+                        <h3 class="font-serif font-black text-xl text-[#3a2717] mb-3 group-hover:text-[#8c5324] transition-colors">
+                            Personal Guidance
+                        </h3>
+                        
+                        <p class="text-xs sm:text-[13px] text-[#685546] font-normal leading-relaxed mb-6">
+                            Book a private 1-on-1 Shastric session for micro-divisional birth chart analysis, non-demolition Vastu remedies, and critical crossroads.
+                        </p>
+                    </div>
+
+                    <a routerLink="/services" class="inline-flex items-center justify-between w-full pt-4 border-t border-[#f0e4d4] text-[10.5px] font-mono font-bold uppercase tracking-wider text-[#8c5324] group-hover:text-[#d97706] transition-colors">
+                        <span>Book Consultation</span>
+                        <i class="fa-solid fa-arrow-right text-[10px] transform group-hover:translate-x-1.5 transition-transform"></i>
+                    </a>
+
+                    <!-- Bottom Accent Rim -->
+                    <div class="absolute inset-x-0 bottom-0 h-[2px] bg-gradient-to-r from-transparent via-[#d97706] to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                </div>
+
+                <!-- Card 3: Transformative Retreats -->
+                <div class="group relative bg-[#fffdfa] rounded-[28px] p-7 sm:p-8 border-2 border-[#e8dac5] hover:border-[#d97706] shadow-2xs hover:shadow-xl transition-all duration-500 hover:-translate-y-1.5 flex flex-col justify-between overflow-hidden">
+                    <!-- Corner Filigrees -->
+                    <div class="absolute top-3 left-3 w-3 h-3 border-t-2 border-l-2 border-[#caa578] pointer-events-none"></div>
+                    <div class="absolute top-3 right-3 w-3 h-3 border-t-2 border-r-2 border-[#caa578] pointer-events-none"></div>
+
+                    <div>
+                        <!-- Icon Crest -->
+                        <div class="w-12 h-12 rounded-2xl bg-[#faf6ee] border border-[#e8dac5] text-[#d97706] flex items-center justify-center text-lg mb-6 shadow-2xs group-hover:scale-105 group-hover:bg-[#d97706] group-hover:text-white transition-all duration-300">
+                            <i class="fa-solid fa-mountain-sun"></i>
+                        </div>
+
+                        <span class="text-[9px] font-mono font-bold uppercase tracking-[0.22em] text-[#8c5324] block mb-1">
+                            Himalayan Tapovan
+                        </span>
+                        
+                        <h3 class="font-serif font-black text-xl text-[#3a2717] mb-3 group-hover:text-[#8c5324] transition-colors">
+                            Immersive Retreats
+                        </h3>
+                        
+                        <p class="text-xs sm:text-[13px] text-[#685546] font-normal leading-relaxed mb-6">
+                            Join transformative retreats in Tapovan, Rishikesh to deepen Chitta Shuddhi, pranayama techniques, and inner meditative stillness.
+                        </p>
+                    </div>
+
+                    <a routerLink="/retreats" class="inline-flex items-center justify-between w-full pt-4 border-t border-[#f0e4d4] text-[10.5px] font-mono font-bold uppercase tracking-wider text-[#8c5324] group-hover:text-[#d97706] transition-colors">
+                        <span>Explore Retreats</span>
+                        <i class="fa-solid fa-arrow-right text-[10px] transform group-hover:translate-x-1.5 transition-transform"></i>
+                    </a>
+
+                    <!-- Bottom Accent Rim -->
+                    <div class="absolute inset-x-0 bottom-0 h-[2px] bg-gradient-to-r from-transparent via-[#d97706] to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                </div>
+
+            </div>
         </div>
     </section>
 

@@ -128,3 +128,170 @@ body {
   -webkit-mask-image: linear-gradient(to right, transparent, black 6%, black 94%, transparent);
   mask-image: linear-gradient(to right, transparent, black 6%, black 94%, transparent);
 }
+
+/* ------------------------------------------------------------------------- */
+/* Rich article text, shared by the public reader and the admin preview.     */
+/* Articles are Markdown rendered by core/utils/article-markdown.ts. Tailwind's */
+/* preflight strips heading, list and link styling, so what an author applies */
+/* in the editor is restored here. Body text colour, size and alignment come  */
+/* from the wrapper; columns, height and paging belong to the reader's own    */
+/* stylesheet, so none are set here.                                          */
+/* ------------------------------------------------------------------------- */
+.article-body {
+  overflow-wrap: anywhere;
+}
+
+.article-body > :first-child {
+  margin-top: 0;
+}
+
+.article-body p {
+  margin: 0 0 0.75rem;
+}
+
+.article-body h2,
+.article-body h3,
+.article-body h4,
+.article-body h5,
+.article-body h6 {
+  font-family: var(--font-serif);
+  font-weight: 800;
+  line-height: 1.25;
+  color: #3a2717;
+  text-align: left;
+  margin: 1rem 0 0.4rem;
+  break-after: avoid;
+}
+
+.article-body h2 { font-size: 1.6em; }
+.article-body h3 { font-size: 1.35em; }
+.article-body h4 { font-size: 1.15em; color: #8c5324; }
+.article-body h5,
+.article-body h6 { font-size: 1em; font-style: italic; color: #8c5324; }
+
+.article-body a {
+  color: #8c5324;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+  overflow-wrap: anywhere;
+}
+
+.article-body a:hover {
+  color: #d97706;
+}
+
+.article-body strong {
+  font-weight: 700;
+  color: #3a2717;
+}
+
+.article-body em {
+  font-style: italic;
+}
+
+.article-body ul,
+.article-body ol {
+  margin: 0 0 0.75rem;
+  padding-left: 1.25rem;
+  text-align: left;
+}
+
+.article-body ul { list-style: disc; }
+.article-body ol { list-style: decimal; }
+
+.article-body li {
+  margin-bottom: 0.25rem;
+}
+
+.article-body li > p {
+  margin: 0;
+}
+
+.article-body blockquote {
+  margin: 0.9rem 0;
+  padding: 0.25rem 0 0.25rem 0.9rem;
+  border-left: 3px solid #d97706;
+  font-family: var(--font-serif);
+  font-style: italic;
+  color: #68574a;
+  text-align: left;
+  break-inside: avoid;
+}
+
+.article-body blockquote p:last-child {
+  margin-bottom: 0;
+}
+
+.article-body hr {
+  border: 0;
+  border-top: 1px solid #e8dac5;
+  margin: 1rem 0;
+  break-inside: avoid;
+}
+
+.article-body img {
+  display: block;
+  max-width: 100%;
+  max-height: 16rem;
+  height: auto;
+  object-fit: contain;
+  margin: 0.6rem auto;
+  border-radius: 0.5rem;
+  break-inside: avoid;
+}
+
+.article-body code {
+  background: #f5ede2;
+  padding: 0.05rem 0.3rem;
+  border-radius: 0.25rem;
+  font-size: 0.9em;
+}
+
+.article-body pre {
+  margin: 0 0 0.75rem;
+  padding: 0.6rem 0.75rem;
+  background: #f5ede2;
+  border-radius: 0.5rem;
+  overflow-x: auto;
+  text-align: left;
+  break-inside: avoid;
+}
+
+.article-body pre code {
+  background: none;
+  padding: 0;
+}
+
+.article-body table {
+  width: 100%;
+  margin: 0 0 0.75rem;
+  border-collapse: collapse;
+  font-size: 0.9em;
+  text-align: left;
+  break-inside: avoid;
+}
+
+.article-body th,
+.article-body td {
+  border: 1px solid #e8dac5;
+  padding: 0.3rem 0.5rem;
+}
+
+.article-body th {
+  background: #f5ede2;
+  font-weight: 700;
+}
+
+/* Drop cap on the first paragraph, also when the article opens with a heading. Opt in with both classes:
+   class="article-body article-body--dropcap". */
+.article-body--dropcap > p:first-of-type::first-letter {
+  font-family: Georgia, 'Cinzel', serif;
+  font-size: 3.5rem;
+  line-height: 0.82;
+  float: left;
+  margin-right: 0.55rem;
+  margin-top: 0.15rem;
+  font-weight: 900;
+  color: #8c5324;
+  text-shadow: 1px 1px 0px rgba(217, 119, 6, 0.25);
+}

@@ -1,6 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, OnInit, inject, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterLink } from '@angular/router';
+import { AdminContentService } from '../../admin/features/admin-content.service';
 
 export interface ConsultationTier {
   id: string;
@@ -22,47 +23,39 @@ export interface ConsultationTier {
   styleUrl: './consultation.css',
   templateUrl: './consultation.html',
 })
-export class Consultation {
-  readonly consultations: ConsultationTier[] = [
-    {
-      id: 'vedic-astrology',
-      devanagariNum: '०१',
-      title: 'Personalized Vedic Chart Reading',
-      sanskritTag: 'कुण्डली दर्पण',
-      category: 'Vedic Jyotish',
-      image: '/images/founder-alok.jpg',
-      price: 90,
-      originalPrice: 102,
-      duration: '45 Mins • Private Video Session',
-      summary: 'A deep-dive reading of your Janma Kundali, Dasha timing, and practical remedial gem/mantra prescriptions.',
-    },
-    {
-      id: 'vastu-blueprint',
-      devanagariNum: '०२',
-      title: 'Commercial & Residential Vastu Blueprint™',
-      sanskritTag: 'स्थापत्य वास्तु चक्र',
-      category: 'Spatial Harmony',
-      image: '/images/founder-alok-nature.jpg',
-      price: 300,
-      originalPrice: 500,
-      duration: 'Comprehensive Remote Audit',
-      summary: 'Non-demolition elemental balancing for home or workspace to eliminate geopathic stress and financial stagnation.',
-    },
-    {
-      id: 'life-strategy',
-      devanagariNum: '०३',
-      title: 'Kapi Master Life Strategy Blueprint™',
-      sanskritTag: 'महा जीवन प्रज्ञा',
-      category: 'High-Stakes Advisory',
-      image: '/images/founder-alok-group.jpg',
-      price: 160,
-      originalPrice: 200,
-      duration: '90 Mins • Multi-Session Strategy',
-      summary: 'Our most comprehensive advisory — synthesizing horary astrology, numerology, and career/wealth roadmap planning.',
-    },
-  ];
+export class Consultation implements OnInit {
+  private readonly contentService = inject(AdminContentService);
 
- formatPrice(val: number): string {
-    return '€' + val.toLocaleString('de-DE'); // Formats as €55, €1.250, etc.
+  readonly consultations = signal<ConsultationTier[]>([]);
+
+  ngOnInit(): void {
+    this.loadConsultations();
+  }
+
+  private loadConsultations(): void {
+    this.contentService.getConsultations().subscribe({
+      next: (data: any) => {
+        const rawList = Array.isArray(data) ? data : (data?.$values || data?.items || []);
+        const mapped: ConsultationTier[] = rawList.map((item: any) => ({
+          id: item.id || item.Id || item.tierId,
+          devanagariNum: item.devanagariNum || item.DevanagariNum,
+          title: item.title || item.Title,
+          sanskritTag: item.sanskritTag || item.SanskritTag,
+          category: item.category || item.Category,
+          image: item.imageUrl || item.ImageUrl || item.image,
+          price: Number(item.price ?? item.Price ?? 0),
+          originalPrice: Number(item.originalPrice ?? item.OriginalPrice ?? 0),
+          duration: item.duration || item.Duration,
+          summary: item.summary || item.Summary
+        }));
+
+        this.consultations.set(mapped);
+      },
+      error: (err) => console.error('Consultations fetch error:', err)
+    });
+  }
+
+  formatPrice(val: number): string {
+    return '€' + (val || 0).toLocaleString('de-DE');
   }
 }

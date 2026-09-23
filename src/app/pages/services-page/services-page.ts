@@ -32,54 +32,80 @@ export class ServicesPage {
   }
 
   // NEW PALETTE: Rich, sophisticated Vedic jewel and earth tones instead of just saffron/gold.
-  readonly themes = [
-    {
-      // Tulsi / Forest Green
-      bgGradient: 'bg-gradient-to-br from-[#2f5243] via-[#213e31] to-[#14291f]',
-      badgeText: 'FLAGSHIP',
-      badgeClass: 'text-emerald-200 border-emerald-300/30 bg-white/10',
-      bottomTextClass: 'text-emerald-100/80'
-    },
-    {
-      // Midnight Indigo / Neela
-      bgGradient: 'bg-gradient-to-br from-[#294261] via-[#1c2e47] to-[#101c2e]',
-      badgeText: 'MOST POPULAR',
-      badgeClass: 'text-blue-200 border-blue-300/30 bg-white/10',
-      bottomTextClass: 'text-blue-100/80'
-    },
-    {
-      // Madder Root / Deep Rose
-      bgGradient: 'bg-gradient-to-br from-[#8a3346] via-[#6d2433] to-[#4a1520]',
-      badgeText: 'VIP GURU',
-      badgeClass: 'text-rose-200 border-rose-300/30 bg-white/10',
-      bottomTextClass: 'text-rose-100/80'
-    },
-    {
-      // Muted Peacock Teal
-      bgGradient: 'bg-gradient-to-br from-[#2c5f63] via-[#1d4447] to-[#122e30]',
-      badgeText: 'WELLNESS',
-      badgeClass: 'text-teal-200 border-teal-300/30 bg-white/10',
-      bottomTextClass: 'text-teal-100/80'
-    },
-    {
-      // Muted Earth / Clay (Sophisticated Terracotta, not bright orange)
-      bgGradient: 'bg-gradient-to-br from-[#8e4a3b] via-[#6d3529] to-[#4d2219]',
-      badgeText: 'STRATEGY',
-      badgeClass: 'text-orange-200 border-orange-300/30 bg-white/10',
-      bottomTextClass: 'text-orange-100/80'
-    },
-    {
-      // Rich Fig / Warm Plum
-      bgGradient: 'bg-gradient-to-br from-[#6b354d] via-[#4f2437] to-[#361624]',
-      badgeText: 'HARMONY',
-      badgeClass: 'text-pink-200 border-pink-300/30 bg-white/10',
-      bottomTextClass: 'text-pink-100/80'
-    }
-  ];
-
-  getTheme(index: number) {
-    return this.themes[index % this.themes.length];
+ 
+  // 6 Sacred Pastel Themes (Saffron Dawn, Sacred Tulsi, Ethereal Lavender, Lotus Blossom, Solar Topaz, and Celestial Azure)
+readonly cardThemes = [
+  {
+    bgGradient: 'bg-gradient-to-br from-[#fffbf5] via-[#fff7ed] to-[#fed7aa]/35',
+    borderColor: 'border-[#fdba74]/60 hover:border-[#ea580c]/60',
+    badgeClass: 'bg-[#fff7ed] text-[#c2410c] border-[#fdba74]',
+    badgeText: 'Jyotish',
+    iconBox: 'bg-white/90 text-[#ea580c] border-[#fed7aa]',
+    divider: 'bg-[#ea580c]/35',
+    accentText: 'text-[#c2410c]',
+    tagText: 'text-[#9a3412]',
+    shadow: 'shadow-[0_10px_25px_rgba(234,88,12,0.08)]'
+  },
+  {
+    bgGradient: 'bg-gradient-to-br from-[#f6fcf8] via-[#f0fdf4] to-[#bbf7d0]/35',
+    borderColor: 'border-[#86efac]/60 hover:border-[#16a34a]/60',
+    badgeClass: 'bg-[#f0fdf4] text-[#15803d] border-[#86efac]',
+    badgeText: 'Vaastu',
+    iconBox: 'bg-white/90 text-[#16a34a] border-[#bbf7d0]',
+    divider: 'bg-[#16a34a]/35',
+    accentText: 'text-[#15803d]',
+    tagText: 'text-[#14532d]',
+    shadow: 'shadow-[0_10px_25px_rgba(22,163,74,0.08)]'
+  },
+  {
+    bgGradient: 'bg-gradient-to-br from-[#faf8ff] via-[#f5f3ff] to-[#ddd6fe]/35',
+    borderColor: 'border-[#c4b5fd]/60 hover:border-[#7c3aed]/60',
+    badgeClass: 'bg-[#f5f3ff] text-[#6d28d9] border-[#c4b5fd]',
+    badgeText: 'Numerology',
+    iconBox: 'bg-white/90 text-[#7c3aed] border-[#ddd6fe]',
+    divider: 'bg-[#7c3aed]/35',
+    accentText: 'text-[#6d28d9]',
+    tagText: 'text-[#4c1d95]',
+    shadow: 'shadow-[0_10px_25px_rgba(124,58,237,0.08)]'
+  },
+  {
+    bgGradient: 'bg-gradient-to-br from-[#fff7f9] via-[#fdf2f8] to-[#fbcfe8]/35',
+    borderColor: 'border-[#f472b6]/60 hover:border-[#db2777]/60',
+    badgeClass: 'bg-[#fdf2f8] text-[#be185d] border-[#f472b6]',
+    badgeText: 'Harmony',
+    iconBox: 'bg-white/90 text-[#db2777] border-[#fbcfe8]',
+    divider: 'bg-[#db2777]/35',
+    accentText: 'text-[#be185d]',
+    tagText: 'text-[#831843]',
+    shadow: 'shadow-[0_10px_25px_rgba(219,39,119,0.08)]'
+  },
+  {
+    bgGradient: 'bg-gradient-to-br from-[#fffeea] via-[#fefce8] to-[#fef08a]/35',
+    borderColor: 'border-[#fde047]/60 hover:border-[#ca8a04]/60',
+    badgeClass: 'bg-[#fefce8] text-[#a16207] border-[#fde047]',
+    badgeText: 'Prashna',
+    iconBox: 'bg-white/90 text-[#ca8a04] border-[#fef08a]',
+    divider: 'bg-[#ca8a04]/35',
+    accentText: 'text-[#a16207]',
+    tagText: 'text-[#713f12]',
+    shadow: 'shadow-[0_10px_25px_rgba(202,138,4,0.08)]'
+  },
+  {
+    bgGradient: 'bg-gradient-to-br from-[#f7fbff] via-[#eff6ff] to-[#bfdbfe]/35',
+    borderColor: 'border-[#93c5fd]/60 hover:border-[#2563eb]/60',
+    badgeClass: 'bg-[#eff6ff] text-[#1d4ed8] border-[#93c5fd]',
+    badgeText: 'Remedies',
+    iconBox: 'bg-white/90 text-[#2563eb] border-[#bfdbfe]',
+    divider: 'bg-[#2563eb]/35',
+    accentText: 'text-[#1d4ed8]',
+    tagText: 'text-[#1e3a8a]',
+    shadow: 'shadow-[0_10px_25px_rgba(37,99,235,0.08)]'
   }
+];
+
+getTheme(index: number) {
+  return this.cardThemes[index % this.cardThemes.length];
+}
 
   readonly services: Service[] = [
     {
@@ -206,6 +232,45 @@ formatPrice(value: number): string {
       description: "Personal, fixed-price consultations with Acharya Alok Awasthi — Vedic astrology, Vastu, numerology, and life-strategy blueprints, delivered online.",
       path: '/services',
       keywords: 'Vedic astrology consultation, online Vastu consultation, birth chart reading, numerology consultation',
+    });
+
+    this.seo.setJsonLd({
+      '@context': 'https://schema.org',
+      '@type': 'FAQPage',
+      mainEntity: [
+        {
+          '@type': 'Question',
+          name: 'What is included in a Vedic astrology consultation?',
+          acceptedAnswer: {
+            '@type': 'Answer',
+            text: 'A personalized one-on-one reading of your birth chart covering karmic patterns, planetary influences, timing for major decisions, and practical guidance for life strategy.'
+          }
+        },
+        {
+          '@type': 'Question',
+          name: 'How long does a consultation session take?',
+          acceptedAnswer: {
+            '@type': 'Answer',
+            text: 'Most consultation sessions range from 60–90 minutes depending on the depth of analysis. All sessions are recorded in full HD for your lifetime access.'
+          }
+        },
+        {
+          '@type': 'Question',
+          name: 'Are consultations available online?',
+          acceptedAnswer: {
+            '@type': 'Answer',
+            text: 'Yes, all consultations are conducted via secure video call. You receive a full HD recording, personalized remedies report, and lifetime access to your session.'
+          }
+        },
+        {
+          '@type': 'Question',
+          name: 'What information do I need to provide?',
+          acceptedAnswer: {
+            '@type': 'Answer',
+            text: 'Please provide your birth date, exact birth time (if known), and birth location. More accurate information yields more precise readings.'
+          }
+        }
+      ]
     });
   }
 }

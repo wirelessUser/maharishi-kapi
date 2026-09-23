@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { CommonModule, NgTemplateOutlet } from '@angular/common';
 
-interface TickerItem {
+export interface TickerItem {
   type: 'stat' | 'logo';
   key: string;
   value?: string;
@@ -26,13 +26,13 @@ export class Stats {
       key: 'generations',
       value: '9',
       label: 'Generations of Lineage',
-      sanskritTag: 'नव पीढ़ी परम्परा',
+      sanskritTag: 'नव पीढ़ी परम्परा',
     },
     {
       type: 'logo',
-      key: 'inkhbar',
-      img: '/images/inkhbar-logo.png',
-      alt: 'InKhabar National Media',
+      key: 'zeenews',
+      img: '/images/zeenews-logo.png',
+      alt: 'Zee News',
     },
     {
       type: 'stat',
@@ -43,9 +43,9 @@ export class Stats {
     },
     {
       type: 'logo',
-      key: 'agniban',
-      img: '/images/agniban-logo.jpg',
-      alt: 'Dainik Agniban Press',
+      key: 'inkhabar',
+      img: '/images/inkhbar-logo.png',
+      alt: 'InKhabar',
     },
     {
       type: 'stat',
@@ -56,8 +56,27 @@ export class Stats {
     },
     {
       type: 'logo',
+      key: 'agniban',
+      img: 'https://www.maharishikapi.com/images/agniban-logo.jpg',
+      alt: 'Dainik Agniban',
+    },
+    {
+      type: 'stat',
+      key: 'publications',
+      value: '100+',
+      label: 'National Media Columns',
+      sanskritTag: 'वैदिक स्तम्भकार',
+    },
+    {
+      type: 'logo',
+      key: 'jantaserishta',
+      img: '/images/jantaserishta-logo.png',
+      alt: 'Janta Se Rishta',
+    },
+    {
+      type: 'logo',
       key: 'ims',
-      img: '/images/ims-logo.webp',
+      img: 'https://www.maharishikapi.com/images/ims-logo.webp',
       alt: 'IMS Ghaziabad Academic Partner',
       dark: true,
     },

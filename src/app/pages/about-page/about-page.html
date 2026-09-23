@@ -383,103 +383,260 @@
 
     </section>
 
-    <!-- ========================================================================= -->
-    <!-- 4. PRESS & PUBLIC APPEARANCES (UNIFIED CONTINUOUS SCROLLING SLIDER)       -->
-    <!-- ========================================================================= -->
-    <section class="py-24 bg-[#f5ede2]/80 border-y border-[#e8dac5] relative overflow-hidden">
+<!-- ========================================================================= -->
+<!-- 4. PRESS & PUBLIC APPEARANCES: LUXURY EDITORIAL ARCHIVES                 -->
+<!-- ========================================================================= -->
+<section class="py-24 sm:py-28 bg-gradient-to-b from-[#f7f2ea] via-[#faf7f2] to-[#ede3d4] border-y border-[#e2d2bd] relative overflow-hidden font-sans">
+    
+    <!-- Ambient Foil Glows & Sacred Matrix -->
+    <div class="absolute inset-0 bg-[radial-gradient(#b89765_1px,transparent_1px)] [background-size:32px_32px] opacity-20 pointer-events-none"></div>
+    <div class="absolute -top-40 left-1/2 -translate-x-1/2 w-[900px] h-[500px] bg-gradient-to-b from-[#fcd34d]/20 via-[#ea580c]/10 to-transparent rounded-full blur-[140px] pointer-events-none"></div>
+
+    <!-- Section Header -->
+    <div class="container mx-auto px-4 max-w-5xl mb-16 text-center relative z-10">
+        <div class="inline-flex items-center gap-2.5 text-[#8c5324] font-mono text-[10px] sm:text-[11px] uppercase tracking-[0.32em] font-bold mb-4 px-5 py-2 rounded-full bg-white/90 border border-[#d8c3a5] shadow-[0_4px_20px_rgba(180,130,70,0.08)]">
+            <span class="text-[#d97706] animate-pulse">❖</span>
+            <span>HISTORIC PRESS CITATIONS • सम्पादकीय स्तम्भ</span>
+            <span class="text-[#d97706] animate-pulse">❖</span>
+        </div>
+
+        <h2 class="text-3xl sm:text-5xl lg:text-6xl font-serif font-black text-[#2e1c10] tracking-tight leading-[1.12] mb-4">
+            Voices in National Media
+        </h2>
+
+        <div class="flex items-center justify-center gap-3 mb-5">
+            <div class="w-12 h-px bg-[#cbb391]"></div>
+            <span class="text-[#d97706] text-xs">✦</span>
+            <div class="w-12 h-px bg-[#cbb391]"></div>
+        </div>
+
+        <p class="text-[#685546] text-xs sm:text-sm max-w-2xl mx-auto leading-relaxed font-serif italic">
+            Chronological commentaries, mundane financial audits, and classical Shastric revelations authored by Acharya Alok Awasthi across premier national broadcast and news syndicates.
+        </p>
+    </div>
+
+    <!-- Infinite Scrolling Runway with Smooth Vignettes -->
+    <div class="relative w-full overflow-hidden group py-6">
         
-        <div class="container mx-auto px-4 max-w-6xl mb-12 text-center">
-            <span class="text-[#8c5324] font-mono text-[10px] tracking-[0.35em] uppercase font-bold block mb-2">MEDIA PUBLICATIONS &amp; ACADEMIC INVITATIONS</span>
-            <h2 class="text-3xl sm:text-5xl font-serif font-black text-[#4a3625]">Press &amp; Public Appearances</h2>
-            <div class="w-20 h-1 bg-[#8c5324] mx-auto mt-4 rounded-full"></div>
-            <p class="text-[#68574a] text-xs sm:text-sm max-w-2xl mx-auto mt-4">
-                National media houses (Zee News, InKhabar, Agnibaan, Janta Se Rishta) and premier academic universities (IMS Ghaziabad, GL Bajaj Institute) featuring Acharya Alok on mental wellness, Shastric horoscopy, and non-demolition Vastu.
-            </p>
-        </div>
+        <!-- Feathered Fade Out Edges -->
+        <div class="absolute left-0 inset-y-0 w-20 sm:w-44 bg-gradient-to-r from-[#f7f2ea] to-transparent z-20 pointer-events-none"></div>
+        <div class="absolute right-0 inset-y-0 w-20 sm:w-44 bg-gradient-to-l from-[#f7f2ea] to-transparent z-20 pointer-events-none"></div>
 
-        <!-- Infinite Scrolling Slide Track (Pause on Hover) -->
-        <div class="relative w-full overflow-hidden group py-4">
+        <!-- Animated Carousel Track -->
+        <div class="flex gap-7 animate-marquee group-hover:[animation-play-state:paused] w-max">
             
-            <!-- Left & Right Warm Gradient Fade Edges -->
-            <div class="absolute left-0 inset-y-0 w-16 sm:w-32 bg-gradient-to-r from-[#faf8f5] to-transparent z-20 pointer-events-none"></div>
-            <div class="absolute right-0 inset-y-0 w-16 sm:w-32 bg-gradient-to-l from-[#faf8f5] to-transparent z-20 pointer-events-none"></div>
-
-            <!-- Double-Track Marquee Wrapper -->
-            <div class="flex gap-6 animate-marquee group-hover:[animation-play-state:paused] w-max">
+            <!-- TRACK SET 1 -->
+            @for (item of appearances; track item.id + '-set1') {
                 
-                <!-- Slide Set 1 -->
-                @for (item of appearances; track item.id + '-1') {
-                    <div class="w-[340px] sm:w-[420px] rounded-[28px] bg-white p-7 border border-[#e8dac5] hover:border-[#8c5324] shadow-md flex flex-col justify-between transition-all duration-300 flex-shrink-0">
-                        <div>
-                            <div class="flex items-center justify-between mb-4">
-                                <span class="px-3 py-1 rounded-full text-[10px] font-mono font-bold tracking-widest uppercase border border-current {{ item.badgeBg }} {{ item.badgeTextColor }}">
-                                    {{ item.category }}
-                                </span>
-                                <i class="fa-solid {{ item.icon }} text-[#8c5324] text-sm"></i>
-                            </div>
+                <!-- Double-Border Designer Tablet -->
+                <div class="w-[330px] sm:w-[370px] h-[480px] p-2 rounded-[34px] bg-gradient-to-b from-[#ffffff] via-[#fbf7f0] to-[#f4ebe0] border border-[#e5d7c3] shadow-[0_14px_35px_rgba(140,83,36,0.08)] hover:shadow-[0_24px_50px_rgba(140,83,36,0.18)] transition-all duration-500 hover:-translate-y-2.5 flex-shrink-0 flex flex-col group/card relative">
+                    
+                    <!-- Inner Parchment Container -->
+                    <div class="w-full h-full bg-[#fffefd] rounded-[28px] border border-[#e8dbc7] p-6 sm:p-7 flex flex-col justify-between relative overflow-hidden">
+                        
+                        <!-- Antique Corner Filigrees -->
+                        <div class="absolute top-2.5 left-2.5 w-4 h-4 border-t-2 border-l-2 border-[#caa578] pointer-events-none"></div>
+                        <div class="absolute top-2.5 right-2.5 w-4 h-4 border-t-2 border-r-2 border-[#caa578] pointer-events-none"></div>
+                        <div class="absolute bottom-2.5 left-2.5 w-4 h-4 border-b-2 border-l-2 border-[#caa578] pointer-events-none"></div>
+                        <div class="absolute bottom-2.5 right-2.5 w-4 h-4 border-b-2 border-r-2 border-[#caa578] pointer-events-none"></div>
 
-                            <h3 class="text-2xl font-serif font-bold text-[#4a3625] mb-1">
-                                {{ item.name }}
+                        <!-- Top Header: Archival Folio Stamp & Time -->
+                        <div class="flex items-center justify-between pb-3 border-b border-[#f1e6d7] text-[9px] font-mono tracking-widest uppercase font-bold text-[#8c5324]">
+                            <span class="flex items-center gap-1.5">
+                                <span class="w-1.5 h-1.5 rounded-full bg-[#d97706]"></span>
+                                {{ item.editionTag }}
+                            </span>
+                            <span class="text-[#a5866d]">{{ item.readTime }}</span>
+                        </div>
+
+                        <!-- Publisher Badge Showcase Chamber -->
+                        <div class="h-28 flex items-center justify-center relative my-1">
+                            <div class="absolute inset-0 bg-[radial-gradient(#c2a275_1px,transparent_1px)] [background-size:12px_12px] opacity-25 rounded-2xl pointer-events-none"></div>
+
+                            <!-- ZEE NEWS -->
+                            @if (item.logoType === 'zeenews') {
+                                <div class="relative group-hover/card:scale-105 transition-transform duration-300">
+                                    <div class="w-[84px] h-[84px] rounded-full bg-gradient-to-tr from-[#990c0c] via-[#c71818] to-[#ea2a2a] p-1 shadow-[0_8px_20px_rgba(208,24,24,0.28)] flex items-center justify-center">
+                                        <div class="w-full h-full rounded-full border border-white/40 flex items-center justify-center">
+                                            <span class="text-white font-black font-sans tracking-tight text-[13px] drop-shadow-sm">ZEENEWS</span>
+                                        </div>
+                                    </div>
+                                    <span class="absolute -bottom-2 left-1/2 -translate-x-1/2 bg-[#2d1b0f] text-amber-200 text-[8px] font-mono uppercase px-2 py-0.5 rounded-full whitespace-nowrap shadow-2xs">
+                                        NATIONAL
+                                    </span>
+                                </div>
+                            }
+
+                            <!-- AGNIBAN -->
+                            @if (item.logoType === 'agniban') {
+                                <div class="flex flex-col items-center group-hover/card:scale-105 transition-transform duration-300">
+                                    <span class="font-serif font-black text-4xl text-[#bf1b1b] tracking-tight drop-shadow-2xs">
+                                        अग्निबाण
+                                    </span>
+                                    <div class="w-24 h-0.5 bg-gradient-to-r from-transparent via-[#bf1b1b]/50 to-transparent mt-1"></div>
+                                </div>
+                            }
+
+                            <!-- JANTA SE RISHTA -->
+                            @if (item.logoType === 'jantaserishta') {
+                                <div class="flex items-center gap-2.5 bg-gradient-to-r from-[#0d609d] to-[#0d7ac7] text-white px-4 py-2.5 rounded-xl shadow-[0_6px_18px_rgba(13,111,184,0.22)] border border-white/25 group-hover/card:scale-105 transition-transform duration-300">
+                                    <div class="w-7 h-7 rounded-lg bg-white text-[#0d6fb8] font-black text-base flex items-center justify-center shadow-xs">
+                                        J
+                                    </div>
+                                    <div class="text-left">
+                                        <span class="block text-sm font-black font-serif leading-none tracking-wide">जनता से रिश्ता</span>
+                                        <span class="block text-[8px] font-mono tracking-tight opacity-90 mt-0.5">jantaserishta.com</span>
+                                    </div>
+                                </div>
+                            }
+
+                            <!-- INKHABAR -->
+                            @if (item.logoType === 'inkhabar') {
+                                <div class="group-hover/card:scale-105 transition-transform duration-300 flex flex-col items-center">
+                                    <span class="text-[34px] font-black text-[#444444] font-sans tracking-tight lowercase">
+                                        in<span class="text-[#e11d48]">khabar</span>
+                                    </span>
+                                    <span class="text-[8px] font-mono tracking-[0.2em] uppercase text-[#888888] -mt-1">News Network</span>
+                                </div>
+                            }
+                        </div>
+
+                        <!-- Editorial Quote Strip (Headline) -->
+                        <div class="my-auto py-2 px-1 text-center relative">
+                            <span class="text-3xl text-[#caa578]/30 font-serif leading-none absolute -top-4 left-1/2 -translate-x-1/2 select-none">“</span>
+                            <h3 class="font-serif font-bold text-[#2b190c] text-[15px] sm:text-[16px] leading-[1.4] line-clamp-4 group-hover/card:text-[#8c5324] transition-colors relative z-10">
+                                {{ item.headline }}
                             </h3>
-                            <span class="text-xs text-[#8c5324] font-mono block mb-4">{{ item.subtitle }}</span>
-
-                            <div class="bg-[#faf8f5] p-4 rounded-2xl border border-[#e8dac5] mb-4">
-                                <p class="text-xs sm:text-sm font-serif italic text-[#5c432d] leading-relaxed">
-                                    "{{ item.headline }}"
-                                </p>
-                            </div>
-
-                            <p class="text-xs text-[#68574a] leading-relaxed">
-                                {{ item.description }}
-                            </p>
                         </div>
 
-                        <div class="mt-6 pt-4 border-t border-[#e8dac5] flex items-center justify-between text-[11px] text-[#8c5324] font-mono">
-                            <span>VERIFIED PUBLIC CITATION</span>
-                            <span>✦</span>
-                        </div>
-                    </div>
-                }
-
-                <!-- Duplicate Slide Set 2 (for seamless infinite loop) -->
-                @for (item of appearances; track item.id + '-2') {
-                    <div class="w-[340px] sm:w-[420px] rounded-[28px] bg-white p-7 border border-[#e8dac5] hover:border-[#8c5324] shadow-md flex flex-col justify-between transition-all duration-300 flex-shrink-0">
-                        <div>
-                            <div class="flex items-center justify-between mb-4">
-                                <span class="px-3 py-1 rounded-full text-[10px] font-mono font-bold tracking-widest uppercase border border-current {{ item.badgeBg }} {{ item.badgeTextColor }}">
-                                    {{ item.category }}
+                        <!-- Byline & Consecrated Seal Footer -->
+                        <div class="pt-4 border-t border-[#f1e6d7] flex flex-col items-center text-center">
+                            
+                            <!-- Acharya Alok Byline -->
+                            <div class="flex items-center gap-2 mb-1.5">
+                                <span class="w-4 h-px bg-[#caa578]"></span>
+                                <span class="text-[#2b190c] font-serif font-bold text-sm tracking-wide">
+                                    {{ item.author }}
                                 </span>
-                                <i class="fa-solid {{ item.icon }} text-[#8c5324] text-sm"></i>
+                                <span class="w-4 h-px bg-[#caa578]"></span>
                             </div>
 
-                            <h3 class="text-2xl font-serif font-bold text-[#4a3625] mb-1">
-                                {{ item.name }}
-                            </h3>
-                            <span class="text-xs text-[#8c5324] font-mono block mb-4">{{ item.subtitle }}</span>
-
-                            <div class="bg-[#faf8f5] p-4 rounded-2xl border border-[#e8dac5] mb-4">
-                                <p class="text-xs sm:text-sm font-serif italic text-[#5c432d] leading-relaxed">
-                                    "{{ item.headline }}"
-                                </p>
+                            <!-- Shastric Classification Pill -->
+                            <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#faf5ec] border border-[#e8dbc7] text-[9.5px] font-mono font-bold uppercase tracking-wider text-[#8c5324]">
+                                <span>{{ item.category }}</span>
+                                <span class="text-[#d97706]">✦</span>
+                                <span class="text-[#6e5542]">{{ item.topicTag }}</span>
                             </div>
 
-                            <p class="text-xs text-[#68574a] leading-relaxed">
-                                {{ item.description }}
-                            </p>
                         </div>
 
-                        <div class="mt-6 pt-4 border-t border-[#e8dac5] flex items-center justify-between text-[11px] text-[#8c5324] font-mono">
-                            <span>VERIFIED PUBLIC CITATION</span>
-                            <span>✦</span>
-                        </div>
                     </div>
-                }
 
-            </div>
+                </div>
+
+            }
+
+            <!-- TRACK SET 2 (Identical Duplicate for Seamless Endless Loop) -->
+            @for (item of appearances; track item.id + '-set2') {
+                
+                <div class="w-[330px] sm:w-[370px] h-[480px] p-2 rounded-[34px] bg-gradient-to-b from-[#ffffff] via-[#fbf7f0] to-[#f4ebe0] border border-[#e5d7c3] shadow-[0_14px_35px_rgba(140,83,36,0.08)] hover:shadow-[0_24px_50px_rgba(140,83,36,0.18)] transition-all duration-500 hover:-translate-y-2.5 flex-shrink-0 flex flex-col group/card relative">
+                    
+                    <div class="w-full h-full bg-[#fffefd] rounded-[28px] border border-[#e8dbc7] p-6 sm:p-7 flex flex-col justify-between relative overflow-hidden">
+                        
+                        <div class="absolute top-2.5 left-2.5 w-4 h-4 border-t-2 border-l-2 border-[#caa578] pointer-events-none"></div>
+                        <div class="absolute top-2.5 right-2.5 w-4 h-4 border-t-2 border-r-2 border-[#caa578] pointer-events-none"></div>
+                        <div class="absolute bottom-2.5 left-2.5 w-4 h-4 border-b-2 border-l-2 border-[#caa578] pointer-events-none"></div>
+                        <div class="absolute bottom-2.5 right-2.5 w-4 h-4 border-b-2 border-r-2 border-[#caa578] pointer-events-none"></div>
+
+                        <div class="flex items-center justify-between pb-3 border-b border-[#f1e6d7] text-[9px] font-mono tracking-widest uppercase font-bold text-[#8c5324]">
+                            <span class="flex items-center gap-1.5">
+                                <span class="w-1.5 h-1.5 rounded-full bg-[#d97706]"></span>
+                                {{ item.editionTag }}
+                            </span>
+                            <span class="text-[#a5866d]">{{ item.readTime }}</span>
+                        </div>
+
+                        <div class="h-28 flex items-center justify-center relative my-1">
+                            <div class="absolute inset-0 bg-[radial-gradient(#c2a275_1px,transparent_1px)] [background-size:12px_12px] opacity-25 rounded-2xl pointer-events-none"></div>
+
+                            @if (item.logoType === 'zeenews') {
+                                <div class="relative group-hover/card:scale-105 transition-transform duration-300">
+                                    <div class="w-[84px] h-[84px] rounded-full bg-gradient-to-tr from-[#990c0c] via-[#c71818] to-[#ea2a2a] p-1 shadow-[0_8px_20px_rgba(208,24,24,0.28)] flex items-center justify-center">
+                                        <div class="w-full h-full rounded-full border border-white/40 flex items-center justify-center">
+                                            <span class="text-white font-black font-sans tracking-tight text-[13px] drop-shadow-sm">ZEENEWS</span>
+                                        </div>
+                                    </div>
+                                    <span class="absolute -bottom-2 left-1/2 -translate-x-1/2 bg-[#2d1b0f] text-amber-200 text-[8px] font-mono uppercase px-2 py-0.5 rounded-full whitespace-nowrap shadow-2xs">
+                                        NATIONAL
+                                    </span>
+                                </div>
+                            }
+
+                            @if (item.logoType === 'agniban') {
+                                <div class="flex flex-col items-center group-hover/card:scale-105 transition-transform duration-300">
+                                    <span class="font-serif font-black text-4xl text-[#bf1b1b] tracking-tight drop-shadow-2xs">
+                                        अग्निबाण
+                                    </span>
+                                    <div class="w-24 h-0.5 bg-gradient-to-r from-transparent via-[#bf1b1b]/50 to-transparent mt-1"></div>
+                                </div>
+                            }
+
+                            @if (item.logoType === 'jantaserishta') {
+                                <div class="flex items-center gap-2.5 bg-gradient-to-r from-[#0d609d] to-[#0d7ac7] text-white px-4 py-2.5 rounded-xl shadow-[0_6px_18px_rgba(13,111,184,0.22)] border border-white/25 group-hover/card:scale-105 transition-transform duration-300">
+                                    <div class="w-7 h-7 rounded-lg bg-white text-[#0d6fb8] font-black text-base flex items-center justify-center shadow-xs">
+                                        J
+                                    </div>
+                                    <div class="text-left">
+                                        <span class="block text-sm font-black font-serif leading-none tracking-wide">जनता से रिश्ता</span>
+                                        <span class="block text-[8px] font-mono tracking-tight opacity-90 mt-0.5">jantaserishta.com</span>
+                                    </div>
+                                </div>
+                            }
+
+                            @if (item.logoType === 'inkhabar') {
+                                <div class="group-hover/card:scale-105 transition-transform duration-300 flex flex-col items-center">
+                                    <span class="text-[34px] font-black text-[#444444] font-sans tracking-tight lowercase">
+                                        in<span class="text-[#e11d48]">khabar</span>
+                                    </span>
+                                    <span class="text-[8px] font-mono tracking-[0.2em] uppercase text-[#888888] -mt-1">News Network</span>
+                                </div>
+                            }
+                        </div>
+
+                        <div class="my-auto py-2 px-1 text-center relative">
+                            <span class="text-3xl text-[#caa578]/30 font-serif leading-none absolute -top-4 left-1/2 -translate-x-1/2 select-none">“</span>
+                            <h3 class="font-serif font-bold text-[#2b190c] text-[15px] sm:text-[16px] leading-[1.4] line-clamp-4 group-hover/card:text-[#8c5324] transition-colors relative z-10">
+                                {{ item.headline }}
+                            </h3>
+                        </div>
+
+                        <div class="pt-4 border-t border-[#f1e6d7] flex flex-col items-center text-center">
+                            <div class="flex items-center gap-2 mb-1.5">
+                                <span class="w-4 h-px bg-[#caa578]"></span>
+                                <span class="text-[#2b190c] font-serif font-bold text-sm tracking-wide">
+                                    {{ item.author }}
+                                </span>
+                                <span class="w-4 h-px bg-[#caa578]"></span>
+                            </div>
+
+                            <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#faf5ec] border border-[#e8dbc7] text-[9.5px] font-mono font-bold uppercase tracking-wider text-[#8c5324]">
+                                <span>{{ item.category }}</span>
+                                <span class="text-[#d97706]">✦</span>
+                                <span class="text-[#6e5542]">{{ item.topicTag }}</span>
+                            </div>
+                        </div>
+
+                    </div>
+
+                </div>
+
+            }
 
         </div>
 
-    </section>
+    </div>
+
+</section>
 
     <!-- ========================================================================= -->
     <!-- 5. FINAL INVITATION CALL TO ACTION                                        -->

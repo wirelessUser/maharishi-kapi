@@ -1,0 +1,127 @@
+/* =========================================================================
+   AUTHENTIC MAHARISHI KAPI HEADER STYLES
+   ========================================================================= */
+
+/* 1. Saffron Apex Strip */
+.saffron-top-strip {
+  background-color: #ea580c; /* Exact rich saffron orange from screenshot */
+  padding-top: 0.35rem;
+  padding-bottom: 0.35rem;
+  transition: all 0.3s ease;
+}
+
+/* 2. Parchment Sub-Strip */
+.parchment-sub-strip {
+  background-color: #FAF8F5;
+  border-bottom: 1px solid #e8dac5;
+  padding-top: 0.3rem;
+  padding-bottom: 0.3rem;
+  transition: all 0.3s ease;
+}
+
+/* Auto-collapse on scroll */
+.strip-collapsed {
+  height: 0 !important;
+  padding-top: 0 !important;
+  padding-bottom: 0 !important;
+  opacity: 0 !important;
+  overflow: hidden !important;
+  border-bottom-width: 0 !important;
+}
+
+/* 3. Main Navigation Bar */
+.main-nav-bar {
+  background-color: #ffffff;
+  border-bottom: 1px solid #f1e6d7;
+  transition: all 0.3s ease;
+}
+
+.nav-scrolled {
+  background-color: rgba(255, 255, 255, 0.98);
+  border-bottom-color: #e8dac5;
+  box-shadow: 0 4px 20px -2px rgba(140, 83, 36, 0.08);
+}
+
+/* Navigation Links */
+.nav-anchor {
+  text-decoration: none;
+  color: #4a3b32;
+  transition: color 0.2s ease;
+  padding: 0.5rem 0.25rem;
+  position: relative;
+}
+
+.nav-anchor:hover {
+  color: #ea580c;
+}
+
+.active-link {
+  color: #ea580c !important;
+}
+
+/* 4. "BOOK SESSION →" Pill Button */
+.book-session-cta {
+  background: linear-gradient(135deg, #ea580c 0%, #c2410c 100%);
+  color: #ffffff;
+  font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  padding: 0.65rem 1.4rem;
+  border-radius: 9999px;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  box-shadow: 0 4px 14px rgba(234, 88, 12, 0.3);
+  transition: all 0.25s ease;
+}
+
+.book-session-cta:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 6px 18px rgba(234, 88, 12, 0.4);
+  filter: brightness(1.05);
+}
+
+.book-session-cta:active {
+  transform: translateY(0);
+}
+
+/* 5. Mobile Controls & Drawer */
+.mobile-menu-btn {
+  width: 38px;
+  height: 38px;
+  border-radius: 10px;
+  background-color: #FAF8F5;
+  border: 1px solid #e8dac5;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.mobile-menu-btn:active {
+  background-color: #faf6ee;
+}
+
+.mobile-drawer {
+  background-color: #ffffff;
+  border-top: 1px solid #e8dac5;
+  padding: 1.25rem 1.5rem 1.75rem 1.5rem;
+  box-shadow: 0 16px 30px rgba(0, 0, 0, 0.08);
+}
+
+.drawer-link {
+  padding: 0.65rem 0.75rem;
+  border-radius: 8px;
+  text-decoration: none;
+  color: #3a2717;
+  transition: background-color 0.2s, color 0.2s;
+}
+
+.drawer-link:hover, .drawer-link:active {
+  background-color: #FAF8F5;
+  color: #ea580c;
+}

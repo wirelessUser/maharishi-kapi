@@ -21,17 +21,36 @@
   pointer-events: none;
 }
 
-/* Classical Editorial Drop-Cap */
-.magazine-column-first::first-letter {
-  font-family: Georgia, 'Cinzel', serif;
-  font-size: 3.5rem;
-  line-height: 0.82;
-  float: left;
-  margin-right: 0.55rem;
-  margin-top: 0.15rem;
-  font-weight: 900;
-  color: #8c5324;
-  text-shadow: 1px 1px 0px rgba(217, 119, 6, 0.25);
+/* The drop cap and the rest of the article typography live in the global styles (.article-body), because the
+   body is injected with [innerHTML] and component-scoped selectors cannot reach that markup. */
+
+/* Article body pages. The viewport has a fixed height and hides overflow; the columns inside fill that height
+   and, when the text is longer, keep flowing into more columns off to the right. Each page is one viewport
+   wide plus the column gap, so paging is a sideways slide of --page * (100% + gap). */
+.article-viewport {
+  height: 22rem;
+  overflow: hidden;
+}
+
+.article-columns {
+  height: 100%;
+  column-count: 1;
+  column-gap: 1.5rem;
+  column-fill: auto;
+  transform: translateX(calc(var(--page, 0) * -1 * (100% + 1.5rem)));
+  transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@media (min-width: 640px) {
+  .article-viewport {
+    height: 26rem;
+  }
+}
+
+@media (min-width: 768px) {
+  .article-columns {
+    column-count: 2;
+  }
 }
 
 /* Physical Desk Perspective Depth */

@@ -1,37 +1,68 @@
-import { Component, computed, signal } from '@angular/core';
+import {
+  Component,
+  DestroyRef,
+  ElementRef,
+  Injector,
+  afterNextRender,
+  computed,
+  effect,
+  inject,
+  signal,
+  untracked,
+  viewChild,
+} from '@angular/core';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { CommonModule } from '@angular/common';
 import { RouterLink } from '@angular/router';
 import { FormsModule } from '@angular/forms';
+import { Subscription } from 'rxjs';
+import { environment } from '../../../environments/environment';
+import { AuthorAvatar } from '../../components/author-avatar/author-avatar';
+import { ArticleDto } from '../../core/models/blog.models';
+import { BlogService } from '../../core/services/blog.service';
+import { renderArticleMarkdown } from '../../core/utils/article-markdown';
+import { describeHttpError } from '../../core/utils/http-error';
 import { SeoService } from '../../services/seo.service';
 
-export type Category = 'Astrology' | 'Vastu' | 'Ayurveda' | 'Numerology' | 'Culture';
-export type CategoryFilter = 'All' | Category;
+const ALL_CATEGORIES = 'All';
+// The page has no pagination UI, so one large page holds the whole archive.
+const PAGE_SIZE = 100;
 
-export interface Article {
-  slug: string;
-  title: string;
-  deck: string;
-  category: Category;
-  image: string;
-  author: string;
-  authorPhoto: string;
-  date: string;
-  readTime: string;
-  featured?: boolean;
-  pullQuote?: string;
-  issueVol?: string;
-}
+// How many pages of columns the text spreads over. A page is one viewport wide plus the column gap, and the
+// small tolerance absorbs sub-pixel rounding in scrollWidth. Pure, so it can be tested without a layout engine.
+export const countTextPages = (scrollWidth: number, clientWidth: number, gap: number): number =>
+  clientWidth > 0 ? Math.max(1, Math.ceil((scrollWidth + gap) / (clientWidth + gap) - 0.05)) : 1;
 
 @Component({
   standalone: true,
-  imports: [CommonModule, RouterLink, FormsModule],
+  imports: [CommonModule, RouterLink, FormsModule, AuthorAvatar],
   selector: 'app-blog-page',
   styleUrl: './blog-page.css',
   templateUrl: './blog-page.html',
 })
 export class BlogPage {
-  readonly categories: CategoryFilter[] = ['All', 'Astrology', 'Vastu', 'Ayurveda', 'Numerology', 'Culture'];
-  readonly selectedCategory = signal<CategoryFilter>('All');
+  private readonly blog = inject(BlogService);
+  private readonly destroyRef = inject(DestroyRef);
+  private articlesRequest?: Subscription;
+  private contentRequest?: Subscription;
+  // Rendered bodies already fetched, so flipping back to an article neither refetches it nor counts another view.
+  private readonly htmlCache = new Map<string, string>();
+  private readonly injector = inject(Injector);
+  private readonly articleColumns = viewChild<ElementRef<HTMLElement>>('articleColumns');
+
+  readonly showTechnicalDetails = !environment.production;
+
+  readonly selectedCategory = signal<string>(ALL_CATEGORIES);
+  private readonly apiCategories = signal<string[]>([]);
+  readonly categories = computed(() => [ALL_CATEGORIES, ...this.apiCategories()]);
+
+  readonly loading = signal<boolean>(true);
+  readonly loadError = signal<string | null>(null);
+
+  private readonly featured = signal<ArticleDto | null>(null);
+  // Grid stories: the API already applies the category filter and leaves the featured article out.
+  readonly filteredArticles = signal<ArticleDto[]>([]);
+  readonly trending = signal<ArticleDto[]>([]);
 
   // Currently open article in the top interactive magazine reader spread
   readonly activeSpreadIndex = signal<number>(0);
@@ -40,210 +71,132 @@ export class BlogPage {
   // Newsletter state
   emailInput = '';
   readonly subscribed = signal<boolean>(false);
+  readonly subscribing = signal<boolean>(false);
+  readonly subscribeError = signal<string | null>(null);
 
-  readonly articles: Article[] = [
-    {
-      slug: 'saturn-returns',
-      title: 'Saturn Returns: What Your 29th Year Is Really Trying to Teach You',
-      deck: "Every 29 years Saturn comes home to the sign it occupied at your birth — and demands you finally grow up. Here's how to read the lesson instead of just surviving it.",
-      category: 'Astrology',
-      image: 'https://images.unsplash.com/photo-1506126613408-eca07ce68773?auto=format&fit=crop&w=1400&q=80',
-      author: 'Acharya Alok',
-      authorPhoto: 'https://images.unsplash.com/photo-1778692258270-bc0e80e975c0?auto=format&fit=crop&w=100&q=80',
-      date: 'Sept 2, 2026',
-      readTime: '8 min read',
-      featured: true,
-      pullQuote: 'Saturn does not delay your blessings out of cruelty; he delays them until your ego is too humble to squander them.',
-      issueVol: 'Vol. IX · Cover Issue',
-    },
-    {
-      slug: 'kitchen-facing-east',
-      title: 'Why Your Kitchen Faces East (and What Happens When It Doesn’t)',
-      deck: 'Classical Vastu ties the kitchen to Agni, the fire element. A misplaced stove is one of the most common — and most fixable — energy leaks in Indian homes.',
-      category: 'Vastu',
-      image: 'https://images.unsplash.com/photo-1538460120076-604b93a2ce88?auto=format&fit=crop&w=1000&q=80',
-      author: 'Riitu Dua',
-      authorPhoto: 'https://images.unsplash.com/photo-1580489944761-15a19d654956?w=100&q=80',
-      date: 'Aug 28, 2026',
-      readTime: '5 min read',
-      pullQuote: 'Agni in the North-East burns the peace of the household; Agni in the South-East fuels physical health and wealth.',
-      issueVol: 'Vol. IX · Dispatch 11',
-    },
-    {
-      slug: 'ashwagandha-vs-brahmi',
-      title: 'Ashwagandha vs. Brahmi: Choosing the Right Herb for Your Dosha',
-      deck: 'Both are Ayurvedic staples, but they calm very different kinds of restlessness. A dosha-first guide before you reach for either bottle.',
-      category: 'Ayurveda',
-      image: 'https://images.unsplash.com/photo-1730977806288-96b82f795008?auto=format&fit=crop&w=1000&q=80',
-      author: 'Shobha Desai',
-      authorPhoto: 'https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=100&q=80',
-      date: 'Aug 24, 2026',
-      readTime: '6 min read',
-      pullQuote: 'Ashwagandha grounds restless Vata currents in the earth; Brahmi cools the burning Pitta intellect in the heavens.',
-      issueVol: 'Vol. IX · Dispatch 10',
-    },
-    {
-      slug: 'number-nine-numerology',
-      title: 'The Number 9 in Vedic Numerology: Endings That Are Actually Beginnings',
-      deck: 'Ruled by Mars, feared by some, chased by entrepreneurs — the 9 is the most misread number in the system. Here is what it actually governs.',
-      category: 'Numerology',
-      image: 'https://images.unsplash.com/photo-1521737604893-d14cc237f11d?auto=format&fit=crop&w=1000&q=80',
-      author: 'Shweta Gupta',
-      authorPhoto: 'https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=100&q=80',
-      date: 'Aug 19, 2026',
-      readTime: '4 min read',
-      pullQuote: 'Nine synthesizes all single digits before it and resets the cycle to the pure potential of zero.',
-      issueVol: 'Vol. IX · Dispatch 09',
-    },
-    {
-      slug: 'navamsa-chart',
-      title: "Reading the Navamsa Chart: Astrology's Hidden Second Map",
-      deck: 'Your birth chart shows the terrain. The Navamsa (D9) shows the destination — especially in marriage and dharma. Most beginners never open it.',
-      category: 'Astrology',
-      image: 'https://images.unsplash.com/photo-1529333166437-7750a6dd5a70?auto=format&fit=crop&w=1000&q=80',
-      author: 'Acharya Alok',
-      authorPhoto: 'https://images.unsplash.com/photo-1778692258270-bc0e80e975c0?auto=format&fit=crop&w=100&q=80',
-      date: 'Aug 14, 2026',
-      readTime: '9 min read',
-      pullQuote: 'The Rashi chart is the seed planted in the soil; the Navamsa is the fruit the tree bears in the second half of life.',
-      issueVol: 'Vol. IX · Dispatch 08',
-    },
-    {
-      slug: 'diwali-new-moon',
-      title: "Why Diwali Falls on a New Moon — And Other Lunar Coincidences That Aren't",
-      deck: 'Nearly every major Hindu festival is anchored to a precise lunar phase. That is not tradition for its own sake — it is a 5,000-year-old calendar still doing its job.',
-      category: 'Culture',
-      image: 'https://images.unsplash.com/photo-1621787084849-ed98731b3071?auto=format&fit=crop&w=1000&q=80',
-      author: 'Acharya Alok',
-      authorPhoto: 'https://images.unsplash.com/photo-1778692258270-bc0e80e975c0?auto=format&fit=crop&w=100&q=80',
-      date: 'Aug 9, 2026',
-      readTime: '7 min read',
-      pullQuote: 'Light is never more sacred than when consecrated against the deep, quiet darkness of the Amavasya night.',
-      issueVol: 'Vol. IX · Dispatch 07',
-    },
-    {
-      slug: 'marma-points-101',
-      title: "Marma Points 101: The Body's 107 Doorways to Healing",
-      deck: 'Ayurveda mapped these vital junctions long before acupuncture reached the West. A working guide to the seven points you can safely learn to press today.',
-      category: 'Ayurveda',
-      image: 'https://images.unsplash.com/photo-1514733670139-4d87a1941d55?auto=format&fit=crop&w=1000&q=80',
-      author: 'Riitu Dua',
-      authorPhoto: 'https://images.unsplash.com/photo-1580489944761-15a19d654956?w=100&q=80',
-      date: 'Aug 3, 2026',
-      readTime: '6 min read',
-      pullQuote: 'Where subtle Prana stagnates, physical pain takes root; gentle touch on Adhipati Marma restores systemic flow.',
-      issueVol: 'Vol. IX · Dispatch 06',
-    },
-    {
-      slug: 'mercury-retrograde',
-      title: "Mercury Retrograde Isn't the Villain — Here's What It's Actually For",
-      deck: 'Three times a year the internet panics. Classical Jyotish reads the same transit very differently: as a scheduled audit, not a curse.',
-      category: 'Astrology',
-      image: 'https://images.unsplash.com/photo-1534447677768-be436bb09401?auto=format&fit=crop&w=1000&q=80',
-      author: 'Shweta Gupta',
-      authorPhoto: 'https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=100&q=80',
-      date: 'Jul 29, 2026',
-      readTime: '5 min read',
-      pullQuote: 'Vakri Budha is not a breakdown—it is the universe commanding you to reflect twice before speaking once.',
-      issueVol: 'Vol. IX · Dispatch 05',
-    },
-    {
-      slug: 'name-number-vs-birth-number',
-      title: 'Your Name Number vs. Your Birth Number: Which One Actually Runs Your Life?',
-      deck: 'One is fixed at birth, the other changes every time you sign a form differently. Numerologists disagree — here is how to weigh both.',
-      category: 'Numerology',
-      image: 'https://images.unsplash.com/photo-1518288774671-b94e8088c2f5?auto=format&fit=crop&w=1000&q=80',
-      author: 'Shobha Desai',
-      authorPhoto: 'https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=100&q=80',
-      date: 'Jul 22, 2026',
-      readTime: '5 min read',
-      pullQuote: 'The Mulank is the destiny hardware you were born with; the Namank is the frequency code you project into the world.',
-      issueVol: 'Vol. IX · Dispatch 04',
-    },
-    {
-      slug: 'rishikesh-havan',
-      title: 'Inside a Rishikesh Havan: What Fire Rituals Are Really Doing',
-      deck: "It looks like ceremony. It's also aerosol chemistry, breathwork, and a 40-minute forced meditation you didn't sign up for — in the best way.",
-      category: 'Culture',
-      image: 'https://images.unsplash.com/photo-1529733772151-bab41484710a?auto=format&fit=crop&w=1000&q=80',
-      author: 'Acharya Alok',
-      authorPhoto: 'https://images.unsplash.com/photo-1778692258270-bc0e80e975c0?auto=format&fit=crop&w=100&q=80',
-      date: 'Jul 15, 2026',
-      readTime: '6 min read',
-      pullQuote: 'Sacred Ghee and samidha cast into consecrated flames purify both the external space and the internal nervous system.',
-      issueVol: 'Vol. IX · Dispatch 03',
-    },
-    {
-      slug: 'nine-gemstones',
-      title: 'The Nine Planets, Nine Gemstones: A Practical Guide to Ratna Shastra',
-      deck: "Before you buy a Blue Sapphire because a reel told you to — here is which planet it strengthens, who it can backfire on, and how to test it first.",
-      category: 'Astrology',
-      image: 'https://images.unsplash.com/photo-1554554497-0095c34db3ec?auto=format&fit=crop&w=1000&q=80',
-      author: 'Acharya Alok',
-      authorPhoto: 'https://images.unsplash.com/photo-1778692258270-bc0e80e975c0?auto=format&fit=crop&w=100&q=80',
-      date: 'Jul 8, 2026',
-      readTime: '10 min read',
-      pullQuote: 'A gemstone acts as a planetary optical lens. Never amplify a malefic ray without a sattvic protective shield.',
-      issueVol: 'Vol. IX · Dispatch 02',
-    },
-    {
-      slug: 'vastu-bedroom-audit',
-      title: "The Five Directions: A Beginner's Vastu Audit for Your Bedroom",
-      deck: 'Bed placement, mirror position, and one surprisingly common mistake with the door — a 15-minute self-audit before you call a consultant.',
-      category: 'Vastu',
-      image: 'https://images.unsplash.com/photo-1723879683308-0c8542c02ee4?auto=format&fit=crop&w=1000&q=80',
-      author: 'Riitu Dua',
-      authorPhoto: 'https://images.unsplash.com/photo-1580489944761-15a19d654956?w=100&q=80',
-      date: 'Jul 1, 2026',
-      readTime: '4 min read',
-      pullQuote: 'Align your head to the South or East; synchronizing with the Earth’s natural geomagnetic field restores REM sleep.',
-      issueVol: 'Vol. IX · Dispatch 01',
-    },
-  ];
-
-  readonly featuredArticle = this.articles.find((article) => article.featured)!;
-
-  readonly trending = [this.articles[0], this.articles[4], this.articles[7], this.articles[10], this.articles[5]];
-
-  readonly filteredArticles = computed(() => {
-    const category = this.selectedCategory();
-    const rest = this.articles.filter((article) => !article.featured);
-    return category === 'All' ? rest : rest.filter((article) => article.category === category);
-  });
-
-  // All selectable articles for the top magazine spread reader
+  // All selectable articles for the top magazine spread reader (cover story first)
   readonly allSelectableArticles = computed(() => {
     const category = this.selectedCategory();
-    return category === 'All' ? this.articles : this.articles.filter((a) => a.category === category);
+    const featured = this.featured();
+    const items = this.filteredArticles();
+    return featured && (category === ALL_CATEGORIES || featured.category === category)
+      ? [featured, ...items]
+      : items;
   });
 
   readonly currentSpreadArticle = computed(() => {
     const list = this.allSelectableArticles();
-    const idx = this.activeSpreadIndex();
-    return list[idx % list.length] ?? this.articles[0];
+    return list.length ? list[this.activeSpreadIndex() % list.length] : null;
   });
 
-  selectCategory(category: CategoryFilter): void {
-    this.selectedCategory.set(category);
-    this.activeSpreadIndex.set(0);
+  // Body of the article open in the reader, as HTML rendered from its Markdown. null while it loads; the list
+  // endpoints leave `content` out. It is bound with [innerHTML], so Angular sanitizes it once more.
+  readonly spreadHtml = signal<string | null>(null);
+  readonly spreadContentError = signal<string | null>(null);
+
+  // The body sits in a fixed-height, multi-column viewport. Text that doesn't fit flows into further columns off to
+  // the side and a "page" is one screenful of them, so a long article turns pages instead of stretching the reader.
+  readonly textPage = signal(0);
+  readonly textPageCount = signal(1);
+  // Set when going back from an article's first page, so the article before it opens on its last page.
+  private pendingLastPage = false;
+
+  constructor(private readonly seo: SeoService) {
+    this.seo.setPageSeo({
+      title: 'The Maharishi Kapi Journal | Vedic Magazine & Editorial',
+      description: 'Read Vedic astrology, Vastu, Ayurveda, numerology, and culture in an authentic interactive magazine format.',
+      path: '/blog',
+      keywords: 'Vedic astrology magazine, Vastu editorial, Ayurveda journal, numerology articles',
+    });
+
+    // Fetch the text of whichever article is open in the reader. Nothing is open until the browser has
+    // loaded the list, so this never fires during server rendering.
+    effect(() => {
+      const article = this.currentSpreadArticle();
+      if (article) {
+        untracked(() => this.loadSpreadContent(article));
+      }
+    });
+
+    // Re-count the pages whenever the columns are resized (window resize, layout change) or an image in the
+    // article finishes loading, since an image changes how much room the text has.
+    effect((onCleanup) => {
+      const columns = this.articleColumns()?.nativeElement;
+      if (!columns) {
+        return;
+      }
+      const remeasure = () => this.measureTextPages();
+      // `load` does not bubble, so listen in the capture phase to catch images inside the article.
+      columns.addEventListener('load', remeasure, true);
+      onCleanup(() => columns.removeEventListener('load', remeasure, true));
+
+      if (typeof ResizeObserver === 'undefined') {
+        return;
+      }
+      const observer = new ResizeObserver(remeasure);
+      observer.observe(columns);
+      onCleanup(() => observer.disconnect());
+    });
+
+    // Browser-only: the server render and the first client render must both show the loading state.
+    afterNextRender(() => {
+      this.loadPage();
+
+      // Web fonts change how the text wraps, and with it the number of pages.
+      const remeasure = () => this.measureTextPages();
+      document.fonts?.addEventListener('loadingdone', remeasure);
+      this.destroyRef.onDestroy(() => document.fonts?.removeEventListener('loadingdone', remeasure));
+    });
   }
 
+  loadPage(): void {
+    this.loadCategories();
+    this.loadFeatured();
+    this.loadTrending();
+    this.loadArticles();
+  }
+
+  selectCategory(category: string): void {
+    this.selectedCategory.set(category);
+    this.activeSpreadIndex.set(0);
+    this.loadArticles();
+  }
+
+  // Turning the leaf pages through the open article's text first, then moves on to the next article.
   nextSpread(): void {
+    if (this.textPage() < this.textPageCount() - 1) {
+      this.textPage.update((page) => page + 1);
+      return;
+    }
     const list = this.allSelectableArticles();
+    if (list.length === 1) {
+      this.textPage.set(0);
+      return;
+    }
     this.triggerFlip(() => {
       this.activeSpreadIndex.update((curr) => (curr + 1) % list.length);
     });
   }
 
   prevSpread(): void {
+    if (this.textPage() > 0) {
+      this.textPage.update((page) => page - 1);
+      return;
+    }
     const list = this.allSelectableArticles();
+    if (list.length === 1) {
+      this.textPage.set(this.textPageCount() - 1);
+      return;
+    }
     this.triggerFlip(() => {
+      // Like turning a leaf back: the previous article opens on its last page.
+      this.pendingLastPage = true;
       this.activeSpreadIndex.update((curr) => (curr - 1 + list.length) % list.length);
     });
   }
 
   // Opens any selected article in the top magazine reading spread & smoothly scrolls up
-  openArticleInMagazine(article: Article): void {
+  openArticleInMagazine(article: ArticleDto): void {
     const list = this.allSelectableArticles();
     const targetIdx = list.findIndex((a) => a.slug === article.slug);
     if (targetIdx !== -1) {
@@ -256,29 +209,149 @@ export class BlogPage {
     }
   }
 
+  subscribe(event: Event): void {
+    event.preventDefault();
+    const email = this.emailInput.trim();
+    if (!email || this.subscribing()) {
+      return;
+    }
+
+    this.subscribing.set(true);
+    this.subscribeError.set(null);
+    this.blog
+      .subscribe(email)
+      .pipe(takeUntilDestroyed(this.destroyRef))
+      .subscribe({
+        next: () => {
+          this.subscribing.set(false);
+          this.emailInput = '';
+          this.subscribed.set(true);
+          setTimeout(() => this.subscribed.set(false), 4000);
+        },
+        error: () => {
+          this.subscribing.set(false);
+          this.subscribeError.set('We could not add your email just now. Please check the address and try again.');
+        },
+      });
+  }
+
+  private loadArticles(): void {
+    // Cancels the previous in-flight request so a slow response can't overwrite a newer category.
+    this.articlesRequest?.unsubscribe();
+    this.loading.set(true);
+    this.loadError.set(null);
+    this.filteredArticles.set([]);
+
+    const category = this.selectedCategory();
+    this.articlesRequest = this.blog
+      .getArticles({ pageSize: PAGE_SIZE, category: category === ALL_CATEGORIES ? undefined : category })
+      .pipe(takeUntilDestroyed(this.destroyRef))
+      .subscribe({
+        next: (res) => {
+          this.filteredArticles.set(res.items);
+          this.activeSpreadIndex.set(0);
+          this.loading.set(false);
+        },
+        error: (err) => {
+          this.loadError.set(describeHttpError(err));
+          this.loading.set(false);
+        },
+      });
+  }
+
+  // Detail endpoints return `content` (and record a public view on the API side).
+  private loadSpreadContent(article: ArticleDto): void {
+    // A different article was opened: drop the request for the previous one and start on its first page.
+    this.contentRequest?.unsubscribe();
+    this.spreadContentError.set(null);
+    this.textPage.set(0);
+    this.textPageCount.set(1);
+
+    const cached = this.htmlCache.get(article.id);
+    if (cached !== undefined) {
+      this.spreadHtml.set(cached);
+      this.measureAfterRender();
+      return;
+    }
+
+    this.spreadHtml.set(null);
+    this.contentRequest = this.blog
+      .getArticleById(article.id)
+      .pipe(takeUntilDestroyed(this.destroyRef))
+      .subscribe({
+        next: ({ data }) => {
+          const html = renderArticleMarkdown(data.content);
+          this.htmlCache.set(article.id, html);
+          this.spreadHtml.set(html);
+          this.measureAfterRender();
+        },
+        error: (err) => {
+          this.pendingLastPage = false;
+          this.spreadContentError.set(describeHttpError(err));
+        },
+      });
+  }
+
+  private measureAfterRender(): void {
+    afterNextRender(() => this.measureTextPages(), { injector: this.injector });
+  }
+
+  // Reads the laid-out columns to see how many pages the open article spans. Runs after the text renders, on
+  // resize, and when web fonts finish loading, since each of those can change how the text wraps.
+  private measureTextPages(): void {
+    const columns = this.articleColumns()?.nativeElement;
+    if (!columns) {
+      return;
+    }
+    const gap = parseFloat(getComputedStyle(columns).columnGap) || 0;
+    const count = countTextPages(columns.scrollWidth, columns.clientWidth, gap);
+    this.textPageCount.set(count);
+    this.textPage.update((page) => (this.pendingLastPage ? count - 1 : Math.min(page, count - 1)));
+    this.pendingLastPage = false;
+  }
+
+  private loadCategories(): void {
+    this.blog
+      .getCategories()
+      .pipe(takeUntilDestroyed(this.destroyRef))
+      .subscribe({
+        next: (res) => this.apiCategories.set(res.data),
+        error: (err) => console.warn('[blog] categories unavailable:', describeHttpError(err)),
+      });
+  }
+
+  private loadFeatured(): void {
+    this.blog
+      .getFeaturedArticle()
+      .pipe(takeUntilDestroyed(this.destroyRef))
+      .subscribe({
+        next: (res) => this.featured.set(res.data),
+        // A missing featured article is a normal state; the list still renders without it.
+        error: (err) => {
+          this.featured.set(null);
+          console.warn('[blog] featured article unavailable:', describeHttpError(err));
+        },
+      });
+  }
+
+  private loadTrending(): void {
+    this.blog
+      .getTrendingArticles()
+      .pipe(takeUntilDestroyed(this.destroyRef))
+      .subscribe({
+        next: (res) => this.trending.set(res.data),
+        error: (err) => {
+          this.trending.set([]);
+          console.warn('[blog] trending unavailable:', describeHttpError(err));
+        },
+      });
+  }
+
   private triggerFlip(callback: () => void): void {
     this.isFlipping.set(true);
     setTimeout(() => {
       callback();
       setTimeout(() => this.isFlipping.set(false), 260);
     }, 180);
-  }
-
-  subscribe(event: Event): void {
-    event.preventDefault();
-    if (this.emailInput.trim()) {
-      this.subscribed.set(true);
-      setTimeout(() => this.subscribed.set(false), 4000);
-      this.emailInput = '';
-    }
-  }
-
-  constructor(private readonly seo: SeoService) {
-    this.seo.setPageSeo({
-      title: 'The Maharishi Kapi Journal | Vedic Magazine & Editorial',
-      description: 'Read Vedic astrology, Vastu, Ayurveda, numerology, and culture in an authentic interactive magazine format.',
-      path: '/blog',
-      keywords: 'Vedic astrology magazine, Vastu editorial, Ayurveda journal, numerology articles',
-    });
   }
 }

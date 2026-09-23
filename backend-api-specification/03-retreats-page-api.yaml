@@ -1,0 +1,745 @@
+---
+# RETREATS PAGE API SPECIFICATION
+# Purpose: Provide retreat listing, filtering, booking information, and details
+
+api_version: "1.0"
+page: "Retreats Page"
+module: "Retreat Management"
+
+base_url: "/api/v1/retreats"
+
+endpoints:
+
+  # ========================================
+  # GET /api/v1/retreats
+  # ========================================
+  # Description: Get all retreats with filtering and pagination
+  # Auth: None (Public)
+  list_retreats:
+    method: GET
+    path: "/"
+    description: "Fetch all retreats with filtering and pagination"
+    authentication: "none"
+    parameters:
+      - name: "page"
+        in: "query"
+        type: "integer"
+        default: 1
+      - name: "pageSize"
+        in: "query"
+        type: "integer"
+        default: 12
+      - name: "status"
+        in: "query"
+        type: "string"
+        enum: ["upcoming", "ongoing", "past"]
+        description: "Filter by retreat status"
+      - name: "location"
+        in: "query"
+        type: "string"
+        description: "Filter by location"
+      - name: "minPrice"
+        in: "query"
+        type: "number"
+        description: "Minimum price filter"
+      - name: "maxPrice"
+        in: "query"
+        type: "number"
+        description: "Maximum price filter"
+      - name: "duration"
+        in: "query"
+        type: "string"
+        description: "Filter by duration (e.g., '12 Days', '13 Days')"
+      - name: "sortBy"
+        in: "query"
+        type: "string"
+        enum: ["date", "price_low", "price_high", "rating"]
+        default: "date"
+    response_schema:
+      type: "object"
+      properties:
+        status:
+          type: "string"
+        data:
+          type: "object"
+          properties:
+            retreats:
+              type: "array"
+              items:
+                $ref: "#/components/schemas/RetreatCard"
+            pagination:
+              type: "object"
+              properties:
+                currentPage:
+                  type: "integer"
+                pageSize:
+                  type: "integer"
+                totalRecords:
+                  type: "integer"
+                totalPages:
+                  type: "integer"
+            filters:
+              type: "object"
+              properties:
+                locations:
+                  type: "array"
+                  items:
+                    type: "string"
+                priceRange:
+                  type: "object"
+                  properties:
+                    min:
+                      type: "number"
+                    max:
+                      type: "number"
+                durations:
+                  type: "array"
+                  items:
+                    type: "string"
+
+  # ========================================
+  # GET /api/v1/retreats/{id}
+  # ========================================
+  # Description: Get retreat detail page data
+  # Auth: None (Public)
+  retreat_detail:
+    method: GET
+    path: "/{id}"
+    description: "Fetch complete retreat details including itinerary, pricing, faqs, testimonials"
+    authentication: "none"
+    parameters:
+      - name: "id"
+        in: "path"
+        type: "string"
+        required: true
+        description: "Retreat ID or slug"
+    response_schema:
+      type: "object"
+      properties:
+        status:
+          type: "string"
+        data:
+          $ref: "#/components/schemas/RetreatDetailFull"
+
+  # ========================================
+  # GET /api/v1/retreats/{id}/itinerary
+  # ========================================
+  # Description: Get retreat itinerary details
+  # Auth: None (Public)
+  retreat_itinerary:
+    method: GET
+    path: "/{id}/itinerary"
+    description: "Fetch detailed retreat itinerary"
+    authentication: "none"
+    parameters:
+      - name: "id"
+        in: "path"
+        type: "string"
+        required: true
+    response_schema:
+      type: "object"
+      properties:
+        status:
+          type: "string"
+        data:
+          type: "object"
+          properties:
+            retreatId:
+              type: "string"
+            retreatTitle:
+              type: "string"
+            itineraryImage:
+              type: "string"
+              format: "url"
+            itineraryCaption:
+              type: "string"
+            itinerary:
+              type: "array"
+              items:
+                $ref: "#/components/schemas/ItineraryDay"
+
+  # ========================================
+  # GET /api/v1/retreats/{id}/pricing
+  # ========================================
+  # Description: Get retreat pricing tiers
+  # Auth: None (Public)
+  retreat_pricing:
+    method: GET
+    path: "/{id}/pricing"
+    description: "Fetch retreat pricing and available accommodation options"
+    authentication: "none"
+    parameters:
+      - name: "id"
+        in: "path"
+        type: "string"
+        required: true
+    response_schema:
+      type: "object"
+      properties:
+        status:
+          type: "string"
+        data:
+          type: "object"
+          properties:
+            retreatId:
+              type: "string"
+            retreatTitle:
+              type: "string"
+            currency:
+              type: "string"
+              example: "EUR"
+            pricing:
+              type: "array"
+              items:
+                $ref: "#/components/schemas/PricingTier"
+            seatsAvailable:
+              type: "object"
+              properties:
+                total:
+                  type: "integer"
+                booked:
+                  type: "integer"
+                available:
+                  type: "integer"
+
+  # ========================================
+  # GET /api/v1/retreats/{id}/faqs
+  # ========================================
+  # Description: Get retreat FAQs
+  # Auth: None (Public)
+  retreat_faqs:
+    method: GET
+    path: "/{id}/faqs"
+    description: "Fetch retreat FAQ section"
+    authentication: "none"
+    parameters:
+      - name: "id"
+        in: "path"
+        type: "string"
+        required: true
+    response_schema:
+      type: "object"
+      properties:
+        status:
+          type: "string"
+        data:
+          type: "object"
+          properties:
+            retreatId:
+              type: "string"
+            faqs:
+              type: "array"
+              items:
+                $ref: "#/components/schemas/RetreatFAQ"
+
+  # ========================================
+  # GET /api/v1/retreats/{id}/testimonials
+  # ========================================
+  # Description: Get retreat testimonials
+  # Auth: None (Public)
+  retreat_testimonials:
+    method: GET
+    path: "/{id}/testimonials"
+    description: "Fetch retreat testimonials and reviews"
+    authentication: "none"
+    parameters:
+      - name: "id"
+        in: "path"
+        type: "string"
+        required: true
+      - name: "limit"
+        in: "query"
+        type: "integer"
+        default: 5
+    response_schema:
+      type: "object"
+      properties:
+        status:
+          type: "string"
+        data:
+          type: "array"
+          items:
+            $ref: "#/components/schemas/RetreatTestimonial"
+
+  # ========================================
+  # GET /api/v1/retreats/locations
+  # ========================================
+  # Description: Get all available retreat locations
+  # Auth: None (Public)
+  retreat_locations:
+    method: GET
+    path: "/locations"
+    description: "Fetch all retreat locations with available retreats count"
+    authentication: "none"
+    response_schema:
+      type: "object"
+      properties:
+        status:
+          type: "string"
+        data:
+          type: "array"
+          items:
+            type: "object"
+            properties:
+              location:
+                type: "string"
+              country:
+                type: "string"
+              count:
+                type: "integer"
+              elevation:
+                type: "string"
+
+  # ========================================
+  # GET /api/v1/retreats/{id}/gallery
+  # ========================================
+  # Description: Get retreat photo gallery
+  # Auth: None (Public)
+  retreat_gallery:
+    method: GET
+    path: "/{id}/gallery"
+    description: "Fetch retreat photo gallery"
+    authentication: "none"
+    parameters:
+      - name: "id"
+        in: "path"
+        type: "string"
+        required: true
+    response_schema:
+      type: "object"
+      properties:
+        status:
+          type: "string"
+        data:
+          type: "object"
+          properties:
+            retreatId:
+              type: "string"
+            gallery:
+              type: "array"
+              items:
+                type: "string"
+                format: "url"
+
+components:
+  schemas:
+    RetreatCard:
+      type: "object"
+      properties:
+        id:
+          type: "string"
+        slug:
+          type: "string"
+        title:
+          type: "string"
+        subtitle:
+          type: "string"
+        tagline:
+          type: "string"
+        dateRange:
+          type: "string"
+        duration:
+          type: "string"
+        location:
+          type: "string"
+        cardImage:
+          type: "string"
+          format: "url"
+        priceFrom:
+          type: "number"
+        seatsTotal:
+          type: "integer"
+        seatsLeft:
+          type: "integer"
+        rating:
+          type: "number"
+        status:
+          type: "string"
+          enum: ["upcoming", "past", "ongoing"]
+
+    RetreatDetailFull:
+      type: "object"
+      properties:
+        id:
+          type: "string"
+        slug:
+          type: "string"
+        status:
+          type: "string"
+          enum: ["upcoming", "past", "ongoing"]
+        tagline:
+          type: "string"
+        title:
+          type: "string"
+        subtitle:
+          type: "string"
+        summary:
+          type: "string"
+        dateRange:
+          type: "string"
+        duration:
+          type: "string"
+        location:
+          type: "string"
+        elevation:
+          type: "string"
+        heroImage:
+          type: "string"
+          format: "url"
+        cardImage:
+          type: "string"
+          format: "url"
+        priceFrom:
+          type: "number"
+        seatsTotal:
+          type: "integer"
+        seatsLeft:
+          type: "integer"
+        rating:
+          type: "number"
+
+        journeyIntro:
+          type: "string"
+        journeyQuote:
+          type: "string"
+        journeyImage:
+          type: "string"
+          format: "url"
+
+        forYou:
+          type: "array"
+          items:
+            type: "string"
+        notForYou:
+          type: "array"
+          items:
+            type: "string"
+        outcomes:
+          type: "array"
+          items:
+            type: "string"
+
+        routeTitle:
+          type: "string"
+        route:
+          type: "array"
+          items:
+            $ref: "#/components/schemas/RetreatStop"
+
+        practices:
+          type: "array"
+          items:
+            $ref: "#/components/schemas/RetreatPractice"
+
+        gallery:
+          type: "array"
+          items:
+            type: "string"
+            format: "url"
+
+        itinerary:
+          type: "array"
+          items:
+            $ref: "#/components/schemas/ItineraryDay"
+        itineraryImage:
+          type: "string"
+          format: "url"
+        itineraryCaption:
+          type: "string"
+
+        requirements:
+          type: "array"
+          items:
+            type: "string"
+        included:
+          type: "array"
+          items:
+            $ref: "#/components/schemas/RetreatFeature"
+
+        pricing:
+          type: "array"
+          items:
+            $ref: "#/components/schemas/PricingTier"
+        faqs:
+          type: "array"
+          items:
+            $ref: "#/components/schemas/RetreatFAQ"
+        testimonials:
+          type: "array"
+          items:
+            $ref: "#/components/schemas/RetreatTestimonial"
+
+    RetreatStop:
+      type: "object"
+      properties:
+        name:
+          type: "string"
+        description:
+          type: "string"
+
+    RetreatPractice:
+      type: "object"
+      properties:
+        name:
+          type: "string"
+        description:
+          type: "string"
+        icon:
+          type: "string"
+
+    ItineraryDay:
+      type: "object"
+      properties:
+        id:
+          type: "string"
+        days:
+          type: "string"
+        date:
+          type: "string"
+        title:
+          type: "string"
+        description:
+          type: "string"
+
+    RetreatFeature:
+      type: "object"
+      properties:
+        icon:
+          type: "string"
+        label:
+          type: "string"
+
+    PricingTier:
+      type: "object"
+      properties:
+        id:
+          type: "string"
+        name:
+          type: "string"
+        price:
+          type: "number"
+        popular:
+          type: "boolean"
+        features:
+          type: "array"
+          items:
+            type: "string"
+        availability:
+          type: "integer"
+
+    RetreatFAQ:
+      type: "object"
+      properties:
+        id:
+          type: "string"
+        question:
+          type: "string"
+        answer:
+          type: "string"
+
+    RetreatTestimonial:
+      type: "object"
+      properties:
+        id:
+          type: "string"
+        name:
+          type: "string"
+        location:
+          type: "string"
+        quote:
+          type: "string"
+        rating:
+          type: "number"
+        dateSubmitted:
+          type: "string"
+          format: "date-time"
+
+database_models:
+  - name: "Retreat"
+    fields:
+      - name: "id"
+        type: "Guid (PK)"
+      - name: "slug"
+        type: "string (Unique)"
+      - name: "status"
+        type: "string"
+      - name: "tagline"
+        type: "string"
+      - name: "title"
+        type: "string"
+      - name: "subtitle"
+        type: "string"
+      - name: "summary"
+        type: "string (long)"
+      - name: "dateRange"
+        type: "string"
+      - name: "duration"
+        type: "string"
+      - name: "location"
+        type: "string"
+      - name: "elevation"
+        type: "string"
+      - name: "heroImage"
+        type: "string"
+      - name: "cardImage"
+        type: "string"
+      - name: "priceFrom"
+        type: "decimal"
+      - name: "seatsTotal"
+        type: "int"
+      - name: "seatsLeft"
+        type: "int"
+      - name: "rating"
+        type: "decimal"
+      - name: "journeyIntro"
+        type: "string (long)"
+      - name: "journeyQuote"
+        type: "string"
+      - name: "journeyImage"
+        type: "string"
+      - name: "forYou"
+        type: "string (JSON array)"
+      - name: "notForYou"
+        type: "string (JSON array)"
+      - name: "outcomes"
+        type: "string (JSON array)"
+      - name: "routeTitle"
+        type: "string"
+      - name: "gallery"
+        type: "string (JSON array)"
+      - name: "itineraryImage"
+        type: "string"
+      - name: "itineraryCaption"
+        type: "string"
+      - name: "requirements"
+        type: "string (JSON array)"
+      - name: "isActive"
+        type: "bool"
+      - name: "createdAt"
+        type: "DateTime"
+      - name: "updatedAt"
+        type: "DateTime"
+
+  - name: "RetreatStop"
+    fields:
+      - name: "id"
+        type: "Guid (PK)"
+      - name: "retreatId"
+        type: "Guid (FK)"
+      - name: "name"
+        type: "string"
+      - name: "description"
+        type: "string"
+      - name: "displayOrder"
+        type: "int"
+
+  - name: "RetreatPractice"
+    fields:
+      - name: "id"
+        type: "Guid (PK)"
+      - name: "retreatId"
+        type: "Guid (FK)"
+      - name: "name"
+        type: "string"
+      - name: "description"
+        type: "string"
+      - name: "icon"
+        type: "string"
+      - name: "displayOrder"
+        type: "int"
+
+  - name: "ItineraryDay"
+    fields:
+      - name: "id"
+        type: "Guid (PK)"
+      - name: "retreatId"
+        type: "Guid (FK)"
+      - name: "days"
+        type: "string"
+      - name: "date"
+        type: "string"
+      - name: "title"
+        type: "string"
+      - name: "description"
+        type: "string"
+      - name: "displayOrder"
+        type: "int"
+
+  - name: "RetreatPricing"
+    fields:
+      - name: "id"
+        type: "Guid (PK)"
+      - name: "retreatId"
+        type: "Guid (FK)"
+      - name: "name"
+        type: "string"
+      - name: "price"
+        type: "decimal"
+      - name: "isPopular"
+        type: "bool"
+      - name: "features"
+        type: "string (JSON array)"
+      - name: "availability"
+        type: "int"
+      - name: "displayOrder"
+        type: "int"
+
+  - name: "RetreatFAQ"
+    fields:
+      - name: "id"
+        type: "Guid (PK)"
+      - name: "retreatId"
+        type: "Guid (FK)"
+      - name: "question"
+        type: "string"
+      - name: "answer"
+        type: "string (long)"
+      - name: "displayOrder"
+        type: "int"
+
+  - name: "RetreatTestimonial"
+    fields:
+      - name: "id"
+        type: "Guid (PK)"
+      - name: "retreatId"
+        type: "Guid (FK)"
+      - name: "name"
+        type: "string"
+      - name: "location"
+        type: "string"
+      - name: "quote"
+        type: "string (long)"
+      - name: "rating"
+        type: "decimal"
+      - name: "dateSubmitted"
+        type: "DateTime"
+      - name: "isVerified"
+        type: "bool"
+      - name: "isActive"
+        type: "bool"
+      - name: "displayOrder"
+        type: "int"
+
+caching:
+  - endpoint: "/"
+    ttl_seconds: 1800
+    cache_key: "retreats_list_{status}_{location}"
+  - endpoint: "/{id}"
+    ttl_seconds: 1800
+    cache_key: "retreat_detail_{id}"
+  - endpoint: "/{id}/itinerary"
+    ttl_seconds: 3600
+    cache_key: "retreat_itinerary_{id}"
+  - endpoint: "/{id}/pricing"
+    ttl_seconds: 900
+    cache_key: "retreat_pricing_{id}"
+  - endpoint: "/{id}/faqs"
+    ttl_seconds: 3600
+    cache_key: "retreat_faqs_{id}"
+  - endpoint: "/{id}/testimonials"
+    ttl_seconds: 3600
+    cache_key: "retreat_testimonials_{id}"
+  - endpoint: "/locations"
+    ttl_seconds: 7200
+    cache_key: "retreat_locations"
+

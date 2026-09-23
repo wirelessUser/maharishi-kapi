@@ -39,7 +39,7 @@ export class Instagram implements OnInit {
       title: 'Panch-Kosha & Panch-tattva Theory in applied #numerology #rishikesh',
       category: 'ध्यान • Meditation',
       duration: '5:12',
-      thumb: 'https://i.ytimg.com/an_webp/jC85u6ZumsE/mqdefault_6s.webp?du=3000&sqp=CJ_gpNUG&rs=AOn4CLCdFn8YameOzPAbDpTmo8liI_yvhg',
+      thumb: 'https://mkvnstorage.blob.core.windows.net/appimages/mqdefault_6s.webp',
       url: 'https://www.youtube.com/watch?v=jC85u6ZumsE',
     },
     {
@@ -76,6 +76,7 @@ export class Instagram implements OnInit {
       subtitleHindi: '',
       category: 'Review',
       url: 'https://www.instagram.com/acharya_alok_awasthi/reel/DRCSegNCYpB/',
+      image: 'assets/reels/meditation-thumb.webp',
     },
     {
       key: 'vastu-reel',

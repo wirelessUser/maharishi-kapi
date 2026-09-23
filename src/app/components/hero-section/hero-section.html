@@ -1,4 +1,4 @@
-<section class="py-10 sm:py-14 bg-gradient-to-b from-[#f5eee4] via-[#faf7f2] to-[#faf8f5] relative border-b border-[#e8dac5] overflow-hidden">
+<section class="py-10 sm:py-14 bg-gradient-to-b from-[#f5eee4] via-[#faf7f2] to-[#faf8f5] relative border-b border-[#e8dac5] overflow-hidden select-none">
     
     <!-- Sacred Geometry Watermarks & Solar Ambient Glow -->
     <div class="absolute inset-0 bg-[radial-gradient(#c2a275_1.2px,transparent_1.2px)] [background-size:32px_32px] opacity-25 pointer-events-none"></div>
@@ -8,7 +8,7 @@
         <div class="flex flex-col gap-6">
             
             <!-- ========================================================================= -->
-            <!-- 1. MAIN FEATURED SANCTUM BANNER: AYURVEDA & SURYA ASTROLABE               -->
+            <!-- 1. MAIN FEATURED SANCTUM BANNER: AYURVEDA & SURYA                -->
             <!-- ========================================================================= -->
             <div class="bg-[#fffdfa] rounded-[36px] p-8 sm:p-10 lg:p-14 relative overflow-hidden flex flex-col md:flex-row items-center justify-between shadow-[0_25px_60px_rgba(180,130,70,0.14)] border-2 border-[#e8dac5] group">
                 
@@ -35,7 +35,7 @@
                     <h1 class="text-3xl sm:text-4xl lg:text-[44px] font-serif font-black text-[#3a2717] mb-4 leading-[1.12] tracking-tight">
                         Master the Ancient<br>
                         <span class="italic text-transparent bg-clip-text bg-gradient-to-r from-[#994d22] via-[#b5651d] to-[#d97706]">
-                            Vedic  Sciences
+                            Vedic Sciences
                         </span>
                     </h1>
 
@@ -51,62 +51,109 @@
 
                 </div>
 
-                <!-- Right Column: Interactive Brass Astrolabe & Zodiac Dial -->
-                <div class="hidden md:flex w-2/5 relative items-center justify-center">
-                    <div class="relative w-80 h-80 flex items-center justify-center">
+                <!-- Right Column: Perfectly Round Interactive Brass Zodiac Wheel -->
+                <div class="hidden md:flex shrink-0 w-[310px] sm:w-[350px] relative items-center justify-center">
+                    <div class="relative w-full flex flex-col items-center justify-center">
                         
                         <!-- Ambient Sun Halo Glow -->
-                        <div class="absolute inset-0 bg-gradient-to-br from-amber-300/30 via-orange-300/20 to-transparent rounded-full blur-2xl animate-pulse"></div>
+                        <div class="absolute inset-0 rounded-full blur-2xl transition-all duration-700 pointer-events-none"
+                             [ngClass]="isCalibrating() 
+                               ? 'bg-gradient-to-br from-amber-400/60 via-orange-400/40 to-transparent scale-125 opacity-100' 
+                               : 'bg-gradient-to-br from-amber-300/30 via-orange-300/20 to-transparent scale-100 opacity-70 animate-pulse'">
+                        </div>
 
-                        <!-- Outer Brass Astronomical Calibrator Dial -->
-                        <div class="relative w-72 h-72 rounded-full border-2 border-[#d8c3a5] bg-gradient-to-br from-[#fffdfa] via-[#fcf6ec] to-[#f4ebe0] shadow-[0_10px_35px_rgba(180,130,70,0.18)] flex items-center justify-center animate-float-slow">
+                        <!-- Expanding Astral Shockwave Rings -->
+                        <div *ngIf="showShockwave()" class="absolute inset-0 rounded-full border-2 border-[#d97706] animate-astral-shockwave pointer-events-none"></div>
+                        <div *ngIf="showShockwave()" class="absolute inset-4 rounded-full border border-[#b45309] animate-astral-shockwave-secondary pointer-events-none"></div>
+
+                        <!-- Outer Positioning Container (Preserves Aspect Ratio & Round Shape) -->
+                        <div class="relative w-[280px] h-[280px] sm:w-[320px] sm:h-[320px] shrink-0 aspect-square flex items-center justify-center group/wheel">
                             
-                            <!-- Concentric Yantra Rings -->
-                            <div class="absolute inset-3 rounded-full border border-dashed border-[#cbb391]/80"></div>
-                            <div class="absolute inset-8 rounded-full border border-[#d8c3a5]/50 animate-spin-reverse"></div>
-                            <div class="absolute inset-14 rounded-full border border-[#d8c3a5]/35"></div>
+                            <!-- Floating "9 Generations" Archival Seal -->
+                            <div class="absolute -top-2 -right-2 bg-[#fffdfa] rounded-2xl px-3.5 py-1.5 shadow-md border-2 border-[#e8dac5] text-center z-30 transition-transform duration-300 group-hover/wheel:-translate-y-1">
+                                <p class="text-[#8c5324] font-black text-lg sm:text-xl leading-none font-serif">9</p>
+                                <p class="text-[7.5px] sm:text-[8px] text-[#7d6756] font-mono font-bold uppercase tracking-wider mt-0.5">Generations</p>
+                            </div>
 
-                            <!-- 30° Angular Degree Division Lines -->
-                            @for (sign of zodiacSigns; track sign; let i = $index) {
-                                <span class="absolute top-1/2 left-1/2 w-px h-[134px] -ml-[0.5px] bg-[#d8c3a5]/60 origin-top pointer-events-none" 
-                                      [style.transform]="'rotate(' + (i * 30) + 'deg)'"></span>
-                            }
+                            <!-- Click to Calibrate Interactive Pill -->
+                            <div *ngIf="!isCalibrating() && !selectedSign()" 
+                                 class="absolute -bottom-3 z-30 bg-[#fffdfa] border border-[#e8dac5] shadow-sm rounded-full px-3 py-1 flex items-center gap-1.5 text-[8.5px] font-mono font-bold uppercase tracking-widest text-[#8c5324] group-hover/wheel:border-[#d97706] group-hover/wheel:text-[#d97706] transition-colors pointer-events-none">
+                                <span class="w-1.5 h-1.5 rounded-full bg-[#d97706] animate-ping"></span>
+                                <span>Tap Wheel to Calibrate</span>
+                            </div>
 
-                            <!-- Rotating 12 Zodiac Constellation Ring -->
-                            <div class="absolute inset-0 animate-spin-astrolabe pointer-events-none">
-                                @for (sign of zodiacSigns; track sign; let i = $index) {
-                                    <span class="absolute top-1/2 left-1/2 w-8 h-8 -ml-4 -mt-4 flex items-center justify-center text-[#8c5324] font-serif text-lg font-bold drop-shadow-2xs select-none"
-                                          [style.transform]="'rotate(' + (i * 30) + 'deg) translateY(-118px) rotate(' + (-i * 30) + 'deg)'">
-                                        {{ sign }}
-                                    </span>
+                            <!-- ================= THE COMPLETE ROUND ZODIAC DIAL ================= -->
+                            <div (click)="calibrateAstrolabe()"
+                                 class="zodiac-dial-circle relative w-full h-full rounded-full border-4 border-[#d8c3a5] bg-gradient-to-br from-[#fffdfa] via-[#fcf6ec] to-[#f4ebe0] shadow-[0_12px_45px_rgba(180,130,70,0.22)] flex items-center justify-center cursor-pointer transition-all duration-300 hover:border-[#d97706] active:scale-95 overflow-hidden"
+                                 [class.animate-subtle-float]="!isCalibrating()"
+                                 title="Click to Calibrate Vedic Wheel">
+
+                                <!-- Annular Calibrated Degree Track (Outer Perimeter) -->
+                                <div class="absolute inset-1 rounded-full border border-[#e8dac5] pointer-events-none"></div>
+
+                                <!-- Concentric Yantra Geometry Rings -->
+                                <div class="absolute inset-4 rounded-full border border-dashed border-[#cbb391]/80 pointer-events-none"></div>
+                                <div class="absolute inset-9 rounded-full border border-[#d8c3a5]/50 animate-spin-reverse-slow pointer-events-none"></div>
+                                <div class="absolute inset-16 rounded-full border border-[#d8c3a5]/35 pointer-events-none"></div>
+
+                                <!-- 30° Angular Degree Division Spokes -->
+                                @for (sign of zodiacSigns; track sign.name; let i = $index) {
+                                    <span class="absolute top-1/2 left-1/2 w-px h-[134px] sm:h-[154px] -ml-[0.5px] bg-[#d8c3a5]/60 origin-top pointer-events-none" 
+                                          [style.transform]="'rotate(' + (i * 30) + 'deg)'"></span>
                                 }
-                            </div>
 
-                            <!-- Planetary Orbiting Beacons -->
-                            <div class="absolute inset-0 flex items-center justify-center animate-spin-orbit-fast pointer-events-none">
-                                <span class="absolute top-1/2 left-1/2 w-2.5 h-2.5 -ml-[5px] -mt-[5px] rounded-full bg-[#d97706] shadow-[0_0_10px_rgba(217,119,6,0.9)] translate-x-[138px]"></span>
-                            </div>
-                            <div class="absolute inset-0 flex items-center justify-center animate-spin-orbit-slow pointer-events-none">
-                                <span class="absolute top-1/2 left-1/2 w-2 h-2 -ml-1 -mt-1 rounded-full bg-[#b45309] shadow-[0_0_8px_rgba(180,83,9,0.9)] -translate-x-[96px]"></span>
-                            </div>
+                                <!-- Rotating 12 Zodiac Constellation Ring -->
+                                <div class="absolute inset-0 pointer-events-none astrolabe-rotator"
+                                     [style.transform]="'rotate(' + wheelRotation() + 'deg)'">
+                                    @for (sign of zodiacSigns; track sign.name; let i = $index) {
+                                        <span class="zodiac-glyph font-serif font-bold select-none transition-colors duration-300"
+                                              [style.--sign-rot]="(i * 30) + 'deg'"
+                                              [ngClass]="selectedSign()?.name === sign.name ? 'text-[#d97706] font-black' : 'text-[#8c5324]'">
+                                            {{ sign.glyph }}
+                                        </span>
+                                    }
+                                </div>
 
-                            <!-- Central Preceptor Consecrated Medallion -->
-                            <div class="relative w-24 h-24 rounded-full p-1 bg-gradient-to-b from-[#d97706] to-[#b45309] shadow-md z-10">
-                                <div class="w-full h-full rounded-full overflow-hidden border-2 border-white bg-[#f5ede2]">
-                                    <img src="https://mkvnstorage.blob.core.windows.net/acharyaalok/file_000000002c0c720b81210e444d2139ed.png" 
-                                         onerror="this.src='https://images.unsplash.com/photo-1506126613408-eca07ce68773?auto=format&fit=crop&w=600&q=80'" 
-                                         alt="Acharya Alok Awasthi" 
-                                         class="w-full h-full object-cover object-[50%_35%]">
+                                <!-- Planetary Orbiting Beacons -->
+                                <div class="absolute inset-0 flex items-center justify-center pointer-events-none"
+                                     [ngClass]="isCalibrating() ? 'animate-orbit-hyper' : 'animate-orbit-outer'">
+                                    <span class="absolute top-1/2 left-1/2 w-2.5 h-2.5 -ml-[5px] -mt-[5px] rounded-full bg-[#d97706] shadow-[0_0_12px_rgba(217,119,6,1)] translate-x-[118px] sm:translate-x-[134px]"></span>
+                                </div>
+                                <div class="absolute inset-0 flex items-center justify-center pointer-events-none"
+                                     [ngClass]="isCalibrating() ? 'animate-orbit-hyper-reverse' : 'animate-orbit-inner'">
+                                    <span class="absolute top-1/2 left-1/2 w-2 h-2 -ml-1 -mt-1 rounded-full bg-[#b45309] shadow-[0_0_10px_rgba(180,83,9,1)] -translate-x-[82px] sm:-translate-x-[92px]"></span>
+                                </div>
+
+                                <!-- Central Preceptor Consecrated Medallion -->
+                                <div class="relative w-22 h-22 sm:w-26 sm:h-26 rounded-full p-1 bg-gradient-to-b from-[#d97706] via-[#ea580c] to-[#b45309] shadow-md z-10 transition-all duration-300 group-hover/wheel:scale-105 shrink-0 aspect-square"
+                                     [class.ring-4]="isCalibrating()"
+                                     [class.ring-amber-300]="isCalibrating()">
+                                    <div class="w-full h-full rounded-full overflow-hidden border-2 border-white bg-[#f5ede2]">
+                                        <img src="https://mkvnstorage.blob.core.windows.net/acharyaalok/file_000000002c0c720b81210e444d2139ed.png" 
+                                             onerror="this.src='https://images.unsplash.com/photo-1506126613408-eca07ce68773?auto=format&fit=crop&w=600&q=80'" 
+                                             alt="Acharya Alok Awasthi" 
+                                             class="w-full h-full object-cover object-[50%_35%]">
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+
+                        <!-- Auspicious Aligned Rashi Inscription -->
+                        @if (selectedSign(); as sign) {
+                            <div class="mt-4 z-30 bg-[#fffdfa] border-2 border-[#e8dac5] rounded-2xl px-4 py-2 shadow-md flex items-center gap-3 animate-fade-slide-up">
+                                <span class="w-8 h-8 rounded-xl bg-[#faf6ee] border border-[#e8dac5] text-[#d97706] font-serif text-lg font-black flex items-center justify-center shadow-xs">
+                                    {{ sign.glyph }}
+                                </span>
+                                <div class="text-left">
+                                    <div class="flex items-center gap-1.5">
+                                        <span class="text-xs font-serif font-black text-[#2e1c10]">{{ sign.name }} ({{ sign.sanskrit }})</span>
+                                        <span class="text-[8px] font-mono px-1.5 py-0.5 bg-[#f0fdf4] text-[#16a34a] border border-[#bbf7d0] rounded-full font-bold">Consecrated</span>
+                                    </div>
+                                    <span class="text-[9px] font-mono text-[#8c5324] font-bold uppercase tracking-wider block"> Synchronized</span>
                                 </div>
                             </div>
-
-                            <!-- Floating "9 Generations" Archival Seal -->
-                            <div class="absolute -top-3 -right-3 bg-[#fffdfa] rounded-2xl px-4 py-2 shadow-md border-2 border-[#e8dac5] text-center z-20">
-                                <p class="text-[#8c5324] font-black text-xl leading-none font-serif">9</p>
-                                <p class="text-[8px] text-[#7d6756] font-mono font-bold uppercase tracking-wider mt-1">Generations</p>
-                            </div>
-
-                        </div>
+                        }
 
                     </div>
                 </div>
@@ -114,7 +161,7 @@
             </div>
 
             <!-- ========================================================================= -->
-            <!-- 2. THREE SACRED GATEWAY DOSSIERS (COURSES, CONSULTATION, BLUEPRINTS)     -->
+            <!-- 2. THREE SACRED GATEWAY DOSSIERS                                          -->
             <!-- ========================================================================= -->
             <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
                 

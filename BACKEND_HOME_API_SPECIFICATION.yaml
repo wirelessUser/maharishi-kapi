@@ -1,0 +1,1320 @@
+---
+title: Maharishi Kapi Home Page Backend API Specification
+version: 1.0
+description: |
+  Complete backend API specification for Maharishi Kapi's home page.
+  This document defines all endpoints, data models, and business logic needed
+  to power the frontend components rendered on the home page.
+
+  Home page route: GET /
+  Frontend framework: Angular 22 (Standalone Components, SSR with Prerendering)
+  Data-driven approach: All content from backend APIs, not hardcoded
+
+---
+
+# =============================================================================
+# SECTION 1: COMPONENT HIERARCHY & RENDERING ORDER
+# =============================================================================
+
+components_order:
+  - name: hero-section
+    position: 1
+    route: /api/hero
+    data_model: HeroSection
+
+  - name: generations
+    position: 2
+    route: /api/lineage/generations
+    data_model: GenerationLineage[]
+
+  - name: stats
+    position: 3
+    route: /api/stats/ticker
+    data_model: TickerItem[]
+
+  - name: featured-courses
+    position: 4
+    route: /api/courses/featured
+    data_model: FeaturedCourse[]
+
+  - name: legacy
+    position: 5
+    route: /api/lineage/pillars
+    data_model: LineagePillar[]
+
+  - name: roles
+    position: 6
+    route: /api/roles
+    data_model: Role[]
+
+  - name: journey
+    position: 7
+    route: /api/journey-paths
+    data_model: JourneyPath[]
+
+  - name: immersive
+    position: 8
+    route: /api/app-features
+    data_model: AppScreen[]
+
+  - name: consultation
+    position: 9
+    route: /api/consultations/tiers
+    data_model: ConsultationTier[]
+
+  - name: trained-consultants
+    position: 10
+    route: /api/consultants
+    data_model: CertifiedConsultant[]
+
+  - name: stories
+    position: 11
+    route: /api/reviews/google
+    data_model: GoogleReviewItem[]
+
+  - name: downloads
+    position: 12
+    route: /api/sacred-codex
+    data_model: SacredCodex[]
+
+  - name: instagram
+    position: 13
+    routes:
+      videos: /api/social/youtube-videos
+      reels: /api/social/instagram-reels
+    data_model:
+      videos: Video[]
+      reels: Reel[]
+
+---
+
+# =============================================================================
+# SECTION 2: DATA MODELS & INTERFACES
+# =============================================================================
+
+data_models:
+
+  # ---------------------------------------------------------------------------
+  # HERO SECTION
+  # ---------------------------------------------------------------------------
+  HeroSection:
+    description: Hero section with zodiac signs (static data)
+    fields:
+      zodiacSigns:
+        type: string[]
+        required: true
+        example: ['♈︎', '♉︎', '♊︎', '♋︎', '♌︎', '♍︎', '♎︎', '♏︎', '♐︎', '♑︎', '♒︎', '♓︎']
+        note: |
+          All 12 zodiac symbols. This is static content that rarely changes.
+          Can be cached indefinitely or stored as a constant.
+
+  # ---------------------------------------------------------------------------
+  # STATS TICKER
+  # ---------------------------------------------------------------------------
+  TickerItem:
+    description: Individual stat or logo item in the ticker carousel
+    fields:
+      type:
+        type: enum
+        values: ['stat', 'logo']
+        required: true
+      key:
+        type: string
+        required: true
+        example: 'generations'
+      value:
+        type: string
+        required: false
+        example: '9'
+        note: Only used when type='stat'
+      label:
+        type: string
+        required: false
+        example: 'Generations of Lineage'
+        note: Only used when type='stat'
+      sanskritTag:
+        type: string
+        required: false
+        example: 'नव पीढ़ी परम्परा'
+        note: Sanskrit label, only for stats
+      img:
+        type: string (URL)
+        required: false
+        example: '/images/inkhbar-logo.png'
+        note: Only used when type='logo'
+      alt:
+        type: string
+        required: false
+        example: 'InKhabar National Media'
+      dark:
+        type: boolean
+        required: false
+        default: false
+        note: Indicates if logo should be displayed in dark mode
+
+  # ---------------------------------------------------------------------------
+  # FEATURED COURSES
+  # ---------------------------------------------------------------------------
+  FeaturedCourse:
+    description: A course featured on the home page
+    fields:
+      id:
+        type: string (UUID)
+        required: true
+        example: 'astro-1'
+      title:
+        type: string
+        required: true
+        example: 'Vedic Astrology Foundations — Level 1'
+      sanskritTag:
+        type: string
+        required: true
+        example: 'पाराशरी ज्योतिष'
+      category:
+        type: string
+        required: true
+        example: 'Astrology'
+      image:
+        type: string (URL)
+        required: true
+        example: 'https://mkvnstorage.blob.core.windows.net/courseimages/...'
+        note: Must be a real `<img>` tag, not background-image
+      price:
+        type: number
+        required: true
+        example: 145
+        note: In EUR (€)
+      originalPrice:
+        type: number
+        required: true
+        example: 220
+      duration:
+        type: string
+        required: true
+        example: '12 Weeks • Live & Self-Paced'
+      rating:
+        type: string
+        required: true
+        example: '4.9 (1.2k+ Sadhaks)'
+    validation:
+      - price must be less than originalPrice
+      - only fetch 3 courses for home featured section (pagination for courses-page)
+
+  # ---------------------------------------------------------------------------
+  # GENERATION LINEAGE
+  # ---------------------------------------------------------------------------
+  Generation:
+    description: A generation in the 9-generation Vedic lineage
+    fields:
+      key:
+        type: string
+        required: true
+        example: 'g1'
+      ordinal:
+        type: string
+        required: true
+        example: 'Generation I'
+      devanagariNumber:
+        type: string
+        required: true
+        example: '०१'
+      name:
+        type: string
+        required: true
+        example: 'Shri Krishna Saraswat'
+      specialty:
+        type: string
+        required: true
+        example: 'Darshanacharya & Classical Philosophy'
+      initials:
+        type: string
+        required: true
+        example: 'KS'
+        note: Two-letter initials for avatar display
+      shastricTitle:
+        type: string
+        required: true
+        example: 'आदि प्रणेता • Founding Acharya'
+        note: Bilingual Sanskrit + English honorary title
+      photo:
+        type: string (URL)
+        required: false
+        example: '/images/founder-alok.jpg'
+        note: Optional photo (Gen VII has one)
+
+  # ---------------------------------------------------------------------------
+  # LINEAGE PILLAR
+  # ---------------------------------------------------------------------------
+  LineagePillar:
+    description: Core Vedic discipline pillar representing family heritage
+    fields:
+      devanagari:
+        type: string
+        required: true
+        example: 'ज्योतिष'
+      label:
+        type: string
+        required: true
+        example: 'Vedic Jyotish'
+    note: Exactly 4 pillars (Jyotish, Vastu, Ayurveda, Sadhana)
+
+  # ---------------------------------------------------------------------------
+  # ROLES (10 Professional Roles)
+  # ---------------------------------------------------------------------------
+  Role:
+    description: One of Acharya Alok's 10 professional specialized roles/avatars
+    fields:
+      key:
+        type: string
+        required: true
+        example: 'astrologer'
+      devanagariNum:
+        type: string
+        required: true
+        example: '०१'
+      icon:
+        type: string
+        required: true
+        example: 'fa-dharmachakra'
+        note: FontAwesome icon class
+      title:
+        type: string
+        required: true
+        example: 'Vedic Astrologer'
+      specialization:
+        type: string
+        required: true
+        example: 'Predictive & Nadi Jyotish'
+      desc:
+        type: string (long text)
+        required: true
+        example: 'Rooted in an unbroken 9-generation...'
+      image:
+        type: string (URL)
+        required: true
+        example: '/images/founder-alok-nature.jpg'
+        note: Real `<img>` tag, rotating through founder photos
+      pressLogos:
+        type: boolean
+        required: false
+        default: false
+        note: Only true for 'speaker' role (position 10)
+    validation:
+      - Exactly 10 roles with devanagari numerals 01-10
+      - Role images should cycle through: founder-alok.jpg, founder-alok-nature.jpg, founder-alok-group.jpg
+      - Last role (speaker) has pressLogos=true
+
+  # ---------------------------------------------------------------------------
+  # JOURNEY PATHS (5 Life Journey Entry Points)
+  # ---------------------------------------------------------------------------
+  JourneyPath:
+    description: A key life journey path users can follow
+    fields:
+      id:
+        type: string
+        required: true
+        example: 'spiritual'
+      devanagariNum:
+        type: string
+        required: true
+        example: '०१'
+      sanskritTag:
+        type: string
+        required: true
+        example: 'अध्यात्म जागृति'
+      prompt:
+        type: string
+        required: true
+        example: 'I am seeking'
+        note: Phrase that completes the user's statement
+      title:
+        type: string
+        required: true
+        example: 'Spiritual'
+      subtitle:
+        type: string
+        required: true
+        example: 'Awakening'
+      deck:
+        type: string (long description)
+        required: true
+        example: 'Dissolve mental fatigue and cultivate...'
+      image:
+        type: string (URL)
+        required: true
+        example: 'https://images.unsplash.com/photo-...'
+      targetRoute:
+        type: string
+        required: true
+        example: '/retreats'
+        note: Internal route to navigate to
+      routeLabel:
+        type: string
+        required: true
+        example: 'Explore Retreats'
+    validation:
+      - Exactly 5 journey paths (01-05)
+      - Each has unique targetRoute
+
+  # ---------------------------------------------------------------------------
+  # APP SCREENS (6 Mobile App Feature Screens)
+  # ---------------------------------------------------------------------------
+  AppScreen:
+    description: A feature screen in the Kapi mobile app (immersive section)
+    fields:
+      id:
+        type: string
+        required: true
+        example: 'home-matrix'
+      title:
+        type: string
+        required: true
+        example: 'Vedic Matrix Dashboard'
+      sanskritTitle:
+        type: string
+        required: false
+        example: ''
+      tag:
+        type: string
+        required: false
+        example: 'Sacred Geometry'
+      headline:
+        type: string
+        required: false
+        example: 'Master Your Life Path'
+      description:
+        type: string (long text)
+        required: false
+        example: 'Interactive 3x3 Kapi Numero chart...'
+      image:
+        type: string (URL)
+        required: true
+        example: 'https://mkvnstorage.blob.core.windows.net/app/1_Home_Page.png'
+        note: Mobile app screenshot
+    validation:
+      - Exactly 6 app screens
+      - First screen (home-matrix) is minimal (only title + image)
+      - Screens 2-6 have full metadata
+
+  # ---------------------------------------------------------------------------
+  # CONSULTATION TIERS (3 Service Tiers)
+  # ---------------------------------------------------------------------------
+  ConsultationTier:
+    description: A professional consultation service offering
+    fields:
+      id:
+        type: string
+        required: true
+        example: 'vedic-astrology'
+      devanagariNum:
+        type: string
+        required: true
+        example: '०१'
+      title:
+        type: string
+        required: true
+        example: 'Personalized Vedic Chart Reading'
+      sanskritTag:
+        type: string
+        required: true
+        example: 'कुण्डली दर्पण'
+      category:
+        type: string
+        required: true
+        example: 'Vedic Jyotish'
+      image:
+        type: string (URL)
+        required: true
+      price:
+        type: number
+        required: true
+        example: 90
+        note: In EUR (€)
+      originalPrice:
+        type: number
+        required: true
+        example: 102
+      duration:
+        type: string
+        required: true
+        example: '45 Mins • Private Video Session'
+      summary:
+        type: string (medium text)
+        required: true
+        example: 'A deep-dive reading of your Janma Kundali...'
+    validation:
+      - Exactly 3 consultation tiers
+      - price < originalPrice
+
+  # ---------------------------------------------------------------------------
+  # TRAINED CONSULTANTS (3+ Certified Network)
+  # ---------------------------------------------------------------------------
+  CertifiedConsultant:
+    description: A trained & certified consultant in the Maharishi Kapi network
+    fields:
+      key:
+        type: string
+        required: true
+        example: 'Tjasa'
+      devanagariNum:
+        type: string
+        required: true
+        example: '०१'
+      name:
+        type: string
+        required: true
+        example: 'Tjasa Rus'
+      sanskritTag:
+        type: string
+        required: true
+        example: 'स्थापत्य विशारद'
+      specialization:
+        type: string
+        required: true
+        example: 'Architect & Sthapatya Vastu Master'
+      photo:
+        type: string (URL)
+        required: true
+        example: 'https://images.unsplash.com/photo-...'
+      experience:
+        type: string
+        required: true
+        example: '10+ Years in Practice'
+      location:
+        type: string
+        required: true
+        example: 'Austria, EU'
+    validation:
+      - At least 3 consultants, expandable to N
+      - Devanagari numbers should be sequential starting from 01
+
+  # ---------------------------------------------------------------------------
+  # GOOGLE REVIEWS (Testimonials / Stories)
+  # ---------------------------------------------------------------------------
+  GoogleReviewItem:
+    description: An authentic Google review/testimonial from a seeker
+    fields:
+      authorName:
+        type: string
+        required: true
+        example: 'anastasija zdraveva'
+      initials:
+        type: string
+        required: true
+        example: 'AZ'
+        note: 2-letter initials for avatar
+      location:
+        type: string
+        required: true
+        example: 'macedonia, Europe'
+      avatarBg:
+        type: string
+        required: true
+        example: 'bg-amber-700'
+        note: Tailwind bg-color class for initials circle
+      rating:
+        type: integer
+        required: true
+        example: 5
+        valid_range: [1, 5]
+      relativeTime:
+        type: string
+        required: true
+        example: 'Verified Seeker'
+        note: "Not timestamp — descriptive label (e.g., 'Verified Client', 'Jyotish & Life Guidance')"
+      tag:
+        type: string
+        required: true
+        example: 'Jyotish & Life Guidance'
+        note: Service category tag
+      reviewText:
+        type: string (long text)
+        required: true
+        example: 'I had a wonderful experience. He was very positive...'
+    validation:
+      - reviewText can be empty string for space-saving (see Varun Bansal)
+      - Aggregate rating: 4.9 with 1200+ reviews
+
+  # ---------------------------------------------------------------------------
+  # SACRED CODEX (Downloadable PDFs)
+  # ---------------------------------------------------------------------------
+  SacredCodex:
+    description: A downloadable sacred/spiritual text or resource
+    fields:
+      id:
+        type: string
+        required: true
+        example: 'ananda-lahari'
+      devanagariNum:
+        type: string
+        required: true
+        example: '०१'
+      title:
+        type: string
+        required: true
+        example: 'Aanand Lahari'
+      sanskritTitle:
+        type: string
+        required: true
+        example: 'आनन्द लहरी'
+      subtitle:
+        type: string
+        required: true
+        example: 'Wave of Divine Bliss • Adi Shankara'
+      category:
+        type: string
+        required: true
+        example: 'Devi Shastra'
+      pages:
+        type: string
+        required: true
+        example: '12 Pages'
+      fileSize:
+        type: string
+        required: true
+        example: '2.8 MB'
+      shlokaSnippet:
+        type: string
+        required: true
+        example: 'भवानि स्तोतुं त्वां प्रभवति चतुर्भिर्न वदनैः...'
+        note: A Sanskrit verse snippet to showcase the text
+      downloadUrl:
+        type: string (URL)
+        required: true
+        example: 'https://storage.example.com/downloads/ananda-lahari.pdf'
+        note: Currently hardcoded as '#' — connect to actual PDF storage
+    validation:
+      - Exactly 4 sacred texts on home page
+      - downloadUrl should resolve to actual PDF file
+
+  # ---------------------------------------------------------------------------
+  # SOCIAL MEDIA CONTENT
+  # ---------------------------------------------------------------------------
+  Video:
+    description: A YouTube video for the Instagram social feed section
+    fields:
+      key:
+        type: string
+        required: true
+        example: 'meditation'
+      title:
+        type: string
+        required: true
+        example: 'Panch-Kosha & Panch-tattva Theory in applied #numerology'
+      category:
+        type: string
+        required: true
+        example: 'ध्यान • Meditation'
+      duration:
+        type: string
+        required: true
+        example: '5:12'
+      thumb:
+        type: string (URL)
+        required: true
+        example: 'https://i.ytimg.com/an_webp/jC85u6ZumsE/...'
+        note: YouTube video thumbnail image
+      url:
+        type: string (URL)
+        required: true
+        example: 'https://www.youtube.com/watch?v=jC85u6ZumsE'
+
+  Reel:
+    description: An Instagram Reel post link
+    fields:
+      key:
+        type: string
+        required: true
+        example: 'meditation-reel'
+      titleHindi:
+        type: string
+        required: false
+        example: ''
+        note: Currently empty for all reels
+      subtitleHindi:
+        type: string
+        required: false
+        example: ''
+      category:
+        type: string
+        required: true
+        example: 'Review'
+        values: ['Review', 'Product', 'Alok vani']
+      url:
+        type: string (URL)
+        required: true
+        example: 'https://www.instagram.com/acharya_alok_awasthi/reel/DRCSegNCYpB/'
+      image:
+        type: string (URL)
+        required: false
+        example: null
+        note: Auto-fetched from Instagram metadata API (microlink.io)
+
+---
+
+# =============================================================================
+# SECTION 3: API ENDPOINTS
+# =============================================================================
+
+api_endpoints:
+
+  # Hero Section (Static)
+  hero:
+    method: GET
+    path: /api/hero
+    description: Static hero section configuration with zodiac signs
+    response_code: 200
+    response_model: HeroSection
+    caching:
+      strategy: aggressive
+      ttl: 86400 # 24 hours
+    note: |
+      Static endpoint. Zodiac signs never change.
+      Can return hardcoded response or fetch once and cache forever.
+
+  # Lineage Data
+  generations:
+    method: GET
+    path: /api/lineage/generations
+    description: 9-generation Vedic lineage family tree
+    response_code: 200
+    response_model: Generation[]
+    caching:
+      strategy: aggressive
+      ttl: 604800 # 7 days (historical data)
+    expected_count: 7
+    note: |
+      The 7th generation is Acharya Alok (current).
+      This is historical family data that rarely changes.
+
+  lineage_pillars:
+    method: GET
+    path: /api/lineage/pillars
+    description: 4 core Vedic discipline pillars representing family heritage
+    response_code: 200
+    response_model: LineagePillar[]
+    caching:
+      strategy: aggressive
+      ttl: 604800
+    expected_count: 4
+    note: |
+      Static: Jyotish, Vastu, Ayurveda, Sadhana.
+      Core identity, never changes.
+
+  # Stats & Metrics
+  stats_ticker:
+    method: GET
+    path: /api/stats/ticker
+    description: |
+      Ticker carousel with mixed stats and partner logos.
+      Stats represent key metrics: 9 generations, 24 courses, 10,240+ students.
+      Logos represent media/academic partnerships.
+    response_code: 200
+    response_model: TickerItem[]
+    caching:
+      strategy: moderate
+      ttl: 3600 # 1 hour (student count may update)
+    expected_count: 6
+    note: |
+      Alternates: stat → logo → stat → logo → stat → logo
+      Consider adding a query param to fetch live student count separately.
+
+  # Courses
+  courses_featured:
+    method: GET
+    path: /api/courses/featured
+    query_params:
+      limit:
+        type: integer
+        default: 3
+        description: Number of featured courses (3 for home, variable for courses-page)
+      category:
+        type: string
+        optional: true
+        description: Filter by category (Astrology, Vastu, Wellness, etc.)
+    description: Featured courses displayed on home page
+    response_code: 200
+    response_model: FeaturedCourse[]
+    caching:
+      strategy: moderate
+      ttl: 3600
+    expected_count_home: 3
+    note: |
+      Home page shows top 3 courses.
+      Courses-page should fetch more with pagination.
+      Prices are in EUR (€).
+
+  # Roles (10 Professional Avatars)
+  roles:
+    method: GET
+    path: /api/roles
+    query_params:
+      limit:
+        type: integer
+        optional: true
+        default: all
+    description: Acharya Alok's 10 specialized professional roles/avatars
+    response_code: 200
+    response_model: Role[]
+    caching:
+      strategy: aggressive
+      ttl: 604800 # Static professional profile
+    expected_count: 10
+    note: |
+      Exactly 10 roles with sequential devanagari numbers 01-10.
+      Role 10 (speaker) has pressLogos=true.
+
+  # Journey Paths (Life Journey Entry Points)
+  journey_paths:
+    method: GET
+    path: /api/journey-paths
+    description: 5 key life journey paths for user segmentation
+    response_code: 200
+    response_model: JourneyPath[]
+    caching:
+      strategy: aggressive
+      ttl: 604800
+    expected_count: 5
+    note: |
+      Static entry point collection for journey selection.
+      Each path has unique targetRoute (retreats, courses, services, residential, matchmaking).
+
+  # App Features (Mobile App Immersive Section)
+  app_features:
+    method: GET
+    path: /api/app-features
+    description: 6 feature screens from the Kapi mobile application
+    response_code: 200
+    response_model: AppScreen[]
+    caching:
+      strategy: aggressive
+      ttl: 604800
+    expected_count: 6
+    note: |
+      Mobile app screenshots showcasing key features.
+      First screen (home-matrix) is minimal; screens 2-6 fully described.
+
+  # Consultations
+  consultations_tiers:
+    method: GET
+    path: /api/consultations/tiers
+    query_params:
+      service_type:
+        type: string
+        optional: true
+        description: Filter by service type
+    description: 3 professional consultation service tiers
+    response_code: 200
+    response_model: ConsultationTier[]
+    caching:
+      strategy: moderate
+      ttl: 3600
+    expected_count: 3
+    note: |
+      Prices are in EUR (€).
+      High-stakes service offerings (Vedic chart, Vastu blueprint, Life strategy).
+
+  # Trained Consultants
+  consultants:
+    method: GET
+    path: /api/consultants
+    query_params:
+      specialty:
+        type: string
+        optional: true
+      location:
+        type: string
+        optional: true
+    description: Trained & certified consultant network in Maharishi Kapi ecosystem
+    response_code: 200
+    response_model: CertifiedConsultant[]
+    caching:
+      strategy: moderate
+      ttl: 3600
+    expected_count_home: 3
+    note: |
+      Currently 3 consultants on home page.
+      Can expand to N consultants with pagination for dedicated consultants page.
+      Each has devanagari number, experience, specialization, photo.
+
+  # Reviews & Testimonials
+  reviews_google:
+    method: GET
+    path: /api/reviews/google
+    query_params:
+      limit:
+        type: integer
+        default: 3
+        description: Number of reviews to fetch
+      min_rating:
+        type: integer
+        optional: true
+        default: 1
+    description: |
+      Authentic Google reviews and testimonials from seekers.
+      Aggregate rating: 4.9 stars, 1200+ reviews.
+    response_code: 200
+    response_model: GoogleReviewItem[]
+    caching:
+      strategy: moderate
+      ttl: 3600 # Reviews may be added
+    expected_count_home: 3
+    note: |
+      Can be synced from actual Google Business Profile via Google Places API.
+      Currently hardcoded; consider adding integration with Google API.
+
+  # Sacred Downloads
+  sacred_codex:
+    method: GET
+    path: /api/sacred-codex
+    query_params:
+      category:
+        type: string
+        optional: true
+    description: Downloadable sacred texts and spiritual resources
+    response_code: 200
+    response_model: SacredCodex[]
+    caching:
+      strategy: aggressive
+      ttl: 604800 # Static resources
+    expected_count: 4
+    note: |
+      4 sacred texts currently available.
+      downloadUrl should resolve to actual PDF storage (S3, Azure Blob, etc.).
+
+  # Social Media
+  social_youtube_videos:
+    method: GET
+    path: /api/social/youtube-videos
+    query_params:
+      limit:
+        type: integer
+        default: 4
+    description: YouTube videos for social media feed section
+    response_code: 200
+    response_model: Video[]
+    caching:
+      strategy: moderate
+      ttl: 3600 # YouTube metadata may update
+    expected_count: 4
+    note: |
+      Videos from @maharishikapi YouTube channel.
+      Consider syncing with YouTube API for real-time data.
+
+  social_instagram_reels:
+    method: GET
+    path: /api/social/instagram-reels
+    query_params:
+      limit:
+        type: integer
+        default: 4
+    description: Instagram Reels for social media feed section
+    response_code: 200
+    response_model: Reel[]
+    caching:
+      strategy: moderate
+      ttl: 3600
+    expected_count: 4
+    note: |
+      Instagram reels from @acharya_alok_awasthi account.
+      Thumbnails auto-fetched from Instagram metadata (microlink.io).
+      Consider direct Instagram Graph API integration for live data.
+
+---
+
+# =============================================================================
+# SECTION 4: CONTENT STRATEGY & GUIDELINES
+# =============================================================================
+
+content_guidelines:
+
+  brand_palette:
+    description: |
+      Design tokens (colors, fonts) defined in src/styles.css @theme block.
+      Do NOT use generic Tailwind palette (purple-500, rose-500, etc.).
+      Use kapi-* tokens for brand consistency.
+    primary_colors:
+      kapi_purple: '#6B4B95' # Deep cosmic violet
+      kapi_saffron: '#F4A460' # Sacred saffron
+      kapi_rose: '#8B3A3A' # Sindoor rose/maroon
+      kapi_gold: '#D4AF37' # Temple gold
+      kapi_ivory: '#F5EFE6' # Warm ivory
+
+  founder:
+    name: "Acharya Alok Awasthi"
+    images:
+      primary: '/images/founder-alok.jpg'
+      nature: '/images/founder-alok-nature.jpg'
+      group: '/images/founder-alok-group.jpg'
+    note: |
+      These are real photos, not stock images.
+      Reuse existing files rather than introducing new generic photos.
+
+  images:
+    external:
+      strategy: link_verify_before_use
+      note: |
+        Multiple past incidents involved assumed Unsplash photo IDs depicting wrong content.
+        Always verify external image URLs resolve to correct content before adding.
+    internal:
+      logo: '/images/mk-logo.png'
+      partner_inkhbar: '/images/inkhbar-logo.png'
+      partner_agniban: '/images/agniban-logo.jpg'
+      partner_ims: '/images/ims-logo.webp'
+    real_images_requirement: |
+      Every meaningful photo must be a real <img> tag, NOT a CSS background-image div.
+      Exception: stardust.png sparkle texture (decorative pattern that repeats).
+
+  pricing:
+    currency: EUR (€)
+    format: "€" + toLocaleString('de-DE')
+    example: "€145", "€1.250"
+
+  languages:
+    primary: English
+    secondary: Sanskrit (Devanagari)
+      description: Every service/offering should have Sanskrit name/tag
+    note: |
+      Brand targets spiritual/Vedic audience.
+      Sanskrit tags are essential for brand authenticity.
+
+  media_partners:
+    - inkhbar_national_media
+    - dainik_agniban_press
+    - ims_ghaziabad_academic
+
+  social_links:
+    instagram: https://instagram.com/acharya_alok_awasthi
+    youtube: https://youtube.com/@maharishikapi
+    threads: https://threads.net/@arka.connection
+
+  contact:
+    email: maharishikapi@gmail.com
+    phone: '+91-8791691675'
+    locations:
+      - Rishikesh, Uttarakhand, India
+      - Delhi, India
+      - Mumbai, India
+      - Riga, Latvia
+
+---
+
+# =============================================================================
+# SECTION 5: DATABASE SCHEMA RECOMMENDATIONS
+# =============================================================================
+
+database_schema:
+
+  notes: |
+    This section provides database design recommendations for storing
+    the home page content. A robust backend should normalize this data
+    to enable easy updates, filtering, and analytics.
+
+  tables:
+
+    courses:
+      columns:
+        - id (PK, UUID)
+        - title (string, required)
+        - sanskritTag (string)
+        - category (enum: Astrology, Vastu Shastra, Wellness & Marma, etc.)
+        - description (text)
+        - imageUrl (string)
+        - price (decimal)
+        - originalPrice (decimal)
+        - duration (string)
+        - rating (string)
+        - isFeatured (boolean)
+        - createdAt (timestamp)
+        - updatedAt (timestamp)
+      indexes:
+        - isFeatured, createdAt (for featured course fetching)
+        - category (for filtering)
+
+    roles:
+      columns:
+        - id (PK, UUID)
+        - key (string, unique)
+        - devanagariNum (string)
+        - icon (string, FontAwesome class)
+        - title (string)
+        - specialization (string)
+        - description (text)
+        - imageUrl (string)
+        - pressLogos (boolean)
+        - displayOrder (int)
+      indexes:
+        - displayOrder (for carousel ordering)
+
+    consultation_services:
+      columns:
+        - id (PK, UUID)
+        - title (string)
+        - sanskritTag (string)
+        - category (string)
+        - imageUrl (string)
+        - price (decimal)
+        - originalPrice (decimal)
+        - duration (string)
+        - summary (text)
+        - devanagariNum (string)
+
+    consultants:
+      columns:
+        - id (PK, UUID)
+        - key (string)
+        - devanagariNum (string)
+        - name (string)
+        - sanskritTag (string)
+        - specialization (string)
+        - photoUrl (string)
+        - experience (string)
+        - location (string)
+        - isActive (boolean)
+        - createdAt (timestamp)
+      indexes:
+        - specialization, isActive
+
+    reviews:
+      columns:
+        - id (PK, UUID)
+        - authorName (string)
+        - location (string)
+        - rating (int, 1-5)
+        - reviewText (text)
+        - tag (string)
+        - source (enum: google, direct, etc.)
+        - createdAt (timestamp)
+        - isFeatured (boolean)
+      indexes:
+        - isFeatured, rating, createdAt
+
+    social_media_content:
+      columns:
+        - id (PK, UUID)
+        - contentType (enum: youtube_video, instagram_reel)
+        - externalId (string)
+        - title (string)
+        - category (string)
+        - url (string)
+        - thumbnailUrl (string)
+        - duration (string, nullable)
+        - isActive (boolean)
+        - createdAt (timestamp)
+      indexes:
+        - contentType, isActive, createdAt
+
+---
+
+# =============================================================================
+# SECTION 6: EXAMPLE REQUEST/RESPONSE PAIRS
+# =============================================================================
+
+examples:
+
+  get_courses_featured:
+    request: |
+      GET /api/courses/featured?limit=3
+      Accept: application/json
+    response: |
+      HTTP/1.1 200 OK
+      Content-Type: application/json
+
+      [
+        {
+          "id": "astro-1",
+          "title": "Vedic Astrology Foundations — Level 1",
+          "sanskritTag": "पाराशरी ज्योतिष",
+          "category": "Astrology",
+          "image": "https://mkvnstorage.blob.core.windows.net/courseimages/Vedic%20Astrology%20Foundations%20%E2%80%93%20Level%201.png",
+          "price": 145,
+          "originalPrice": 220,
+          "duration": "12 Weeks • Live & Self-Paced",
+          "rating": "4.9 (1.2k+ Sadhaks)"
+        },
+        {
+          "id": "vastu-consultant",
+          "title": "Kapi Vastu Consultant™ Certification",
+          "sanskritTag": "स्थापत्य वेद",
+          "category": "Vastu Shastra",
+          "image": "https://mkvnstorage.blob.core.windows.net/courseimages/Kapi%20Vastu%20Consultant%E2%84%A2.jpg",
+          "price": 410,
+          "originalPrice": 500,
+          "duration": "16 Weeks • On-Site Audits",
+          "rating": "5.0 (860+ Sadhaks)"
+        },
+        {
+          "id": "kapi-shakti",
+          "title": "Kapi Shakti — Women's Hormonal & AyurJyotish Wellness",
+          "sanskritTag": "शक्ति एवं आयुर्वेद",
+          "category": "Wellness & Marma",
+          "image": "https://mkvnstorage.blob.core.windows.net/courseimages/Kapi%20Shakti%20%E2%80%93%20The%20Complete%20System%20of%20Women%E2%80%99s%20Health,%20Hormonal%20Wellness%20&%20Conscious%20Living.png",
+          "price": 399,
+          "originalPrice": 500,
+          "duration": "8 Weeks • Daily Rituals",
+          "rating": "4.95 (940+ Sadhaks)"
+        }
+      ]
+
+  get_roles:
+    request: |
+      GET /api/roles
+      Accept: application/json
+    response_snippet: |
+      HTTP/1.1 200 OK
+      Content-Type: application/json
+
+      [
+        {
+          "key": "astrologer",
+          "devanagariNum": "०१",
+          "icon": "fa-dharmachakra",
+          "title": "Vedic Astrologer",
+          "specialization": "Predictive & Nadi Jyotish",
+          "desc": "Rooted in an unbroken 9-generation Saraswat lineage, decoding intricate karmic blueprints and Dasha timings for 10,000+ global seekers.",
+          "image": "https://drive.google.com/drive/u/1/folders/1CGiq3rPyYy_wTq0dZ_YHCGHPOMoNQTXs",
+          "pressLogos": false
+        },
+        ...
+      ]
+
+  get_reviews:
+    request: |
+      GET /api/reviews/google?limit=3
+      Accept: application/json
+    response_snippet: |
+      HTTP/1.1 200 OK
+      Content-Type: application/json
+
+      [
+        {
+          "authorName": "anastasija zdraveva",
+          "initials": "AZ",
+          "location": "macedonia, Europe",
+          "avatarBg": "bg-amber-700",
+          "rating": 5,
+          "relativeTime": "Verified Seeker",
+          "tag": "Jyotish & Life Guidance",
+          "reviewText": "I had a wonderful experience. He was very positive, insightful, attentive, and explained everything in a clear way..."
+        },
+        ...
+      ]
+
+---
+
+# =============================================================================
+# SECTION 7: IMPLEMENTATION CHECKLIST
+# =============================================================================
+
+implementation_checklist:
+
+  phase_1_basic_api:
+    - [ ] Create Node.js/Express or similar backend server
+    - [ ] Implement authentication & CORS for Angular frontend
+    - [ ] Create 13 main API endpoints (see SECTION 3)
+    - [ ] Connect to database or mock data layer
+    - [ ] Implement caching strategy (aggressive for static, moderate for dynamic)
+    - [ ] Add error handling and validation
+
+  phase_2_database:
+    - [ ] Design normalized database schema (see SECTION 5)
+    - [ ] Create migration scripts for initial data seed
+    - [ ] Implement ORM (Prisma, TypeORM, etc.)
+    - [ ] Add database indexing for performance
+
+  phase_3_integrations:
+    - [ ] Google Places API for real reviews sync
+    - [ ] YouTube API for live video metadata
+    - [ ] Instagram Graph API for live reel metadata
+    - [ ] Image storage (S3, Azure Blob) for PDFs & images
+
+  phase_4_admin:
+    - [ ] Admin panel for content management
+    - [ ] CRUD operations for courses, roles, consultants, reviews
+    - [ ] Bulk import/export functionality
+    - [ ] Analytics dashboard for visitor metrics
+
+  phase_5_testing:
+    - [ ] Unit tests for all endpoints
+    - [ ] Integration tests with database
+    - [ ] Load testing for performance
+    - [ ] Security testing (SQL injection, XSS, CSRF)
+
+  phase_6_deployment:
+    - [ ] Deploy to production server/cloud platform
+    - [ ] Set up monitoring & alerting
+    - [ ] Configure CDN for static assets
+    - [ ] Establish backup & disaster recovery
+
+---
+
+# =============================================================================
+# SECTION 8: MIGRATION NOTES FROM FRONTEND HARDCODING
+# =============================================================================
+
+hardcoded_to_migrate:
+
+  components_with_static_data:
+    - hero-section: zodiacSigns array (KEEP as static)
+    - generations: lineage array (MIGRATE to /api/lineage/generations)
+    - stats: tickerItems array (MIGRATE to /api/stats/ticker)
+    - featured-courses: courses array (MIGRATE to /api/courses/featured)
+    - legacy: lineagePillars array (MIGRATE to /api/lineage/pillars)
+    - roles: roles array (MIGRATE to /api/roles)
+    - journey: paths array (MIGRATE to /api/journey-paths)
+    - immersive: appScreens array (MIGRATE to /api/app-features)
+    - consultation: consultations array (MIGRATE to /api/consultations/tiers)
+    - trained-consultants: consultants array (MIGRATE to /api/consultants)
+    - stories: googleReviews array (MIGRATE to /api/reviews/google)
+    - downloads: codices array (MIGRATE to /api/sacred-codex)
+    - instagram: videos & reels arrays (MIGRATE to /api/social/youtube-videos & /api/social/instagram-reels)
+
+  migration_strategy:
+    1. Create backend API with mock data (same hardcoded arrays)
+    2. Update Angular components to fetch from API instead of hardcoding
+    3. Test API responses match frontend expectations exactly
+    4. Connect to database with real data
+    5. Gradually enable live data sync (Google, YouTube, Instagram APIs)
+
+---
+
+# =============================================================================
+# SECTION 9: CACHING & PERFORMANCE NOTES
+# =============================================================================
+
+caching_strategy:
+
+  frontend_caching:
+    strategy: |
+      Angular HttpClient should use HTTP caching headers from backend.
+      Consider implementing Angular's built-in cache service for:
+      - Hero (cache forever, refresh on demand)
+      - Generations/Lineage (cache 7 days)
+      - Stats (cache 1 hour, refresh more frequently for live counts)
+      - Courses/Services (cache 1 hour, bust cache on inventory change)
+      - Roles (cache 7 days)
+      - Social media (cache 1 hour, refresh frequently)
+
+  backend_response_headers:
+    hero: "Cache-Control: public, max-age=86400"
+    generations: "Cache-Control: public, max-age=604800"
+    stats: "Cache-Control: public, max-age=3600"
+    courses: "Cache-Control: public, max-age=3600"
+    social: "Cache-Control: public, max-age=3600"
+    reviews: "Cache-Control: public, max-age=1800" # Fresher reviews
+
+  cdn_strategy: |
+    Images (courses, roles, consultants) should be served via CDN.
+    Consider lazy-loading images with intersection observer.
+
+---
+
+# =============================================================================
+# END OF SPECIFICATION
+# =============================================================================
+
+version_history:
+  - version: 1.0
+    date: 2026-09-18
+    author: Claude Haiku 4.5
+    changes: Initial specification for Maharishi Kapi home page backend API

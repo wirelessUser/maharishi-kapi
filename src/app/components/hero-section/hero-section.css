@@ -1,13 +1,44 @@
-/* Astrolabe Rotations & Orbital Physics */
-@keyframes spin-astrolabe {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
+/* =========================================================================
+   PERFECT CIRCULAR GEOMETRY & ASTROLABE PHYSICS
+   ========================================================================= */
+
+/* Enforce 1:1 true circle ratio without flex compression */
+.zodiac-dial-circle {
+  aspect-ratio: 1 / 1;
+  border-radius: 50%;
+  box-sizing: border-box;
+}
+
+/* Mechanical physics deceleration curve on click */
+.astrolabe-rotator {
+  transition: transform 2.2s cubic-bezier(0.12, 0.8, 0.32, 1);
+  will-change: transform;
+}
+
+/* Radial Placement for Zodiac Glyphs */
+.zodiac-glyph {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 2rem;
+  height: 2rem;
+  margin-left: -1rem;
+  margin-top: -1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.15rem;
+  transform: rotate(var(--sign-rot)) translateY(-108px) rotate(calc(-1 * var(--sign-rot)));
+}
+
+@media (min-width: 640px) {
+  .zodiac-glyph {
+    font-size: 1.25rem;
+    transform: rotate(var(--sign-rot)) translateY(-124px) rotate(calc(-1 * var(--sign-rot)));
   }
 }
 
+/* Astrolabe Rotations & Orbits */
 @keyframes spin-reverse-slow {
   from {
     transform: rotate(360deg);
@@ -37,15 +68,11 @@
 
 @keyframes subtle-float {
   0%, 100% {
-    transform: translateY(0px) scale(1);
+    transform: translateY(0px);
   }
   50% {
-    transform: translateY(-8px) scale(1.015);
+    transform: translateY(-7px);
   }
-}
-
-.animate-spin-astrolabe {
-  animation: spin-astrolabe 60s linear infinite;
 }
 
 .animate-spin-reverse-slow {
@@ -62,6 +89,59 @@
 
 .animate-subtle-float {
   animation: subtle-float 7s ease-in-out infinite;
+}
+
+/* Hyper-Drive Planetary Acceleration During Click */
+@keyframes orbitHyper {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(720deg); }
+}
+.animate-orbit-hyper {
+  animation: orbitHyper 1.1s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+}
+
+@keyframes orbitHyperReverse {
+  from { transform: rotate(720deg); }
+  to { transform: rotate(0deg); }
+}
+.animate-orbit-hyper-reverse {
+  animation: orbitHyperReverse 0.9s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+}
+
+/* Astral Shockwave Bursts */
+@keyframes astralShockwave {
+  0% {
+    transform: scale(0.85);
+    opacity: 0.9;
+  }
+  100% {
+    transform: scale(1.65);
+    opacity: 0;
+  }
+}
+
+.animate-astral-shockwave {
+  animation: astralShockwave 0.75s ease-out forwards;
+}
+
+.animate-astral-shockwave-secondary {
+  animation: astralShockwave 0.95s ease-out 0.15s forwards;
+}
+
+/* Alignment Badge Entrance */
+@keyframes fadeSlideUp {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fade-slide-up {
+  animation: fadeSlideUp 0.35s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
 
 /* Gateway Tablet Edge Shadows */

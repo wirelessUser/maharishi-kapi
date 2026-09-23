@@ -42,26 +42,26 @@ export class Stories {
         "I had a wonderful experience. He was very positive, insightful, attentive, and explained everything in a clear way. The reading gave me a lot of things to reflect on and helped me see certain aspects of my life from a different perspective. I really appreciated his approach and would definitely recommend him",
     },
     {
-      authorName: 'Manish Agarwal',
-      initials: 'MA',
+      authorName: 'Erinda Zhupani',
+      initials: 'EZ',
       location: 'Delhi NCR',
       avatarBg: 'bg-emerald-700',
       rating: 5,
-      relativeTime: 'Verified Client',
-      tag: 'Commercial Vastu Audit',
+      relativeTime: 'Jyotish & Life Guidance',
+      tag: 'Jyotish & Life Guidance',
       reviewText:
-        'The non-demolition Vastu corrections Acharya suggested worked wonders for our commercial space. Both our workplace harmony and productivity improved significantly.',
+        'I had a wonderful experience with Alok and as an astrologer, philosopher, and spiritual guide. He is highly educated, deeply intuitive, and, most importantly, a person of great integrity.Even though I am also a student of these sciences, I was genuinely impressed by how accurate and insightful his readings were. Many people can be good at giving readings, but not everyone is equally good at offering the right remedies and practical guidance......',
     },
     {
-      authorName: 'Neha Verma',
-      initials: 'NV',
-      location: 'Mumbai, India',
+      authorName: 'Ritika T Nijhawan',
+      initials: 'RN',
+      location: 'DELHI, India',
       avatarBg: 'bg-indigo-700',
       rating: 5,
       relativeTime: 'Verified Client',
-      tag: 'Residential Vastu',
+      tag: 'Jyotish & Life Guidance',
       reviewText:
-        'We consulted for residential Vastu corrections and the results were astonishing. Without breaking any walls, the directional adjustments brought deep peace and balance to our home.',
+        'A very positive and enlightening Acharya ji explained everything clearly and made the session feel personal and meaningful.He listened  me totally and gave me right direction for my future...I came away feeling hopeful and motivated.',
     }
     
   ];

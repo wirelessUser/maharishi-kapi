@@ -32,7 +32,7 @@
         <!-- ========================================================================= -->
         <div #viewport class="overflow-hidden mb-10 pb-4">
             <div #track class="flex gap-5 sm:gap-6 lg:gap-7 transition-transform duration-500 ease-out" [style.transform]="trackTransform()">
-                @for (role of roles; track role.key) {
+                @for (role of roles(); track role.key) {
                     
                     <div class="shrink-0 w-[260px] sm:w-[290px] md:w-[320px] h-[410px] sm:h-[450px] md:h-[470px]">
                         
@@ -129,7 +129,7 @@
 
             <!-- Dynamic Capsule Dots -->
             <div class="flex gap-2 items-center flex-wrap justify-center max-w-[220px] sm:max-w-none">
-                @for (role of roles; track role.key; let i = $index) {
+                @for (role of roles(); track role.key; let i = $index) {
                     <button type="button" 
                             (click)="goTo(i)" 
                             [attr.aria-label]="'Go to ' + role.title" 

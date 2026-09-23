@@ -1,42 +1,84 @@
-/* Cross-browser hide-scrollbar utility */
-.hide-scrollbar {
-  -ms-overflow-style: none; /* IE and Edge */
-  scrollbar-width: none; /* Firefox */
-}
-
+/* Hide scrollbar for clean horizontal swiping */
 .hide-scrollbar::-webkit-scrollbar {
-  display: none; /* Chrome, Safari and Opera */
+  display: none;
+}
+.hide-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
 }
 
-/* Glossy Sheen Sweep Reflection on Hover */
+/* =====================================================
+   1. SCROLL REVEAL ANIMATION (Staggered Fade-Up)
+   ===================================================== */
+.consultant-card {
+  opacity: 0;
+  transform: translateY(50px) scale(0.96);
+  transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), 
+              transform 0.8s cubic-bezier(0.16, 1, 0.3, 1),
+              box-shadow 0.5s ease,
+              border-color 0.5s ease;
+  will-change: transform, opacity;
+}
+
+/* Added by the IntersectionObserver */
+.consultant-card.is-visible {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+}
+
+/* Prevent hover states from breaking the visible transformation */
+.consultant-card.is-visible:hover {
+  transform: translateY(-8px) scale(1);
+}
+
+
+/* =====================================================
+   2. GOLDEN GLASS SHEEN SWEEP ANIMATION
+   ===================================================== */
 .sheen-sweep {
   position: absolute;
-  inset: 0;
+  top: 0;
+  left: -150%;
+  width: 50%;
+  height: 100%;
   background: linear-gradient(
-    115deg,
-    transparent 0%,
-    rgba(255, 255, 255, 0.42) 45%,
-    rgba(255, 255, 255, 0.15) 55%,
-    transparent 100%
+    to right,
+    rgba(255, 255, 255, 0) 0%,
+    rgba(255, 255, 255, 0.15) 50%,
+    rgba(255, 215, 100, 0.25) 75%, /* Subtle gold tint */
+    rgba(255, 255, 255, 0) 100%
   );
-  transform: translateX(-160%);
+  transform: skewX(-25deg);
   pointer-events: none;
-  transition: transform 0.85s cubic-bezier(0.16, 1, 0.3, 1);
+  z-index: 20;
 }
 
+/* Trigger the sweep when hovering over the card */
 .consultant-card:hover .sheen-sweep {
-  transform: translateX(160%);
+  animation: diagonalSheen 1.2s cubic-bezier(0.4, 0, 0.2, 1) forwards;
 }
 
-/* Tactile Card Elevation */
-.consultant-card {
-  box-shadow: 
-    0 8px 20px -5px rgba(140, 83, 36, 0.08),
-    0 0 0 1px rgba(232, 218, 197, 0.6);
+@keyframes diagonalSheen {
+  0% {
+    left: -150%;
+  }
+  100% {
+    left: 200%;
+  }
 }
 
-.consultant-card:hover {
-  box-shadow: 
-    0 24px 45px -10px rgba(140, 83, 36, 0.16),
-    0 0 0 1px rgba(217, 119, 6, 0.4);
+/* =====================================================
+   3. MICRO-ANIMATIONS
+   ===================================================== */
+@keyframes bounceSlight {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-3px);
+  }
+}
+
+.animate-bounce-slight {
+  animation: bounceSlight 2s ease-in-out infinite;
 }

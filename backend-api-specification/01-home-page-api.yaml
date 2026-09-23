@@ -1,0 +1,589 @@
+---
+# HOME PAGE API SPECIFICATION
+# Purpose: Provide all data needed for the home page including hero, stats, featured courses, testimonials, etc.
+
+api_version: "1.0"
+page: "Home"
+module: "Public Content"
+
+base_url: "/api/v1/home"
+
+endpoints:
+
+  # ========================================
+  # GET /api/v1/home/dashboard
+  # ========================================
+  # Description: Get complete home page data in one request (recommended)
+  # Auth: None (Public)
+  dashboard:
+    method: GET
+    path: "/dashboard"
+    description: "Fetch complete home page data including hero, stats, featured courses, testimonials"
+    authentication: "none"
+    parameters: []
+    response_schema:
+      type: "object"
+      properties:
+        status:
+          type: "string"
+          example: "success"
+        data:
+          type: "object"
+          properties:
+            hero:
+              type: "object"
+              properties:
+                title:
+                  type: "string"
+                  example: "Maharishi Kapi Institute | Vedic Astrology, Vastu & Yogic Sciences"
+                subtitle:
+                  type: "string"
+                  example: "Learn Vedic Astrology, Numerology, Vastu, Palmistry, Tarot & Ayurveda"
+                backgroundImage:
+                  type: "string"
+                  format: "url"
+                ctaButtons:
+                  type: "array"
+                  items:
+                    type: "object"
+                    properties:
+                      label:
+                        type: "string"
+                      link:
+                        type: "string"
+                      style:
+                        type: "string"
+                        enum: ["primary", "secondary"]
+
+            stats:
+              type: "array"
+              items:
+                type: "object"
+                properties:
+                  num:
+                    type: "string"
+                    example: "25+"
+                  label:
+                    type: "string"
+                    example: "Years of Tapasya"
+                  sub:
+                    type: "string"
+                    example: "Saraswat Guru Lineage"
+
+            featuredCourses:
+              type: "array"
+              maxItems: 6
+              items:
+                $ref: "#/components/schemas/CourseCard"
+
+            generations:
+              type: "object"
+              properties:
+                title:
+                  type: "string"
+                  example: "A 9-Generation Vedic Lineage"
+                description:
+                  type: "string"
+                content:
+                  type: "string"
+
+            legacy:
+              type: "object"
+              properties:
+                title:
+                  type: "string"
+                description:
+                  type: "string"
+                features:
+                  type: "array"
+                  items:
+                    type: "string"
+
+            roles:
+              type: "array"
+              items:
+                $ref: "#/components/schemas/MasterRole"
+
+            journey:
+              type: "object"
+              properties:
+                title:
+                  type: "string"
+                description:
+                  type: "string"
+                steps:
+                  type: "array"
+                  items:
+                    type: "object"
+                    properties:
+                      number:
+                        type: "integer"
+                      title:
+                        type: "string"
+                      description:
+                        type: "string"
+
+            immersive:
+              type: "object"
+              properties:
+                title:
+                  type: "string"
+                retreats:
+                  type: "array"
+                  items:
+                    $ref: "#/components/schemas/RetreatCard"
+
+            consultation:
+              type: "object"
+              properties:
+                title:
+                  type: "string"
+                description:
+                  type: "string"
+                services:
+                  type: "array"
+                  items:
+                    type: "object"
+                    properties:
+                      title:
+                        type: "string"
+                      description:
+                        type: "string"
+                      icon:
+                        type: "string"
+
+            trainedConsultants:
+              type: "array"
+              items:
+                type: "object"
+                properties:
+                  id:
+                    type: "string"
+                  name:
+                    type: "string"
+                  specialization:
+                    type: "string"
+                  location:
+                    type: "string"
+                  image:
+                    type: "string"
+                    format: "url"
+                  rating:
+                    type: "number"
+                  totalConsultations:
+                    type: "integer"
+
+            testimonials:
+              type: "array"
+              items:
+                $ref: "#/components/schemas/Testimonial"
+
+            downloads:
+              type: "object"
+              properties:
+                title:
+                  type: "string"
+                resources:
+                  type: "array"
+                  items:
+                    type: "object"
+                    properties:
+                      title:
+                        type: "string"
+                      description:
+                        type: "string"
+                      downloadUrl:
+                        type: "string"
+                        format: "url"
+                      fileSize:
+                        type: "string"
+
+            instagram:
+              type: "object"
+              properties:
+                username:
+                  type: "string"
+                feedUrl:
+                  type: "string"
+                posts:
+                  type: "array"
+                  items:
+                    type: "object"
+                    properties:
+                      imageUrl:
+                        type: "string"
+                      caption:
+                        type: "string"
+                      postUrl:
+                        type: "string"
+
+    response_example:
+      status: "success"
+      data:
+        hero:
+          title: "Maharishi Kapi Institute"
+          subtitle: "Learn Vedic Astrology & Spiritual Sciences"
+          backgroundImage: "https://..."
+          ctaButtons:
+            - label: "Explore Courses"
+              link: "/courses"
+              style: "primary"
+        stats:
+          - num: "25+"
+            label: "Years of Tapasya"
+            sub: "Saraswat Guru Lineage"
+        featuredCourses: []
+        generations: {}
+        legacy: {}
+        roles: []
+        journey: {}
+        immersive: {}
+        consultation: {}
+        trainedConsultants: []
+        testimonials: []
+        downloads: {}
+        instagram: {}
+
+    error_responses:
+      - code: 500
+        description: "Internal Server Error"
+        example:
+          status: "error"
+          message: "Failed to fetch home page data"
+
+  # ========================================
+  # GET /api/v1/home/featured-courses
+  # ========================================
+  # Description: Get featured courses for home page carousel
+  # Auth: None (Public)
+  featured_courses:
+    method: GET
+    path: "/featured-courses"
+    description: "Fetch featured courses (limited to 6)"
+    authentication: "none"
+    parameters:
+      - name: "limit"
+        in: "query"
+        type: "integer"
+        default: 6
+        description: "Maximum number of courses to return"
+    response_schema:
+      type: "object"
+      properties:
+        status:
+          type: "string"
+        data:
+          type: "array"
+          items:
+            $ref: "#/components/schemas/CourseCard"
+
+  # ========================================
+  # GET /api/v1/home/testimonials
+  # ========================================
+  # Description: Get testimonials for home page
+  # Auth: None (Public)
+  testimonials:
+    method: GET
+    path: "/testimonials"
+    description: "Fetch testimonials and reviews"
+    authentication: "none"
+    parameters:
+      - name: "limit"
+        in: "query"
+        type: "integer"
+        default: 10
+      - name: "sort"
+        in: "query"
+        type: "string"
+        enum: ["recent", "rating"]
+        default: "recent"
+    response_schema:
+      type: "object"
+      properties:
+        status:
+          type: "string"
+        data:
+          type: "array"
+          items:
+            $ref: "#/components/schemas/Testimonial"
+
+  # ========================================
+  # GET /api/v1/home/trained-consultants
+  # ========================================
+  # Description: Get trained consultants directory
+  # Auth: None (Public)
+  trained_consultants:
+    method: GET
+    path: "/trained-consultants"
+    description: "Fetch list of trained and certified consultants"
+    authentication: "none"
+    parameters:
+      - name: "limit"
+        in: "query"
+        type: "integer"
+        default: 12
+      - name: "specialization"
+        in: "query"
+        type: "string"
+        enum: ["Astrology", "Vastu", "Numerology", "Tarot", "Palmistry"]
+      - name: "location"
+        in: "query"
+        type: "string"
+    response_schema:
+      type: "object"
+      properties:
+        status:
+          type: "string"
+        data:
+          type: "array"
+          items:
+            type: "object"
+            properties:
+              id:
+                type: "string"
+              name:
+                type: "string"
+              specialization:
+                type: "array"
+                items:
+                  type: "string"
+              location:
+                type: "string"
+              image:
+                type: "string"
+                format: "url"
+              rating:
+                type: "number"
+              totalConsultations:
+                type: "integer"
+              bio:
+                type: "string"
+              contactEmail:
+                type: "string"
+              contactPhone:
+                type: "string"
+
+  # ========================================
+  # GET /api/v1/home/stats
+  # ========================================
+  # Description: Get statistics for the home page
+  # Auth: None (Public)
+  stats:
+    method: GET
+    path: "/stats"
+    description: "Fetch authority statistics"
+    authentication: "none"
+    response_schema:
+      type: "object"
+      properties:
+        status:
+          type: "string"
+        data:
+          type: "array"
+          items:
+            type: "object"
+            properties:
+              num:
+                type: "string"
+              label:
+                type: "string"
+              sub:
+                type: "string"
+
+components:
+  schemas:
+    CourseCard:
+      type: "object"
+      properties:
+        id:
+          type: "string"
+        slug:
+          type: "string"
+        title:
+          type: "string"
+        category:
+          type: "string"
+        level:
+          type: "string"
+          enum: ["Beginner", "Intermediate", "Advanced", "Professional"]
+        image:
+          type: "string"
+          format: "url"
+        price:
+          type: "number"
+        originalPrice:
+          type: "number"
+        tagline:
+          type: "string"
+        duration:
+          type: "string"
+        language:
+          type: "string"
+        rating:
+          type: "number"
+        enrolled:
+          type: "integer"
+
+    RetreatCard:
+      type: "object"
+      properties:
+        id:
+          type: "string"
+        slug:
+          type: "string"
+        title:
+          type: "string"
+        subtitle:
+          type: "string"
+        dateRange:
+          type: "string"
+        duration:
+          type: "string"
+        location:
+          type: "string"
+        cardImage:
+          type: "string"
+          format: "url"
+        priceFrom:
+          type: "number"
+        seatsTotal:
+          type: "integer"
+        seatsLeft:
+          type: "integer"
+        rating:
+          type: "number"
+        status:
+          type: "string"
+          enum: ["upcoming", "past", "ongoing"]
+
+    MasterRole:
+      type: "object"
+      properties:
+        id:
+          type: "string"
+        roleNumber:
+          type: "string"
+        title:
+          type: "string"
+        domain:
+          type: "string"
+        icon:
+          type: "string"
+        tagline:
+          type: "string"
+
+    Testimonial:
+      type: "object"
+      properties:
+        id:
+          type: "string"
+        name:
+          type: "string"
+        location:
+          type: "string"
+        quote:
+          type: "string"
+        rating:
+          type: "number"
+        image:
+          type: "string"
+          format: "url"
+        course:
+          type: "string"
+        dateSubmitted:
+          type: "string"
+          format: "date-time"
+
+database_models:
+  - name: "HomeStats"
+    fields:
+      - name: "id"
+        type: "Guid (PK)"
+      - name: "num"
+        type: "string"
+      - name: "label"
+        type: "string"
+      - name: "sub"
+        type: "string"
+      - name: "isActive"
+        type: "bool"
+      - name: "displayOrder"
+        type: "int"
+      - name: "createdAt"
+        type: "DateTime"
+      - name: "updatedAt"
+        type: "DateTime"
+
+  - name: "Testimonial"
+    fields:
+      - name: "id"
+        type: "Guid (PK)"
+      - name: "name"
+        type: "string"
+      - name: "location"
+        type: "string"
+      - name: "quote"
+        type: "string"
+      - name: "rating"
+        type: "decimal"
+      - name: "image"
+        type: "string"
+      - name: "courseId"
+        type: "Guid (FK)"
+      - name: "isActive"
+        type: "bool"
+      - name: "displayOrder"
+        type: "int"
+      - name: "createdAt"
+        type: "DateTime"
+      - name: "updatedAt"
+        type: "DateTime"
+
+  - name: "TrainedConsultant"
+    fields:
+      - name: "id"
+        type: "Guid (PK)"
+      - name: "name"
+        type: "string"
+      - name: "specializations"
+        type: "string (JSON array)"
+      - name: "location"
+        type: "string"
+      - name: "image"
+        type: "string"
+      - name: "bio"
+        type: "string"
+      - name: "rating"
+        type: "decimal"
+      - name: "totalConsultations"
+        type: "int"
+      - name: "contactEmail"
+        type: "string"
+      - name: "contactPhone"
+        type: "string"
+      - name: "isVerified"
+        type: "bool"
+      - name: "isActive"
+        type: "bool"
+      - name: "createdAt"
+        type: "DateTime"
+      - name: "updatedAt"
+        type: "DateTime"
+
+caching:
+  - endpoint: "/dashboard"
+    ttl_seconds: 3600
+    cache_key: "home_dashboard_complete"
+  - endpoint: "/featured-courses"
+    ttl_seconds: 1800
+    cache_key: "home_featured_courses"
+  - endpoint: "/testimonials"
+    ttl_seconds: 3600
+    cache_key: "home_testimonials"
+  - endpoint: "/trained-consultants"
+    ttl_seconds: 7200
+    cache_key: "home_trained_consultants"
+  - endpoint: "/stats"
+    ttl_seconds: 86400
+    cache_key: "home_stats"
+

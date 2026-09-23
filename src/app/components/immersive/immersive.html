@@ -61,16 +61,16 @@
             
             <!-- Left Side Interactive App Feature Cards -->
             <div class="w-full lg:w-72 flex flex-col gap-4 z-10">
-                @for (screen of appScreens.slice(0, 3); track screen.id) {
+                @for (screen of appScreens().slice(0, 3); track screen.id) {
                     <button type="button"
                             (click)="selectScreen(screen)"
                             class="w-full text-left p-4 rounded-2xl border transition-all duration-300 cursor-pointer backdrop-blur-md flex items-center gap-3.5 group"
-                            [class.bg-[#d97706]/20]="activeScreen().id === screen.id"
-                            [class.border-[#fcd34d]/60]="activeScreen().id === screen.id"
-                            [class.shadow-[0_0_20px_rgba(217,119,6,0.35)]]="activeScreen().id === screen.id"
-                            [class.bg-[#fffdfa]/5]="activeScreen().id !== screen.id"
-                            [class.border-white/10]="activeScreen().id !== screen.id"
-                            [class.hover:bg-white/10]="activeScreen().id !== screen.id">
+                            [class.bg-[#d97706]/20]="activeScreen()?.id === screen.id"
+                            [class.border-[#fcd34d]/60]="activeScreen()?.id === screen.id"
+                            [class.shadow-[0_0_20px_rgba(217,119,6,0.35)]]="activeScreen()?.id === screen.id"
+                            [class.bg-[#fffdfa]/5]="activeScreen()?.id !== screen.id"
+                            [class.border-white/10]="activeScreen()?.id !== screen.id"
+                            [class.hover:bg-white/10]="activeScreen()?.id !== screen.id">
                         
                         <div class="w-12 h-16 rounded-lg overflow-hidden border border-[#cbb391]/40 shrink-0 bg-black/40">
                             <img [src]="screen.image" [alt]="screen.title" class="w-full h-full object-cover">
@@ -105,8 +105,8 @@
 
                 <!-- Screen Glass Frame with Actual Screenshot -->
                 <div class="relative w-full h-full rounded-[40px] overflow-hidden bg-black border border-white/10 flex flex-col">
-                    <img [src]="activeScreen().image" 
-                         [alt]="activeScreen().title" 
+                    <img [src]="activeScreen()?.image" 
+                         [alt]="activeScreen()?.title" 
                          class="w-full h-full object-cover object-top transition-opacity duration-300">
 
                     <!-- Subtle Inner Shadow & Glass Glint -->
@@ -115,11 +115,11 @@
                     <!-- Floating Quick-Info Overlay Badge at bottom -->
                     <div class="absolute bottom-3 inset-x-3 bg-black/85 backdrop-blur-md border border-[#cbb391]/50 rounded-2xl p-3 text-left">
                         <div class="flex items-center justify-between text-[9px] font-mono text-amber-300 uppercase tracking-wider mb-0.5">
-                            <span>{{ activeScreen().tag }}</span>
-                            <span>{{ activeScreen().sanskritTitle }}</span>
+                            <span>{{ activeScreen()?.tag }}</span>
+                            <span>{{ activeScreen()?.sanskritTitle }}</span>
                         </div>
-                        <h5 class="text-xs font-serif font-bold text-white">{{ activeScreen().headline }}</h5>
-                        <p class="text-[10px] text-[#d8c3a5]/80 leading-snug line-clamp-2 mt-0.5">{{ activeScreen().description }}</p>
+                        <h5 class="text-xs font-serif font-bold text-white">{{ activeScreen()?.headline }}</h5>
+                        <p class="text-[10px] text-[#d8c3a5]/80 leading-snug line-clamp-2 mt-0.5">{{ activeScreen()?.description }}</p>
                     </div>
                 </div>
 
@@ -127,16 +127,15 @@
 
             <!-- Right Side Interactive App Feature Cards -->
             <div class="w-full lg:w-72 flex flex-col gap-4 z-10">
-                @for (screen of appScreens.slice(3, 6); track screen.id) {
+                @for (screen of appScreens().slice(3, 6); track screen.id) {
                     <button type="button"
                             (click)="selectScreen(screen)"
                             class="w-full text-left p-4 rounded-2xl border transition-all duration-300 cursor-pointer backdrop-blur-md flex items-center gap-3.5 group"
-                            [class.bg-[#d97706]/20]="activeScreen().id === screen.id"
-                            [class.border-[#fcd34d]/60]="activeScreen().id === screen.id"
-                            [class.shadow-[0_0_20px_rgba(217,119,6,0.35)]]="activeScreen().id === screen.id"
-                            [class.bg-[#fffdfa]/5]="activeScreen().id !== screen.id"
-                            [class.border-white/10]="activeScreen().id !== screen.id"
-                            [class.hover:bg-white/10]="activeScreen().id !== screen.id">
+                            [class.border-[#fcd34d]/60]="activeScreen()?.id === screen.id"
+                            [class.shadow-[0_0_20px_rgba(217,119,6,0.35)]]="activeScreen()?.id === screen.id"
+                            [class.bg-[#fffdfa]/5]="activeScreen()?.id !== screen.id"
+                            [class.border-white/10]="activeScreen()?.id !== screen.id"
+                            [class.hover:bg-white/10]="activeScreen()?.id !== screen.id">
                         
                         <div class="w-12 h-16 rounded-lg overflow-hidden border border-[#cbb391]/40 shrink-0 bg-black/40">
                             <img [src]="screen.image" [alt]="screen.title" class="w-full h-full object-cover">
@@ -160,14 +159,14 @@
 
         <!-- Quick Dots for Mobile Navigation -->
         <div class="flex lg:hidden justify-center items-center gap-2 mt-4">
-            @for (screen of appScreens; track screen.id) {
+            @for (screen of appScreens(); track screen.id) {
                 <button type="button"
                         (click)="selectScreen(screen)"
                         class="h-2 rounded-full transition-all duration-300 cursor-pointer"
-                        [class.w-7]="activeScreen().id === screen.id"
-                        [class.w-2]="activeScreen().id !== screen.id"
-                        [class.bg-amber-400]="activeScreen().id === screen.id"
-                        [class.bg-white/30]="activeScreen().id !== screen.id"
+                        [class.w-7]="activeScreen()?.id === screen.id"
+                        [class.w-2]="activeScreen()?.id !== screen.id"
+                        [class.bg-amber-400]="activeScreen()?.id === screen.id"
+                        [class.bg-white/30]="activeScreen()?.id !== screen.id"
                         [attr.aria-label]="screen.title">
                 </button>
             }

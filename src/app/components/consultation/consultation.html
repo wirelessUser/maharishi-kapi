@@ -63,8 +63,7 @@
             <!-- 2. RIGHT 3-COLUMN PARCHMENT CARDS GRID                                    -->
             <!-- ========================================================================= -->
             <div class="w-full lg:w-8/12 grid grid-cols-1 sm:grid-cols-3 gap-6 sm:gap-6 lg:gap-7">
-                @for (item of consultations; track item.id; let i = $index) {
-                    
+@for (item of consultations(); track item.id; let i = $index) {                    
                     <article class="consult-card group bg-[#fffdfa] rounded-[30px] border-2 border-[#e8dac5] hover:border-[#d97706] flex flex-col justify-between overflow-hidden shadow-xs hover:shadow-xl transition-all duration-500 hover:-translate-y-2 relative">
                         
                         <!-- Gilded Corner Filigrees -->
@@ -87,9 +86,10 @@
                             <!-- Circular Avatar with Gold Halo -->
                             <div class="relative w-20 h-20 rounded-full p-1 bg-gradient-to-b from-[#d97706] to-[#b45309] shadow-sm my-3">
                                 <div class="w-full h-full rounded-full overflow-hidden border-2 border-white bg-[#f5ede2]">
-                                    <img [src]="item.image" 
-                                         [alt]="item.title" 
-                                         class="w-full h-full object-cover object-top group-hover:scale-108 transition-transform duration-700">
+                                   <img [src]="item.image || 'https://mkvnstorage.blob.core.windows.net/acharyaalok/file_000000002c0c720b81210e444d2139ed.png'" 
+     [alt]="item.title" 
+     (error)="$any($event.target).src = 'https://mkvnstorage.blob.core.windows.net/acharyaalok/file_000000002c0c720b81210e444d2139ed.png'"
+     class="w-full h-full object-cover object-top group-hover:scale-108 transition-transform duration-700">
                                 </div>
                             </div>
 

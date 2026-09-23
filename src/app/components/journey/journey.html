@@ -38,7 +38,7 @@
 
             <!-- Scrollable Track -->
             <div #scrollTrack class="flex overflow-x-auto pb-8 pt-2 gap-6 snap-x snap-mandatory hide-scrollbar px-2 sm:px-4">
-                @for (path of paths; track path.id) {
+                @for (path of paths(); track path.id) {
                     
                     <article 
                         (click)="selectPath(path.id)"
@@ -122,7 +122,7 @@
                 <div>
                     <div class="flex items-center justify-center sm:justify-start gap-2 mb-1.5">
                         <span class="text-[9px] font-mono text-[#d97706] uppercase tracking-[0.2em] font-bold">
-                            {{ selectedPath.devanagariNum }} • {{ selectedPath.sanskritTag }}
+                            {{ selectedPath?.devanagariNum }} • {{ selectedPath?.sanskritTag }}
                         </span>
                         <span class="w-1.5 h-1.5 rounded-full bg-[#d97706]"></span>
                         <span class="text-[9px] font-mono text-[#8c5324] uppercase tracking-wider">
@@ -131,18 +131,18 @@
                     </div>
 
                     <h4 class="font-serif font-bold text-lg sm:text-xl text-[#3a2717] mb-2 leading-snug">
-                        {{ selectedPath.title }} {{ selectedPath.subtitle }}
+                        {{ selectedPath?.title }} {{ selectedPath?.subtitle }}
                     </h4>
 
                     <p class="text-[#685546] text-xs sm:text-[13px] leading-relaxed max-w-xl font-normal">
-                        {{ selectedPath.deck }}
+                        {{ selectedPath?.deck }}
                     </p>
                 </div>
 
                 <!-- Direct CTA to Relevant Section -->
-                <a [routerLink]="selectedPath.targetRoute" 
+                <a [routerLink]="selectedPath?.targetRoute" 
                    class="shrink-0 inline-flex items-center gap-2.5 bg-gradient-to-r from-[#d97706] via-[#ea580c] to-[#b45309] hover:brightness-105 text-white font-mono font-bold text-xs uppercase tracking-widest px-7 py-3.5 rounded-full transition-all shadow-md hover:shadow-lg hover:scale-105 active:scale-95 cursor-pointer whitespace-nowrap">
-                    <span>{{ selectedPath.routeLabel }}</span>
+                    <span>{{ selectedPath?.routeLabel }}</span>
                     <i class="fa-solid fa-arrow-right text-[10px]"></i>
                 </a>
 

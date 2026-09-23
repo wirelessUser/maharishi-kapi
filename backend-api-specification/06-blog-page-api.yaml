@@ -1,0 +1,586 @@
+---
+# BLOG PAGE API SPECIFICATION
+# Purpose: Provide blog articles, filtering, search, and content management
+
+api_version: "1.0"
+page: "Blog Page"
+module: "Content Management"
+
+base_url: "/api/v1/blog"
+
+endpoints:
+
+  # ========================================
+  # GET /api/v1/blog/articles
+  # ========================================
+  # Description: Get all blog articles with filtering
+  # Auth: None (Public)
+  list_articles:
+    method: GET
+    path: "/articles"
+    description: "Fetch all blog articles with filtering, sorting, and pagination"
+    authentication: "none"
+    parameters:
+      - name: "page"
+        in: "query"
+        type: "integer"
+        default: 1
+      - name: "pageSize"
+        in: "query"
+        type: "integer"
+        default: 12
+      - name: "category"
+        in: "query"
+        type: "string"
+        enum: ["Astrology", "Vastu", "Ayurveda", "Numerology", "Culture"]
+        description: "Filter by article category"
+      - name: "search"
+        in: "query"
+        type: "string"
+        description: "Search by article title or content"
+      - name: "sortBy"
+        in: "query"
+        type: "string"
+        enum: ["newest", "oldest", "popular", "trending"]
+        default: "newest"
+      - name: "featured"
+        in: "query"
+        type: "boolean"
+        description: "Filter for featured articles only"
+    response_schema:
+      type: "object"
+      properties:
+        status:
+          type: "string"
+        data:
+          type: "object"
+          properties:
+            articles:
+              type: "array"
+              items:
+                $ref: "#/components/schemas/ArticleCard"
+            pagination:
+              type: "object"
+              properties:
+                currentPage:
+                  type: "integer"
+                pageSize:
+                  type: "integer"
+                totalRecords:
+                  type: "integer"
+                totalPages:
+                  type: "integer"
+            categories:
+              type: "array"
+              items:
+                type: "string"
+
+  # ========================================
+  # GET /api/v1/blog/articles/{slug}
+  # ========================================
+  # Description: Get article detail with full content
+  # Auth: None (Public)
+  article_detail:
+    method: GET
+    path: "/articles/{slug}"
+    description: "Fetch full article content with metadata"
+    authentication: "none"
+    parameters:
+      - name: "slug"
+        in: "path"
+        type: "string"
+        required: true
+    response_schema:
+      type: "object"
+      properties:
+        status:
+          type: "string"
+        data:
+          $ref: "#/components/schemas/ArticleDetail"
+
+  # ========================================
+  # GET /api/v1/blog/featured
+  # ========================================
+  # Description: Get featured article
+  # Auth: None (Public)
+  featured_article:
+    method: GET
+    path: "/featured"
+    description: "Fetch the current featured article"
+    authentication: "none"
+    response_schema:
+      type: "object"
+      properties:
+        status:
+          type: "string"
+        data:
+          $ref: "#/components/schemas/ArticleDetail"
+
+  # ========================================
+  # GET /api/v1/blog/trending
+  # ========================================
+  # Description: Get trending articles
+  # Auth: None (Public)
+  trending_articles:
+    method: GET
+    path: "/trending"
+    description: "Fetch trending articles"
+    authentication: "none"
+    parameters:
+      - name: "limit"
+        in: "query"
+        type: "integer"
+        default: 5
+    response_schema:
+      type: "object"
+      properties:
+        status:
+          type: "string"
+        data:
+          type: "array"
+          items:
+            $ref: "#/components/schemas/ArticleCard"
+
+  # ========================================
+  # GET /api/v1/blog/categories
+  # ========================================
+  # Description: Get all blog categories
+  # Auth: None (Public)
+  blog_categories:
+    method: GET
+    path: "/categories"
+    description: "Fetch all blog categories with article counts"
+    authentication: "none"
+    response_schema:
+      type: "object"
+      properties:
+        status:
+          type: "string"
+        data:
+          type: "array"
+          items:
+            type: "object"
+            properties:
+              name:
+                type: "string"
+              count:
+                type: "integer"
+              description:
+                type: "string"
+
+  # ========================================
+  # GET /api/v1/blog/articles/{slug}/related
+  # ========================================
+  # Description: Get related articles
+  # Auth: None (Public)
+  related_articles:
+    method: GET
+    path: "/articles/{slug}/related"
+    description: "Fetch related articles based on category and tags"
+    authentication: "none"
+    parameters:
+      - name: "slug"
+        in: "path"
+        type: "string"
+        required: true
+      - name: "limit"
+        in: "query"
+        type: "integer"
+        default: 3
+    response_schema:
+      type: "object"
+      properties:
+        status:
+          type: "string"
+        data:
+          type: "array"
+          items:
+            $ref: "#/components/schemas/ArticleCard"
+
+  # ========================================
+  # GET /api/v1/blog/search
+  # ========================================
+  # Description: Full-text search for articles
+  # Auth: None (Public)
+  search_articles:
+    method: GET
+    path: "/search"
+    description: "Full-text search across all articles"
+    authentication: "none"
+    parameters:
+      - name: "q"
+        in: "query"
+        type: "string"
+        required: true
+        description: "Search query"
+      - name: "limit"
+        in: "query"
+        type: "integer"
+        default: 10
+    response_schema:
+      type: "object"
+      properties:
+        status:
+          type: "string"
+        data:
+          type: "array"
+          items:
+            $ref: "#/components/schemas/ArticleCard"
+
+  # ========================================
+  # POST /api/v1/blog/newsletter/subscribe
+  # ========================================
+  # Description: Subscribe to newsletter
+  # Auth: None (Public)
+  newsletter_subscribe:
+    method: POST
+    path: "/newsletter/subscribe"
+    description: "Subscribe email to newsletter"
+    authentication: "none"
+    request_body:
+      type: "object"
+      required: ["email"]
+      properties:
+        email:
+          type: "string"
+          format: "email"
+          description: "User email address"
+        name:
+          type: "string"
+          description: "Optional: User name"
+    response_schema:
+      type: "object"
+      properties:
+        status:
+          type: "string"
+        message:
+          type: "string"
+        data:
+          type: "object"
+          properties:
+            subscriptionId:
+              type: "string"
+            email:
+              type: "string"
+            subscribedAt:
+              type: "string"
+              format: "date-time"
+
+  # ========================================
+  # GET /api/v1/blog/authors
+  # ========================================
+  # Description: Get all blog authors
+  # Auth: None (Public)
+  blog_authors:
+    method: GET
+    path: "/authors"
+    description: "Fetch all blog authors and their articles"
+    authentication: "none"
+    response_schema:
+      type: "object"
+      properties:
+        status:
+          type: "string"
+        data:
+          type: "array"
+          items:
+            $ref: "#/components/schemas/BlogAuthor"
+
+  # ========================================
+  # GET /api/v1/blog/authors/{id}/articles
+  # ========================================
+  # Description: Get articles by specific author
+  # Auth: None (Public)
+  author_articles:
+    method: GET
+    path: "/authors/{id}/articles"
+    description: "Fetch all articles by a specific author"
+    authentication: "none"
+    parameters:
+      - name: "id"
+        in: "path"
+        type: "string"
+        required: true
+      - name: "limit"
+        in: "query"
+        type: "integer"
+        default: 10
+    response_schema:
+      type: "object"
+      properties:
+        status:
+          type: "string"
+        data:
+          type: "object"
+          properties:
+            author:
+              $ref: "#/components/schemas/BlogAuthor"
+            articles:
+              type: "array"
+              items:
+                $ref: "#/components/schemas/ArticleCard"
+
+  # ========================================
+  # POST /api/v1/blog/articles/{slug}/views
+  # ========================================
+  # Description: Track article views
+  # Auth: None (Public)
+  track_article_view:
+    method: POST
+    path: "/articles/{slug}/views"
+    description: "Increment article view count"
+    authentication: "none"
+    parameters:
+      - name: "slug"
+        in: "path"
+        type: "string"
+        required: true
+    response_schema:
+      type: "object"
+      properties:
+        status:
+          type: "string"
+        data:
+          type: "object"
+          properties:
+            viewCount:
+              type: "integer"
+
+components:
+  schemas:
+    ArticleCard:
+      type: "object"
+      properties:
+        slug:
+          type: "string"
+        title:
+          type: "string"
+        deck:
+          type: "string"
+        category:
+          type: "string"
+        image:
+          type: "string"
+          format: "url"
+        author:
+          type: "string"
+        authorPhoto:
+          type: "string"
+          format: "url"
+        date:
+          type: "string"
+          format: "date"
+        readTime:
+          type: "string"
+        featured:
+          type: "boolean"
+        views:
+          type: "integer"
+
+    ArticleDetail:
+      type: "object"
+      properties:
+        slug:
+          type: "string"
+        title:
+          type: "string"
+        deck:
+          type: "string"
+        category:
+          type: "string"
+        image:
+          type: "string"
+          format: "url"
+        author:
+          type: "string"
+        authorPhoto:
+          type: "string"
+          format: "url"
+        date:
+          type: "string"
+          format: "date"
+        readTime:
+          type: "string"
+        featured:
+          type: "boolean"
+        pullQuote:
+          type: "string"
+        issueVol:
+          type: "string"
+        content:
+          type: "string"
+          format: "html or markdown"
+        tags:
+          type: "array"
+          items:
+            type: "string"
+        views:
+          type: "integer"
+        relatedArticles:
+          type: "array"
+          items:
+            $ref: "#/components/schemas/ArticleCard"
+
+    BlogAuthor:
+      type: "object"
+      properties:
+        id:
+          type: "string"
+        name:
+          type: "string"
+        bio:
+          type: "string"
+        photo:
+          type: "string"
+          format: "url"
+        expertise:
+          type: "array"
+          items:
+            type: "string"
+        articleCount:
+          type: "integer"
+        social:
+          type: "object"
+          properties:
+            instagram:
+              type: "string"
+            website:
+              type: "string"
+
+database_models:
+  - name: "Article"
+    fields:
+      - name: "id"
+        type: "Guid (PK)"
+      - name: "slug"
+        type: "string (Unique)"
+      - name: "title"
+        type: "string"
+      - name: "deck"
+        type: "string"
+      - name: "category"
+        type: "string"
+      - name: "image"
+        type: "string"
+      - name: "author"
+        type: "string"
+      - name: "authorId"
+        type: "Guid (FK)"
+      - name: "authorPhoto"
+        type: "string"
+      - name: "date"
+        type: "DateTime"
+      - name: "readTime"
+        type: "string"
+      - name: "featured"
+        type: "bool"
+      - name: "pullQuote"
+        type: "string"
+      - name: "issueVol"
+        type: "string"
+      - name: "content"
+        type: "string (very long)"
+      - name: "tags"
+        type: "string (JSON array)"
+      - name: "views"
+        type: "int"
+      - name: "isPublished"
+        type: "bool"
+      - name: "displayOrder"
+        type: "int"
+      - name: "createdAt"
+        type: "DateTime"
+      - name: "updatedAt"
+        type: "DateTime"
+
+  - name: "BlogAuthor"
+    fields:
+      - name: "id"
+        type: "Guid (PK)"
+      - name: "name"
+        type: "string"
+      - name: "bio"
+        type: "string (long)"
+      - name: "photo"
+        type: "string"
+      - name: "expertise"
+        type: "string (JSON array)"
+      - name: "instagramHandle"
+        type: "string"
+      - name: "website"
+        type: "string"
+      - name: "isActive"
+        type: "bool"
+      - name: "createdAt"
+        type: "DateTime"
+      - name: "updatedAt"
+        type: "DateTime"
+
+  - name: "BlogCategory"
+    fields:
+      - name: "id"
+        type: "Guid (PK)"
+      - name: "name"
+        type: "string (Unique)"
+      - name: "description"
+        type: "string"
+      - name: "displayOrder"
+        type: "int"
+      - name: "createdAt"
+        type: "DateTime"
+
+  - name: "NewsletterSubscriber"
+    fields:
+      - name: "id"
+        type: "Guid (PK)"
+      - name: "email"
+        type: "string (Unique)"
+      - name: "name"
+        type: "string"
+      - name: "isActive"
+        type: "bool"
+      - name: "subscribedAt"
+        type: "DateTime"
+      - name: "unsubscribedAt"
+        type: "DateTime"
+      - name: "createdAt"
+        type: "DateTime"
+
+  - name: "ArticleView"
+    fields:
+      - name: "id"
+        type: "Guid (PK)"
+      - name: "articleId"
+        type: "Guid (FK)"
+      - name: "ipAddress"
+        type: "string"
+      - name: "userAgent"
+        type: "string"
+      - name: "referrer"
+        type: "string"
+      - name: "viewedAt"
+        type: "DateTime"
+
+caching:
+  - endpoint: "/articles"
+    ttl_seconds: 1800
+    cache_key: "blog_articles_{page}_{category}_{sort}"
+  - endpoint: "/articles/{slug}"
+    ttl_seconds: 3600
+    cache_key: "blog_article_{slug}"
+  - endpoint: "/featured"
+    ttl_seconds: 3600
+    cache_key: "blog_featured_article"
+  - endpoint: "/trending"
+    ttl_seconds: 1800
+    cache_key: "blog_trending_articles"
+  - endpoint: "/categories"
+    ttl_seconds: 86400
+    cache_key: "blog_categories"
+  - endpoint: "/articles/{slug}/related"
+    ttl_seconds: 3600
+    cache_key: "blog_related_articles_{slug}"
+  - endpoint: "/authors"
+    ttl_seconds: 86400
+    cache_key: "blog_authors"
+

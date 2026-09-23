@@ -1,0 +1,526 @@
+---
+# SERVICES PAGE API SPECIFICATION
+# Purpose: Provide 1-on-1 consultation services data and pricing
+
+api_version: "1.0"
+page: "Services Page"
+module: "Consultation Services"
+
+base_url: "/api/v1/services"
+
+endpoints:
+
+  # ========================================
+  # GET /api/v1/services
+  # ========================================
+  # Description: Get all consultation services
+  # Auth: None (Public)
+  list_services:
+    method: GET
+    path: "/"
+    description: "Fetch all consultation services with pricing and details"
+    authentication: "none"
+    parameters:
+      - name: "category"
+        in: "query"
+        type: "string"
+        enum: ["Astrology", "Vastu", "Numerology", "Health", "Business", "Relationships", "Legal", "Travel"]
+        description: "Filter by service category"
+      - name: "sortBy"
+        in: "query"
+        type: "string"
+        enum: ["price_low", "price_high", "popular"]
+        default: "popular"
+    response_schema:
+      type: "object"
+      properties:
+        status:
+          type: "string"
+        data:
+          type: "object"
+          properties:
+            services:
+              type: "array"
+              items:
+                $ref: "#/components/schemas/ServiceDetail"
+            categories:
+              type: "array"
+              items:
+                type: "string"
+            totalServices:
+              type: "integer"
+
+  # ========================================
+  # GET /api/v1/services/{id}
+  # ========================================
+  # Description: Get service detail
+  # Auth: None (Public)
+  service_detail:
+    method: GET
+    path: "/{id}"
+    description: "Fetch detailed service information"
+    authentication: "none"
+    parameters:
+      - name: "id"
+        in: "path"
+        type: "string"
+        required: true
+    response_schema:
+      type: "object"
+      properties:
+        status:
+          type: "string"
+        data:
+          $ref: "#/components/schemas/ServiceDetailFull"
+
+  # ========================================
+  # GET /api/v1/services/categories
+  # ========================================
+  # Description: Get service categories
+  # Auth: None (Public)
+  service_categories:
+    method: GET
+    path: "/categories"
+    description: "Fetch all service categories"
+    authentication: "none"
+    response_schema:
+      type: "object"
+      properties:
+        status:
+          type: "string"
+        data:
+          type: "array"
+          items:
+            type: "object"
+            properties:
+              name:
+                type: "string"
+              count:
+                type: "integer"
+              icon:
+                type: "string"
+
+  # ========================================
+  # POST /api/v1/services/{id}/book
+  # ========================================
+  # Description: Book a consultation service
+  # Auth: Required (JWT Token)
+  book_service:
+    method: POST
+    path: "/{id}/book"
+    description: "Book a consultation service"
+    authentication: "jwt"
+    parameters:
+      - name: "id"
+        in: "path"
+        type: "string"
+        required: true
+    request_body:
+      type: "object"
+      required: ["preferredDate", "preferredTime"]
+      properties:
+        preferredDate:
+          type: "string"
+          format: "date"
+          description: "Preferred consultation date"
+        preferredTime:
+          type: "string"
+          format: "time"
+          description: "Preferred consultation time"
+        timezone:
+          type: "string"
+          description: "User timezone (e.g., IST, EST, GMT)"
+        birthDetails:
+          type: "object"
+          properties:
+            birthDate:
+              type: "string"
+              format: "date"
+            birthTime:
+              type: "string"
+              format: "time"
+            birthPlace:
+              type: "string"
+        additionalNotes:
+          type: "string"
+          description: "Any specific questions or concerns"
+    response_schema:
+      type: "object"
+      properties:
+        status:
+          type: "string"
+        data:
+          type: "object"
+          properties:
+            bookingId:
+              type: "string"
+            serviceId:
+              type: "string"
+            serviceName:
+              type: "string"
+            scheduledDate:
+              type: "string"
+              format: "date-time"
+            price:
+              type: "number"
+            status:
+              type: "string"
+              enum: ["confirmed", "pending"]
+            conferenceLink:
+              type: "string"
+              format: "url"
+            instructions:
+              type: "string"
+
+  # ========================================
+  # GET /api/v1/services/{id}/availability
+  # ========================================
+  # Description: Get available time slots for a service
+  # Auth: None (Public)
+  service_availability:
+    method: GET
+    path: "/{id}/availability"
+    description: "Fetch available consultation time slots"
+    authentication: "none"
+    parameters:
+      - name: "id"
+        in: "path"
+        type: "string"
+        required: true
+      - name: "date"
+        in: "query"
+        type: "string"
+        format: "date"
+        description: "Date to check availability"
+      - name: "daysAhead"
+        in: "query"
+        type: "integer"
+        default: 30
+        description: "Number of days ahead to show availability"
+    response_schema:
+      type: "object"
+      properties:
+        status:
+          type: "string"
+        data:
+          type: "array"
+          items:
+            type: "object"
+            properties:
+              date:
+                type: "string"
+                format: "date"
+              availableSlots:
+                type: "array"
+                items:
+                  type: "object"
+                  properties:
+                    time:
+                      type: "string"
+                      format: "time"
+                    isAvailable:
+                      type: "boolean"
+
+  # ========================================
+  # GET /api/v1/services/faq
+  # ========================================
+  # Description: Get services FAQs
+  # Auth: None (Public)
+  services_faq:
+    method: GET
+    path: "/faq"
+    description: "Fetch services FAQ section"
+    authentication: "none"
+    response_schema:
+      type: "object"
+      properties:
+        status:
+          type: "string"
+        data:
+          type: "array"
+          items:
+            $ref: "#/components/schemas/ServiceFAQ"
+
+components:
+  schemas:
+    ServiceDetail:
+      type: "object"
+      properties:
+        id:
+          type: "string"
+        slug:
+          type: "string"
+        title:
+          type: "string"
+        category:
+          type: "string"
+        description:
+          type: "string"
+        icon:
+          type: "string"
+        price:
+          type: "number"
+        originalPrice:
+          type: "number"
+        discount:
+          type: "number"
+        duration:
+          type: "string"
+        format:
+          type: "string"
+          enum: ["Online", "Offline", "Hybrid"]
+        rating:
+          type: "number"
+        reviews:
+          type: "integer"
+        popular:
+          type: "boolean"
+
+    ServiceDetailFull:
+      type: "object"
+      properties:
+        id:
+          type: "string"
+        slug:
+          type: "string"
+        title:
+          type: "string"
+        sanskritName:
+          type: "string"
+        category:
+          type: "string"
+        description:
+          type: "string"
+        fullDescription:
+          type: "string"
+        icon:
+          type: "string"
+        price:
+          type: "number"
+        originalPrice:
+          type: "number"
+        discount:
+          type: "number"
+        duration:
+          type: "string"
+        format:
+          type: "string"
+        language:
+          type: "string"
+        whatIsIncluded:
+          type: "array"
+          items:
+            type: "string"
+        prerequisites:
+          type: "array"
+          items:
+            type: "string"
+        outcomes:
+          type: "array"
+          items:
+            type: "string"
+        rating:
+          type: "number"
+        reviews:
+          type: "integer"
+        nextAvailableDate:
+          type: "string"
+          format: "date"
+        instructor:
+          $ref: "#/components/schemas/Instructor"
+        faqs:
+          type: "array"
+          items:
+            $ref: "#/components/schemas/ServiceFAQ"
+        testimonials:
+          type: "array"
+          items:
+            $ref: "#/components/schemas/ServiceTestimonial"
+        popular:
+          type: "boolean"
+
+    Instructor:
+      type: "object"
+      properties:
+        id:
+          type: "string"
+        name:
+          type: "string"
+        title:
+          type: "string"
+        bio:
+          type: "string"
+        image:
+          type: "string"
+          format: "url"
+        expertise:
+          type: "array"
+          items:
+            type: "string"
+
+    ServiceFAQ:
+      type: "object"
+      properties:
+        id:
+          type: "string"
+        question:
+          type: "string"
+        answer:
+          type: "string"
+
+    ServiceTestimonial:
+      type: "object"
+      properties:
+        id:
+          type: "string"
+        name:
+          type: "string"
+        quote:
+          type: "string"
+        rating:
+          type: "number"
+        service:
+          type: "string"
+        dateSubmitted:
+          type: "string"
+          format: "date-time"
+
+database_models:
+  - name: "ConsultationService"
+    fields:
+      - name: "id"
+        type: "Guid (PK)"
+      - name: "slug"
+        type: "string (Unique)"
+      - name: "title"
+        type: "string"
+      - name: "sanskritName"
+        type: "string"
+      - name: "category"
+        type: "string"
+      - name: "description"
+        type: "string"
+      - name: "fullDescription"
+        type: "string (long)"
+      - name: "icon"
+        type: "string"
+      - name: "price"
+        type: "decimal"
+      - name: "originalPrice"
+        type: "decimal"
+      - name: "duration"
+        type: "string"
+      - name: "format"
+        type: "string"
+      - name: "language"
+        type: "string"
+      - name: "whatIsIncluded"
+        type: "string (JSON array)"
+      - name: "prerequisites"
+        type: "string (JSON array)"
+      - name: "outcomes"
+        type: "string (JSON array)"
+      - name: "rating"
+        type: "decimal"
+      - name: "reviews"
+        type: "int"
+      - name: "instructorId"
+        type: "Guid (FK)"
+      - name: "isPopular"
+        type: "bool"
+      - name: "isActive"
+        type: "bool"
+      - name: "displayOrder"
+        type: "int"
+      - name: "createdAt"
+        type: "DateTime"
+      - name: "updatedAt"
+        type: "DateTime"
+
+  - name: "ServiceBooking"
+    fields:
+      - name: "id"
+        type: "Guid (PK)"
+      - name: "bookingId"
+        type: "string (Unique)"
+      - name: "serviceId"
+        type: "Guid (FK)"
+      - name: "userId"
+        type: "Guid (FK)"
+      - name: "scheduledDate"
+        type: "DateTime"
+      - name: "price"
+        type: "decimal"
+      - name: "status"
+        type: "string"
+        enum: ["pending", "confirmed", "completed", "cancelled"]
+      - name: "conferenceLink"
+        type: "string"
+      - name: "birthDate"
+        type: "DateTime"
+      - name: "birthTime"
+        type: "TimeSpan"
+      - name: "birthPlace"
+        type: "string"
+      - name: "timezone"
+        type: "string"
+      - name: "additionalNotes"
+        type: "string"
+      - name: "recordingUrl"
+        type: "string"
+      - name: "createdAt"
+        type: "DateTime"
+      - name: "updatedAt"
+        type: "DateTime"
+
+  - name: "ServiceFAQ"
+    fields:
+      - name: "id"
+        type: "Guid (PK)"
+      - name: "serviceId"
+        type: "Guid (FK)"
+      - name: "question"
+        type: "string"
+      - name: "answer"
+        type: "string (long)"
+      - name: "displayOrder"
+        type: "int"
+
+  - name: "ServiceTestimonial"
+    fields:
+      - name: "id"
+        type: "Guid (PK)"
+      - name: "serviceId"
+        type: "Guid (FK)"
+      - name: "name"
+        type: "string"
+      - name: "quote"
+        type: "string (long)"
+      - name: "rating"
+        type: "decimal"
+      - name: "dateSubmitted"
+        type: "DateTime"
+      - name: "isVerified"
+        type: "bool"
+      - name: "isActive"
+        type: "bool"
+      - name: "displayOrder"
+        type: "int"
+
+caching:
+  - endpoint: "/"
+    ttl_seconds: 1800
+    cache_key: "services_list_{category}"
+  - endpoint: "/{id}"
+    ttl_seconds: 1800
+    cache_key: "service_detail_{id}"
+  - endpoint: "/categories"
+    ttl_seconds: 3600
+    cache_key: "service_categories"
+  - endpoint: "/{id}/availability"
+    ttl_seconds: 300
+    cache_key: "service_availability_{id}_{date}"
+  - endpoint: "/faq"
+    ttl_seconds: 3600
+    cache_key: "services_faq"
+

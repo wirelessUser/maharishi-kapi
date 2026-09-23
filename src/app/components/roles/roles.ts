@@ -1,15 +1,20 @@
-import { Component, ElementRef, HostListener, afterNextRender, signal, viewChild } from '@angular/core';
+import { Component, ElementRef, HostListener, OnInit, afterNextRender, inject, signal, viewChild } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { AdminContentService } from '../../admin/features/admin-content.service';
 
 export interface Role {
+  id?: string;
   key: string;
   devanagariNum: string;
   icon: string;
   title: string;
   specialization: string;
-  desc: string;
-  image: string;
+  desc?: string;
+  description?: string;
+  image?: string;
+  imageUrl?: string;
   pressLogos?: boolean;
+  hasPressLogos?: boolean;
 }
 
 @Component({
@@ -19,100 +24,10 @@ export interface Role {
   styleUrl: './roles.css',
   templateUrl: './roles.html',
 })
-export class Roles {
-  readonly roles: Role[] = [
-    {
-      key: 'astrologer',
-      devanagariNum: '०१',
-     icon: 'fa-dharmachakra', // Sacred Vedic Wheel / Kaalchakra (8-spoke celestial cycle)
-      title: 'Vedic Astrologer',
-      specialization: 'Predictive & Nadi Jyotish',
-      desc: 'Rooted in an unbroken 9-generation Saraswat lineage, decoding intricate karmic blueprints and Dasha timings for 10,000+ global seekers.',
-      image: 'https://drive.google.com/drive/u/1/folders/1CGiq3rPyYy_wTq0dZ_YHCGHPOMoNQTXs',
-    },
-    {
-      key: 'vastu',
-      devanagariNum: '०२',
-      icon: 'fa-compass',
-      title: 'Sthapatya Vastu Master',
-      specialization: 'Commercial & Residential Vastu',
-      desc: 'Harmonizes dwellings, factories, and tech headquarters with classical Shastric remedies — pure bio-energetic alignment without demolition.',
-      image: '/images/founder-alok-nature.jpg',
-    },
-    {
-      key: 'numerology',
-      devanagariNum: '०३',
-      icon: 'fa-hand',
-      title: 'Numerology & Palmistry',
-      specialization: 'Ank Vidya & Samudrika Shastra',
-      desc: 'Decodes fate through birth frequencies and hand line topography, offering precise, grounded guidance rooted in the ancient Samudra tradition.',
-      image: '/images/founder-alok-group.jpg',
-    },
-    {
-      key: 'healer',
-      devanagariNum: '०४',
-      icon: 'fa-hand-holding-heart',
-      title: 'Panchakosha Energy Healer',
-      specialization: 'Subtle Body Prana & Marma Yoga',
-      desc: 'Trained in classical Marma therapy and Panchakosha Energy Yoga, unlocking the 107 vital energy doorways to heal the subtle sheath alongside the mind.',
-      image: '/images/founder-alok.jpg',
-    },
-    {
-      key: 'gita',
-      devanagariNum: '०५',
-      icon: 'fa-om',
-      title: 'Bhagavad Gita Preceptor',
-      specialization: 'Chitta Shuddhi & Gita Psychology',
-      desc: 'Translates the 700 verses of the Gita into practical tools for emotional equilibrium, executive leadership, and conscious non-attached action.',
-      image: '/images/founder-alok-nature.jpg',
-    },
-    {
-      key: 'ayurjyotish',
-      devanagariNum: '०६',
-      icon: 'fa-leaf',
-      title: 'AyurJyotish Health Guide',
-      specialization: 'Medical Astrology & Dosha Blueprint',
-      desc: 'Synthesizes planetary afflictions with Charaka biological doshas to identify latent bodily vulnerabilities and prescribe natural herbal Dinacharya.',
-      image: '/images/founder-alok-group.jpg',
-    },
-    {
-      key: 'matchmaking',
-      devanagariNum: '०७',
-      icon: 'fa-heart',
-      title: 'Dharma & Marriage Counselor',
-      specialization: 'Ashtakoota & Guna Milan Synthesis',
-      desc: 'Evaluates marital harmony beyond superficial scorecards, analyzing Navamsha (D9) longevity, emotional temperament, and auspicious Muhurta timing.',
-      image: '/images/founder-alok.jpg',
-    },
-    {
-      key: 'finance',
-      devanagariNum: '०८',
-      icon: 'fa-sack-dollar',
-      title: 'Corporate Financial Strategist',
-      specialization: 'Wealth Houses & Investment Cycles',
-      desc: 'Calculates corporate launch dates, capital deployment cycles, and financial prosperity windows using planetary transits and Sarvatobhadra Chakra.',
-      image: '/images/founder-alok-nature.jpg',
-    },
-    {
-      key: 'career',
-      devanagariNum: '०९',
-      icon: 'fa-scale-balanced',
-      title: 'Career & High-Stakes Strategist',
-      specialization: 'Dashamsha (D10) & Legal Counsel',
-      desc: 'Applies astrological foresight to corporate restructuring, public career pivots, disputes, and high-stakes executive negotiations.',
-      image: '/images/founder-alok-group.jpg',
-    },
-    {
-      key: 'speaker',
-      devanagariNum: '१०',
-      icon: 'fa-microphone',
-      title: 'Keynote Speaker & Author',
-      specialization: 'National Broadcast Media & Satsang',
-      desc: 'A sought-after cultural voice and keynote mentor, bridging ancient Vedic metaphysics with modern life on national media networks.',
-      image: '/images/founder-alok.jpg',
-      pressLogos: true,
-    },
-  ];
+export class Roles implements OnInit {
+  private readonly contentService = inject(AdminContentService);
+
+  readonly roles = signal<Role[]>([]);
 
   readonly viewport = viewChild<ElementRef<HTMLDivElement>>('viewport');
   readonly track = viewChild<ElementRef<HTMLDivElement>>('track');
@@ -125,13 +40,42 @@ export class Roles {
     afterNextRender(() => this.measure());
   }
 
+  ngOnInit(): void {
+    this.loadRoles();
+  }
+
+  private loadRoles(): void {
+    this.contentService.getRoles().subscribe({
+      next: (data: any) => {
+        const rawList = Array.isArray(data) ? data : (data?.$values || data?.items || []);
+        // डेटाबेस के कॉलम नामों (imageUrl, description) को UI मॉडल (image, desc) से मैप करना
+        const mapped: Role[] = rawList.map((item: any) => ({
+          id: item.id || item.Id,
+          key: item.key || item.Key,
+          devanagariNum: item.devanagariNum || item.DevanagariNum,
+          icon: item.icon || item.Icon,
+          title: item.title || item.Title,
+          specialization: item.specialization || item.Specialization,
+          desc: item.description || item.Description || item.desc,
+          image: item.imageUrl || item.ImageUrl || item.image,
+          pressLogos: item.hasPressLogos ?? item.HasPressLogos ?? item.pressLogos ?? false
+        }));
+
+        this.roles.set(mapped);
+        setTimeout(() => this.measure(), 100);
+      },
+      error: (err) => console.error('Roles fetch error:', err)
+    });
+  }
+
   @HostListener('window:resize')
   onResize() {
     this.measure();
   }
 
   goTo(i: number) {
-    const n = this.roles.length;
+    const n = this.roles().length;
+    if (n === 0) return;
     this.currentIndex.set(((i % n) + n) % n);
   }
 
@@ -157,7 +101,7 @@ export class Roles {
 
     const gap = parseFloat(getComputedStyle(trackEl).columnGap || '0') || 0;
     const cardWidth = cardEl.getBoundingClientRect().width;
-    const n = this.roles.length;
+    const n = this.roles().length;
 
     this.stepPx.set(cardWidth + gap);
     const totalWidth = n * cardWidth + (n - 1) * gap;

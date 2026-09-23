@@ -1,0 +1,615 @@
+---
+# COURSES PAGE API SPECIFICATION
+# Purpose: Provide course listing, filtering, and search functionality
+
+api_version: "1.0"
+page: "Courses Page"
+module: "Course Management"
+
+base_url: "/api/v1/courses"
+
+endpoints:
+
+  # ========================================
+  # GET /api/v1/courses
+  # ========================================
+  # Description: Get all courses with filtering and pagination
+  # Auth: None (Public)
+  list_courses:
+    method: GET
+    path: "/"
+    description: "Fetch all courses with filtering, sorting, and pagination"
+    authentication: "none"
+    parameters:
+      - name: "page"
+        in: "query"
+        type: "integer"
+        default: 1
+        description: "Page number for pagination"
+      - name: "pageSize"
+        in: "query"
+        type: "integer"
+        default: 12
+        description: "Number of courses per page"
+      - name: "category"
+        in: "query"
+        type: "string"
+        enum: ["Astrology", "Numerology", "Tarot", "Vastu", "Palmistry", "Wellness", "Timing & Muhurta", "Specialization", "Foundational Jyotish", "Intermediate Jyotish", "Professional Jyotish", "Advanced Jyotish", "Research & Mastery"]
+        description: "Filter by course category"
+      - name: "level"
+        in: "query"
+        type: "string"
+        enum: ["Beginner", "Intermediate", "Advanced", "Professional"]
+        description: "Filter by difficulty level"
+      - name: "search"
+        in: "query"
+        type: "string"
+        description: "Search by course title or description"
+      - name: "sortBy"
+        in: "query"
+        type: "string"
+        enum: ["newest", "price_low", "price_high", "popular", "rating"]
+        default: "newest"
+      - name: "minPrice"
+        in: "query"
+        type: "number"
+        description: "Minimum price filter"
+      - name: "maxPrice"
+        in: "query"
+        type: "number"
+        description: "Maximum price filter"
+      - name: "format"
+        in: "query"
+        type: "string"
+        enum: ["Online", "Offline", "Hybrid"]
+        description: "Filter by course format"
+    response_schema:
+      type: "object"
+      properties:
+        status:
+          type: "string"
+        data:
+          type: "object"
+          properties:
+            courses:
+              type: "array"
+              items:
+                $ref: "#/components/schemas/CourseDetail"
+            pagination:
+              type: "object"
+              properties:
+                currentPage:
+                  type: "integer"
+                pageSize:
+                  type: "integer"
+                totalRecords:
+                  type: "integer"
+                totalPages:
+                  type: "integer"
+            filters:
+              type: "object"
+              properties:
+                categories:
+                  type: "array"
+                  items:
+                    type: "string"
+                levels:
+                  type: "array"
+                  items:
+                    type: "string"
+                formats:
+                  type: "array"
+                  items:
+                    type: "string"
+                priceRange:
+                  type: "object"
+                  properties:
+                    min:
+                      type: "number"
+                    max:
+                      type: "number"
+
+  # ========================================
+  # GET /api/v1/courses/categories
+  # ========================================
+  # Description: Get all available course categories
+  # Auth: None (Public)
+  categories:
+    method: GET
+    path: "/categories"
+    description: "Fetch all available course categories with counts"
+    authentication: "none"
+    response_schema:
+      type: "object"
+      properties:
+        status:
+          type: "string"
+        data:
+          type: "array"
+          items:
+            type: "object"
+            properties:
+              name:
+                type: "string"
+              count:
+                type: "integer"
+              description:
+                type: "string"
+              icon:
+                type: "string"
+
+  # ========================================
+  # GET /api/v1/courses/{id}
+  # ========================================
+  # Description: Get course detail page data
+  # Auth: None (Public)
+  course_detail:
+    method: GET
+    path: "/{id}"
+    description: "Fetch complete course details including modules, pricing, faqs, testimonials"
+    authentication: "none"
+    parameters:
+      - name: "id"
+        in: "path"
+        type: "string"
+        required: true
+        description: "Course ID or slug"
+    response_schema:
+      type: "object"
+      properties:
+        status:
+          type: "string"
+        data:
+          $ref: "#/components/schemas/CourseDetailFull"
+
+  # ========================================
+  # GET /api/v1/courses/{id}/modules
+  # ========================================
+  # Description: Get course modules
+  # Auth: None (Public)
+  course_modules:
+    method: GET
+    path: "/{id}/modules"
+    description: "Fetch course modules and topics"
+    authentication: "none"
+    parameters:
+      - name: "id"
+        in: "path"
+        type: "string"
+        required: true
+    response_schema:
+      type: "object"
+      properties:
+        status:
+          type: "string"
+        data:
+          type: "object"
+          properties:
+            courseId:
+              type: "string"
+            courseTitle:
+              type: "string"
+            totalModules:
+              type: "integer"
+            totalTopics:
+              type: "integer"
+            modules:
+              type: "array"
+              items:
+                $ref: "#/components/schemas/CourseModule"
+
+  # ========================================
+  # GET /api/v1/courses/search
+  # ========================================
+  # Description: Full-text search for courses
+  # Auth: None (Public)
+  search_courses:
+    method: GET
+    path: "/search"
+    description: "Full-text search across courses"
+    authentication: "none"
+    parameters:
+      - name: "q"
+        in: "query"
+        type: "string"
+        required: true
+        description: "Search query"
+      - name: "limit"
+        in: "query"
+        type: "integer"
+        default: 10
+    response_schema:
+      type: "object"
+      properties:
+        status:
+          type: "string"
+        data:
+          type: "array"
+          items:
+            $ref: "#/components/schemas/CourseCard"
+
+  # ========================================
+  # GET /api/v1/courses/{id}/related
+  # ========================================
+  # Description: Get related courses
+  # Auth: None (Public)
+  related_courses:
+    method: GET
+    path: "/{id}/related"
+    description: "Fetch related/recommended courses based on category and level"
+    authentication: "none"
+    parameters:
+      - name: "id"
+        in: "path"
+        type: "string"
+        required: true
+      - name: "limit"
+        in: "query"
+        type: "integer"
+        default: 4
+    response_schema:
+      type: "object"
+      properties:
+        status:
+          type: "string"
+        data:
+          type: "array"
+          items:
+            $ref: "#/components/schemas/CourseCard"
+
+components:
+  schemas:
+    CourseDetail:
+      type: "object"
+      properties:
+        id:
+          type: "string"
+        slug:
+          type: "string"
+        title:
+          type: "string"
+        sanskritTag:
+          type: "string"
+        category:
+          type: "string"
+        level:
+          type: "string"
+        image:
+          type: "string"
+          format: "url"
+        price:
+          type: "number"
+        originalPrice:
+          type: "number"
+        tagline:
+          type: "string"
+        duration:
+          type: "string"
+        format:
+          type: "string"
+        language:
+          type: "string"
+        rating:
+          type: "number"
+        enrolled:
+          type: "integer"
+        reviews:
+          type: "integer"
+
+    CourseDetailFull:
+      type: "object"
+      properties:
+        id:
+          type: "string"
+        slug:
+          type: "string"
+        title:
+          type: "string"
+        sanskritTag:
+          type: "string"
+        category:
+          type: "string"
+        level:
+          type: "string"
+        image:
+          type: "string"
+          format: "url"
+        price:
+          type: "number"
+        originalPrice:
+          type: "number"
+        tagline:
+          type: "string"
+        description:
+          type: "string"
+        duration:
+          type: "string"
+        format:
+          type: "string"
+        language:
+          type: "string"
+        prerequisites:
+          type: "string"
+        whoFor:
+          type: "array"
+          items:
+            type: "string"
+        included:
+          type: "array"
+          items:
+            type: "string"
+        certification:
+          type: "string"
+        rating:
+          type: "number"
+        enrolled:
+          type: "integer"
+        reviews:
+          type: "integer"
+        modules:
+          type: "array"
+          items:
+            $ref: "#/components/schemas/CourseModule"
+        testimonials:
+          type: "array"
+          items:
+            $ref: "#/components/schemas/CourseTestimonial"
+        faqs:
+          type: "array"
+          items:
+            $ref: "#/components/schemas/CourseFAQ"
+        instructor:
+          $ref: "#/components/schemas/Instructor"
+        syllabus:
+          type: "string"
+          format: "url"
+
+    CourseCard:
+      type: "object"
+      properties:
+        id:
+          type: "string"
+        slug:
+          type: "string"
+        title:
+          type: "string"
+        category:
+          type: "string"
+        level:
+          type: "string"
+        image:
+          type: "string"
+          format: "url"
+        price:
+          type: "number"
+        originalPrice:
+          type: "number"
+        tagline:
+          type: "string"
+        rating:
+          type: "number"
+
+    CourseModule:
+      type: "object"
+      properties:
+        id:
+          type: "string"
+        title:
+          type: "string"
+        moduleNumber:
+          type: "integer"
+        duration:
+          type: "string"
+        topics:
+          type: "array"
+          items:
+            type: "string"
+        description:
+          type: "string"
+
+    CourseTestimonial:
+      type: "object"
+      properties:
+        id:
+          type: "string"
+        name:
+          type: "string"
+        location:
+          type: "string"
+        quote:
+          type: "string"
+        rating:
+          type: "number"
+        image:
+          type: "string"
+          format: "url"
+        dateSubmitted:
+          type: "string"
+          format: "date-time"
+
+    CourseFAQ:
+      type: "object"
+      properties:
+        id:
+          type: "string"
+        question:
+          type: "string"
+        answer:
+          type: "string"
+
+    Instructor:
+      type: "object"
+      properties:
+        id:
+          type: "string"
+        name:
+          type: "string"
+        title:
+          type: "string"
+        bio:
+          type: "string"
+        image:
+          type: "string"
+          format: "url"
+        expertise:
+          type: "array"
+          items:
+            type: "string"
+
+database_models:
+  - name: "Course"
+    fields:
+      - name: "id"
+        type: "Guid (PK)"
+      - name: "slug"
+        type: "string (Unique)"
+      - name: "title"
+        type: "string"
+      - name: "sanskritTag"
+        type: "string"
+      - name: "category"
+        type: "string"
+      - name: "level"
+        type: "string"
+      - name: "image"
+        type: "string"
+      - name: "price"
+        type: "decimal"
+      - name: "originalPrice"
+        type: "decimal"
+      - name: "tagline"
+        type: "string"
+      - name: "description"
+        type: "string (long)"
+      - name: "duration"
+        type: "string"
+      - name: "format"
+        type: "string"
+      - name: "language"
+        type: "string"
+      - name: "prerequisites"
+        type: "string"
+      - name: "whoFor"
+        type: "string (JSON array)"
+      - name: "included"
+        type: "string (JSON array)"
+      - name: "certification"
+        type: "string"
+      - name: "rating"
+        type: "decimal"
+      - name: "enrolled"
+        type: "int"
+      - name: "instructorId"
+        type: "Guid (FK)"
+      - name: "isActive"
+        type: "bool"
+      - name: "createdAt"
+        type: "DateTime"
+      - name: "updatedAt"
+        type: "DateTime"
+
+  - name: "CourseModule"
+    fields:
+      - name: "id"
+        type: "Guid (PK)"
+      - name: "courseId"
+        type: "Guid (FK)"
+      - name: "title"
+        type: "string"
+      - name: "moduleNumber"
+        type: "int"
+      - name: "duration"
+        type: "string"
+      - name: "topics"
+        type: "string (JSON array)"
+      - name: "description"
+        type: "string"
+      - name: "displayOrder"
+        type: "int"
+      - name: "createdAt"
+        type: "DateTime"
+      - name: "updatedAt"
+        type: "DateTime"
+
+  - name: "CourseTestimonial"
+    fields:
+      - name: "id"
+        type: "Guid (PK)"
+      - name: "courseId"
+        type: "Guid (FK)"
+      - name: "name"
+        type: "string"
+      - name: "location"
+        type: "string"
+      - name: "quote"
+        type: "string (long)"
+      - name: "rating"
+        type: "decimal"
+      - name: "image"
+        type: "string"
+      - name: "isVerified"
+        type: "bool"
+      - name: "isActive"
+        type: "bool"
+      - name: "displayOrder"
+        type: "int"
+      - name: "dateSubmitted"
+        type: "DateTime"
+      - name: "createdAt"
+        type: "DateTime"
+
+  - name: "CourseFAQ"
+    fields:
+      - name: "id"
+        type: "Guid (PK)"
+      - name: "courseId"
+        type: "Guid (FK)"
+      - name: "question"
+        type: "string"
+      - name: "answer"
+        type: "string (long)"
+      - name: "displayOrder"
+        type: "int"
+      - name: "createdAt"
+        type: "DateTime"
+      - name: "updatedAt"
+        type: "DateTime"
+
+  - name: "Instructor"
+    fields:
+      - name: "id"
+        type: "Guid (PK)"
+      - name: "name"
+        type: "string"
+      - name: "title"
+        type: "string"
+      - name: "bio"
+        type: "string (long)"
+      - name: "image"
+        type: "string"
+      - name: "expertise"
+        type: "string (JSON array)"
+      - name: "isActive"
+        type: "bool"
+      - name: "createdAt"
+        type: "DateTime"
+      - name: "updatedAt"
+        type: "DateTime"
+
+caching:
+  - endpoint: "/"
+    ttl_seconds: 1800
+    cache_key: "courses_list_{page}_{category}_{level}"
+  - endpoint: "/categories"
+    ttl_seconds: 3600
+    cache_key: "courses_categories"
+  - endpoint: "/{id}"
+    ttl_seconds: 1800
+    cache_key: "course_detail_{id}"
+  - endpoint: "/{id}/modules"
+    ttl_seconds: 3600
+    cache_key: "course_modules_{id}"
+  - endpoint: "/{id}/related"
+    ttl_seconds: 1800
+    cache_key: "course_related_{id}"
+

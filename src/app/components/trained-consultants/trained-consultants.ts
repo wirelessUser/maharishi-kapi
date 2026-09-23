@@ -118,4 +118,4 @@ export class TrainedConsultants implements AfterViewInit, OnDestroy {
     if (!el) return;
     el.scrollBy({ left: direction * (el.clientWidth * 0.75), behavior: 'smooth' });
   }
-}
+}// Commete added

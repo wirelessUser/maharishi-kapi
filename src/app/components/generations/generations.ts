@@ -83,7 +83,7 @@ export class Generations {
       specialty: 'Vedic Jyotish, Sthapatya Vastu & Yogic Sciences',
       initials: 'AA',
       shastricTitle: 'संस्थापक • Current Torchbearer',
-      photo: '/images/founder-alok.jpg',
+      photo: 'https://storagemaharishikapicom.blob.core.windows.net/home-page/acharyalaoknaturebackground.png',
     },
   ];
 }

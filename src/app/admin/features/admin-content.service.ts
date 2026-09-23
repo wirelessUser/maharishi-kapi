@@ -5,104 +5,106 @@ import { Observable, finalize } from 'rxjs';
 @Injectable({ providedIn: 'root' })
 export class AdminContentService {
   private readonly http = inject(HttpClient);
-private readonly baseUrl = 'https://localhost:7263/api/v1/home';
+  
+  // मुख्य बेस URL (हमेशा HTTPS का उपयोग करें)
+  private readonly apiBaseUrl = 'https://maharishikapicomwebapi-e0edcjh9d3eufrak.centralindia-01.azurewebsites.net/api/v1';
+  private readonly homeUrl = `${this.apiBaseUrl}/home`;
+
   readonly isProcessing = signal(false);
 
   // --- ROLES ---
   getRoles(): Observable<any[]> {
-    return this.http.get<any[]>(`${this.baseUrl}/roles`);
+    return this.http.get<any[]>(`${this.homeUrl}/roles`);
   }
   createRole(payload: any): Observable<any> {
     this.isProcessing.set(true);
-    return this.http.post(`${this.baseUrl}/roles`, payload).pipe(finalize(() => this.isProcessing.set(false)));
+    return this.http.post(`${this.homeUrl}/roles`, payload).pipe(finalize(() => this.isProcessing.set(false)));
   }
   updateRole(id: string, payload: any): Observable<void> {
     this.isProcessing.set(true);
-    return this.http.put<void>(`${this.baseUrl}/roles/${id}`, payload).pipe(finalize(() => this.isProcessing.set(false)));
+    return this.http.put<void>(`${this.homeUrl}/roles/${id}`, payload).pipe(finalize(() => this.isProcessing.set(false)));
   }
   deleteRole(id: string): Observable<void> {
     this.isProcessing.set(true);
-    return this.http.delete<void>(`${this.baseUrl}/roles/${id}`).pipe(finalize(() => this.isProcessing.set(false)));
+    return this.http.delete<void>(`${this.homeUrl}/roles/${id}`).pipe(finalize(() => this.isProcessing.set(false)));
   }
 
   // --- JOURNEY PATHS ---
   getJourneyPaths(): Observable<any[]> {
-    return this.http.get<any[]>(`${this.baseUrl}/journey`);
+    return this.http.get<any[]>(`${this.homeUrl}/journey`);
   }
   createJourneyPath(payload: any): Observable<any> {
     this.isProcessing.set(true);
-    return this.http.post(`${this.baseUrl}/journey`, payload).pipe(finalize(() => this.isProcessing.set(false)));
+    return this.http.post(`${this.homeUrl}/journey`, payload).pipe(finalize(() => this.isProcessing.set(false)));
   }
   updateJourneyPath(id: string, payload: any): Observable<void> {
     this.isProcessing.set(true);
-    return this.http.put<void>(`${this.baseUrl}/journey/${id}`, payload).pipe(finalize(() => this.isProcessing.set(false)));
+    return this.http.put<void>(`${this.homeUrl}/journey/${id}`, payload).pipe(finalize(() => this.isProcessing.set(false)));
   }
   deleteJourneyPath(id: string): Observable<void> {
     this.isProcessing.set(true);
-    return this.http.delete<void>(`${this.baseUrl}/journey/${id}`).pipe(finalize(() => this.isProcessing.set(false)));
+    return this.http.delete<void>(`${this.homeUrl}/journey/${id}`).pipe(finalize(() => this.isProcessing.set(false)));
   }
 
   // --- IMMERSIVE APP SCREENS ---
   getAppScreens(): Observable<any[]> {
-    return this.http.get<any[]>(`${this.baseUrl}/immersive`);
+    return this.http.get<any[]>(`${this.homeUrl}/immersive`);
   }
   createAppScreen(payload: any): Observable<any> {
     this.isProcessing.set(true);
-    return this.http.post(`${this.baseUrl}/immersive`, payload).pipe(finalize(() => this.isProcessing.set(false)));
+    return this.http.post(`${this.homeUrl}/immersive`, payload).pipe(finalize(() => this.isProcessing.set(false)));
   }
   updateAppScreen(id: string, payload: any): Observable<void> {
     this.isProcessing.set(true);
-    return this.http.put<void>(`${this.baseUrl}/immersive/${id}`, payload).pipe(finalize(() => this.isProcessing.set(false)));
+    return this.http.put<void>(`${this.homeUrl}/immersive/${id}`, payload).pipe(finalize(() => this.isProcessing.set(false)));
   }
   deleteAppScreen(id: string): Observable<void> {
     this.isProcessing.set(true);
-    return this.http.delete<void>(`${this.baseUrl}/immersive/${id}`).pipe(finalize(() => this.isProcessing.set(false)));
+    return this.http.delete<void>(`${this.homeUrl}/immersive/${id}`).pipe(finalize(() => this.isProcessing.set(false)));
   }
 
   // --- CONSULTATIONS ---
   getConsultations(): Observable<any[]> {
-    return this.http.get<any[]>(`${this.baseUrl}/consultations`);
+    return this.http.get<any[]>(`${this.homeUrl}/consultations`);
   }
   createConsultation(payload: any): Observable<any> {
     this.isProcessing.set(true);
-    return this.http.post(`${this.baseUrl}/consultations`, payload).pipe(finalize(() => this.isProcessing.set(false)));
+    return this.http.post(`${this.homeUrl}/consultations`, payload).pipe(finalize(() => this.isProcessing.set(false)));
   }
   updateConsultation(id: string, payload: any): Observable<void> {
     this.isProcessing.set(true);
-    return this.http.put<void>(`${this.baseUrl}/consultations/${id}`, payload).pipe(finalize(() => this.isProcessing.set(false)));
+    return this.http.put<void>(`${this.homeUrl}/consultations/${id}`, payload).pipe(finalize(() => this.isProcessing.set(false)));
   }
   deleteConsultation(id: string): Observable<void> {
     this.isProcessing.set(true);
-    return this.http.delete<void>(`${this.baseUrl}/consultations/${id}`).pipe(finalize(() => this.isProcessing.set(false)));
+    return this.http.delete<void>(`${this.homeUrl}/consultations/${id}`).pipe(finalize(() => this.isProcessing.set(false)));
   }
 
- 
+  // --- RETREATS CRUD (HTTPS में अपडेटेड) ---
+  getRetreats(): Observable<any[]> {
+    return this.http.get<any[]>(`${this.apiBaseUrl}/retreats`);
+  }
 
-// Retreats CRUD
-getRetreats(): Observable<any[]> {
-  return this.http.get<any[]>('https://localhost:7263/api/v1/retreats');
-}
+  getRetreatBySlug(slug: string): Observable<any> {
+    return this.http.get<any>(`${this.apiBaseUrl}/retreats/${slug}`);
+  }
 
-getRetreatBySlug(slug: string): Observable<any> {
-  return this.http.get<any>(`https://localhost:7263/api/v1/retreats/${slug}`);
-}
+  createRetreat(payload: any): Observable<any> {
+    return this.http.post(`${this.apiBaseUrl}/retreats`, payload);
+  }
 
-createRetreat(payload: any): Observable<any> {
-  return this.http.post('https://localhost:7263/api/v1/retreats', payload);
-}
+  updateRetreat(id: string, payload: any): Observable<any> {
+    return this.http.put(`${this.apiBaseUrl}/retreats/${id}`, payload);
+  }
 
-updateRetreat(id: string, payload: any): Observable<any> {
-  return this.http.put(`https://localhost:7263/api/v1/retreats/${id}`, payload);
-}
+  deleteRetreat(id: string): Observable<any> {
+    return this.http.delete(`${this.apiBaseUrl}/retreats/${id}`);
+  }
 
-deleteRetreat(id: string): Observable<any> {
-  return this.http.delete(`https://localhost:7263/api/v1/retreats/${id}`);
-}
-
-// 1-Click Direct Azure Upload
-uploadImage(file: File, folder = 'retreats'): Observable<{ url: string }> {
-  const formData = new FormData();
-  formData.append('file', file);
-  return this.http.post<{ url: string }>(`https://localhost:7263/api/v1/media/upload?folder=${folder}`, formData);
-}
+  // --- 1-CLICK DIRECT AZURE UPLOAD (HTTPS में अपडेटेड) ---
+  uploadImage(file: File, folder = 'retreats'): Observable<{ url: string }> {
+    const formData = new FormData();
+    formData.append('file', file);
+    return this.http.post<{ url: string }>(`${this.apiBaseUrl}/media/upload?folder=${folder}`, formData);
+  }
 }

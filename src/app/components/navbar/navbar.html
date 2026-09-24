@@ -1,32 +1,34 @@
 <header class="sticky top-0 z-50 font-sans select-none transition-all duration-300" id="navbar">
   
+
+
   <!-- ========================================================================= -->
-  <!-- 1. VIBRANT SAFFRON APEX STRIP (Direct Match with Screenshot)              -->
+  <!-- 1. VIBRANT KESARIYA APEX STRIP (HIDDEN ON MOBILE: hidden md:block)         -->
   <!-- ========================================================================= -->
-  <div class="saffron-top-strip"
+  <div class="hidden md:block saffron-top-strip bg-gradient-to-r from-[#d97706] via-[#ea580c] to-[#b45309] text-white shadow-[0_2px_15px_rgba(217,119,6,0.25)] border-b border-amber-600/30"
        [class.strip-collapsed]="isScrolled()">
-    <div class="container mx-auto max-w-7xl px-4 sm:px-6 flex justify-between items-center text-[10px] sm:text-[11px] font-semibold tracking-wider">
+    <div class="container mx-auto max-w-7xl px-4 sm:px-6 flex justify-between items-center text-[10px] sm:text-[11px] font-semibold tracking-wider py-2">
       
       <!-- Left: Disciplines -->
       <div class="flex items-center gap-2 sm:gap-3.5 overflow-hidden text-ellipsis whitespace-nowrap text-white">
-        <span class="hover:text-amber-100 transition-colors cursor-default">VEDIC ASTROLOGY</span>
-        <span class="opacity-60">•</span>
-        <span class="hover:text-amber-100 transition-colors cursor-default">VEDIC NUMEROLOGY</span>
-        <span class="hidden md:inline opacity-60">•</span>
-        <span class="hidden md:inline hover:text-amber-100 transition-colors cursor-default">VEDIC PALMISTRY</span>
-        <span class="hidden lg:inline opacity-60">•</span>
-        <span class="hidden lg:inline hover:text-amber-100 transition-colors cursor-default">COUNSELLING THERAPIES</span>
+        <span class="hover:text-amber-200 transition-colors cursor-default">VEDIC ASTROLOGY</span>
+        <span class="opacity-50 text-amber-200">•</span>
+        <span class="hover:text-amber-200 transition-colors cursor-default">VEDIC NUMEROLOGY</span>
+        <span class="opacity-50 text-amber-200">•</span>
+        <span class="hover:text-amber-200 transition-colors cursor-default">VEDIC PALMISTRY</span>
+        <span class="hidden lg:inline opacity-50 text-amber-200">•</span>
+        <span class="hidden lg:inline hover:text-amber-200 transition-colors cursor-default">COUNSELLING THERAPIES</span>
       </div>
 
       <!-- Right: Helpline & Email -->
       <div class="flex items-center gap-4 shrink-0 text-white font-medium">
-        <a href="tel:+918791691675" class="hover:text-amber-100 flex items-center gap-1.5 transition-colors">
-          <i class="fa-solid fa-phone text-[9px]"></i>
+        <a href="tel:+918791691675" class="hover:text-amber-200 flex items-center gap-1.5 transition-colors">
+          <i class="fa-solid fa-phone text-[9px] text-amber-200"></i>
           <span>+91-8791691675</span>
         </a>
-        <span class="opacity-50 hidden sm:inline">|</span>
-        <a href="mailto:info@astrokapi.com" class="hover:text-amber-100 hidden sm:flex items-center gap-1.5 transition-colors">
-          <i class="fa-solid fa-envelope text-[9px]"></i>
+        <span class="opacity-50 text-amber-200">|</span>
+        <a href="mailto:info@astrokapi.com" class="hover:text-amber-200 flex items-center gap-1.5 transition-colors">
+          <i class="fa-solid fa-envelope text-[9px] text-amber-200"></i>
           <span>Email Us</span>
         </a>
       </div>
@@ -34,10 +36,11 @@
     </div>
   </div>
 
+  
+<!-- ========================================================================= -->
+  <!-- 2. PARCHMENT GAZETTE LINEAGE SUB-STRIP (HIDDEN ON MOBILE: hidden md:block) -->
   <!-- ========================================================================= -->
-  <!-- 2. PARCHMENT GAZETTE LINEAGE SUB-STRIP (Direct Match with Screenshot)      -->
-  <!-- ========================================================================= -->
-  <div class="parchment-sub-strip"
+  <div class="hidden md:block parchment-sub-strip"
        [class.strip-collapsed]="isScrolled()">
     <div class="container mx-auto max-w-7xl px-4 sm:px-6 flex justify-between items-center text-[9px] sm:text-[10px] font-mono tracking-[0.2em] text-[#8c5324] uppercase">
       
@@ -57,6 +60,7 @@
 
     </div>
   </div>
+
 
   <!-- ========================================================================= -->
   <!-- 3. MAIN NAVIGATION BAR (Login Button Removed)                             -->

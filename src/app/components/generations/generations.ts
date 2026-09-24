@@ -73,7 +73,7 @@ export class Generations {
       name: 'Shri L. N. Sharma',
       specialty: 'Shastric Pedagogy & Gurukul Education',
       initials: 'LN',
-      shastricTitle: 'विद्या वाचस्पति • Guru Preceptor',
+      shastricTitle: 'गुरु • Guru Preceptor',
     },
     {
       key: 'g7',
@@ -83,7 +83,7 @@ export class Generations {
       specialty: 'Vedic Jyotish, Sthapatya Vastu & Yogic Sciences',
       initials: 'AA',
       shastricTitle: 'संस्थापक • Current Torchbearer',
-      photo: '/images/founder-alok.jpg',
+      photo: 'https://storagemaharishikapicom.blob.core.windows.net/home-page/acharyalaoknaturebackground.png',
     },
   ];
 }

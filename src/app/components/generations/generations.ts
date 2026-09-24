@@ -73,7 +73,7 @@ export class Generations {
       name: 'Shri L. N. Sharma',
       specialty: 'Shastric Pedagogy & Gurukul Education',
       initials: 'LN',
-      shastricTitle: 'विद्या वाचस्पति • Guru Preceptor',
+      shastricTitle: 'गुरु • Guru Preceptor',
     },
     {
       key: 'g7',

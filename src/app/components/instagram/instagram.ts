@@ -76,7 +76,7 @@ export class Instagram implements OnInit {
       subtitleHindi: '',
       category: 'Review',
       url: 'https://www.instagram.com/acharya_alok_awasthi/reel/DRCSegNCYpB/',
-      image: 'assets/reels/meditation-thumb.webp',
+      image: 'https://storagemaharishikapicom.blob.core.windows.net/home-page/Screenshot%202026-09-23%20203529.png',
     },
     {
       key: 'vastu-reel',

@@ -39,7 +39,7 @@ export class Instagram implements OnInit {
       title: 'Panch-Kosha & Panch-tattva Theory in applied #numerology #rishikesh',
       category: 'ध्यान • Meditation',
       duration: '5:12',
-      thumb: 'https://mkvnstorage.blob.core.windows.net/appimages/mqdefault_6s.webp',
+      thumb: 'https://storagemaharishikapicom.blob.core.windows.net/home-page-yotube/panchkosh_youtube.webp',
       url: 'https://www.youtube.com/watch?v=jC85u6ZumsE',
     },
     {

@@ -19,10 +19,21 @@ export const routes: Routes = [
   { path: 'about', component: AboutPage },
   { path: 'blog', component: BlogPage },
   { path: 'retreats', component: RetreatsPage },
-  { path: 'Fundraise', component: FundraiserPage },
+  { path: 'fundraise', component: FundraiserPage },
+  { path: 'Fundraise', redirectTo: 'fundraise' }, // Casing सुरक्षा के लिए
   { path: 'retreats/:slug', component: RetreatDetailPage },
   { path: 'library', component: LibraryPage },
   { path: 'residential', component: ResidentialPage },
+
+  // ✅ PRODUCT ROUTE (यहाँ मुख्य स्तर पर होना चाहिए):
+  {
+    path: 'product',
+    loadComponent: () => import('./components/product-page/product-page').then(m => m.ProductPage)
+  },
+  {
+    path: 'products',
+    redirectTo: 'product'
+  },
 
   // Admin Backend Panel (Lazy Loaded)
   {
@@ -50,17 +61,17 @@ export const routes: Routes = [
         path: 'consultations', 
         loadComponent: () => import('./admin/features/admin-consultations.component').then(m => m.AdminConsultationsComponent) 
       },
-     { 
+      { 
         path: 'retreats', 
         loadComponent: () => import('./admin/features/admin-retreat.component').then(m => m.AdminRetreatsComponent)
       },
-      {
-        path: 'blog',
+      { 
+        path: 'blog', 
         loadComponent: () => import('./admin/features/admin-blog.component').then(m => m.AdminBlogComponent) 
       }
     ]
   },
 
-  // Catch-all route
+  // Catch-all route (हमेशा सबसे नीचे)
   { path: '**', redirectTo: '' }
 ];

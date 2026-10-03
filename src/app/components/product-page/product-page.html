@@ -1,0 +1,103 @@
+<!-- product-page.html -->
+<main class="bg-[#f7f3ec] text-[#422e1b] antialiased overflow-hidden selection:bg-amber-200 selection:text-amber-950 font-sans min-h-screen">
+
+    <!-- HERO HEADER -->
+    <section class="relative pt-16 pb-12 overflow-hidden bg-gradient-to-b from-[#eee4d2] via-[#f7f2ea] to-[#f4ece0] border-b border-[#ddcdb5]">
+        <div class="absolute inset-0 bg-[radial-gradient(#b8935e_1.2px,transparent_1.2px)] [background-size:32px_32px] opacity-20 pointer-events-none"></div>
+        <div class="absolute -top-36 left-1/2 -translate-x-1/2 w-[900px] h-[900px] bg-gradient-to-b from-[#f59e0b]/25 via-[#ea580c]/15 to-transparent rounded-full blur-[140px] pointer-events-none"></div>
+
+        <div class="container mx-auto px-4 max-w-5xl relative z-10 text-center">
+            
+            <div class="inline-flex items-center gap-2.5 px-5 py-2 rounded-full bg-white/95 backdrop-blur-md border border-[#cbb391] text-[#783e16] text-[10px] sm:text-[11px] font-mono font-bold tracking-[0.3em] uppercase shadow-sm mb-5">
+                <span class="text-[#d97706] animate-pulse">❖</span>
+                <span>SACRED CONSECRATED SANCTUM EXHIBITION</span>
+                <span class="text-[#d97706] animate-pulse">❖</span>
+            </div>
+
+            <h1 class="text-4xl sm:text-5xl md:text-6xl font-serif font-black text-[#2f1f13] leading-[1.08] tracking-tight drop-shadow-xs mb-5 text-balance">
+                The Sacred Product Showcase.<br/>
+                <span class="italic text-transparent bg-clip-text bg-gradient-to-r from-[#92400e] via-[#b45309] to-[#d97706]">
+                    Authentic Malas, Vastu Artifacts, Pure Dhoop &amp; Granthas.
+                </span>
+            </h1>
+
+            <p class="text-[#685341] text-xs sm:text-sm leading-relaxed max-w-2xl mx-auto mb-8 font-normal">
+                Explore our collection of authentic ritual items and classical scriptures. Every item is ethically sourced, pure, and prepared for daily sadhana and altar sacredness.
+            </p>
+
+            <!-- Category Filter Pills -->
+            <div class="flex flex-wrap justify-center gap-2 max-w-4xl mx-auto">
+                @for (cat of categories; track cat) {
+                    <button (click)="setCategory(cat)"
+                            class="px-4 py-1.5 rounded-full text-xs font-mono tracking-wider transition-all duration-200 border cursor-pointer"
+                            [class.bg-[#783e16]]="selectedCategory() === cat"
+                            [class.text-white]="selectedCategory() === cat"
+                            [class.border-[#783e16]]="selectedCategory() === cat"
+                            [class.bg-white/80]="selectedCategory() !== cat"
+                            [class.text-[#685341]]="selectedCategory() !== cat"
+                            [class.border-[#d6c2a5]]="selectedCategory() !== cat"
+                            [class.hover:border-[#783e16]]="selectedCategory() !== cat">
+                        {{ cat }}
+                    </button>
+                }
+            </div>
+
+        </div>
+    </section>
+
+    <!-- PRODUCT LEDGER GRID -->
+    <section class="py-16 bg-[#f7f3ec]">
+        <div class="container mx-auto px-4 max-w-7xl">
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+                @for (product of filteredProducts(); track product.slug) {
+                    <div class="bg-white rounded-[20px] border border-[#e2d2bb] shadow-xs hover:shadow-lg hover:border-[#b45309] transition-all duration-300 flex flex-col overflow-hidden group">
+                        
+                        <!-- Header Image -->
+                        <div class="relative h-48 overflow-hidden bg-[#f4ece0]">
+                            <img [src]="product.image" [alt]="product.title" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                            
+                            <span class="absolute top-3 left-3 bg-[#d97706]/90 backdrop-blur-md text-white text-[9px] font-mono font-bold uppercase tracking-wider px-2 py-0.5 rounded-md shadow-sm border border-[#fbbf24]/30">
+                                {{ product.category }}
+                            </span>
+                            <span class="absolute top-3 right-3 bg-white/95 text-[#9a3412] text-[10px] font-serif font-bold px-2.5 py-0.5 rounded-full border border-[#d6c2a5] shadow-xs">
+                                {{ product.sanskritTag }}
+                            </span>
+                        </div>
+
+                        <!-- Details -->
+                        <div class="p-5 flex flex-col flex-grow">
+                            <span class="text-[10px] font-mono text-[#d97706] uppercase font-bold tracking-wider mb-1">
+                                {{ product.badge }}
+                            </span>
+                            
+                            <h3 class="font-serif font-bold text-base text-[#2f1f13] mb-1.5 leading-snug line-clamp-1">
+                                {{ product.title }}
+                            </h3>
+
+                            <p class="text-[11px] font-mono text-gray-500 mb-3">
+                                <i class="fa-solid fa-cube mr-1 text-[#d97706]"></i> {{ product.specifications }}
+                            </p>
+                            
+                            <p class="text-[#63503f] text-xs leading-relaxed mb-4 line-clamp-2 font-normal flex-grow">
+                                {{ product.summary }}
+                            </p>
+
+                            <div class="flex items-center justify-between pt-3 border-t border-[#f0e4d4] mt-auto">
+                                <div>
+                                    <span class="font-serif font-bold text-lg text-[#783e16]">{{ formatPrice(product.price) }}</span>
+                                    <span class="text-[11px] text-gray-400 line-through ml-1.5">{{ formatPrice(product.originalPrice) }}</span>
+                                </div>
+                                <a [routerLink]="['/products', product.slug]" class="bg-[#d97706] hover:bg-[#b45309] text-white font-mono font-bold text-[10px] uppercase tracking-wider px-4 py-2 rounded-lg transition-all flex items-center gap-1.5 shadow-sm">
+                                    <i class="fa-solid fa-bag-shopping"></i>
+                                    <span>Buy</span>
+                                </a>
+                            </div>
+                        </div>
+
+                    </div>
+                }
+            </div>
+        </div>
+    </section>
+
+</main>

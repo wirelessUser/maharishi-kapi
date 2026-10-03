@@ -4273,8 +4273,8 @@ Kapi Dhyana is more than a meditation course—it is a comprehensive system for 
   category: 'Wellness',
   level: 'Premium',
   image: 'https://storagemaharishikapicom.blob.core.windows.net/courses/Clarity%20Porgram.jpeg',
-  price: 3500,
-  originalPrice: 4500,
+  price: 1600,
+  originalPrice: 2100,
   tagline: 'You have spent years understanding the world. Now learn a disciplined framework for understanding yourself.',
   description: `The Clarity Program
 

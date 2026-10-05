@@ -1,117 +1,83 @@
-import { Component, computed, effect, signal, inject, PLATFORM_ID } from '@angular/core';
-import { DecimalPipe, isPlatformBrowser } from '@angular/common';
-import { RouterLink, ActivatedRoute } from '@angular/router';
-import { toSignal } from '@angular/core/rxjs-interop';
-import { map } from 'rxjs';
-import { CourseDetail, getCourseBySlug, getRelatedCourses } from '../../data/courses';
-import { SeoService, SITE_URL } from '../../services/seo.service';
+import { Component, OnInit, signal, inject, ViewChild, ElementRef } from '@angular/core';
+import { CommonModule, DecimalPipe } from '@angular/common';
+import { ActivatedRoute, Router, RouterLink } from '@angular/router';
+import { firstValueFrom } from 'rxjs';
+import { COURSES, CourseDetail } from '../../data/courses';
+import { PaymentService } from '../../services/payment.service';
+import { CartService } from '../../services/cart.service';
 
-interface Faq {
-  question: string;
-  answer: string;
-}
+declare var paypal: any;
 
 @Component({
   standalone: true,
-  imports: [RouterLink,DecimalPipe],
+  imports: [CommonModule, RouterLink, DecimalPipe],
   selector: 'app-course-detail-page',
-  styleUrl: './course-detail-page.css',
   templateUrl: './course-detail-page.html',
+  styleUrl: './course-detail-page.css'
 })
-export class CourseDetailPage {
+export class CourseDetailPage implements OnInit {
   private readonly route = inject(ActivatedRoute);
-  private readonly seo = inject(SeoService);
-  private readonly platformId = inject(PLATFORM_ID); // Platform ID इंजेक्ट करें
-isExpanded?: boolean; // यह लाइन जोड़ें
-  readonly slug = toSignal(
-    this.route.paramMap.pipe(map(params => params.get('slug') || params.get('id') || '')),
-    { initialValue: '' }
-  );
+  private readonly router = inject(Router);
+  private readonly paymentService = inject(PaymentService);
+  readonly cart = inject(CartService);
 
-  readonly course = computed(() => getCourseBySlug(this.slug()));
-  readonly related = computed(() => getRelatedCourses(this.slug()));
+  // PayPal Sandbox Client ID
+  private readonly PAYPAL_CLIENT_ID = 'BAAE51YJ8cK9cnb841N2XrLTEr5zN3L6ZW4cDjZDdeWbaRG1ELTR1Qxvx8K1Tng9zg1VlX81TZKh00wBYw';
+
+  readonly course = signal<CourseDetail | null>(null);
+  readonly related = signal<CourseDetail[]>([]);
+  readonly expandedIndex = signal<number | null>(null);
   readonly openFaq = signal<number | null>(0);
 
-  readonly faqs: Faq[] = [
+  // State signals for modal & checkout
+  readonly activeCheckoutCourse = signal<CourseDetail | null>(null);
+  readonly isProcessingPayment = signal<boolean>(false);
+  readonly paymentError = signal<string | null>(null);
+
+  // State signal for completed order success popup
+  readonly completedOrder = signal<{
+    orderId: string;
+    courseTitle: string;
+    amount: number;
+  } | null>(null);
+
+  readonly faqs = [
     {
-      question: 'Do I need any prior knowledge to enrol?',
-      answer: 'Only if the course itself lists a prerequisite above. Most Level 1 / foundational courses start from first principles and assume nothing.',
+      question: 'When can I access the course material?',
+      answer: 'Immediately after transaction completion, the course materials and portal credentials are automatically unlocked.'
     },
     {
-      question: 'Is the certification recognised?',
-      answer: 'Yes — certificates are issued by the Maharishi Kapi Institute of Vedic Astrology & Yogic Sciences on completion.',
+      question: 'Is the certificate accredited?',
+      answer: 'Yes, issued directly under the Maharishi Kapi Saraswat parampara.'
     },
     {
-      question: 'What if I miss a live class?',
-      answer: 'Sessions are recorded and added to your course dashboard, so you can catch up at your own pace with lifetime access.',
-    },
-    {
-      question: 'Can I get a refund if the course isn’t right for me?',
-      answer: 'No',
-    },
+      question: 'What currency is used for payment?',
+      answer: 'All transactions are securely handled in EUR (€) via PayPal.'
+    }
   ];
 
-  constructor() {
-    effect(() => {
-      const c = this.course();
-      if (!c) return;
+  @ViewChild('paypalButtonContainer') set paypalContainer(element: ElementRef | undefined) {
+    if (element && this.activeCheckoutCourse()) {
+      this.renderPayPalButton(element.nativeElement, this.activeCheckoutCourse()!);
+    }
+  }
 
-      // 1. Meta & Title Update (SSR safe होना चाहिए)
-      this.seo.setPageSeo({
-        title: c.title,
-        description: c.tagline,
-        path: `/courses/${c.slug}`,
-        image: c.image,
-        type: 'product',
-        keywords: `${c.title}, ${c.category} course, ${c.level} Vedic ${c.category}`,
-      });
+  ngOnInit(): void {
+    this.route.paramMap.subscribe((params) => {
+      const slug = params.get('slug');
+      const found = COURSES.find((item) => item.slug === slug) ?? null;
+      this.course.set(found);
 
-      // 2. यदि SeoService सीधे DOM मैनिपुलेशन (Direct Script injection) करता है, 
-      // तो उसे केवल ब्राउज़र में चलाएं या SeoService में DOCUMENT Token का प्रयोग करें।
-      if (isPlatformBrowser(this.platformId)) {
-        this.injectJsonLd(c);
+      if (found) {
+        this.related.set(
+          COURSES.filter((item) => item.category === found.category && item.slug !== found.slug).slice(0, 3)
+        );
       }
     });
   }
 
-  private injectJsonLd(c: CourseDetail): void {
-    this.seo.setJsonLd([
-      {
-        '@context': 'https://schema.org',
-        '@type': 'Course',
-        name: c.title,
-        description: c.description,
-        image: c.image,
-        provider: {
-          '@type': 'EducationalOrganization',
-          name: 'Maharishi Kapi Institute of Vedic Astrology & Yogic Sciences',
-          sameAs: SITE_URL,
-        },
-        educationalLevel: c.level,
-        inLanguage: c.language,
-        hasCourseInstance: {
-          '@type': 'CourseInstance',
-          courseMode: c.format,
-          courseWorkload: c.duration,
-        },
-        offers: {
-          '@type': 'Offer',
-          price: c.price,
-          priceCurrency: 'EUR',
-          availability: 'https://schema.org/InStock',
-          url: `${SITE_URL}/courses/${c.slug}`,
-        },
-      },
-      {
-        '@context': 'https://schema.org',
-        '@type': 'FAQPage',
-        mainEntity: this.faqs.map((faq) => ({
-          '@type': 'Question',
-          name: faq.question,
-          acceptedAnswer: { '@type': 'Answer', text: faq.answer },
-        })),
-      },
-    ]);
+  toggle(index: number): void {
+    this.expandedIndex.update((current) => (current === index ? null : index));
   }
 
   toggleFaq(index: number): void {
@@ -122,16 +88,105 @@ isExpanded?: boolean; // यह लाइन जोड़ें
     return `${value.toLocaleString('de-DE')} €`;
   }
 
+  // Cart action
+  toggleCart(c: CourseDetail): void {
+    if (this.cart.isInCart(c.slug)) {
+      this.cart.removeFromCart(c.slug);
+    } else {
+      this.cart.addToCart({
+        id: c.slug,
+        title: c.title,
+        category: c.category,
+        price: c.price,
+        originalPrice: c.originalPrice,
+        image: c.image
+      });
+    }
+  }
 
-  // विकल्प 1: यदि आप डेटा लोड करते समय टॉगल प्रॉपर्टी सेट करना चाहते हैं
-toggleModule(module: any) {
-    module.isExpanded = !module.isExpanded;
-}
+  // Direct checkout modal actions
+  async openCheckout(c: CourseDetail, event?: Event): Promise<void> {
+    if (event) {
+      event.preventDefault();
+      event.stopPropagation();
+    }
+    this.paymentError.set(null);
+    this.isProcessingPayment.set(false);
 
-// विकल्प 2: या सेट (Set) / सिग्नल (Signal) के माध्यम से सिलेक्टेड इंडेक्स ट्रैक कर सकते हैं
-expandedIndex = signal<number | null>(null);
+    try {
+      await this.paymentService.loadSdk(this.PAYPAL_CLIENT_ID, 'EUR');
+    } catch {
+      this.paymentError.set('Failed to load PayPal. Please refresh the page.');
+    }
 
-toggle(index: number) {
-    this.expandedIndex.update(i => i === index ? null : index);
-}
+    this.activeCheckoutCourse.set(c);
+  }
+
+  closeCheckout(): void {
+    if (this.isProcessingPayment()) return;
+    this.activeCheckoutCourse.set(null);
+    this.paymentError.set(null);
+  }
+
+  closeSuccessModal(): void {
+    this.completedOrder.set(null);
+  }
+
+  private renderPayPalButton(container: HTMLElement, course: CourseDetail): void {
+    container.innerHTML = '';
+
+    paypal.Buttons({
+      style: {
+        layout: 'vertical',
+        color: 'gold',
+        shape: 'pill',
+        label: 'pay'
+      },
+      createOrder: async () => {
+        try {
+          this.paymentError.set(null);
+          console.log('Sending order request for slug:', course.slug);
+          const res = await firstValueFrom(
+            this.paymentService.createOrder(course.slug, 'Course')
+          );
+          return res.orderId;
+        } catch (err: any) {
+          console.error('>>> EXACT REASON IT FAILED:', err);
+          this.paymentError.set(err?.error?.message || err?.statusText || 'Could not initiate order.');
+          throw err;
+        }
+      },
+      onApprove: async (data: any) => {
+        this.isProcessingPayment.set(true);
+        try {
+          const captureRes = await firstValueFrom(
+            this.paymentService.captureOrder(data.orderID)
+          );
+
+          if (captureRes.status === 'COMPLETED') {
+            this.activeCheckoutCourse.set(null);
+            this.completedOrder.set({
+              orderId: captureRes.orderId,
+              courseTitle: course.title,
+              amount: course.price
+            });
+          } else {
+            this.paymentError.set('Payment could not be completed.');
+          }
+        } catch (err) {
+          console.error('Payment capture error:', err);
+          this.paymentError.set('An error occurred during payment verification.');
+        } finally {
+          this.isProcessingPayment.set(false);
+        }
+      },
+      onCancel: () => {
+        this.paymentError.set('Transaction was cancelled.');
+      },
+      onError: (err: any) => {
+        console.error('PayPal Error:', err);
+        this.paymentError.set('Payment gateway encountered an error.');
+      }
+    }).render(container);
+  }
 }

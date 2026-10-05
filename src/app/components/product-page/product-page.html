@@ -1,42 +1,145 @@
 <!-- product-page.html -->
-<main class="bg-[#f7f3ec] text-[#422e1b] antialiased overflow-hidden selection:bg-amber-200 selection:text-amber-950 font-sans min-h-screen">
 
-    <!-- HERO HEADER -->
-    <section class="relative pt-16 pb-12 overflow-hidden bg-gradient-to-b from-[#eee4d2] via-[#f7f2ea] to-[#f4ece0] border-b border-[#ddcdb5]">
+<!-- Custom Keyframe Animations & 3D Glass Reflections -->
+<style>
+    /* ========================================================================= */
+    /* PERMANENT 3D CRYSTAL VITRINE SPECULAR REFLECTIONS                          */
+    /* ========================================================================= */
+ /* ========================================================================= */
+    /* BALANCED 3D CRYSTAL VITRINE REFLECTIONS (TRANSPARENT & SUBTLE)            */
+    /* ========================================================================= */
+    .glass-permanent-reflection {
+        background: 
+            /* 1. Gentle Top-Left Ambient Glint (Softened from 75% -> 30%) */
+            radial-gradient(circle at 16% 14%, rgba(255, 255, 255, 0.32) 0%, rgba(255, 255, 255, 0.08) 25%, transparent 50%),
+            
+            /* 2. Primary Diagonal Sheen Band (Softened from 85% -> 38%) */
+            linear-gradient(125deg, 
+                transparent 18%, 
+                rgba(255, 255, 255, 0.18) 25%, 
+                rgba(255, 255, 255, 0.36) 27%, 
+                rgba(255, 255, 255, 0.15) 30%, 
+                transparent 40%),
+                
+            /* 3. Subtle Secondary Ambient Sheen (Softened from 45% -> 18%) */
+            linear-gradient(125deg, 
+                transparent 48%, 
+                rgba(255, 255, 255, 0.10) 52%, 
+                rgba(255, 255, 255, 0.20) 55%, 
+                rgba(255, 255, 255, 0.06) 58%, 
+                transparent 66%),
+                
+            /* 4. Crystal Surface Base Layer (Softened from 35% -> 12%) */
+            linear-gradient(to bottom right, rgba(255, 255, 255, 0.14), rgba(255, 255, 255, 0.02) 60%, rgba(217, 119, 6, 0.02));
+    }
+
+    /* 3D Glass Pane Bevel & Inset Depth */
+    .glass-vitrine-3d {
+        box-shadow: 
+            inset 0 2px 4px rgba(255, 255, 255, 0.9),
+            inset 2px 0 4px rgba(255, 255, 255, 0.6),
+            inset -2px -2px 6px rgba(45, 26, 11, 0.12),
+            0 12px 28px -6px rgba(45, 26, 11, 0.16);
+    }
+
+    .group:hover .glass-permanent-reflection {
+        filter: brightness(1.15) contrast(1.05);
+        transition: filter 0.4s ease;
+    }
+
+    /* 1. Horizontal Patrol Across the Entire Row */
+    @keyframes patrol-row-path {
+        0% { left: 0%; }
+        50% { left: calc(100% - 95px); }
+        100% { left: 0%; }
+    }
+    .row-patrol-container {
+        animation: patrol-row-path 18s infinite ease-in-out;
+    }
+
+    /* 2. Flip Cow Direction When Reaching the Ends */
+    @keyframes cow-flip-direction {
+        0%, 48% { transform: scaleX(1); }
+        50%, 98% { transform: scaleX(-1); }
+        100% { transform: scaleX(1); }
+    }
+    .cow-directional-flip {
+        animation: cow-flip-direction 18s infinite ease-in-out;
+        transform-origin: center;
+    }
+
+    /* 3. Celestial Bobbing / Flying Hover */
+    @keyframes cow-celestial-bob {
+        0%, 100% { transform: translateY(0px) rotate(0deg); }
+        50% { transform: translateY(-9px) rotate(2deg); }
+    }
+    .cow-hover-bob {
+        animation: cow-celestial-bob 3s infinite ease-in-out;
+        transform-origin: center;
+    }
+
+    /* 4. Animated Tail Wag */
+    @keyframes tail-wag-loop {
+        0%, 100% { transform: rotate(0deg); }
+        50% { transform: rotate(18deg); }
+    }
+    .cow-tail-wag {
+        animation: tail-wag-loop 1.4s infinite ease-in-out;
+        transform-origin: 15px 42px;
+    }
+
+    /* 5. Speech Bubble Gentle Pulse */
+    @keyframes bubble-float-anim {
+        0%, 100% { transform: translateY(0px) scale(1); }
+        50% { transform: translateY(-3px) scale(1.02); }
+    }
+    .bubble-float {
+        animation: bubble-float-anim 2.5s infinite ease-in-out;
+    }
+</style>
+
+<main class="bg-[#f7f3ec] text-[#422e1b] antialiased overflow-hidden selection:bg-amber-200 selection:text-amber-950 font-sans min-h-screen pb-24">
+
+    <!-- ========================================================================= -->
+    <!-- HERO HEADER                                                               -->
+    <!-- ========================================================================= -->
+    <section class="relative pt-16 pb-14 overflow-hidden bg-gradient-to-b from-[#eee4d2] via-[#f7f2ea] to-[#f4ece0] border-b border-[#ddcdb5]">
         <div class="absolute inset-0 bg-[radial-gradient(#b8935e_1.2px,transparent_1.2px)] [background-size:32px_32px] opacity-20 pointer-events-none"></div>
-        <div class="absolute -top-36 left-1/2 -translate-x-1/2 w-[900px] h-[900px] bg-gradient-to-b from-[#f59e0b]/25 via-[#ea580c]/15 to-transparent rounded-full blur-[140px] pointer-events-none"></div>
+        <div class="absolute -top-36 left-1/2 -translate-x-1/2 w-[900px] h-[900px] bg-gradient-to-b from-[#f59e0b]/20 via-[#d97706]/15 to-transparent rounded-full blur-[140px] pointer-events-none"></div>
 
         <div class="container mx-auto px-4 max-w-5xl relative z-10 text-center">
             
             <div class="inline-flex items-center gap-2.5 px-5 py-2 rounded-full bg-white/95 backdrop-blur-md border border-[#cbb391] text-[#783e16] text-[10px] sm:text-[11px] font-mono font-bold tracking-[0.3em] uppercase shadow-sm mb-5">
                 <span class="text-[#d97706] animate-pulse">❖</span>
-                <span>SACRED CONSECRATED SANCTUM EXHIBITION</span>
+                <span>SACRED CRYSTAL VITRINE EXHIBITION</span>
                 <span class="text-[#d97706] animate-pulse">❖</span>
             </div>
 
             <h1 class="text-4xl sm:text-5xl md:text-6xl font-serif font-black text-[#2f1f13] leading-[1.08] tracking-tight drop-shadow-xs mb-5 text-balance">
                 The Sacred Product Showcase.<br/>
                 <span class="italic text-transparent bg-clip-text bg-gradient-to-r from-[#92400e] via-[#b45309] to-[#d97706]">
-                    Authentic Malas, Vastu Artifacts, Pure Dhoop &amp; Granthas.
+                    Authentic Malas, Vastu Artifacts &amp; Granthas.
                 </span>
             </h1>
 
-            <p class="text-[#685341] text-xs sm:text-sm leading-relaxed max-w-2xl mx-auto mb-8 font-normal">
-                Explore our collection of authentic ritual items and classical scriptures. Every item is ethically sourced, pure, and prepared for daily sadhana and altar sacredness.
+            <p class="text-[#685341] text-sm md:text-base leading-relaxed max-w-2xl mx-auto mb-8 font-normal">
+                Browse our consecrated physical artifacts presented as framed specimens in pure crystal vitrines. Every item is naturally sourced and prepared for profound altar sacredness.
             </p>
 
             <!-- Category Filter Pills -->
-            <div class="flex flex-wrap justify-center gap-2 max-w-4xl mx-auto">
+            <div class="flex flex-wrap justify-center gap-2 max-w-4xl mx-auto mt-6">
                 @for (cat of categories; track cat) {
                     <button (click)="setCategory(cat)"
-                            class="px-4 py-1.5 rounded-full text-xs font-mono tracking-wider transition-all duration-200 border cursor-pointer"
+                            class="px-4 py-1.5 rounded-full text-[11px] sm:text-xs font-mono tracking-wider transition-all duration-200 border cursor-pointer"
                             [class.bg-[#783e16]]="selectedCategory() === cat"
                             [class.text-white]="selectedCategory() === cat"
                             [class.border-[#783e16]]="selectedCategory() === cat"
-                            [class.bg-white/80]="selectedCategory() !== cat"
+                            [class.shadow-md]="selectedCategory() === cat"
+                            [class.bg-white]="selectedCategory() !== cat"
                             [class.text-[#685341]]="selectedCategory() !== cat"
                             [class.border-[#d6c2a5]]="selectedCategory() !== cat"
-                            [class.hover:border-[#783e16]]="selectedCategory() !== cat">
+                            [class.hover:border-[#783e16]]="selectedCategory() !== cat"
+                            [class.hover:text-[#783e16]]="selectedCategory() !== cat">
                         {{ cat }}
                     </button>
                 }
@@ -45,58 +148,213 @@
         </div>
     </section>
 
-    <!-- PRODUCT LEDGER GRID -->
-    <section class="py-16 bg-[#f7f3ec]">
+    <!-- ========================================================================= -->
+    <!-- 3D CRYSTAL GLASS SHOWCASE GRID (ORGANIZED BY ROWS WITH 1 PATROLLING COW)  -->
+    <!-- ========================================================================= -->
+    <section class="py-14">
         <div class="container mx-auto px-4 max-w-7xl">
-            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-                @for (product of filteredProducts(); track product.slug) {
-                    <div class="bg-white rounded-[20px] border border-[#e2d2bb] shadow-xs hover:shadow-lg hover:border-[#b45309] transition-all duration-300 flex flex-col overflow-hidden group">
+            
+            <div class="space-y-20">
+                @for (row of productRows(); track $index; let rIdx = $index) {
+                    
+                    <!-- ROW CONTAINER -->
+                    <div class="relative pt-6">
                         
-                        <!-- Header Image -->
-                        <div class="relative h-48 overflow-hidden bg-[#f4ece0]">
-                            <img [src]="product.image" [alt]="product.title" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                        <!-- ================= ONE FLYING COW PATROLLING THIS ENTIRE ROW ================= -->
+                        <div class="row-patrol-container absolute -top-10 z-40 pointer-events-none flex flex-col items-center"
+                             [style.animationDelay]="-(rIdx * 4.5) + 's'">
                             
-                            <span class="absolute top-3 left-3 bg-[#d97706]/90 backdrop-blur-md text-white text-[9px] font-mono font-bold uppercase tracking-wider px-2 py-0.5 rounded-md shadow-sm border border-[#fbbf24]/30">
-                                {{ product.category }}
-                            </span>
-                            <span class="absolute top-3 right-3 bg-white/95 text-[#9a3412] text-[10px] font-serif font-bold px-2.5 py-0.5 rounded-full border border-[#d6c2a5] shadow-xs">
-                                {{ product.sanskritTag }}
-                            </span>
+                            <!-- Speech Bubble -->
+                            <div class="bubble-float -mb-1 bg-white/95 backdrop-blur-xs border border-amber-400 rounded-2xl px-2.5 py-1 shadow-[0_4px_12px_rgba(217,119,6,0.3)] flex items-center gap-1.5 whitespace-nowrap z-50">
+                                <span class="text-[11px]">🌸</span>
+                                <span class="text-[8.5px] font-sans font-black text-[#92400e] tracking-tight">
+                                    {{ cowBlessings[rIdx % cowBlessings.length] }}
+                                </span>
+                            </div>
+
+                            <!-- Cow & Cloud -->
+                            <div class="cow-directional-flip" [style.animationDelay]="-(rIdx * 4.5) + 's'">
+                                <div class="cow-hover-bob flex flex-col items-center drop-shadow-[0_10px_16px_rgba(40,24,12,0.4)]">
+                                    
+                                    <!-- Vedic Cartoon Cow (Kamadhenu) -->
+                                    <div class="w-20 h-20 sm:w-22 sm:h-22">
+                                        <svg viewBox="0 0 110 110" class="w-full h-full overflow-visible" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                            
+                                            <!-- Wagging Tail -->
+                                            <g class="cow-tail-wag">
+                                                <path d="M18 52 C10 50, 4 60, 8 72 C9 75, 11 77, 10 82" stroke="#fefce8" stroke-width="3" stroke-linecap="round"/>
+                                                <path d="M10 80 C8 85, 12 91, 14 87 C15 84, 11 81, 10 80 Z" fill="#92400e"/>
+                                            </g>
+
+                                            <!-- Back Legs -->
+                                            <rect x="25" y="70" width="7" height="18" rx="3.5" fill="#f5f5f4"/>
+                                            <rect x="25" y="85" width="7" height="4" rx="1.5" fill="#d97706"/>
+                                            <rect x="68" y="70" width="7" height="18" rx="3.5" fill="#f5f5f4"/>
+                                            <rect x="68" y="85" width="7" height="4" rx="1.5" fill="#d97706"/>
+
+                                            <!-- Main Body -->
+                                            <ellipse cx="48" cy="62" rx="30" ry="22" fill="#fffdfa" stroke="#e7e5e4" stroke-width="1.5"/>
+                                            
+                                            <!-- Sacred Zebu Hump -->
+                                            <ellipse cx="36" cy="42" rx="7" ry="9" fill="#fffdfa" stroke="#e7e5e4" stroke-width="1"/>
+
+                                            <!-- Front Legs -->
+                                            <rect x="33" y="72" width="7" height="18" rx="3.5" fill="#fffdfa" stroke="#e7e5e4" stroke-width="0.5"/>
+                                            <rect x="33" y="87" width="7" height="4" rx="1.5" fill="#f59e0b"/>
+                                            <rect x="60" y="72" width="7" height="18" rx="3.5" fill="#fffdfa" stroke="#e7e5e4" stroke-width="0.5"/>
+                                            <rect x="60" y="87" width="7" height="4" rx="1.5" fill="#f59e0b"/>
+
+                                            <!-- Saffron Saddle Cloth (झूल) -->
+                                            <path d="M36 50 Q48 53 60 50 L63 67 Q48 70 33 67 Z" fill="#ea580c"/>
+                                            <path d="M35 66 Q48 69 62 66" stroke="#fcd34d" stroke-width="2" stroke-linecap="round" stroke-dasharray="2 2"/>
+
+                                            <!-- Sacred Bell & Rudraksha Garland -->
+                                            <path d="M68 50 Q75 60 84 57" stroke="#b91c1c" stroke-width="2.5" stroke-linecap="round"/>
+                                            <circle cx="77" cy="60" r="3.5" fill="#f59e0b" stroke="#78350f" stroke-width="0.8"/>
+                                            <circle cx="77" cy="62.5" r="1" fill="#78350f"/>
+
+                                            <!-- Head -->
+                                            <ellipse cx="80" cy="40" rx="16" ry="17" fill="#fffdfa" stroke="#e7e5e4" stroke-width="1"/>
+
+                                            <!-- Golden Horns -->
+                                            <path d="M72 26 C68 18 64 16 62 17 C64 21 68 25 71 28 Z" fill="#f59e0b" stroke="#b45309" stroke-width="0.8"/>
+                                            <path d="M86 26 C90 18 94 16 96 17 C94 21 90 25 87 28 Z" fill="#f59e0b" stroke="#b45309" stroke-width="0.8"/>
+
+                                            <!-- Ears -->
+                                            <path d="M68 36 C61 36 58 41 62 43 C66 44 68 40 69 38 Z" fill="#fed7aa" stroke="#e7e5e4" stroke-width="0.8"/>
+                                            <path d="M92 36 C99 36 102 41 98 43 C94 44 92 40 91 38 Z" fill="#fed7aa" stroke="#e7e5e4" stroke-width="0.8"/>
+
+                                            <!-- Eyes with Sparkle -->
+                                            <ellipse cx="74" cy="36" rx="3.5" ry="4.5" fill="#1c1917"/>
+                                            <circle cx="75.2" cy="34.5" r="1.4" fill="white"/>
+                                            
+                                            <ellipse cx="86" cy="36" rx="3.5" ry="4.5" fill="#1c1917"/>
+                                            <circle cx="87.2" cy="34.5" r="1.4" fill="white"/>
+
+                                            <!-- Vedic Tilak -->
+                                            <path d="M79 26 L81 26 L81 33 Q80 34 79 33 Z" fill="#f59e0b"/>
+                                            <line x1="80" y1="27" x2="80" y2="33" stroke="#b91c1c" stroke-width="1"/>
+                                            <circle cx="80" cy="34.5" r="0.8" fill="#b91c1c"/>
+
+                                            <!-- Muzzle & Smile -->
+                                            <ellipse cx="80" cy="46" rx="9" ry="6" fill="#fbcfe8"/>
+                                            <circle cx="77" cy="45" r="1" fill="#be185d"/>
+                                            <circle cx="83" cy="45" r="1" fill="#be185d"/>
+                                            <path d="M77 48 Q80 50.5 83 48" stroke="#be185d" stroke-width="1" stroke-linecap="round"/>
+
+                                        </svg>
+                                    </div>
+
+                                    <!-- Celestial Golden Cloud -->
+                                    <div class="-mt-3.5 w-18 sm:w-20 h-5">
+                                        <svg viewBox="0 0 100 28" class="w-full h-full" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                            <path d="M12 22 Q4 22 8 16 Q6 8 16 9 Q20 3 32 6 Q40 0 54 4 Q66 1 76 8 Q86 6 88 15 Q96 16 92 22 Z" fill="#ffffff" stroke="#fcd34d" stroke-width="1.2"/>
+                                            <circle cx="34" cy="14" r="5" fill="#fef3c7" opacity="0.6"/>
+                                            <circle cx="62" cy="13" r="6" fill="#fef3c7" opacity="0.6"/>
+                                        </svg>
+                                    </div>
+
+                                </div>
+                            </div>
+
                         </div>
 
-                        <!-- Details -->
-                        <div class="p-5 flex flex-col flex-grow">
-                            <span class="text-[10px] font-mono text-[#d97706] uppercase font-bold tracking-wider mb-1">
-                                {{ product.badge }}
-                            </span>
-                            
-                            <h3 class="font-serif font-bold text-base text-[#2f1f13] mb-1.5 leading-snug line-clamp-1">
-                                {{ product.title }}
-                            </h3>
+                        <!-- ================= 4 PRODUCTS IN THIS ROW ================= -->
+                        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-x-8 gap-y-12">
+                            @for (product of row; track product.slug) {
+                                <div class="flex flex-col group cursor-pointer">
+                                    
+                                    <!-- 3D VITRINE CONTAINER -->
+                                    <div class="relative w-full pt-4 px-3 flex flex-col items-center">
+                                        
+                                        <!-- Real 3D Glass Box with Permanent Glare -->
+<div class="relative w-full aspect-[4/3] bg-gradient-to-br from-white/25 via-white/5 to-transparent backdrop-blur-[2px] z-10 overflow-hidden flex items-end justify-center pb-1.5 border border-white/50 glass-vitrine-3d rounded-t-sm">                                            
+                                            <!-- Gold Frame Edges -->
+                                            <div class="absolute top-0 left-0 w-full h-[2px] bg-gradient-to-r from-amber-200 via-amber-400 to-amber-200 shadow-[0_0_8px_rgba(252,211,77,0.9)] z-20 pointer-events-none"></div>
+                                            <div class="absolute bottom-0 left-0 w-full h-[2px] bg-amber-400/90 shadow-[0_0_6px_rgba(252,211,77,0.7)] z-20 pointer-events-none"></div>
+                                            <div class="absolute top-0 left-0 w-[2px] h-full bg-gradient-to-b from-amber-200 via-amber-400 to-amber-300 shadow-[0_0_8px_rgba(252,211,77,0.8)] z-20 pointer-events-none"></div>
+                                            <div class="absolute top-0 right-0 w-[2px] h-full bg-gradient-to-b from-amber-200 via-amber-400 to-amber-300 shadow-[0_0_8px_rgba(252,211,77,0.8)] z-20 pointer-events-none"></div>
 
-                            <p class="text-[11px] font-mono text-gray-500 mb-3">
-                                <i class="fa-solid fa-cube mr-1 text-[#d97706]"></i> {{ product.specifications }}
-                            </p>
-                            
-                            <p class="text-[#63503f] text-xs leading-relaxed mb-4 line-clamp-2 font-normal flex-grow">
-                                {{ product.summary }}
-                            </p>
+                                            <!-- Internal Perspective Lines (Depth Illusion) -->
+                                            <svg class="absolute inset-0 w-full h-full pointer-events-none z-0 opacity-45" preserveAspectRatio="none">
+                                                <line x1="0" y1="100%" x2="15%" y2="85%" stroke="#fcd34d" stroke-width="1.5" />
+                                                <line x1="100%" y1="100%" x2="85%" y2="85%" stroke="#fcd34d" stroke-width="1.5" />
+                                                <line x1="0" y1="0" x2="15%" y2="15%" stroke="#fcd34d" stroke-width="1.5" />
+                                                <line x1="100%" y1="0" x2="85%" y2="15%" stroke="#fcd34d" stroke-width="1.5" />
+                                                <rect x="15%" y="15%" width="70%" height="70%" fill="rgba(255,255,255,0.15)" stroke="#fcd34d" stroke-width="1.5"/>
+                                            </svg>
 
-                            <div class="flex items-center justify-between pt-3 border-t border-[#f0e4d4] mt-auto">
-                                <div>
-                                    <span class="font-serif font-bold text-lg text-[#783e16]">{{ formatPrice(product.price) }}</span>
-                                    <span class="text-[11px] text-gray-400 line-through ml-1.5">{{ formatPrice(product.originalPrice) }}</span>
+                                            <!-- Framed Product Image Resting on Floor -->
+                                            <div class="relative z-10 w-[56%] h-[74%] flex flex-col items-center justify-end">
+                                                <div class="w-full h-full bg-[#3d210f] p-1 shadow-[0_8px_18px_rgba(0,0,0,0.5)] border border-amber-500/90 rounded-[3px] group-hover:-translate-y-1.5 transition-transform duration-500 ease-out flex items-center justify-center">
+                                                    <div class="w-full h-full bg-[#faf8f5] p-2 sm:p-2.5 shadow-inner flex items-center justify-center overflow-hidden border border-[#e8dac5]">
+                                                        <img [src]="product.image" 
+                                                             [alt]="product.title" 
+                                                             class="w-full h-full object-cover filter contrast-105">
+                                                    </div>
+                                                </div>
+                                                <div class="w-[88%] h-1 bg-black/45 rounded-full blur-[1px] mt-0.5 pointer-events-none"></div>
+                                            </div>
+
+                                            <!-- PERMANENT 3D GLASS SPECULAR SHINE LAYER -->
+                                            <div class="absolute inset-0 z-30 pointer-events-none glass-permanent-reflection"></div>
+
+                                            <!-- Top Glass Chamfer Specular Edge Line -->
+                                          <!-- Top & Left Glass Chamfer Edge Lines (Softened) -->
+<div class="absolute top-[3px] left-[3px] right-[3px] h-[1px] bg-white/40 pointer-events-none z-30"></div>
+<div class="absolute top-[3px] left-[3px] bottom-[3px] w-[1px] bg-white/30 pointer-events-none z-30"></div>
+                                        </div>
+
+                                        <!-- Solid White Podium Base -->
+                                        <div class="relative z-20 w-[106%] h-12 bg-white shadow-[0_15px_30px_rgba(0,0,0,0.14)] flex flex-col justify-start border-b border-x border-gray-200">
+                                            <div class="w-full h-2.5 bg-gradient-to-b from-[#f2e7d3] to-white border-b border-[#eadbc6] shadow-inner"></div>
+                                            <div class="flex-1 w-full flex justify-center items-center px-2">
+                                                <span class="text-[8.5px] font-mono text-[#8c491c] tracking-[0.3em] uppercase font-black opacity-90 truncate">
+                                                    {{ product.sanskritTag }}
+                                                </span>
+                                            </div>
+                                        </div>
+                                        
+                                        <!-- Podium Contact Shadow -->
+                                        <div class="w-[90%] h-3 bg-black/15 blur-md rounded-[100%] absolute -bottom-1"></div>
+
+                                    </div>
+
+                                    <!-- Details Card -->
+                                    <div class="mt-8 px-4 flex flex-col flex-grow text-center">
+                                        <span class="text-[#d97706] text-[9px] font-mono font-bold uppercase tracking-[0.2em] mb-1.5">
+                                            {{ product.badge }}
+                                        </span>
+                                        
+                                        <h3 class="font-serif font-black text-lg text-[#2f1f13] mb-2 leading-snug">
+                                            {{ product.title }}
+                                        </h3>
+
+                                        <p class="text-[#63503f] text-xs leading-relaxed mb-5 line-clamp-2 font-normal flex-grow">
+                                            {{ product.summary }}
+                                        </p>
+
+                                        <div class="flex flex-col items-center justify-center pt-4 border-t border-[#eadbc6] mt-auto">
+                                            <div class="flex items-center gap-2.5 mb-3">
+                                                <span class="font-serif font-black text-xl text-[#783e16]">{{ formatPrice(product.price) }}</span>
+                                                <span class="text-[11px] text-gray-400 line-through">{{ formatPrice(product.originalPrice) }}</span>
+                                            </div>
+                                            
+                                            <a [routerLink]="['/products', product.slug]" 
+                                               class="w-full bg-[#d97706] hover:bg-[#b45309] text-white font-mono font-bold text-[10px] uppercase tracking-widest px-6 py-3.5 rounded shadow-md hover:shadow-lg transition-all flex items-center justify-center gap-2">
+                                                <i class="fa-solid fa-sparkles text-amber-200"></i> View Specimen / Order
+                                            </a>
+                                        </div>
+                                    </div>
+
                                 </div>
-                                <a [routerLink]="['/products', product.slug]" class="bg-[#d97706] hover:bg-[#b45309] text-white font-mono font-bold text-[10px] uppercase tracking-wider px-4 py-2 rounded-lg transition-all flex items-center gap-1.5 shadow-sm">
-                                    <i class="fa-solid fa-bag-shopping"></i>
-                                    <span>Buy</span>
-                                </a>
-                            </div>
+                            }
                         </div>
 
                     </div>
                 }
             </div>
+
         </div>
     </section>
 

@@ -20,12 +20,12 @@ export const routes: Routes = [
   { path: 'blog', component: BlogPage },
   { path: 'retreats', component: RetreatsPage },
   { path: 'fundraise', component: FundraiserPage },
-  { path: 'Fundraise', redirectTo: 'fundraise' }, // Casing सुरक्षा के लिए
+  { path: 'Fundraise', redirectTo: 'fundraise' },
   { path: 'retreats/:slug', component: RetreatDetailPage },
   { path: 'library', component: LibraryPage },
   { path: 'residential', component: ResidentialPage },
 
-  // ✅ PRODUCT ROUTE (यहाँ मुख्य स्तर पर होना चाहिए):
+  // PRODUCT ROUTE
   {
     path: 'product',
     loadComponent: () => import('./components/product-page/product-page').then(m => m.ProductPage)
@@ -33,6 +33,39 @@ export const routes: Routes = [
   {
     path: 'products',
     redirectTo: 'product'
+  },
+
+  // 1. PUBLIC CART ROUTE (Top-level)
+  {
+    path: 'cart',
+    loadComponent: () => import('./pages/cart/cart.component').then(m => m.CartComponent)
+  },
+
+  // 2. PUBLIC AUTH / SIGN IN / REGISTER ROUTES (Top-level)
+  {
+    path: 'login',
+    loadComponent: () => import('./pages/auth/auth.component/auth.component').then(m => m.AuthComponent)
+  },
+  {
+    path: 'register',
+    redirectTo: 'login',
+    pathMatch: 'full'
+  },
+
+  // 3. PUBLIC FORGOT & RESET PASSWORD ROUTES (Top-level)
+  {
+    path: 'forgot-password',
+    loadComponent: () => import('./pages/forgot-password/forgot-password.component').then(m => m.ForgotPasswordComponent)
+  },
+  {
+    path: 'reset-password',
+    loadComponent: () => import('./pages/reset-password/reset-password.component').then(m => m.ResetPasswordComponent)
+  },
+
+  // 4. PUBLIC MY ORDERS ROUTE (Top-level)
+  {
+    path: 'my-orders',
+    loadComponent: () => import('./pages/my-orders/my-orders.component/my-orders.component').then(m => m.MyOrdersComponent)
   },
 
   // Admin Backend Panel (Lazy Loaded)
@@ -72,6 +105,6 @@ export const routes: Routes = [
     ]
   },
 
-  // Catch-all route (हमेशा सबसे नीचे)
+  // Catch-all route (always at the very end)
   { path: '**', redirectTo: '' }
 ];

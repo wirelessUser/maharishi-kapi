@@ -43,7 +43,7 @@ export const COURSES: CourseDetail[] = [
     sanskritTag: 'कुण्डली विज्ञान',
     category: 'Astrology',
     level: 'Beginner',
-    image: 'https://mkvnstorage.blob.core.windows.net/courseimages/Vedic%20Astrology%20Foundations%20%E2%80%93%20Level%201.png',
+    image: 'https://storagemaharishikapicom.blob.core.windows.net/courses/Vedic%20Astrology%20Foundations%20%E2%80%93%20Level%201.png',
     price: 145,
     originalPrice: 220,
     tagline: 'Read your first birth chart with confidence — zero prior knowledge needed.',
@@ -160,7 +160,7 @@ export const COURSES: CourseDetail[] = [
     sanskritTag: 'मध्यम ज्योतिष',
     category: 'Astrology',
     level: 'Intermediate',
-    image: 'https://mkvnstorage.blob.core.windows.net/courseimages/Predictive%20Astrology%20Mastery%20%E2%80%93%20Level%202.png',
+    image: 'https://storagemaharishikapicom.blob.core.windows.net/courses/Predictive%20Astrology%20Mastery%20%E2%80%93%20Level%202.png',
     price: 245,
     originalPrice: 320,
     tagline: 'Deepen your understanding of horoscope interpretation and predictive astrology.',
@@ -244,7 +244,7 @@ export const COURSES: CourseDetail[] = [
     sanskritTag: 'ज्योतिषाचार्य',
     category: 'Astrology',
     level: 'Advanced',
-    image: 'https://mkvnstorage.blob.core.windows.net/courseimages/Professional%20Jyotish%20Consultant%20%E2%80%93%20Level%203.png',
+    image: 'https://storagemaharishikapicom.blob.core.windows.net/courses/Professional%20Jyotish%20Consultant%20%E2%80%93%20Level%203.png',
     price: 345,
     originalPrice: 420,
     tagline: 'Master professional prediction techniques and conduct real-life consultations.',
@@ -382,7 +382,7 @@ export const COURSES: CourseDetail[] = [
     sanskritTag: 'प्रश्न ज्योतिष',
     category: 'Astrology',
     level: 'Professional',
-    image: 'https://mkvnstorage.blob.core.windows.net/courseimages/Vedic%20Prashna%20Astrology%20%E2%80%93%20Mastering%20the%20Classical%20Science%20of%20Horary%20Prediction.png',
+    image: 'https://storagemaharishikapicom.blob.core.windows.net/courses/Vedic%20Prashna%20Astrology%20%E2%80%93%20Mastering%20the%20Classical%20Science%20of%20Horary%20Prediction.png',
     price: 260,
     originalPrice: 350,
     tagline: 'Learn the art of answering life’s most important questions—one chart, one question, one moment at a time.',
@@ -611,7 +611,7 @@ export const COURSES: CourseDetail[] = [
     sanskritTag: 'नक्षत्र विद्या',
     category: 'Astrology',
     level: 'Advanced',
-    image: 'https://mkvnstorage.blob.core.windows.net/courseimages/Nakshatra%20Vidya%20%E2%80%93%20The%20Lunar%20Mansions%20of%20Vedic%20Astrology.png',
+    image: 'https://storagemaharishikapicom.blob.core.windows.net/courses/Nakshatra%20Vidya%20%E2%80%93%20The%20Lunar%20Mansions%20of%20Vedic%20Astrology.png',
     price: 295,
     originalPrice: 380,
     tagline: 'Discover the Soul of Vedic Astrology',
@@ -829,7 +829,7 @@ export const COURSES: CourseDetail[] = [
     sanskritTag: 'अङ्क ज्योतिष',
     category: 'Numerology',
     level: 'Beginner',
-    image: 'https://mkvnstorage.blob.core.windows.net/courseimages/Predictive%20Numerology%20Essentials%20%E2%80%93%20Level%201.png',
+    image: 'https://storagemaharishikapicom.blob.core.windows.net/courses/Predictive%20Numerology%20Essentials%20%E2%80%93%20Level%201.png',
     price: 150,
     originalPrice: 200,
     tagline: 'Understand how numbers influence human life, behavior, destiny, and decision-making.',
@@ -941,7 +941,7 @@ export const COURSES: CourseDetail[] = [
     sanskritTag: 'प्रगत अङ्क ज्योतिष',
     category: 'Numerology',
     level: 'Intermediate',
-    image: 'https://mkvnstorage.blob.core.windows.net/courseimages/Advanced%20Vedic%20Numerology%20%E2%80%93%20Level%202.png',
+    image: 'https://storagemaharishikapicom.blob.core.windows.net/courses/Advanced%20Vedic%20Numerology%20%E2%80%93%20Level%202.png',
     price: 190,
     originalPrice: 250,
     tagline: 'Master prediction, timing analysis, and detailed chart interpretation.',
@@ -1045,7 +1045,7 @@ export const COURSES: CourseDetail[] = [
     sanskritTag: 'अङ्क विशारद',
     category: 'Numerology',
     level: 'Advanced',
-    image: 'https://mkvnstorage.blob.core.windows.net/courseimages/The%20Master%20Numerologist%20%20Strategic%20Life%20designer%20%E2%80%93%20Level%203.png',
+    image: 'https://storagemaharishikapicom.blob.core.windows.net/courses/The%20Master%20Numerologist%20%20Strategic%20Life%20designer%20%E2%80%93%20Level%203.png',
     price: 280,
     originalPrice: 380,
     tagline: 'Master deep predictive accuracy, long-term life mapping, and transformational healing techniques.',
@@ -1161,7 +1161,7 @@ export const COURSES: CourseDetail[] = [
     sanskritTag: 'टैरो प्रज्ञा',
     category: 'Tarot',
     level: 'Beginner to Advanced',
-    image: 'https://mkvnstorage.blob.core.windows.net/courseimages/The%20Kapi%20Tarot%20System%E2%84%A2%20Program.png',
+    image: 'https://storagemaharishikapicom.blob.core.windows.net/courses/The%20Kapi%20Tarot%20System%E2%84%A2%20Program.png',
     price: 260,
     originalPrice: 320,
     tagline: 'Mastering Tarot Consultation, Symbolic Interpretation & Conscious Guidance',
@@ -1341,7 +1341,7 @@ export const COURSES: CourseDetail[] = [
     sanskritTag: 'वास्तु सलाहकार',
     category: 'Vastu',
     level: 'Foundational Professional',
-    image: 'https://mkvnstorage.blob.core.windows.net/courseimages/Kapi%20Vastu%20Consultant%E2%84%A2.jpg',
+    image: 'https://storagemaharishikapicom.blob.core.windows.net/courses/Kapi%20Vastu%20Consultant%E2%84%A2.jpg',
     price: 410,
     originalPrice: 500,
     tagline: 'Mastering Vedic Vastu for Homes, Properties & Conscious Living',
@@ -1609,7 +1609,7 @@ export const COURSES: CourseDetail[] = [
     sanskritTag: 'वास्तु देवता विज्ञान',
     category: 'Vastu',
     level: 'Advanced Specialist',
-    image: 'https://mkvnstorage.blob.core.windows.net/courseimages/Kapi%20Vastu%20Devta%E2%84%A2.jpg',
+    image: 'https://storagemaharishikapicom.blob.core.windows.net/courses/Kapi%20Vastu%20Devta%E2%84%A2.jpg',
     price: 260,
     originalPrice: 350,
     tagline: 'Mastering Vastu Devatas, Sacred Energy Fields & Numero Vastu',
@@ -1897,7 +1897,7 @@ export const COURSES: CourseDetail[] = [
     sanskritTag: 'वास्तु महर्षि',
     category: 'Vastu',
     level: 'Capstone / Advanced',
-    image: 'https://mkvnstorage.blob.core.windows.net/courseimages/Kapi%20Vastu%20Master%20Practitioner%E2%84%A2.jpg',
+    image: 'https://storagemaharishikapicom.blob.core.windows.net/courses/Kapi%20Vastu%20Master%20Practitioner%E2%84%A2.jpg',
     price: 360,
     originalPrice: 450,
     tagline: 'Advanced Multi-Domain Vastu Consultancy & Strategic Advisory',
@@ -2157,7 +2157,7 @@ export const COURSES: CourseDetail[] = [
     sanskritTag: 'पञ्चपक्षी शास्त्र',
     category: 'Astrology',
     level: 'Foundational to Intermediate',
-    image: 'https://mkvnstorage.blob.core.windows.net/courseimages/Panchapakshi%20Shastra%20%E2%80%93%20The%20Vedic%20Science%20of%20Timing%20&%20Decision-Making.png',
+    image: 'https://storagemaharishikapicom.blob.core.windows.net/courses/Panchapakshi%20Shastra%20%E2%80%93%20The%20Vedic%20Science%20of%20Timing%20&%20Decision-Making.png',
     price: 185,
     originalPrice: 250,
     tagline: 'Discover the traditional science of choosing the right time through the activities of five symbolic birds.',
@@ -2342,7 +2342,7 @@ export const COURSES: CourseDetail[] = [
     sanskritTag: 'आयुर्ज्योतिष',
     category: 'Astrology',
     level: 'Advanced',
-    image: 'https://mkvnstorage.blob.core.windows.net/courseimages/Medical%20Astrology%20(Medical%20Jyotish).png',
+    image: 'https://storagemaharishikapicom.blob.core.windows.net/courses/Medical%20Astrology%20(Medical%20Jyotish).png',
     price: 245,
     originalPrice: 320,
     tagline: 'Understand health, constitutional tendencies, and vulnerabilities through classical Vedic Astrology.',
@@ -2477,7 +2477,7 @@ export const COURSES: CourseDetail[] = [
     sanskritTag: 'ज्योतिष अनुसन्धान',
     category: 'Astrology',
     level: 'Advanced',
-    image: 'https://mkvnstorage.blob.core.windows.net/courseimages/Vedic%20Astrology%20Research%20Fellowship.png',
+    image: 'https://storagemaharishikapicom.blob.core.windows.net/courses/Vedic%20Astrology%20Research%20Fellowship.png',
     price: 495,
     originalPrice: 600,
     tagline: 'Develop the Mind of a Researcher. Interpret Like a Master Astrologer.',
@@ -2650,7 +2650,7 @@ export const COURSES: CourseDetail[] = [
     sanskritTag: 'नारी शक्ति एवं आयुर्वेद',
     category: 'Wellness',
     level: 'Professional',
-    image: 'https://mkvnstorage.blob.core.windows.net/courseimages/Kapi%20Shakti%20%E2%80%93%20The%20Complete%20System%20of%20Women%E2%80%99s%20Health,%20Hormonal%20Wellness%20&%20Conscious%20Living.png',
+    image: 'https://storagemaharishikapicom.blob.core.windows.net/courses/Kapi%20Shakti%20%E2%80%93%20The%20Complete%20System%20of%20Women%E2%80%99s%20Health,%20Hormonal%20Wellness%20&%20Conscious%20Living.png',
     price: 399,
     originalPrice: 500,
     tagline: "A complete system for women's hormonal health, cycles, and conscious living.",
@@ -3003,7 +3003,7 @@ Upon successful completion, participants will be able to:
     sanskritTag: 'नाद ब्रह्म',
     category: 'Wellness',
     level: 'Intermediate to Advanced',
-    image: 'https://mkvnstorage.blob.core.windows.net/courseimages/Kapi%20Sacred%20Sound%20Therapy%20%E2%80%93%20Mantra%20Therapy%20&%20Nada%20Yoga%20Programme.png',
+    image: 'https://storagemaharishikapicom.blob.core.windows.net/courses/Kapi%20Sacred%20Sound%20Therapy%20%E2%80%93%20Mantra%20Therapy%20&%20Nada%20Yoga%20Programme.png',
     price: 399,
     originalPrice: 500,
     tagline: 'Healing through mantra, sacred sound, and the yogic science of Nada Yoga.',
@@ -3124,7 +3124,7 @@ Enrol in Kapi Sacred Sound Therapy™ and experience the timeless wisdom of Sacr
     sanskritTag: 'आयुर्वेद जीवन दर्शन',
     category: 'Wellness',
     level: 'Professional',
-    image: 'https://mkvnstorage.blob.core.windows.net/courseimages/Kapi%20Ayurveda%20%E2%80%93%20The%20Complete%20System%20of%20Ayurvedic%20Living%20&%20Holistic%20Wellness.png',
+    image: 'https://storagemaharishikapicom.blob.core.windows.net/courses/Kapi%20Ayurveda%20%E2%80%93%20The%20Complete%20System%20of%20Ayurvedic%20Living%20&%20Holistic%20Wellness.png',
     price: 399,
     originalPrice: 500,
     tagline: 'Doshas, daily routine, and herbs — for a complete Ayurvedic lifestyle.',
@@ -3426,7 +3426,7 @@ Kapi Ayurveda empowers you to understand the timeless principles of Ayurveda and
     sanskritTag: 'मनोविज्ञान एवं संवाद',
     category: 'Wellness',
     level: 'Intermediate to Advanced',
-    image: 'https://mkvnstorage.blob.core.windows.net/courseimages/Kapi%20NLP%20%E2%80%93%20The%20Complete%20System%20of%20Neuro-Linguistic%20Programming%20&%20Human%20Transformation.png',
+    image: 'https://storagemaharishikapicom.blob.core.windows.net/courses/Kapi%20NLP%20%E2%80%93%20The%20Complete%20System%20of%20Neuro-Linguistic%20Programming%20&%20Human%20Transformation.png',
     price: 399,
     originalPrice: 500,
     tagline: 'Practical NLP tools for personal change, layered with Vedic psychology.',
@@ -3751,7 +3751,7 @@ Kapi NLP is more than an NLP certification—it is a comprehensive professional 
     sanskritTag: 'भावनात्मक स्वास्थ्य',
     category: 'Wellness',
     level: 'Professional',
-    image: 'https://mkvnstorage.blob.core.windows.net/courseimages/Kapi%20Emotional%20Wellness%20%E2%80%93%20Understanding%20the%20Human%20Through%20the%20Mind.png',
+    image: 'https://storagemaharishikapicom.blob.core.windows.net/courses/Kapi%20Emotional%20Wellness%20%E2%80%93%20Understanding%20the%20Human%20Through%20the%20Mind.png',
     price: 399,
     originalPrice: 500,
     tagline: 'A holistic system of emotional wellness rooted in Vedic wisdom and NLP.',
@@ -3978,7 +3978,7 @@ Discover a practical and holistic approach to emotional well-being by integratin
     sanskritTag: 'ध्यान',
     category: 'Wellness',
     level: 'Professional',
-    image: 'https://mkvnstorage.blob.core.windows.net/courseimages/Kapi%20Dhyana%20%E2%80%93%20The%20Complete%20System%20of%20Dhyana,%20Yogic%20Psychology%20&%20Conscious%20Living.png',
+    image: 'https://storagemaharishikapicom.blob.core.windows.net/courses/Kapi%20Dhyana%20%E2%80%93%20The%20Complete%20System%20of%20Dhyana,%20Yogic%20Psychology%20&%20Conscious%20Living.png',
     price: 399,
     originalPrice: 500,
     tagline: 'A complete system of inner development, yogic psychology, and conscious living.',
@@ -4266,7 +4266,164 @@ Kapi Dhyana is more than a meditation course—it is a comprehensive system for 
         ] 
       }
     ]
-  }
+  },{
+  slug: 'the-clarity-program',
+  title: 'The Clarity Program — A Signature Premium Journey in Self-Understanding, Alignment & Inner Prosperity',
+  sanskritTag: 'Numerology • Palmistry • Ayurveda • Vastu • Marma',
+  category: 'Wellness',
+  level: 'Premium',
+  image: 'https://storagemaharishikapicom.blob.core.windows.net/courses/Clarity%20Porgram.jpeg',
+  price: 1600,
+  originalPrice: 2100,
+  tagline: 'You have spent years understanding the world. Now learn a disciplined framework for understanding yourself.',
+  description: `The Clarity Program
+
+You have spent years understanding the world. Now learn a disciplined framework for understanding yourself.
+
+Knowledge, experience and success do not always create inner clarity. You may know how to solve complex problems, lead people and make important decisions — yet still experience repeated patterns, relationship friction, emotional noise or a quiet sense that something in life is not fully aligned.
+
+The Clarity Program is a 12-week signature journey designed to help you understand yourself more deeply and bring greater coherence to the way you live, decide, relate and grow.
+
+Through an integrated study of Numerology, Palmistry, Ayurveda, Vastu and Marma, you will explore your natural tendencies, recurring patterns, conditioning, lifestyle, environment and inner regulation through traditional Indian wisdom systems presented in a structured, contemporary way.
+
+This is not about collecting more information. It is about learning to observe more clearly, recognize what is shaping your life, and make more conscious choices about what comes next.
+
+By the end of the journey, you will bring these insights together into your own Clarity & Prosperity Blueprint — a practical framework for creating greater alignment between who you are, how you live and the life you want to build`,
+  duration: '12 Weeks (36 Live Sessions, 72 Live Hours)',
+  format: 'Live cohort experience',
+  language: 'English',
+  prerequisites: 'No previous knowledge of Numerology, Palmistry, Ayurveda, Vastu or Marma is needed.',
+  whoFor: [
+    'Senior professionals, founders, consultants, specialists, academics and experienced practitioners who value depth and structure.',
+    'People who have accumulated substantial knowledge but still want greater inner coherence and direction.',
+    'Leaders who want to understand their own patterns before trying to optimize another strategy, team or business.',
+    'People experiencing repeated relational or professional patterns and wanting a more reflective way to understand them.',
+    'Sincere spiritual seekers who want traditional knowledge presented with discipline, clear boundaries and practical application.'
+  ],
+  included: [
+    '72 hours of guided live teaching across 12 weeks.',
+    'Structured worksheets and observation tools for every phase of the journey.',
+    'A Personal Clarity Baseline at the beginning of the program.',
+    'A Numerology Core Map and structured Palmistry Profile.',
+    'An Integrated Human Profile and Pattern Lineage Map.',
+    'A Relationship Discernment Framework.',
+    'A 30-Day Lifestyle Alignment Experiment based on Ayurvedic observation.',
+    'A Home / Workspace Alignment Plan based on Vastu.',
+    'A personal Marma-based self-regulation routine taught within appropriate safety boundaries.',
+    'A personal 90-Day Clarity & Prosperity Blueprint for the next chapter of life.'
+  ],
+  certification: 'Certificate of completion confirming participation in this educational program',
+  modules: [
+    {
+      title: 'Week 1 - Orientation & Clarity Baseline',
+      topics: [
+        'Session 1: The Clarity Problem: Knowledge vs Coherence',
+        'Session 2: Core Nature, Adaptive Identity & Social Conditioning',
+        'Session 3: Life Pattern Inventory & Personal Inquiry',
+        'Outcome: Establish your baseline, define your central questions and identify where life currently feels least coherent.'
+      ]
+    },
+    {
+      title: 'Week 2 - Personal Pattern Mapping I | Numerology',
+      topics: [
+        'Session 4: Numerology Foundations: Building the Personal Map',
+        'Session 5: Core Numbers: Temperament, Motivation & Life Themes',
+        'Session 6: From Numbers to a Human Story: Synthesis without Reduction',
+        'Outcome: Create your Numerology Core Map and identify themes to observe rather than labels to obey.'
+      ]
+    },
+    {
+      title: 'Week 3 - Personal Pattern Mapping II | Numerology',
+      topics: [
+        'Session 7: Cycles, Timing & Decision Context',
+        'Session 8: Relationships, Work Style & Comparative Profiles',
+        'Session 9: Karmic and Repeating-Pattern Lens in Numerology',
+        'Outcome: Explore timing, relationship dynamics and recurring themes through a traditional lens without reducing life to deterministic prediction.'
+      ]
+    },
+    {
+      title: 'Week 4 - Hand & Behavioural Pattern Reading I | Palmistry',
+      topics: [
+        'Session 10: Palmistry Foundations: Learning to Observe the Hand Responsibly',
+        'Session 11: Major Lines: Themes, Quality & Pattern Language',
+        'Session 12: Thumb, Fingers, Mounts & Behavioural Tendencies',
+        'Outcome: Build a standardized hand-observation framework and learn to separate observation from interpretation.'
+      ]
+    },
+    {
+      title: 'Week 5 - Hand & Behavioural Pattern Reading II | Palmistry',
+      topics: [
+        'Session 13: Change, Development & the Dynamic Hand',
+        'Session 14: Contradictions and Pattern Synthesis',
+        'Session 15: Palmistry Profile Lab & Case Presentation',
+        'Outcome: Move beyond isolated signs and learn to synthesize multiple indicators into a coherent, cautious profile.'
+      ]
+    },
+    {
+      title: 'Week 6 - Integrated Human Profiling | Samskara, Karma & Relationships',
+      topics: [
+        'Session 16: Triangulation: Numerology + Palmistry + Life History',
+        'Session 17: Samskara: Conditioning, Inherited Narratives & Karmic Patterns',
+        'Session 18: Relationship Discernment: Needs, Boundaries & Alignment',
+        'Outcome: Build your Integrated Human Profile, Pattern Lineage Map and Relationship Discernment Framework.'
+      ]
+    },
+    {
+      title: 'Week 7 - Constitution & Lifestyle Alignment I | Ayurveda',
+      topics: [
+        'Session 19: Prakriti & Vikriti: Natural Constitution and Present State',
+        'Session 20: Daily Rhythm, Sleep, Digestion & Energy Observation',
+        'Session 21: Vata, Pitta & Kapha Patterns in Work, Stress and Decision-Making',
+        'Outcome: Begin observing your constitution, present state and the rhythms that influence energy and functioning.'
+      ]
+    },
+    {
+      title: 'Week 8 - Constitution & Lifestyle Alignment II | Ayurveda',
+      topics: [
+        'Session 22: Food & Lifestyle Principles Without Over-Prescription',
+        'Session 23: Executive Rhythm: Focus, Recovery & Sustainable Output',
+        'Session 24: Lifestyle Blueprint Lab: Test, Measure, Adjust',
+        'Outcome: Build a realistic 30-Day Lifestyle Alignment Experiment rather than an idealized routine you cannot sustain.'
+      ]
+    },
+    {
+      title: 'Week 9 - Space & Environmental Alignment I | Vastu',
+      topics: [
+        'Session 25: Vastu Foundations: Space as an Alignment Variable',
+        'Session 26: Home Audit: Sleep, Work, Entry & Daily Flow',
+        'Session 27: Professional Space: Focus, Authority & Collaboration',
+        'Outcome: Audit one home or workspace and identify practical changes to test.'
+      ]
+    },
+    {
+      title: 'Week 10 - Space & Environmental Alignment II | Vastu',
+      topics: [
+        'Session 28: Interventions: From Low-Risk Changes to Structural Decisions',
+        'Session 29: Constraints, Shared Homes & Real-World Decision-Making',
+        'Session 30: Space Alignment Case Lab',
+        'Outcome: Complete a staged Space Alignment Plan based on impact, feasibility and real-life constraints.'
+      ]
+    },
+    {
+      title: 'Week 11 - Energy Regulation & Marma Practice',
+      topics: [
+        'Session 31: Marma Foundations: Vital Points, Safety & Scope',
+        'Session 32: Self-Practice Sequences: Grounding, Focus & Decompression',
+        'Session 33: Integrating Marma with Daily Rhythm',
+        'Outcome: Create a safe, simple personal Marma-based routine that fits into daily life.'
+      ]
+    },
+    {
+      title: 'Week 12 - Integration, Clarity & Prosperity[cite: 30]',
+      topics: [
+        'Session 34: The Integrated Clarity Map',
+        'Session 35: The 90-Day Clarity & Prosperity Blueprint',
+        'Session 36: Capstone Presentation, Reassessment & Continuation',
+        'Outcome: Integrate the full program into a focused 90-day blueprint for decisions, relationships, lifestyle, space and personal practice.'
+      ]
+    }
+  ]
+}
 ];
 
 // =========================================================================

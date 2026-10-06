@@ -18,7 +18,7 @@ export class CartService {
   private readonly http = inject(HttpClient);
   private readonly auth = inject(AuthService);
 
-  private readonly API_URL = 'https://localhost:7084/api/cart';
+  private readonly API_URL = 'https://astrokapiapi-hkesbwh6fjddhtg5.centralindia-01.azurewebsites.net/api/cart';
   private readonly STORAGE_KEY = 'astro_cart_items';
 
   readonly items = signal<CartItem[]>(this.loadCart());

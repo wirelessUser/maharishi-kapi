@@ -11,7 +11,7 @@ export class PaymentService {
 
   // 1. Point this directly to your running .NET API port:
   // Replace 7xxx with your actual .NET port from launchSettings.json
-  private readonly API_BASE_URL = 'https://localhost:7084/api/payments';
+  private readonly API_BASE_URL = 'https://astrokapiapi-hkesbwh6fjddhtg5.centralindia-01.azurewebsites.net/api/payments';
 
   loadSdk(clientId: string, currency: string = 'EUR'): Promise<void> {
     if (this.sdkLoaded || (window as any).paypal) {
@@ -40,7 +40,7 @@ export class PaymentService {
     });
   }
 createCartOrder(itemIds: string[]): Observable<{ orderId: string }> {
-  return this.http.post<{ orderId: string }>('https://localhost:7084/api/payments/create-cart-paypal-order', {
+  return this.http.post<{ orderId: string }>('https://astrokapiapi-hkesbwh6fjddhtg5.centralindia-01.azurewebsites.net/api/payments/create-cart-paypal-order', {
     itemIds
   });
 }

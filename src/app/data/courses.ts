@@ -44,7 +44,7 @@ export const COURSES: CourseDetail[] = [
     category: 'Astrology',
     level: 'Beginner',
     image: 'https://storagemaharishikapicom.blob.core.windows.net/courses/Vedic%20Astrology%20Foundations%20%E2%80%93%20Level%201.png',
-    price: 0.02,
+    price: 1,
     originalPrice: 220,
     tagline: 'Read your first birth chart with confidence — zero prior knowledge needed.',
     description: 'This course introduces the core building blocks of astrology—planets, signs, houses, and horoscope structure—enabling students to read and understand birth charts with confidence. We focus on conceptual clarity, planetary psychology, and basic predictive understanding, making it suitable for personal growth or as a professional foundation.',

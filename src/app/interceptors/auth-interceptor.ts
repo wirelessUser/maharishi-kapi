@@ -10,7 +10,7 @@ export const authInterceptor: HttpInterceptorFn = (req, next) => {
   if (isPlatformBrowser(platformId)) {
     const token = localStorage.getItem('astro_jwt_token');
 
-    if (token && req.url.includes('localhost:7084')) {
+    if (token && req.url.includes('astrokapiapi-hkesbwh6fjddhtg5.centralindia-01.azurewebsites.net')) {
       const cloned = req.clone({
         setHeaders: {
           Authorization: `Bearer ${token}`

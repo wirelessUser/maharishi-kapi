@@ -18,7 +18,7 @@ export class CartComponent {
   private readonly paymentService = inject(PaymentService);
   private readonly router = inject(Router);
 
-  private readonly PAYPAL_CLIENT_ID = 'BAAE51YJ8cK9cnb841N2XrLTEr5zN3L6ZW4cDjZDdeWbaRG1ELTR1Qxvx8K1Tng9zg1VlX81TZKh00wBYw';
+  private readonly PAYPAL_CLIENT_ID = 'BAAB26u5T2tIE66-Vf7U_zoKPCfM61wdMBbh2wBbiyyVggMWEoP0ohGoLpJtzVUFXTqsueQlM5QvJEnSQU';
 
   readonly isProcessing = signal<boolean>(false);
   readonly errorMessage = signal<string | null>(null);

@@ -22,7 +22,7 @@ export class CourseDetailPage implements OnInit {
   readonly cart = inject(CartService);
 
   // PayPal Sandbox Client ID
-  private readonly PAYPAL_CLIENT_ID = 'BAAE51YJ8cK9cnb841N2XrLTEr5zN3L6ZW4cDjZDdeWbaRG1ELTR1Qxvx8K1Tng9zg1VlX81TZKh00wBYw';
+  private readonly PAYPAL_CLIENT_ID = 'BAAB26u5T2tIE66-Vf7U_zoKPCfM61wdMBbh2wBbiyyVggMWEoP0ohGoLpJtzVUFXTqsueQlM5QvJEnSQU';
 
   readonly course = signal<CourseDetail | null>(null);
   readonly related = signal<CourseDetail[]>([]);

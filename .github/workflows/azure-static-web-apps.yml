@@ -3,11 +3,11 @@ name: Azure Static Web Apps CI/CD
 on:
   push:
     branches:
-      - Branch5-backend-Added
+      - Branch6-paypal-cart-added-login-too
   pull_request:
     types: [opened, synchronize, reopened, closed]
     branches:
-      - Branch5-backend-Added
+      - Branch6-paypal-cart-added-login-too
 
 jobs:
   build_and_deploy_job:

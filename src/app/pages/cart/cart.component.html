@@ -1,0 +1,56 @@
+<main class="min-h-screen bg-[#faf8f5] py-16 px-4">
+  <div class="container mx-auto max-w-5xl">
+    <h1 class="text-3xl sm:text-4xl font-serif font-black text-[#3a2717] mb-8">
+      Your Sacred Vidya Cart ({{ cart.count() }})
+    </h1>
+
+    @if (cart.count() === 0) {
+      <div class="bg-white rounded-3xl p-12 text-center border border-[#e8dac5]">
+        <i class="fa-solid fa-basket-shopping text-4xl text-[#d97706] mb-4"></i>
+        <h2 class="text-xl font-bold font-serif text-[#3a2717] mb-2">Your cart is empty</h2>
+        <p class="text-sm text-[#7d6756] mb-6">Explore our curated certifications to begin your journey.</p>
+        <a routerLink="/courses" class="bg-[#8c5324] hover:bg-[#d97706] text-white px-8 py-3 rounded-full text-xs font-mono font-bold uppercase tracking-wider transition-all">
+          Browse Courses
+        </a>
+      </div>
+    } @else {
+      <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+        <div class="lg:col-span-2 space-y-4">
+          @for (item of cart.items(); track item.id) {
+            <div class="flex gap-4 p-4 bg-white rounded-2xl border border-[#e8dac5] items-center">
+              <img [src]="item.image" [alt]="item.title" class="w-24 h-20 object-cover rounded-xl border border-[#e8dac5]">
+              <div class="flex-grow min-w-0">
+                <span class="text-[10px] font-mono font-bold text-[#8c5324] uppercase tracking-wider">{{ item.category }}</span>
+                <h3 class="font-serif font-bold text-base text-[#3a2717] truncate">{{ item.title }}</h3>
+                <span class="text-sm font-serif font-bold text-[#8c5324]">{{ formatPrice(item.price) }}</span>
+              </div>
+              <button (click)="cart.removeFromCart(item.id)" class="text-red-500 hover:text-red-700 p-2 text-sm cursor-pointer" title="Remove">
+                <i class="fa-solid fa-trash-can"></i>
+              </button>
+            </div>
+          }
+        </div>
+
+        <div class="bg-white rounded-3xl p-6 border border-[#e8dac5] h-fit sticky top-24">
+          <h2 class="font-serif font-bold text-lg mb-4 text-[#3a2717]">Order Summary</h2>
+          <div class="flex justify-between py-2 border-b border-[#f0e4d4] text-sm text-[#7d6756]">
+            <span>Items ({{ cart.count() }})</span>
+            <span>{{ formatPrice(cart.totalAmount()) }}</span>
+          </div>
+          <div class="flex justify-between py-4 text-lg font-bold text-[#8c5324] font-serif">
+            <span>Total Dakshina</span>
+            <span>{{ formatPrice(cart.totalAmount()) }}</span>
+          </div>
+
+          @if (errorMessage()) {
+            <div class="p-3 mb-4 bg-red-50 text-red-700 text-xs rounded-xl border border-red-200">
+              {{ errorMessage() }}
+            </div>
+          }
+
+          <div #cartPaypalContainer class="min-h-[150px]"></div>
+        </div>
+      </div>
+    }
+  </div>
+</main>

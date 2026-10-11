@@ -5,22 +5,12 @@
 <!-- ========================================================================= -->
 <div class="relative bg-gradient-to-b from-[#f6eee3] via-[#faf7f2] to-[#f4ebe1] pt-14 pb-24 px-4 overflow-hidden border-b border-[#e8dac5]">
     
-    <!-- Atmospheric Celestial Animations & Yantra Watermarks -->
     <div class="absolute inset-0 bg-[radial-gradient(#c2a275_1.2px,transparent_1.2px)] [background-size:32px_32px] opacity-30 pointer-events-none"></div>
     <div class="absolute -top-32 right-[-5%] w-[650px] h-[650px] bg-gradient-to-br from-[#fcd34d]/30 via-[#f97316]/15 to-transparent rounded-full blur-[130px] pointer-events-none animate-float-slow"></div>
     <div class="absolute top-1/2 left-[-10%] w-[500px] h-[500px] bg-gradient-to-tr from-[#ea580c]/15 via-[#fcd34d]/20 to-transparent rounded-full blur-[120px] pointer-events-none animate-float-reverse"></div>
 
-    <!-- Dual Animated Rotating Vedic Mandalas -->
-    <div class="absolute -top-16 left-1/2 -translate-x-1/2 w-[850px] h-[850px] border border-[#d8c3a5]/40 rounded-full animate-spin-mandala pointer-events-none opacity-45">
-        <div class="absolute inset-12 border border-dashed border-[#cbb391]/60 rounded-full"></div>
-        <div class="absolute inset-32 border border-[#d8c3a5]/40 rotate-45"></div>
-        <div class="absolute inset-32 border border-[#d8c3a5]/40 rotate-12"></div>
-    </div>
-    <div class="absolute -top-16 left-1/2 -translate-x-1/2 w-[600px] h-[600px] border border-[#e2caa8]/30 rounded-full animate-spin-reverse pointer-events-none opacity-35"></div>
-
     <div class="container mx-auto px-4 max-w-7xl relative z-10">
         
-        <!-- Breadcrumb Ribbon -->
         <nav aria-label="Breadcrumb" class="flex items-center gap-2.5 text-[#8c5324] text-[11px] font-mono font-bold uppercase tracking-[0.25em] mb-8">
             <a routerLink="/courses" class="hover:text-[#b5651d] transition-colors flex items-center gap-1.5 bg-white/70 px-3.5 py-1.5 rounded-full border border-[#e8dac5] shadow-2xs hover:shadow-xs hover:-translate-x-0.5 transform duration-300">
                 <i class="fa-solid fa-arrow-left text-[10px]"></i>
@@ -34,27 +24,22 @@
 
         <div class="flex flex-col lg:flex-row gap-12 items-start">
             
-            <!-- Left Hero Information -->
             <div class="lg:w-3/5">
                 
-                <!-- Category & Level Animated Badges -->
                 <div class="flex flex-wrap items-center gap-3 mb-6">
                     <span class="relative overflow-hidden bg-gradient-to-r from-[#d97706] via-[#ea580c] to-[#b45309] text-white font-mono font-bold text-[10px] uppercase tracking-[0.25em] px-4 py-1.5 rounded-full shadow-sm flex items-center gap-2 group">
                         <span class="animate-pulse text-[#fde68a]">❖</span>
                         <span>{{ c.category }}</span>
-                        <div class="absolute inset-0 bg-gradient-to-r from-transparent via-white/30 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-1000"></div>
                     </span>
-                    <span class="bg-[#fffdfa] text-[#8c5324] border border-[#d8c3a5] font-mono font-bold text-[10px] uppercase tracking-[0.2em] px-4 py-1.5 rounded-full shadow-2xs hover:border-[#b5651d] transition-colors">
+                    <span class="bg-[#fffdfa] text-[#8c5324] border border-[#d8c3a5] font-mono font-bold text-[10px] uppercase tracking-[0.2em] px-4 py-1.5 rounded-full shadow-2xs">
                         {{ c.level }}
                     </span>
                 </div>
 
-                <!-- Course Title with Antique Calligraphic Finish -->
                 <div class="relative mb-5">
                     <h1 class="text-3xl sm:text-4xl md:text-5xl lg:text-[52px] font-serif font-black text-[#3a2717] leading-[1.1] tracking-tight text-balance">
                         {{ c.title }}
                     </h1>
-                    <!-- Gold Shimmer Filament Line -->
                     <div class="w-24 h-[3px] bg-gradient-to-r from-[#d97706] via-[#fcd34d] to-transparent rounded-full mt-4"></div>
                 </div>
                 
@@ -62,11 +47,9 @@
                     {{ c.tagline }}
                 </p>
 
-                <!-- Floating Spec Cards with Tilt & Gold Micro-Border -->
                 <div class="flex flex-wrap gap-3.5 sm:gap-4 text-[#5c432d] text-xs font-semibold">
-                    
-                    <div class="group flex items-center gap-3 bg-[#fffdfa] hover:bg-white px-4 py-3 rounded-2xl border border-[#e8dac5] hover:border-[#d97706]/50 shadow-2xs hover:shadow-xs transition-all duration-300 hover:-translate-y-1">
-                        <div class="w-9 h-9 rounded-xl bg-[#fbf3e8] text-[#d97706] group-hover:bg-[#d97706] group-hover:text-white flex items-center justify-center text-xs transition-colors duration-300 shadow-inner">
+                    <div class="group flex items-center gap-3 bg-[#fffdfa] hover:bg-white px-4 py-3 rounded-2xl border border-[#e8dac5] shadow-2xs">
+                        <div class="w-9 h-9 rounded-xl bg-[#fbf3e8] text-[#d97706] flex items-center justify-center text-xs">
                             <i class="fa-solid fa-clock"></i>
                         </div>
                         <div>
@@ -75,8 +58,8 @@
                         </div>
                     </div>
 
-                    <div class="group flex items-center gap-3 bg-[#fffdfa] hover:bg-white px-4 py-3 rounded-2xl border border-[#e8dac5] hover:border-[#d97706]/50 shadow-2xs hover:shadow-xs transition-all duration-300 hover:-translate-y-1">
-                        <div class="w-9 h-9 rounded-xl bg-[#fbf3e8] text-[#d97706] group-hover:bg-[#d97706] group-hover:text-white flex items-center justify-center text-xs transition-colors duration-300 shadow-inner">
+                    <div class="group flex items-center gap-3 bg-[#fffdfa] hover:bg-white px-4 py-3 rounded-2xl border border-[#e8dac5] shadow-2xs">
+                        <div class="w-9 h-9 rounded-xl bg-[#fbf3e8] text-[#d97706] flex items-center justify-center text-xs">
                             <i class="fa-solid fa-signal"></i>
                         </div>
                         <div>
@@ -85,8 +68,8 @@
                         </div>
                     </div>
 
-                    <div class="group flex items-center gap-3 bg-[#fffdfa] hover:bg-white px-4 py-3 rounded-2xl border border-[#e8dac5] hover:border-[#d97706]/50 shadow-2xs hover:shadow-xs transition-all duration-300 hover:-translate-y-1">
-                        <div class="w-9 h-9 rounded-xl bg-[#fbf3e8] text-[#d97706] group-hover:bg-[#d97706] group-hover:text-white flex items-center justify-center text-xs transition-colors duration-300 shadow-inner">
+                    <div class="group flex items-center gap-3 bg-[#fffdfa] hover:bg-white px-4 py-3 rounded-2xl border border-[#e8dac5] shadow-2xs">
+                        <div class="w-9 h-9 rounded-xl bg-[#fbf3e8] text-[#d97706] flex items-center justify-center text-xs">
                             <i class="fa-solid fa-language"></i>
                         </div>
                         <div>
@@ -94,46 +77,21 @@
                             <span class="font-bold text-[#4a3625] text-xs sm:text-[13px]">{{ c.language }}</span>
                         </div>
                     </div>
-
                 </div>
 
             </div>
 
-            <!-- Right Hero Card: South Indian Temple Gopuram Arch Frame -->
             <div class="lg:w-2/5 w-full">
-                <div class="bg-[#fffdfa] rounded-[36px] p-6 sm:p-7 shadow-[0_25px_60px_rgba(180,130,70,0.15)] border-2 border-[#e8dac5] hover:border-[#d97706]/40 transition-all duration-500 relative group">
-                    
-                    <!-- Decorative Antique Corner Filigrees -->
-                    <div class="absolute top-3 left-3 w-6 h-6 border-t-2 border-l-2 border-[#cbb391] pointer-events-none"></div>
-                    <div class="absolute top-3 right-3 w-6 h-6 border-t-2 border-r-2 border-[#cbb391] pointer-events-none"></div>
-                    <div class="absolute bottom-3 left-3 w-6 h-6 border-b-2 border-l-2 border-[#cbb391] pointer-events-none"></div>
-                    <div class="absolute bottom-3 right-3 w-6 h-6 border-b-2 border-r-2 border-[#cbb391] pointer-events-none"></div>
+                <div class="bg-[#fffdfa] rounded-[36px] p-6 sm:p-7 shadow-[0_25px_60px_rgba(180,130,70,0.15)] border-2 border-[#e8dac5] relative group">
 
-                    <!-- Gopuram Stepped Silhouette Arch Container -->
                     <div class="relative w-full h-64 sm:h-72 mb-6 overflow-hidden rounded-[26px] bg-[#fbf3e8] border border-[#e8dac5]">
-                        <div class="w-full h-full relative overflow-hidden"
-                             style="clip-path: polygon(0% 100%, 0% 32%, 10% 32%, 10% 22%, 22% 22%, 22% 14%, 34% 14%, 34% 8%, 46% 8%, 50% 0%, 54% 8%, 66% 8%, 66% 14%, 78% 14%, 78% 22%, 90% 22%, 90% 32%, 100% 32%, 100% 100%);">
-                            
-                            <img [src]="c.image" [alt]="c.title" class="w-full h-full object-cover group-hover:scale-108 transition-transform duration-1000 ease-out">
-                            <div class="absolute inset-0 bg-gradient-to-t from-[#3a2717]/65 via-transparent to-transparent"></div>
-                            
-                            <!-- Shimmering Scanline Beam on Hover -->
-                            <div class="absolute inset-0 bg-gradient-to-tr from-transparent via-white/30 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-1000"></div>
-
-                            <!-- Floating Sanctum Tag -->
-                            <div class="absolute bottom-3 left-1/2 -translate-x-1/2 whitespace-nowrap bg-white/95 backdrop-blur-md px-4 py-1 rounded-full text-[9px] font-mono font-bold text-[#8c5324] uppercase border border-[#e8dac5] shadow-xs">
-                                <i class="fa-solid fa-certificate text-amber-600 mr-1.5"></i> Consecrated Pathshala
-                            </div>
-                        </div>
-
-                        <!-- Finial / Kalash Marker -->
-                        <div class="absolute top-1 left-1/2 -translate-x-1/2 text-amber-600 text-xs drop-shadow-xs pointer-events-none">
-                            ⚜
+                        <img [src]="c.image" [alt]="c.title" class="w-full h-full object-cover">
+                        <div class="absolute bottom-3 left-1/2 -translate-x-1/2 whitespace-nowrap bg-white/95 backdrop-blur-md px-4 py-1 rounded-full text-[9px] font-mono font-bold text-[#8c5324] uppercase border border-[#e8dac5]">
+                            <i class="fa-solid fa-certificate text-amber-600 mr-1.5"></i> Consecrated Pathshala
                         </div>
                     </div>
 
-                    <!-- Price & Access Tamra-Patra Card -->
-                    <div class="flex items-end justify-between mb-6 bg-gradient-to-r from-[#faf6ee] to-[#f7f0e4] p-4 rounded-2xl border border-[#ede1d1] relative overflow-hidden">
+                    <div class="flex items-end justify-between mb-6 bg-gradient-to-r from-[#faf6ee] to-[#f7f0e4] p-4 rounded-2xl border border-[#ede1d1]">
                         <div>
                             <span class="text-[9px] font-mono uppercase tracking-[0.2em] text-[#8c5324] font-bold block mb-1">Dakshina / Tuition</span>
                             <div class="flex items-baseline gap-2">
@@ -141,19 +99,33 @@
                                 <span class="text-[#9c7d67] text-xs sm:text-sm line-through font-mono">{{ formatPrice(c.originalPrice) }}</span>
                             </div>
                         </div>
-                        <span class="bg-[#fffdfa] text-[#8c5324] text-[9px] font-mono font-bold uppercase tracking-widest px-3 py-1.5 rounded-xl border border-[#e8dac5] shadow-2xs">
+                        <span class="bg-[#fffdfa] text-[#8c5324] text-[9px] font-mono font-bold uppercase tracking-widest px-3 py-1.5 rounded-xl border border-[#e8dac5]">
                             Lifetime Access
                         </span>
                     </div>
 
-                    <!-- Animated Saffron Pulse Enrollment Button -->
-                    <button type="button" class="w-full relative group overflow-hidden bg-gradient-to-r from-[#d97706] via-[#ea580c] to-[#b45309] text-white font-bold py-4 rounded-full text-xs uppercase tracking-[0.25em] transition-all duration-300 shadow-md hover:shadow-lg hover:shadow-amber-600/25 hover:scale-[1.01] active:scale-[0.99] mb-3 flex items-center justify-center gap-2 cursor-pointer">
-                        <span class="relative z-10">Enroll Now</span>
-                        <i class="fa-solid fa-arrow-right text-[11px] relative z-10 group-hover:translate-x-1 transition-transform"></i>
-                        <div class="absolute inset-0 bg-gradient-to-r from-[#ea580c] via-[#f59e0b] to-[#d97706] opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
-                    </button>
+                    <!-- ACTION BUTTONS: ENROLL DIRECTLY + ADD TO CART -->
+                    <div class="flex flex-col sm:flex-row gap-3 mb-3">
+                        <button 
+                            type="button" 
+                            (click)="openCheckout(c, $event)"
+                            class="flex-1 relative group overflow-hidden bg-gradient-to-r from-[#d97706] via-[#ea580c] to-[#b45309] text-white font-bold py-3.5 px-4 rounded-full text-xs uppercase tracking-[0.15em] transition-all duration-300 shadow-md hover:shadow-lg flex items-center justify-center gap-2 cursor-pointer">
+                            <span>Enroll Now</span>
+                            <i class="fa-solid fa-arrow-right text-[10px]"></i>
+                        </button>
 
-                    <!-- Direct Free Alignment Call CTA -->
+                        <button 
+                            type="button" 
+                            (click)="toggleCart(c)"
+                            [class.bg-emerald-600]="cart.isInCart(c.slug)"
+                            [class.text-white]="cart.isInCart(c.slug)"
+                            [class.border-emerald-600]="cart.isInCart(c.slug)"
+                            class="flex-1 py-3.5 px-4 rounded-full border-2 border-[#8c5324] text-[#8c5324] font-mono text-xs font-bold uppercase tracking-wider hover:bg-[#8c5324] hover:text-white transition-all flex items-center justify-center gap-2 cursor-pointer">
+                            <i class="fa-solid" [class.fa-check]="cart.isInCart(c.slug)" [class.fa-basket-shopping]="!cart.isInCart(c.slug)"></i>
+                            <span>{{ cart.isInCart(c.slug) ? 'In Cart ✓' : 'Add to Cart' }}</span>
+                        </button>
+                    </div>
+
                     <a routerLink="/services" class="block text-center text-[#8c5324] text-[11px] font-mono font-bold uppercase tracking-wider hover:text-[#593414] transition-colors py-1">
                         Have Questions? Book a Free 15-Min Alignment Call
                     </a>
@@ -168,36 +140,36 @@
 </div>
 
 <!-- ========================================================================= -->
-<!-- 2. SACRED HIGHLIGHTS / TRUST SEAL BAR WITH TAMRA-PATRA MOTIFS             -->
+<!-- 2. SACRED HIGHLIGHTS / TRUST SEAL BAR                                     -->
 <!-- ========================================================================= -->
 <section class="py-7 bg-[#fffdfa] border-b border-[#e8dac5] relative">
     <div class="container mx-auto px-4 max-w-7xl flex flex-wrap justify-center md:justify-between items-center gap-6">
         
-        <div class="flex items-center gap-3.5 group cursor-default">
-            <div class="w-12 h-12 rounded-2xl bg-[#fbf3e8] group-hover:bg-[#8c5324] text-[#8c5324] group-hover:text-white border border-[#e8dac5] flex items-center justify-center text-lg shadow-2xs transition-colors duration-300">
+        <div class="flex items-center gap-3.5">
+            <div class="w-12 h-12 rounded-2xl bg-[#fbf3e8] text-[#8c5324] border border-[#e8dac5] flex items-center justify-center text-lg shadow-2xs">
                 <i class="fa-solid fa-award"></i>
             </div>
-            <div class="text-left">
+            <div>
                 <p class="text-[10px] text-[#9c7d67] font-mono font-bold uppercase tracking-widest">Certification</p>
                 <p class="text-xs sm:text-sm font-bold text-[#3a2717] font-serif">{{ c.certification }}</p>
             </div>
         </div>
 
-        <div class="flex items-center gap-3.5 group cursor-default">
-            <div class="w-12 h-12 rounded-2xl bg-[#fbf3e8] group-hover:bg-[#8c5324] text-[#8c5324] group-hover:text-white border border-[#e8dac5] flex items-center justify-center text-lg shadow-2xs transition-colors duration-300">
+        <div class="flex items-center gap-3.5">
+            <div class="w-12 h-12 rounded-2xl bg-[#fbf3e8] text-[#8c5324] border border-[#e8dac5] flex items-center justify-center text-lg shadow-2xs">
                 <i class="fa-solid fa-infinity"></i>
             </div>
-            <div class="text-left">
+            <div>
                 <p class="text-[10px] text-[#9c7d67] font-mono font-bold uppercase tracking-widest">Access</p>
                 <p class="text-xs sm:text-sm font-bold text-[#3a2717] font-serif">Lifetime Portal, Learn At Your Pace</p>
             </div>
         </div>
 
-        <div class="flex items-center gap-3.5 group cursor-default">
-            <div class="w-12 h-12 rounded-2xl bg-[#fbf3e8] group-hover:bg-[#8c5324] text-[#8c5324] group-hover:text-white border border-[#e8dac5] flex items-center justify-center text-lg shadow-2xs transition-colors duration-300">
+        <div class="flex items-center gap-3.5">
+            <div class="w-12 h-12 rounded-2xl bg-[#fbf3e8] text-[#8c5324] border border-[#e8dac5] flex items-center justify-center text-lg shadow-2xs">
                 <i class="fa-solid fa-om"></i>
             </div>
-            <div class="text-left">
+            <div>
                 <p class="text-[10px] text-[#9c7d67] font-mono font-bold uppercase tracking-widest">Sadhana Mentor</p>
                 <p class="text-xs sm:text-sm font-bold text-[#8c5324] font-serif">Acharya Alok Awasthi</p>
             </div>
@@ -207,19 +179,16 @@
 </section>
 
 <!-- ========================================================================= -->
-<!-- 3. MAIN SYLLABUS, STEPPED MODULE FOLIOS & STICKY ANCHOR CARD              -->
+<!-- 3. MAIN SYLLABUS, MODULES & FAQ                                           -->
 <!-- ========================================================================= -->
 <section class="py-20 bg-[#faf8f5]">
     <div class="container mx-auto px-4 max-w-7xl grid grid-cols-1 lg:grid-cols-3 gap-12 items-start">
         
-        <!-- Left 2 Columns: Main Adhyayana Content -->
         <div class="lg:col-span-2 space-y-16">
 
-            <!-- Overview (Talapatra Folio Card) -->
-            <div class="bg-white rounded-[32px] p-8 sm:p-10 border border-[#e8dac5] shadow-xs relative overflow-hidden group hover:border-[#d97706]/40 transition-colors">
-                <div class="absolute top-0 right-0 w-32 h-32 bg-gradient-to-bl from-amber-100/40 to-transparent rounded-bl-full pointer-events-none"></div>
+            <div class="bg-white rounded-[32px] p-8 sm:p-10 border border-[#e8dac5] shadow-xs">
                 <div class="inline-flex items-center gap-2 text-[#8c5324] font-mono text-[10px] uppercase tracking-[0.25em] font-bold mb-3">
-                    <span class="animate-pulse">❖</span>
+                    <span>❖</span>
                     <span>SACRED VIDYA DARSHANA</span>
                 </div>
                 <h2 class="text-2xl sm:text-3xl font-serif font-black text-[#3a2717] mb-4">About This Curriculum</h2>
@@ -227,18 +196,17 @@
                 <p class="text-[#59493e] text-sm sm:text-[15px] leading-relaxed font-normal">{{ c.description }}</p>
             </div>
 
-            <!-- Fit Check / Disciple Readiness -->
-            <div class="bg-white rounded-[32px] p-8 sm:p-10 border border-[#e8dac5] shadow-xs relative overflow-hidden group hover:border-[#d97706]/40 transition-colors">
+            <div class="bg-white rounded-[32px] p-8 sm:p-10 border border-[#e8dac5] shadow-xs">
                 <div class="inline-flex items-center gap-2 text-[#8c5324] font-mono text-[10px] uppercase tracking-[0.25em] font-bold mb-3">
-                    <span class="animate-pulse">❖</span>
+                    <span>❖</span>
                     <span>DISCIPLE READINESS</span>
                 </div>
                 <h2 class="text-2xl sm:text-3xl font-serif font-black text-[#3a2717] mb-6">Is This Course For You?</h2>
                 
                 <div class="space-y-3 mb-6">
                     @for (item of c.whoFor; track item) {
-                        <div class="flex items-start gap-3.5 bg-gradient-to-r from-[#fbf8f2] to-[#fffdfa] hover:from-[#f8f1e6] hover:to-[#fffdfa] rounded-2xl p-4 border border-[#eee2d3] hover:border-[#d97706]/40 transition-all duration-300 hover:translate-x-1">
-                            <div class="w-6 h-6 rounded-xl bg-[#fceddc] text-[#8c5324] flex items-center justify-center text-xs flex-shrink-0 mt-0.5 shadow-2xs">
+                        <div class="flex items-start gap-3.5 bg-gradient-to-r from-[#fbf8f2] to-[#fffdfa] rounded-2xl p-4 border border-[#eee2d3]">
+                            <div class="w-6 h-6 rounded-xl bg-[#fceddc] text-[#8c5324] flex items-center justify-center text-xs flex-shrink-0 mt-0.5">
                                 <i class="fa-solid fa-check"></i>
                             </div>
                             <span class="text-[#4a3625] text-xs sm:text-sm font-medium leading-relaxed">{{ item }}</span>
@@ -257,37 +225,30 @@
                 }
             </div>
 
-            <!-- Curriculum: Animated Stepped Palm-Leaf Folio Modules -->
-            <div class="bg-white rounded-[32px] p-8 sm:p-10 border border-[#e8dac5] shadow-xs relative overflow-hidden group hover:border-[#d97706]/40 transition-colors">
+            <div class="bg-white rounded-[32px] p-8 sm:p-10 border border-[#e8dac5] shadow-xs">
                 <div class="inline-flex items-center gap-2 text-[#8c5324] font-mono text-[10px] uppercase tracking-[0.25em] font-bold mb-3">
-                    <span class="animate-pulse">❖</span>
+                    <span>❖</span>
                     <span>STEP-BY-STEP ADHYAYANA</span>
                 </div>
                 <h2 class="text-2xl sm:text-3xl font-serif font-black text-[#3a2717] mb-2">What You'll Study</h2>
                 <p class="text-[#7d6756] text-xs font-mono uppercase tracking-wider mb-8">{{ c.modules.length }} Consecrated Learning Modules</p>
 
-                <!-- Stepped Folios Connected by Sacred Vertical Thread -->
-                <div class="relative space-y-4 before:absolute before:left-5 sm:before:left-6 before:top-4 before:bottom-4 before:w-[2px] before:bg-gradient-to-b before:from-[#d97706] before:via-[#e8dac5] before:to-transparent before:z-0">
-                    
+                <div class="space-y-4">
                     @for (module of c.modules; track module.title; let i = $index) {
-                        <div class="flex flex-col w-full p-4 bg-[#fdfbf7] rounded-2xl border border-[#e8dac5] relative z-10">
-
-                            <!-- Header Row -->
+                        <div class="flex flex-col w-full p-4 bg-[#fdfbf7] rounded-2xl border border-[#e8dac5]">
                             <div class="flex items-center justify-between cursor-pointer w-full" (click)="toggle(i)">
                                 <div class="flex items-center gap-3">
-                                    <span class="relative z-20 bg-[#8c5324] text-white font-bold px-3 py-1.5 rounded-xl text-xs shrink-0 shadow-sm">{{ i + 1 | number:'2.0' }}</span>
+                                    <span class="bg-[#8c5324] text-white font-bold px-3 py-1.5 rounded-xl text-xs shrink-0">{{ i + 1 | number:'2.0' }}</span>
                                     <h3 class="text-[#3a2717] font-serif font-bold text-sm sm:text-base leading-snug">
                                         {{ module.title }}
                                     </h3>
                                 </div>
-                                
                                 <i class="fa-solid fa-chevron-down text-xs text-[#cbb391] transition-transform duration-300 shrink-0"
                                    [class.rotate-180]="expandedIndex() === i"></i>
                             </div>
 
-                            <!-- Sub-topics List -->
                             @if (expandedIndex() === i) {
-                                <ul class="mt-3 space-y-2 pt-3 border-t border-[#e8dac5]/50 w-full animate-fadeIn">
+                                <ul class="mt-3 space-y-2 pt-3 border-t border-[#e8dac5]/50 w-full">
                                     @for (topic of module.topics; track topic) {
                                         <li class="flex items-start gap-2 text-xs text-[#685546]">
                                             <span class="text-[#d97706] text-[9px] mt-0.5 shrink-0">❖</span>
@@ -296,24 +257,22 @@
                                     }
                                 </ul>
                             }
-
                         </div>
                     }
                 </div>
             </div>
 
-            <!-- What's Included: Talapatra Samagri Grid -->
-            <div class="bg-white rounded-[32px] p-8 sm:p-10 border border-[#e8dac5] shadow-xs relative overflow-hidden group hover:border-[#d97706]/40 transition-colors">
+            <div class="bg-white rounded-[32px] p-8 sm:p-10 border border-[#e8dac5] shadow-xs">
                 <div class="inline-flex items-center gap-2 text-[#8c5324] font-mono text-[10px] uppercase tracking-[0.25em] font-bold mb-3">
-                    <span class="animate-pulse">❖</span>
+                    <span>❖</span>
                     <span>STUDENT SAMAGRI</span>
                 </div>
                 <h2 class="text-2xl sm:text-3xl font-serif font-black text-[#3a2717] mb-6">What You Get With Enrollment</h2>
                 
                 <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
                     @for (item of c.included; track item) {
-                        <div class="flex items-start gap-3.5 bg-[#faf7f2] hover:bg-[#f7efe4] rounded-2xl p-4.5 border border-[#e8dac5] hover:border-[#d97706]/50 transition-all duration-300 hover:-translate-y-0.5">
-                            <div class="w-9 h-9 rounded-xl bg-[#fbf3e8] text-[#8c5324] flex items-center justify-center text-xs flex-shrink-0 shadow-2xs">
+                        <div class="flex items-start gap-3.5 bg-[#faf7f2] rounded-2xl p-4.5 border border-[#e8dac5]">
+                            <div class="w-9 h-9 rounded-xl bg-[#fbf3e8] text-[#8c5324] flex items-center justify-center text-xs flex-shrink-0">
                                 <i class="fa-solid fa-scroll"></i>
                             </div>
                             <span class="text-[#4a3625] text-xs sm:text-sm font-medium leading-relaxed">{{ item }}</span>
@@ -322,34 +281,31 @@
                 </div>
             </div>
 
-            <!-- Frequently Asked Questions -->
-            <div class="bg-white rounded-[32px] p-8 sm:p-10 border border-[#e8dac5] shadow-xs relative overflow-hidden group hover:border-[#d97706]/40 transition-colors">
+            <div class="bg-white rounded-[32px] p-8 sm:p-10 border border-[#e8dac5] shadow-xs">
                 <div class="inline-flex items-center gap-2 text-[#8c5324] font-mono text-[10px] uppercase tracking-[0.25em] font-bold mb-3">
-                    <span class="animate-pulse">❖</span>
+                    <span>❖</span>
                     <span>PRASHNA UTTARA</span>
                 </div>
                 <h2 class="text-2xl sm:text-3xl font-serif font-black text-[#3a2717] mb-6">Frequently Asked Questions</h2>
                 
                 <div class="space-y-3">
                     @for (faq of faqs; track faq.question; let i = $index) {
-                        <div class="border border-[#e8dac5] rounded-2xl overflow-hidden bg-[#faf8f5] transition-all duration-300"
+                        <div class="border border-[#e8dac5] rounded-2xl overflow-hidden bg-[#faf8f5]"
                              [class.border-[#8c5324]/60]="openFaq() === i"
-                             [class.bg-[#fffdfa]]="openFaq() === i"
-                             [class.shadow-xs]="openFaq() === i">
+                             [class.bg-[#fffdfa]]="openFaq() === i">
                             <button type="button" 
                                     (click)="toggleFaq(i)" 
-                                    class="w-full flex justify-between items-center text-left px-6 py-4.5 gap-4 group cursor-pointer">
-                                <span class="font-serif font-bold text-sm sm:text-base text-[#3a2717] group-hover:text-[#8c5324] transition-colors">
+                                    class="w-full flex justify-between items-center text-left px-6 py-4.5 gap-4 cursor-pointer">
+                                <span class="font-serif font-bold text-sm sm:text-base text-[#3a2717]">
                                     {{ faq.question }}
                                 </span>
-                                <div class="w-8 h-8 rounded-full bg-white border border-[#e8dac5] flex items-center justify-center text-[#8c5324] text-xs flex-shrink-0 transition-transform duration-300 group-hover:border-[#d97706]"
-                                     [class.rotate-180]="openFaq() === i"
-                                     [class.bg-[#fbf3e8]]="openFaq() === i">
+                                <div class="w-8 h-8 rounded-full bg-white border border-[#e8dac5] flex items-center justify-center text-[#8c5324] text-xs flex-shrink-0 transition-transform duration-300"
+                                     [class.rotate-180]="openFaq() === i">
                                     <i class="fa-solid fa-chevron-down text-[10px]"></i>
                                 </div>
                             </button>
                             @if (openFaq() === i) {
-                                <div class="px-6 pb-5 pt-1 text-[#685546] text-xs sm:text-sm leading-relaxed border-t border-[#f0e4d4] animate-fade-in">
+                                <div class="px-6 pb-5 pt-1 text-[#685546] text-xs sm:text-sm leading-relaxed border-t border-[#f0e4d4]">
                                     {{ faq.answer }}
                                 </div>
                             }
@@ -360,55 +316,38 @@
 
         </div>
 
-        <!-- Right 1 Column: Sticky Instructor & Certificate Card + Related Courses -->
         <div class="space-y-8 lg:sticky lg:top-24">
             
-            <!-- Consecrated Instructor & Certification Seal Card -->
-            <div class="bg-[#fffdfa] rounded-[36px] p-8 text-center shadow-[0_20px_50px_rgba(180,130,70,0.1)] border-2 border-[#e8dac5] relative overflow-hidden group">
-                
-                <!-- Rotating Mini Mandala Behind Seal Icon -->
-                <div class="relative w-20 h-20 mx-auto mb-4 flex items-center justify-center">
-                    <div class="absolute inset-0 rounded-full border border-dashed border-[#d97706]/40 animate-spin-mandala"></div>
-                    <div class="w-16 h-16 rounded-2xl bg-[#fbf3e8] border border-amber-300/80 text-[#8c5324] group-hover:bg-[#8c5324] group-hover:text-white flex items-center justify-center text-2xl shadow-xs transition-colors duration-500">
-                        <i class="fa-solid fa-certificate"></i>
-                    </div>
+            <div class="bg-[#fffdfa] rounded-[36px] p-8 text-center border-2 border-[#e8dac5]">
+                <div class="w-16 h-16 rounded-2xl bg-[#fbf3e8] border border-amber-300/80 text-[#8c5324] flex items-center justify-center text-2xl mx-auto mb-4">
+                    <i class="fa-solid fa-certificate"></i>
                 </div>
-                
-                <h3 class="text-[#3a2717] font-serif font-bold text-lg mb-2 text-balance leading-snug">
+                <h3 class="text-[#3a2717] font-serif font-bold text-lg mb-2 leading-snug">
                     {{ c.certification }}
                 </h3>
                 <p class="text-[#7d6756] text-xs leading-relaxed mb-6">
                     Awarded upon successful completion, consecrated by the Maharishi Kapi Institute of Vedic Astrology &amp; Yogic Sciences.
                 </p>
-                
-                <!-- Instructor Identity -->
-                <div class="border-t border-[#f0e4d4] pt-6 relative">
-                    <div class="w-20 h-20 rounded-full overflow-hidden border-2 border-amber-400/60 mx-auto mb-3 shadow-sm bg-[#f5ede2] group-hover:scale-105 transition-transform duration-500">
-                        <img src="/images/founder-alok.jpg" 
-                             onerror="this.src='https://images.unsplash.com/photo-1506126613408-eca07ce68773?auto=format&fit=crop&w=600&q=80'" 
-                             alt="Acharya Alok Awasthi" 
-                             class="w-full h-full object-cover object-[50%_25%]">
-                    </div>
+                <div class="border-t border-[#f0e4d4] pt-6">
                     <p class="text-[#3a2717] font-serif font-bold text-sm">Acharya Alok Awasthi</p>
                     <p class="text-[#8c5324] text-[10px] font-mono uppercase tracking-[0.2em] font-bold mt-1">Sadhana Preceptor</p>
                 </div>
             </div>
 
-            <!-- Related Courses (Illuminated Parchment Cards) -->
             @if (related().length > 0) {
-                <div class="bg-white rounded-[32px] p-6 border border-[#e8dac5] shadow-xs">
+                <div class="bg-white rounded-[32px] p-6 border border-[#e8dac5]">
                     <h3 class="text-[#3a2717] font-serif font-bold text-base mb-4 flex items-center gap-2">
-                        <span class="text-amber-600 animate-pulse">❖</span>
+                        <span class="text-amber-600">❖</span>
                         <span>More in {{ c.category }}</span>
                     </h3>
                     <div class="space-y-3.5">
                         @for (r of related(); track r.slug) {
-                            <a [routerLink]="['/courses', r.slug]" class="flex gap-3.5 bg-[#faf7f2] hover:bg-[#f5ede2] rounded-2xl p-3 border border-[#e8dac5] hover:border-[#8c5324] transition-all duration-300 hover:translate-x-1 group cursor-pointer">
-                                <div class="w-20 h-16 rounded-xl overflow-hidden shrink-0 border border-[#e8dac5] bg-[#fffdfa]">
-                                    <img [src]="r.image" [alt]="r.title" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
+                            <a [routerLink]="['/courses', r.slug]" class="flex gap-3.5 bg-[#faf7f2] rounded-2xl p-3 border border-[#e8dac5] hover:border-[#8c5324] transition-all cursor-pointer">
+                                <div class="w-20 h-16 rounded-xl overflow-hidden shrink-0 border border-[#e8dac5]">
+                                    <img [src]="r.image" [alt]="r.title" class="w-full h-full object-cover">
                                 </div>
                                 <div class="flex-grow min-w-0 flex flex-col justify-center">
-                                    <h4 class="text-[#3a2717] font-serif font-bold text-xs leading-snug line-clamp-2 mb-1 group-hover:text-[#8c5324] transition-colors">
+                                    <h4 class="text-[#3a2717] font-serif font-bold text-xs leading-snug line-clamp-2 mb-1">
                                         {{ r.title }}
                                     </h4>
                                     <span class="text-[#8c5324] font-mono font-bold text-xs">{{ formatPrice(r.price) }}</span>
@@ -425,16 +364,12 @@
 </section>
 
 <!-- ========================================================================= -->
-<!-- 4. FINAL ENROLLMENT BANNER (KESARIYA TEMPLE HALO)                         -->
+<!-- 4. FINAL ENROLLMENT BANNER                                                -->
 <!-- ========================================================================= -->
 <section class="py-24 bg-gradient-to-b from-[#f5ede2] via-[#faf7f2] to-[#ede3d4] text-[#3a2717] text-center relative overflow-hidden border-t border-[#e8dac5]">
-    
-    <!-- Radiating Halo Watermark -->
-    <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-gradient-to-r from-amber-400/20 via-orange-300/15 to-transparent rounded-full blur-[100px] pointer-events-none"></div>
-
     <div class="container mx-auto px-4 max-w-2xl relative z-10">
         <span class="text-[#8c5324] font-mono text-[10px] tracking-[0.3em] uppercase font-bold block mb-3">CONSECRATE YOUR LEARNING</span>
-        <h2 class="font-serif text-3xl sm:text-4xl lg:text-[40px] font-black mb-4 text-balance leading-tight">
+        <h2 class="font-serif text-3xl sm:text-4xl font-black mb-4 leading-tight">
             Ready to begin {{ c.title }}?
         </h2>
         <p class="text-[#685546] text-xs sm:text-sm mb-8 leading-relaxed max-w-xl mx-auto">
@@ -442,18 +377,22 @@
         </p>
         
         <div class="flex flex-wrap justify-center gap-4">
-            <button type="button" class="group relative overflow-hidden bg-gradient-to-r from-[#d97706] to-[#b45309] hover:from-[#ea580c] hover:to-[#d97706] text-white font-mono font-bold text-xs uppercase tracking-widest px-9 py-4 rounded-full transition-all duration-300 shadow-md hover:shadow-lg hover:scale-105 cursor-pointer">
-                <span class="relative z-10 flex items-center gap-2">
-                    <span>Enroll for {{ formatPrice(c.price) }}</span>
-                    <i class="fa-solid fa-arrow-right text-[10px] group-hover:translate-x-1 transition-transform"></i>
-                </span>
+            <button 
+                type="button" 
+                (click)="openCheckout(c, $event)"
+                class="bg-gradient-to-r from-[#d97706] to-[#b45309] text-white font-mono font-bold text-xs uppercase tracking-widest px-9 py-4 rounded-full transition-all shadow-md hover:scale-105 cursor-pointer">
+                <span>Enroll for {{ formatPrice(c.price) }}</span>
             </button>
-            <a routerLink="/courses" class="bg-white hover:bg-[#fbf8f2] text-[#8c5324] font-mono font-bold text-xs uppercase tracking-widest px-8 py-4 rounded-full border border-[#d8c3a5] transition-all shadow-2xs hover:shadow-xs">
-                Browse All Courses
-            </a>
+            <button 
+                type="button" 
+                (click)="toggleCart(c)"
+                [class.bg-emerald-700]="cart.isInCart(c.slug)"
+                [class.text-white]="cart.isInCart(c.slug)"
+                class="bg-white text-[#8c5324] font-mono font-bold text-xs uppercase tracking-widest px-8 py-4 rounded-full border border-[#d8c3a5] transition-all cursor-pointer">
+                {{ cart.isInCart(c.slug) ? 'In Cart ✓' : '+ Add to Cart' }}
+            </button>
         </div>
     </div>
-
 </section>
 
 } @else {
@@ -463,11 +402,122 @@
 <!-- ========================================================================= -->
 <div class="flex flex-col items-center justify-center py-32 bg-[#faf8f5]">
     <i class="fa-solid fa-circle-exclamation text-4xl text-[#d97706] mb-4"></i>
-    <h2 class="text-2xl font-serif font-black text-[#3a2717]">कोर्स की जानकारी नहीं मिली (Course Not Found)</h2>
+    <h2 class="text-2xl font-serif font-black text-[#3a2717]">Course Not Found</h2>
     <p class="text-[#685546] mt-2">कृपया बाद में पुनः प्रयास करें।</p>
-    <a routerLink="/courses" class="mt-6 bg-[#8c5324] hover:bg-[#593414] text-white px-6 py-2 rounded-full text-sm transition-colors duration-300">
+    <a routerLink="/courses" class="mt-6 bg-[#8c5324] text-white px-6 py-2 rounded-full text-sm">
         वापस जाएँ (Go Back)
     </a>
 </div>
 
+}
+
+<!-- ========================================================================= -->
+<!-- 6. CHECKOUT MODAL WITH PAYPAL INTEGRATION                                 -->
+<!-- ========================================================================= -->
+@if (activeCheckoutCourse(); as checkoutCourse) {
+    <div class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm animate-fade-in">
+        <div class="relative w-full max-w-md bg-[#fffdfa] rounded-[2.5rem] border border-[#d8c3a5] shadow-2xl p-6 sm:p-8 text-[#3a2717] overflow-hidden">
+            
+            <button 
+                type="button" 
+                (click)="closeCheckout()" 
+                [disabled]="isProcessingPayment()"
+                class="absolute top-5 right-5 w-8 h-8 rounded-full bg-[#fbf3e8] border border-[#e8dac5] flex items-center justify-center text-[#8c5324] hover:bg-[#8c5324] hover:text-white transition-colors cursor-pointer disabled:opacity-50">
+                <i class="fa-solid fa-xmark text-xs"></i>
+            </button>
+
+            <div class="text-center mb-6">
+                <span class="inline-block text-[9px] font-mono font-bold uppercase tracking-[0.25em] text-[#d97706] bg-[#fbf3e8] px-3.5 py-1.5 rounded-full border border-[#e8dac5] mb-2">
+                    {{ checkoutCourse.category }}
+                </span>
+                <h3 class="font-serif font-black text-2xl text-[#3a2717] leading-tight mb-1">
+                    {{ checkoutCourse.title }}
+                </h3>
+                <p class="text-xs text-[#7d6756]">Instant Access • Saraswat Parampara Certification</p>
+            </div>
+
+            <div class="bg-[#fbf3e8] rounded-2xl p-4 border border-[#e8dac5] mb-6 flex justify-between items-center">
+                <span class="font-serif font-semibold text-sm text-[#685546]">Total Investment</span>
+                <span class="font-serif font-black text-2xl text-[#8c5324]">{{ formatPrice(checkoutCourse.price) }}</span>
+            </div>
+
+            @if (paymentError()) {
+                <div class="mb-4 p-3 bg-red-50 border border-red-200 rounded-xl text-red-700 text-xs text-center font-medium">
+                    {{ paymentError() }}
+                </div>
+            }
+
+            @if (isProcessingPayment()) {
+                <div class="py-8 text-center flex flex-col items-center gap-3">
+                    <div class="w-8 h-8 border-3 border-[#8c5324] border-t-transparent rounded-full animate-spin"></div>
+                    <p class="text-xs font-mono text-[#8c5324] font-semibold tracking-wider">VERIFYING WITH PAYPAL...</p>
+                </div>
+            } @else {
+                <div #paypalButtonContainer class="min-h-[150px]"></div>
+            }
+
+            <div class="mt-4 text-center">
+                <p class="text-[10px] text-[#9c7d67] flex items-center justify-center gap-1.5 font-mono">
+                    <i class="fa-solid fa-lock text-[9px]"></i> End-to-end encrypted PayPal transaction
+                </p>
+            </div>
+
+        </div>
+    </div>
+}
+
+<!-- ========================================================================= -->
+<!-- 7. PURCHASE COMPLETED SUCCESS MODAL                                       -->
+<!-- ========================================================================= -->
+@if (completedOrder(); as order) {
+  <div class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm animate-fade-in">
+    <div class="relative w-full max-w-md bg-[#fffdfa] rounded-[2.5rem] border border-[#d8c3a5] shadow-2xl p-6 sm:p-8 text-[#3a2717] text-center">
+      
+      <button 
+        type="button" 
+        (click)="closeSuccessModal()" 
+        class="absolute top-5 right-5 w-8 h-8 rounded-full bg-[#fbf3e8] border border-[#e8dac5] flex items-center justify-center text-[#8c5324] hover:bg-[#8c5324] hover:text-white transition-colors cursor-pointer">
+        <i class="fa-solid fa-xmark text-xs"></i>
+      </button>
+
+      <div class="w-16 h-16 rounded-full bg-emerald-100 text-emerald-600 border border-emerald-300 flex items-center justify-center mx-auto mb-4 text-2xl shadow-sm">
+        <i class="fa-solid fa-check"></i>
+      </div>
+
+      <span class="inline-block text-[10px] font-mono font-bold uppercase tracking-[0.25em] text-[#8c5324] bg-[#fbf3e8] px-3.5 py-1.5 rounded-full border border-[#e8dac5] mb-2">
+        Enrollment Consecrated
+      </span>
+
+      <h3 class="font-serif font-black text-2xl text-[#3a2717] mb-2">
+        Payment Successful!
+      </h3>
+      
+      <p class="text-xs text-[#685546] leading-relaxed mb-6">
+        Welcome to <strong class="text-[#3a2717]">{{ order.courseTitle }}</strong>. Your lifetime access has been unlocked, and an official invoice has been sent to your email.
+      </p>
+
+      <div class="bg-[#fbf3e8] rounded-2xl p-4 border border-[#e8dac5] mb-6 text-left space-y-2 text-xs">
+        <div class="flex justify-between items-center text-[#7d6756]">
+          <span>Order ID:</span>
+          <span class="font-mono font-bold text-[#3a2717]">{{ order.orderId }}</span>
+        </div>
+        <div class="flex justify-between items-center text-[#7d6756]">
+          <span>Amount Paid:</span>
+          <span class="font-serif font-black text-base text-[#8c5324]">{{ formatPrice(order.amount) }}</span>
+        </div>
+        <div class="flex justify-between items-center text-[#7d6756]">
+          <span>Payment Gateway:</span>
+          <span class="font-medium text-[#3a2717]">PayPal Sandbox</span>
+        </div>
+      </div>
+
+      <button 
+        type="button" 
+        (click)="closeSuccessModal()"
+        class="w-full bg-[#8c5324] hover:bg-[#d97706] text-white py-3.5 px-6 rounded-2xl font-mono text-xs font-bold uppercase tracking-widest transition-all duration-300 shadow-md hover:shadow-lg cursor-pointer">
+        Access Course Portal
+      </button>
+
+    </div>
+  </div>
 }

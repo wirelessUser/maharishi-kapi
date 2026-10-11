@@ -169,6 +169,17 @@
 
             </div>
         </a>
+    }@empty {
+        
+        <!-- THIS WILL SHOW IF THE ARRAY IS EMPTY -->
+        <div class="col-span-full p-12 text-center bg-red-50 border-2 border-red-200 rounded-[2rem]">
+            <i class="fa-solid fa-database text-3xl text-red-400 mb-4"></i>
+            <h3 class="text-xl font-bold text-red-800 font-serif mb-2">No Course Data Found</h3>
+            <p class="text-red-600 text-sm">
+                The 'COURSES' array is empty. Check your src/app/data/courses.ts file to ensure data is exported correctly.
+            </p>
+        </div>
+
     }
 </div>
 

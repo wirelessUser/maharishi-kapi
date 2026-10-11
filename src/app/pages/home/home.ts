@@ -9,13 +9,12 @@ import { Roles } from '../../components/roles/roles';
 import { Journey } from '../../components/journey/journey';
 import { Immersive } from '../../components/immersive/immersive';
 import { Consultation } from '../../components/consultation/consultation';
-import { TrainedConsultants } from '../../components/trained-consultants/trained-consultants';
 import { Stories } from '../../components/stories/stories';
 import { Downloads } from '../../components/downloads/downloads';
 import { Instagram } from '../../components/instagram/instagram';
 
 @Component({
-  imports: [HeroSection, Generations, Stats, FeaturedCourses, Legacy, Roles, Journey, Immersive, Consultation, TrainedConsultants, Stories, Downloads, Instagram],
+  imports: [HeroSection, Generations, Stats, FeaturedCourses, Legacy, Roles, Journey, Immersive, Consultation, Stories, Downloads, Instagram],
   selector: 'app-home',
   styleUrl: './home.css',
   templateUrl: './home.html',

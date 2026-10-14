@@ -1,49 +1,4 @@
-<!-- Custom Banner Animations -->
-<style>
-    /* 1. Smooth Entrance */
-    @keyframes fade-in-up-banner {
-        0% { opacity: 0; transform: translateY(30px); }
-        100% { opacity: 1; transform: translateY(0); }
-    }
-    .anim-fade-in-up { animation: fade-in-up-banner 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
 
-    /* 2. Gentle Levitation */
-    @keyframes float-gentle-card {
-        0%, 100% { transform: translateY(0); }
-        50% { transform: translateY(-12px); }
-    }
-    .anim-float { animation: float-gentle-card 5s ease-in-out infinite; }
-
-    /* 3. Slow Celestial Rotation */
-    @keyframes spin-very-slow {
-        from { transform: rotate(0deg); }
-        to { transform: rotate(360deg); }
-    }
-    .anim-spin-slow { animation: spin-very-slow 24s linear infinite; }
-
-    /* 4. Breathing Background Energy */
-    @keyframes breathe-glow-bg {
-        0%, 100% { opacity: 0.5; transform: scale(1); }
-        50% { opacity: 0.8; transform: scale(1.1); }
-    }
-    .anim-breathe { animation: breathe-glow-bg 7s ease-in-out infinite; }
-    
-    /* 5. Button Shine Sweep */
-    @keyframes shine-sweep-btn {
-        0% { left: -100%; }
-        20% { left: 100%; }
-        100% { left: 100%; }
-    }
-    .anim-shine-btn { position: relative; overflow: hidden; }
-    .anim-shine-btn::after {
-        content: '';
-        position: absolute;
-        top: 0; left: -100%; width: 40%; height: 100%;
-        background: linear-gradient(to right, transparent, rgba(255,255,255,0.4), transparent);
-        transform: skewX(-25deg);
-        animation: shine-sweep-btn 4.5s infinite;
-    }
-</style>
 
 <section class="py-10 sm:py-14 bg-gradient-to-b from-[#f5eee4] via-[#faf7f2] to-[#faf8f5] relative border-b border-[#e8dac5] overflow-hidden select-none">
     
@@ -134,13 +89,13 @@
                             <!-- Buttons -->
                             <div class="flex items-center gap-3">
                                 <!-- Animated Shine Button -->
-                                <a routerLink="/courses/clarity-program"
+                                <a routerLink="/courses/the-clarity-program"
                                    class="anim-shine-btn group px-6 py-3.5 bg-gradient-to-r from-[#d97706] via-[#ea580c] to-[#b45309] hover:from-[#b45309] hover:to-[#ea580c] text-white font-mono text-[11px] font-bold uppercase tracking-widest rounded-xl shadow-md hover:shadow-xl hover:-translate-y-0.5 transition-all duration-300 flex items-center gap-2 cursor-pointer">
                                     <span class="relative z-10">Enroll Now</span>
                                     <i class="fa-solid fa-arrow-right text-[10px] relative z-10 group-hover:translate-x-1 transition-transform"></i>
                                 </a>
 
-                                <a routerLink="/courses" 
+                                <a routerLink="/courses/the-clarity-program" 
                                    class="px-5 py-3.5 bg-white hover:bg-[#fbf7f0] text-[#783e16] border border-[#dac7af] rounded-xl font-mono text-[11px] font-bold uppercase tracking-wider hover:-translate-y-0.5 transition-all duration-300 shadow-2xs hover:shadow-md hidden sm:flex">
                                     View Details
                                 </a>
@@ -212,6 +167,10 @@
                 </div>
 
             </div>
+
+
+
+
 
             <!-- ========================================================================= -->
             <!-- 2. MAIN FEATURED SANCTUM BANNER: AYURVEDA & SURYA                        -->

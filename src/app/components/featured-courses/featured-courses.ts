@@ -24,7 +24,7 @@ export interface FeaturedCourse {
 export class FeaturedCourses {
   readonly courses: FeaturedCourse[] = [
     {
-      id: 'astro-1',
+      id: 'astrology-level-1',
       title: 'Vedic Astrology Foundations — Level 1',
       sanskritTag: 'पाराशरी ज्योतिष',
       category: 'Astrology',

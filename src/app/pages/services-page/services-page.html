@@ -1,6 +1,5 @@
 <main class="bg-[#fbf5eb] text-[#3a2717] antialiased min-h-screen">
 
-
     <!-- ========================================================================= -->
     <!-- 1. SACRED BEIGE & KESARIYA HERO SECTION WITH ROTATING MANDALAS            -->
     <!-- ========================================================================= -->
@@ -49,11 +48,11 @@
                     <span class="text-[9px] font-mono font-bold text-[#8c5324] uppercase tracking-[0.2em] mt-1.5">Generations</span>
                 </div>
                 <div class="group flex flex-col items-center">
-                    <span class="font-serif font-black text-3xl text-[#3a2717] group-hover:text-[#d97706] transition-colors">16</span>
+                    <span class="font-serif font-black text-3xl text-[#3a2717] group-hover:text-[#d97706] transition-colors">23</span>
                     <span class="text-[9px] font-mono font-bold text-[#8c5324] uppercase tracking-[0.2em] mt-1.5">Master Consults</span>
                 </div>
                 <div class="group flex flex-col items-center">
-                    <span class="font-serif font-black text-3xl text-[#3a2717] group-hover:text-[#d97706] transition-colors">6</span>
+                    <span class="font-serif font-black text-3xl text-[#3a2717] group-hover:text-[#d97706] transition-colors">7</span>
                     <span class="text-[9px] font-mono font-bold text-[#8c5324] uppercase tracking-[0.2em] mt-1.5">Sacred Categories</span>
                 </div>
                 <div class="group flex flex-col items-center">
@@ -99,7 +98,7 @@
                 
                 @for (service of filteredServices(); track service.title; let i = $index) {
                     <!-- 3D Wrapper Layer -->
-                    <div class="relative w-full h-[370px] group [perspective:1800px] cursor-pointer" (click)="toggleFlip(i)">
+                    <div class="relative w-full h-[390px] group [perspective:1800px] cursor-pointer" (click)="toggleFlip(i)">
                         
                         <!-- ================= INSIDE DOSSIER (BACK FACE LAYER) ================= -->
                         <div class="absolute inset-0 bg-white rounded-[24px] border-2 border-[#e8dac5] shadow-md flex flex-col justify-between p-5 z-0">
@@ -107,10 +106,12 @@
                             <div class="absolute inset-0 bg-[radial-gradient(#c2a275_1px,transparent_1px)] [background-size:20px_20px] opacity-15 pointer-events-none rounded-[24px]"></div>
                             
                             <!-- Inside content revealed -->
-                            <div class="relative z-10 flex-grow pt-2 px-1">
-                                <div class="flex justify-between items-start border-b border-[#e8dac5] pb-3 mb-4">
+                            <div class="relative z-10 flex-grow pt-1 px-1 overflow-y-auto">
+                                <div class="flex justify-between items-start border-b border-[#e8dac5] pb-2.5 mb-3">
                                     <div>
-                                        <span class="text-[9px] font-mono tracking-widest uppercase font-bold block mb-1" [ngClass]="getTheme(i).accentText">Dossier</span>
+                                        <span class="text-[9px] font-mono tracking-widest uppercase font-bold block mb-0.5" [ngClass]="getTheme(i).accentText">
+                                            {{ service.duration ? service.duration + ' · Dossier' : 'Dossier' }}
+                                        </span>
                                         <h3 class="font-serif font-bold text-[#2d1a0e] text-sm leading-tight pr-2" [innerHTML]="formatTitle(service.title)"></h3>
                                     </div>
                                     <div class="bg-[#fcf7f0] text-[#8c5324] text-[10px] font-mono font-bold px-2.5 py-1 rounded-md shadow-2xs border border-[#ecdac3] shrink-0">
@@ -118,13 +119,27 @@
                                     </div>
                                 </div>
                                 
-                                <p class="text-[#685546] text-xs leading-relaxed italic font-serif">
+                                <p class="text-[#685546] text-xs leading-relaxed italic font-serif mb-3">
                                     "{{ service.description }}"
                                 </p>
+
+                                @if (service.steps) {
+                                    <div class="bg-[#faf6f0] rounded-xl p-2.5 border border-[#e8dac5]/70 text-[10.5px] text-[#574435] space-y-1 mb-2">
+                                        @for (step of service.steps; track step) {
+                                            <p class="leading-snug">• {{ step }}</p>
+                                        }
+                                    </div>
+                                }
+
+                                @if (service.takeHome) {
+                                    <p class="text-[10.5px] text-[#8c5324] font-medium">
+                                        <strong>Take Home:</strong> {{ service.takeHome }}
+                                    </p>
+                                }
                             </div>
 
                             <!-- Bottom Action Button -->
-                            <div class="relative z-10 w-full mt-auto">
+                            <div class="relative z-10 w-full mt-auto pt-2">
                                 <div class="w-full h-px border-b-2 border-dotted border-[#d8c3a5] mb-3"></div>
                                 
                                 <button (click)="$event.stopPropagation()" class="w-full bg-gradient-to-r from-[#d97706] to-[#b45309] hover:brightness-105 text-white text-[10px] sm:text-[11px] font-mono font-bold uppercase tracking-widest py-3.5 rounded-[16px] transition-all shadow-xs flex justify-center items-center gap-2 hover:scale-[1.02] active:scale-95 cursor-pointer">
@@ -134,47 +149,73 @@
                             </div>
                         </div>
 
-                        <!-- ================= FRONT COVER (VIBRANT PASTEL GEMSTONE COVER) ================= -->
+                        <!-- ================= FRONT COVER (SUPPORTS 4:3 IMAGE OR GEMSTONE COVER) ================= -->
                         <div class="absolute top-0 inset-x-0 bottom-[60px] transition-transform duration-700 ease-[cubic-bezier(0.2,0.8,0.2,1)] [transform-style:preserve-3d] origin-left z-10 group-hover:rotate-y-[-10deg]"
                              [style.transform]="activeCardIndex() === i ? 'rotateY(-155deg)' : null">
                              
                             <!-- Front Cover Face -->
-                            <div class="absolute inset-0 [backface-visibility:hidden] rounded-[22px] overflow-hidden border-2 flex flex-col justify-between p-5 transition-all duration-300"
-                                 [ngClass]="[getTheme(i).bgGradient, getTheme(i).borderColor, getTheme(i).shadow]">
-                                
-                                <!-- Subtle Radial Ring Accent -->
-                                <div class="absolute top-[45%] left-1/2 -translate-x-1/2 -translate-y-1/2 w-48 h-48 border border-white/40 rounded-full pointer-events-none"></div>
-
-                                <!-- Top Row: Colored Pill Badge & Accent Symbol -->
-                                <div class="flex justify-between items-center relative z-10">
-                                    <span class="border rounded-full px-3 py-1 text-[9px] font-mono font-bold tracking-[0.2em] uppercase shadow-2xs"
-                                          [ngClass]="getTheme(i).badgeClass">
-                                        {{ service.category }}
-                                    </span>
-                                    <span class="text-[13px] opacity-70" [ngClass]="getTheme(i).accentText">❖</span>
-                                </div>
-
-                                <!-- Center Content: Colored Icon Box & Deep Title -->
-                                <div class="flex flex-col items-center justify-center text-center relative z-10 mt-1">
-                                    <div class="w-14 h-14 rounded-[18px] border shadow-xs flex items-center justify-center text-xl mb-3.5 transition-transform duration-500 group-hover:scale-110"
-                                         [ngClass]="getTheme(i).iconBox">
-                                        <i class="fa-solid {{ service.icon }}"></i>
-                                    </div>
-                                    <h3 class="text-[#2d1a0e] font-serif font-black text-lg md:text-[19px] leading-[1.22] tracking-wide px-2 drop-shadow-xs" [innerHTML]="formatTitle(service.title)"></h3>
+                            @if (service.image) {
+                                <!-- 4:3 ARTWORK FRONT COVER FOR THE 7 CONSULTATIONS -->
+                                <div class="absolute inset-0 [backface-visibility:hidden] rounded-[22px] overflow-hidden border-2 border-[#e8dac5] bg-[#fbf7f0] shadow-md flex flex-col transition-all duration-300">
                                     
-                                    <!-- Matching Accent Divider -->
-                                    <div class="w-10 h-[2px] mt-3.5 rounded-full" [ngClass]="getTheme(i).divider"></div>
-                                </div>
+                                    <!-- Image Container with flex-1 min-h-0 so it never collapses -->
+                                    <div class="relative flex-1 min-h-0 w-full flex items-center justify-center bg-[#fbf7f0] p-1.5 overflow-hidden">
+                                        <img [src]="service.image" 
+                                             [alt]="service.title" 
+                                             class="w-full h-full object-contain rounded-[14px]" />
+                                        <!-- Price Badge Overlay on Top-Right -->
+                                        <span class="absolute top-3 right-3 bg-[#3a2717]/90 backdrop-blur-xs text-[#fcd34d] text-[10px] font-mono font-bold px-2.5 py-1 rounded-full shadow-sm">
+                                            {{ formatPrice(service.price) }}
+                                        </span>
+                                    </div>
 
-                                <!-- Bottom Row: Colored Unfold Prompt -->
-                                <div class="flex justify-between items-end relative z-10 border-t border-black/5 pt-2.5 mt-auto text-[9px] font-mono font-bold uppercase tracking-widest"
-                                     [ngClass]="getTheme(i).tagText">
-                                    <span class="group-hover:translate-x-1 transition-transform">Tap to unfold</span>
-                                    <span class="flex items-center gap-1.5 capitalize tracking-normal font-semibold text-[11px]">
-                                        Folio <i class="fa-solid fa-book-open text-[10px]" [ngClass]="getTheme(i).accentText"></i>
-                                    </span>
+                                    <!-- Bottom Unfold Bar -->
+                                    <div class="shrink-0 bg-[#f5eee4] px-4 py-2.5 border-t border-[#e8dac5] flex justify-between items-center text-[9px] font-mono font-bold uppercase tracking-widest text-[#8c5324]">
+                                        <span class="group-hover:translate-x-1 transition-transform">Tap to unfold session details</span>
+                                        <span class="flex items-center gap-1.5 capitalize tracking-normal font-semibold text-[11px]">
+                                            Folio <i class="fa-solid fa-book-open text-[10px] text-[#d97706]"></i>
+                                        </span>
+                                    </div>
                                 </div>
-                            </div>
+                            } @else {
+                                <!-- STANDARD GEMSTONE FRONT COVER FOR OTHER SERVICES -->
+                                <div class="absolute inset-0 [backface-visibility:hidden] rounded-[22px] overflow-hidden border-2 flex flex-col justify-between p-5 transition-all duration-300"
+                                     [ngClass]="[getTheme(i).bgGradient, getTheme(i).borderColor, getTheme(i).shadow]">
+                                    
+                                    <!-- Subtle Radial Ring Accent -->
+                                    <div class="absolute top-[45%] left-1/2 -translate-x-1/2 -translate-y-1/2 w-48 h-48 border border-white/40 rounded-full pointer-events-none"></div>
+
+                                    <!-- Top Row: Colored Pill Badge & Accent Symbol -->
+                                    <div class="flex justify-between items-center relative z-10">
+                                        <span class="border rounded-full px-3 py-1 text-[9px] font-mono font-bold tracking-[0.2em] uppercase shadow-2xs"
+                                              [ngClass]="getTheme(i).badgeClass">
+                                            {{ service.category }}
+                                        </span>
+                                        <span class="text-[13px] opacity-70" [ngClass]="getTheme(i).accentText">❖</span>
+                                    </div>
+
+                                    <!-- Center Content: Colored Icon Box & Deep Title -->
+                                    <div class="flex flex-col items-center justify-center text-center relative z-10 mt-1">
+                                        <div class="w-14 h-14 rounded-[18px] border shadow-xs flex items-center justify-center text-xl mb-3.5 transition-transform duration-500 group-hover:scale-110"
+                                             [ngClass]="getTheme(i).iconBox">
+                                            <i class="fa-solid {{ service.icon }}"></i>
+                                        </div>
+                                        <h3 class="text-[#2d1a0e] font-serif font-black text-lg md:text-[19px] leading-[1.22] tracking-wide px-2 drop-shadow-xs" [innerHTML]="formatTitle(service.title)"></h3>
+                                        
+                                        <!-- Matching Accent Divider -->
+                                        <div class="w-10 h-[2px] mt-3.5 rounded-full" [ngClass]="getTheme(i).divider"></div>
+                                    </div>
+
+                                    <!-- Bottom Row: Colored Unfold Prompt -->
+                                    <div class="flex justify-between items-end relative z-10 border-t border-black/5 pt-2.5 mt-auto text-[9px] font-mono font-bold uppercase tracking-widest"
+                                         [ngClass]="getTheme(i).tagText">
+                                        <span class="group-hover:translate-x-1 transition-transform">Tap to unfold</span>
+                                        <span class="flex items-center gap-1.5 capitalize tracking-normal font-semibold text-[11px]">
+                                            Folio <i class="fa-solid fa-book-open text-[10px]" [ngClass]="getTheme(i).accentText"></i>
+                                        </span>
+                                    </div>
+                                </div>
+                            }
 
                             <!-- Back Face (Left Page when unfolded) -->
                             <div class="absolute inset-0 [backface-visibility:hidden] [transform:rotateY(180deg)] rounded-[22px] bg-[#fdfbf7] border-2 border-[#e5d9c5] shadow-[-12px_0_25px_rgba(140,83,36,0.06)] flex flex-col justify-center items-center p-5 overflow-hidden">
@@ -207,4 +248,153 @@
         </div>
     </section>
 
+
+    <!-- ========================================================================= -->
+    <!-- 3. DEDICATED CONSULTATION SECTION WITH 4:3 AZURE IMAGES                   -->
+    <!-- ========================================================================= -->
+    <section id="consultation-section" class="py-20 bg-gradient-to-b from-[#f5eee4] to-[#fbf5eb] border-t border-[#e8dac5] relative overflow-hidden">
+        
+        <div class="absolute inset-0 bg-[radial-gradient(#c2a275_1px,transparent_1px)] [background-size:28px_28px] opacity-20 pointer-events-none"></div>
+
+        <div class="container mx-auto px-4 max-w-7xl relative z-10">
+
+            <!-- Section Heading -->
+            <div class="text-center max-w-3xl mx-auto mb-14">
+                <div class="inline-flex items-center gap-2 px-4 py-1 rounded-full bg-white border border-[#e8dac5] text-[#8c5324] text-[9.5px] font-mono font-bold tracking-[0.2em] uppercase mb-4 shadow-2xs">
+                    <span>❖</span>
+                    <span>ONE-TO-ONE CONSULTATIONS · ONLINE & IN PERSON</span>
+                    <span>❖</span>
+                </div>
+                <h2 class="text-3xl sm:text-4xl md:text-5xl font-serif font-black text-[#2c1d11] leading-tight mb-4">
+                    Mind & Inner Work <span class="italic text-[#b45309]">Sessions</span>
+                </h2>
+                <p class="text-[#685546] text-sm sm:text-base leading-relaxed">
+                    Understand your patterns. Meet the part of you that never grew up. Teach your mind a new way to respond. Guided privately by <strong>Acharya Alok Awasthi</strong> online worldwide, or in person in Rishikesh & Delhi.
+                </p>
+            </div>
+
+            <!-- How It Works (4-Step Strip) -->
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-16">
+                <div class="bg-white/90 backdrop-blur-xs border border-[#e8dac5] rounded-2xl p-5 shadow-2xs">
+                    <span class="text-[10px] font-mono font-bold text-[#d97706] tracking-widest uppercase block mb-1">Step 01</span>
+                    <h4 class="font-serif font-bold text-[#2d1a0e] text-base mb-1.5">Free 15-Min Discovery Call</h4>
+                    <p class="text-xs text-[#685546] leading-relaxed">We check together whether these sessions suit what you are looking for.</p>
+                </div>
+                <div class="bg-white/90 backdrop-blur-xs border border-[#e8dac5] rounded-2xl p-5 shadow-2xs">
+                    <span class="text-[10px] font-mono font-bold text-[#d97706] tracking-widest uppercase block mb-1">Step 02</span>
+                    <h4 class="font-serif font-bold text-[#2d1a0e] text-base mb-1.5">Short Intake Form</h4>
+                    <p class="text-xs text-[#685546] leading-relaxed">Takes ten minutes and helps your first session start in the right place.</p>
+                </div>
+                <div class="bg-white/90 backdrop-blur-xs border border-[#e8dac5] rounded-2xl p-5 shadow-2xs">
+                    <span class="text-[10px] font-mono font-bold text-[#d97706] tracking-widest uppercase block mb-1">Step 03</span>
+                    <h4 class="font-serif font-bold text-[#2d1a0e] text-base mb-1.5">Meet Online or In Person</h4>
+                    <p class="text-xs text-[#685546] leading-relaxed">60 or 90 minutes, by secure video or at the Institute in Rishikesh or Delhi.</p>
+                </div>
+                <div class="bg-white/90 backdrop-blur-xs border border-[#e8dac5] rounded-2xl p-5 shadow-2xs">
+                    <span class="text-[10px] font-mono font-bold text-[#d97706] tracking-widest uppercase block mb-1">Step 04</span>
+                    <h4 class="font-serif font-bold text-[#2d1a0e] text-base mb-1.5">Take Your Practice Home</h4>
+                    <p class="text-xs text-[#685546] leading-relaxed">Receive a written practice note and a personal audio recording for guided sessions.</p>
+                </div>
+            </div>
+
+            <!-- Dynamic 7 Consultation Cards Looping Over consultationServices -->
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+
+                @for (item of consultationServices; track item.title; let idx = $index) {
+                    <div class="bg-white rounded-[24px] border-2 border-[#e8dac5] overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 flex flex-col justify-between group"
+                         [ngClass]="idx === 6 ? 'md:col-span-2 lg:col-span-3 border-[#d97706]/50' : ''">
+                        
+                        @if (idx < 6) {
+                            <!-- Standard 60-Min Consultation Card (Items 1 to 6) -->
+                            <div>
+                                <!-- 4:3 Image Banner from Azure -->
+                                <div class="relative w-full aspect-[4/3] bg-[#fbf7f0] border-b border-[#e8dac5] overflow-hidden">
+                                    <img [src]="item.image" 
+                                         [alt]="item.title" 
+                                         class="w-full h-full object-contain group-hover:scale-[1.02] transition-transform duration-500" />
+                                    <span class="absolute top-3 right-3 bg-[#3a2717]/90 backdrop-blur-xs text-[#fcd34d] text-xs font-mono font-bold px-3 py-1 rounded-full shadow-sm">
+                                        {{ item.price }} · {{ item.duration }}
+                                    </span>
+                                </div>
+
+                                <!-- Session Breakdown -->
+                                <div class="p-5">
+                                    <div class="bg-[#faf6f0] rounded-xl p-3.5 border border-[#e8dac5]/80 text-xs text-[#574435] space-y-1.5 mb-3">
+                                        <div class="font-mono font-bold text-[9.5px] uppercase tracking-wider text-[#8c5324] mb-1">
+                                            How {{ item.duration }} Unfold
+                                        </div>
+                                        @for (step of item.steps; track step) {
+                                            <p>• {{ step }}</p>
+                                        }
+                                    </div>
+                                    <p class="text-xs text-[#685546] leading-relaxed">
+                                        <strong class="text-[#3a2717]">Take Home:</strong> {{ item.takeHome }}
+                                    </p>
+                                </div>
+                            </div>
+
+                            <div class="px-5 pb-5">
+                              
+                                <!-- We pass the 'item' object directly in the state payload -->
+<button 
+  [routerLink]="['/consultation-detail']" 
+  [state]="{ session: item }"
+  class="w-full bg-gradient-to-r from-[#d97706] to-[#b45309] hover:brightness-105 text-white text-[10.5px] font-mono font-bold uppercase tracking-widest py-3.5 rounded-xl transition-all shadow-xs cursor-pointer">
+    Book {{ item.title }} &rarr;
+</button>
+                            </div>
+                        } @else {
+                            <!-- Wide 90-Min Featured Card (Item 7: Past Life Regression Journey) -->
+                            <div class="grid grid-cols-1 lg:grid-cols-12 items-center">
+                                <div class="lg:col-span-7 relative w-full aspect-[4/3] bg-[#fbf7f0] border-b lg:border-b-0 lg:border-r border-[#e8dac5] overflow-hidden">
+                                    <img [src]="item.image" 
+                                         [alt]="item.title" 
+                                         class="w-full h-full object-contain group-hover:scale-[1.02] transition-transform duration-500" />
+                                    <span class="absolute top-4 right-4 bg-[#8c5324] text-white text-xs font-mono font-bold px-3.5 py-1.5 rounded-full shadow-sm">
+                                        {{ item.price }} · {{ item.duration }} Deep Journey
+                                    </span>
+                                </div>
+
+                                <div class="lg:col-span-5 p-6 sm:p-8 flex flex-col justify-between h-full">
+                                    <div>
+                                        <span class="inline-block px-3 py-1 rounded-full bg-[#fef3c7] border border-[#fde68a] text-[#92400e] text-[9.5px] font-mono font-bold uppercase tracking-widest mb-3">
+                                            Session 7 of 7 · Deep Samskara Exploration
+                                        </span>
+                                        <h3 class="text-2xl font-serif font-black text-[#2d1a0e] mb-2">{{ item.title }}</h3>
+                                        <p class="text-xs text-[#685546] leading-relaxed mb-5">
+                                            {{ item.description }}
+                                        </p>
+
+                                        <div class="bg-[#faf6f0] rounded-xl p-4 border border-[#e8dac5] text-xs text-[#574435] space-y-2 mb-4">
+                                            <div class="font-mono font-bold text-[9.5px] uppercase tracking-wider text-[#8c5324] mb-1">
+                                                How {{ item.duration }} Unfold
+                                            </div>
+                                            @for (step of item.steps; track step) {
+                                                <p>• {{ step }}</p>
+                                            }
+                                        </div>
+
+                                        <p class="text-xs text-[#685546] mb-6">
+                                            <strong class="text-[#3a2717]">Take Home:</strong> {{ item.takeHome }}
+                                        </p>
+                                    </div>
+
+                                  
+                                    <button 
+  [routerLink]="['/consultation-detail']" 
+  [state]="{ session: item }"
+  class="w-full bg-gradient-to-r from-[#d97706] to-[#b45309] hover:brightness-105 text-white text-xs font-mono font-bold uppercase tracking-widest py-4 rounded-xl transition-all shadow-sm cursor-pointer">
+    Book {{ item.title }} &rarr;
+</button>
+                                </div>
+                            </div>
+                        }
+
+                    </div>
+                }
+
+            </div>
+
+        </div>
+    </section>
 </main>

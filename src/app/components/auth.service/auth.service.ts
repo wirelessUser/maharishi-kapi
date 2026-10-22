@@ -24,7 +24,7 @@ export class AuthService {
   private readonly platformId = inject(PLATFORM_ID);
 
   // Matches AccountController
-  private readonly API_URL = 'https://localhost:7084/api/account';
+  private readonly API_URL = 'https://maharishikapicomwebapi-e0edcjh9d3eufrak.centralindia-01.azurewebsites.net/api/account';
   private readonly TOKEN_KEY = 'astro_jwt_token';
   private readonly USER_KEY = 'astro_user_info';
 

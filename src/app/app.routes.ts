@@ -10,6 +10,7 @@ import { CourseDetailPage } from './pages/course-detail-page/course-detail-page'
 import { FundraiserPage } from './fundraiser-page/fundraiser-page';
 import { ResidentialPage } from './residential-page/residential-page';
 import { LibraryPage } from './kapi-library-page/kapi-library-page';
+import { SessionDetailComponent } from './pages/Session-details/session-detail.component';
 
 export const routes: Routes = [
   { path: '', component: Home, pathMatch: 'full' },
@@ -29,6 +30,10 @@ export const routes: Routes = [
   {
     path: 'product',
     loadComponent: () => import('./components/product-page/product-page').then(m => m.ProductPage)
+  },
+  { 
+    path: 'consultation-detail', 
+    component: SessionDetailComponent 
   },
   {
     path: 'products',

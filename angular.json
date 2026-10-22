@@ -27,15 +27,7 @@
             ],
             "styles": [
               "src/styles.css"
-            ],
-            "server": "src/main.server.ts",
-            "outputMode": "server",
-            "security": {
-              "allowedHosts": []
-            },
-            "ssr": {
-              "entry": "src/server.ts"
-            }
+            ]
           },
           "configurations": {
             "production": {
@@ -70,7 +62,9 @@
         "serve": {
           "builder": "@angular/build:dev-server",
           "options": {
-            "allowedHosts": ["escalator-bronze-fasting.ngrok-free.dev"]
+            "allowedHosts": [
+              "escalator-bronze-fasting.ngrok-free.dev"
+            ]
           },
           "configurations": {
             "production": {
